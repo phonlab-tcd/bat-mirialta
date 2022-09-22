@@ -9,9 +9,9 @@ import { title } from '@/config';
 function Header() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar color="transparent" elevation={1} position="static">
+      <AppBar sx={{ backgroundColor: 'primary.dark' }} elevation={0} position="static">
         <Toolbar sx={{ justifyContent: 'center' }}>
-          <FlexBox sx={{ alignItems: 'center' }}>
+          <FlexBox>
             <Button color="info">{title}</Button>
           </FlexBox>
         </Toolbar>

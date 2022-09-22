@@ -1,3 +1,4 @@
+import { blue, green, red } from '@mui/material/colors';
 import { ThemeOptions } from '@mui/material/styles';
 import { deepmerge } from '@mui/utils';
 
@@ -6,8 +7,37 @@ import { Themes } from './types';
 const sharedTheme = {
   palette: {
     background: {
-      default: '#fafafa',
-      paper: '#fff',
+      default: '#fff',
+      paper: '#fafafa',
+      dark: '#eaeaea',
+      main: '#fff',
+    },
+    primary: {
+      wafer: green[50],
+      light: green[100],
+      main: green[600],
+      dark: green[800],
+    },
+    secondary: {
+      wafer: blue[50],
+      light: blue[100],
+      medium: blue[200],
+      main: blue[600],
+      dark: blue[800],
+    },
+    warning: {
+      wafer: red[50],
+      light: red[100],
+      main: red[600],
+      dark: red[800],
+    },
+    info: {
+      main: '#fff',
+    },
+  },
+  typography: {
+    button: {
+      textTransform: 'none',
     },
   },
   components: {
@@ -39,13 +69,6 @@ const themes: Record<Themes, ThemeOptions> = {
   light: deepmerge(sharedTheme, {
     palette: {
       mode: 'light',
-      background: {
-        default: '#fafafa',
-        paper: '#fff',
-      },
-      primary: {
-        main: '#3f51b5',
-      },
     },
   }),
 
