@@ -4,35 +4,41 @@ const getVerbScripts = () => {
 
 export default getVerbScripts;
 
-const generateVerbObject = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const verbObject: any = {};
-  const allVerbs: string[] = [];
-  // const blankVerbObject: any = {};
-  Object.keys(verbScripts).forEach((verb) => {
-    verbObject[verb] = {};
-    Object.keys(verbScripts[verb]).forEach((tense) => {
-      if (tense !== 'quiz') {
-        verbObject[verb][tense] = {};
-        Object.keys(verbScripts[verb][tense]).forEach((form) => {
-          if (form !== 'extra questions') {
-            verbObject[verb][tense][form] = [];
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            verbScripts[verb][tense][form].forEach((questionData: any) => {
-              if (!verbObject[verb][tense][form].includes(questionData.answer.toLowerCase())) {
-                verbObject[verb][tense][form].push(questionData.answer.toLowerCase());
-                allVerbs.push(questionData.answer.toLowerCase());
-              }
-            });
-          }
-        });
-      }
-    });
-  });
-  return [allVerbs, verbObject];
-};
+// const generateVerbObject = () => {
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   const verbObject: any = {};
+//   const allVerbs: any[] = [];
+//   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+//   const blankVerbObject: any = {};
+//   Object.keys(verbScripts).forEach((verb) => {
+//     // verbObject[verb] = {};
+//     Object.keys(verbScripts[verb]).forEach((tense) => {
+//       if (tense !== 'quiz') {
+//         // verbObject[verb][tense] = {};
+//         Object.keys(verbScripts[verb][tense]).forEach((form) => {
+//           if (form !== 'extra questions') {
+//             // verbObject[verb][tense][form] = [];
+//             // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//             verbScripts[verb][tense][form].forEach((questionData: any) => {
+//               const hints = [questionData.hint1]
+//               questionData.hint2 !== undefined && hints.push(questionData.hint2)
+//               const vID = verbs
+//               allVerbs.push({question_text: questionData.question, answer: questionData.answer, hints: hints})
 
-export { generateVerbObject };
+//               // if (!verbObject[verb][tense][form].includes(questionData.answer.toLowerCase())) {
+//                 // verbObject[verb][tense][form].push(questionData.answer.toLowerCase());
+//                 // allVerbs.push(questionData.answer.toLowerCase());
+//               }
+//             });
+//           }
+//         });
+//       }
+//     });
+//   });
+//   return [allVerbs, verbObject];
+// };
+
+// export { generateVerbObject };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const verbScripts: any = {
@@ -3586,7 +3592,7 @@ const verbScripts: any = {
           hint1: 'diúltach',
         },
       ],
-      'brithar saor': [
+      'briathar saor': [
         {
           question: '______ eitleán in airde sa spéir (dearfach).',
           answer: 'chuathas',

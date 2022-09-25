@@ -9,7 +9,7 @@ const sharedTheme = {
     background: {
       default: '#fff',
       paper: '#fafafa',
-      dark: '#eaeaea',
+      dark: '#f1f1f1',
       main: '#fff',
     },
     primary: {

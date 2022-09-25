@@ -1,43 +1,116 @@
-import { atom, useRecoilState } from 'recoil';
+import { atom, selector, useRecoilState } from 'recoil';
 
-const verbState = atom<string | undefined>({
-  key: 'verb-state',
+import { questionModel, verbTenseFormModel } from '@/models';
+
+const verbIDState = atom<number | undefined>({
+  key: 'verbID-state',
   default: undefined,
 });
 
-const useVerb = () => {
-  const [verb, setVerb] = useRecoilState(verbState);
-  return { verb, setVerb };
+const useVerbID = () => {
+  const [verbID, setVerbID] = useRecoilState(verbIDState);
+  return { verbID, setVerbID };
 };
 
-const tenseState = atom<string | undefined>({
-  key: 'tense-state',
+const verbsState = atom<verbTenseFormModel[]>({
+  key: 'verbs-state',
+  default: [],
+});
+
+const useVerbs = () => {
+  const [verbs, setVerbs] = useRecoilState(verbsState);
+  return { verbs, setVerbs };
+};
+
+const tenseIDState = atom<number | undefined>({
+  key: 'tenseID-state',
   default: undefined,
 });
 
-const useTense = () => {
-  const [tense, setTense] = useRecoilState(tenseState);
-  return { tense, setTense };
+const useTenseID = () => {
+  const [tenseID, setTenseID] = useRecoilState(tenseIDState);
+  return { tenseID, setTenseID };
 };
 
-const formState = atom<string | undefined>({
-  key: 'form-state',
+const tensesState = atom<verbTenseFormModel[]>({
+  key: 'tenses-state',
+  default: [],
+});
+
+const useTenses = () => {
+  const [tenses, setTenses] = useRecoilState(tensesState);
+  return { tenses, setTenses };
+};
+
+const formIDState = atom<number | undefined>({
+  key: 'formID-state',
   default: undefined,
 });
 
-const useForm = () => {
-  const [form, setForm] = useRecoilState(formState);
-  return { form, setForm };
+const useFormID = () => {
+  const [formID, setFormID] = useRecoilState(formIDState);
+  return { formID, setFormID };
 };
 
-const questionState = atom<string | undefined>({
-  key: 'question-state',
-  default: undefined,
+const formsState = atom<verbTenseFormModel[]>({
+  key: 'forms-state',
+  default: [],
 });
 
-const useQuestion = () => {
-  const [question, setQuestion] = useRecoilState(questionState);
-  return { question, setQuestion };
+const useForms = () => {
+  const [forms, setForms] = useRecoilState(formsState);
+  return { forms, setForms };
 };
 
-export { useVerb, useTense, useForm, useQuestion };
+const questionsState = atom<questionModel[]>({
+  key: 'questions-state',
+  default: [],
+});
+
+const useQuestions = () => {
+  const [questions, setQuestions] = useRecoilState(questionsState);
+  return { questions, setQuestions };
+};
+
+const selectedVerb = selector({
+  key: 'selected-verb',
+  get: ({ get }) => {
+    const id = get(verbIDState);
+    const list = get(verbsState);
+    const obj = list.find((item) => item.id === id);
+    return obj !== undefined ? obj.name : undefined;
+  },
+});
+
+const selectedTense = selector({
+  key: 'selected-tense',
+  get: ({ get }) => {
+    const id = get(tenseIDState);
+    const list = get(tensesState);
+    const obj = list.find((item) => item.id === id);
+    return obj !== undefined ? obj.name : undefined;
+  },
+});
+
+const selectedForm = selector({
+  key: 'selected-form',
+  get: ({ get }) => {
+    const id = get(formIDState);
+    const list = get(formsState);
+    const obj = list.find((item) => item.id === id);
+    return obj !== undefined ? obj.name : undefined;
+  },
+});
+
+export {
+  useVerbID,
+  useTenseID,
+  useFormID,
+  useQuestions,
+  useVerbs,
+  useTenses,
+  useForms,
+  selectedVerb,
+  selectedTense,
+  selectedForm,
+};
