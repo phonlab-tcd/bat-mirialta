@@ -1,27 +1,27 @@
-import { SetterOrUpdater } from 'recoil';
-
-import { questionModel } from '@/models';
+// import { SetterOrUpdater } from 'recoil';
+// import { questionModel } from '@/models';
 import supabase from '@/services/supabase';
 
-const getQuestions = async (
+const getQuestionIDs = async (
   table: string,
   verb_id: number | undefined,
   tense_id: number | undefined,
   form_id: number | undefined,
-  setter: SetterOrUpdater<questionModel[]>,
+  // setter: SetterOrUpdater<number[]>,
 ) => {
   try {
     const { data, error } = await supabase
       .from(table)
-      .select(`id, question_text, answer, verb_id, tense_id, form_id, hints`)
+      .select(`id`)
       .eq('verb_id', verb_id)
       .eq('tense_id', tense_id)
       .eq('form_id', form_id);
     if (error) {
       throw error;
     } else {
-      setter(data);
-      console.log('data:', data);
+      const idList: number[] = [];
+      data.map((d) => idList.push(d.id));
+      return idList;
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
@@ -29,4 +29,4 @@ const getQuestions = async (
   }
 };
 
-export default getQuestions;
+export default getQuestionIDs;

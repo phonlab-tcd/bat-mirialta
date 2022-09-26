@@ -1,13 +1,13 @@
-import { atom, useRecoilState } from 'recoil';
+// import { atom, useRecoilState } from 'recoil';
 
-const chatTextState = atom<string>({
-  key: 'chat-text-state',
-  default: '',
-});
+// const chatHistoryState = atom<string>({
+//   key: 'chat-history-state',
+//   default: '',
+// });
 
-const useChatText = () => {
-  const [chatText, setChatText] = useRecoilState(chatTextState);
-  return { chatText, setChatText };
-};
+// const useChatHistory = () => {
+//   const [chatHistory, setChatHistory] = useRecoilState(chatHistoryState);
+//   return { chatHistory, setChatHistory };
+// };
 
-export { useChatText };
+// export { useChatHistory };

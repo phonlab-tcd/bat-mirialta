@@ -8,14 +8,14 @@ import Typography from '@mui/material/Typography';
 
 import AbButton from '@/components/AbButton';
 import Meta from '@/components/Meta';
-import { getQuestions, getVerbsTensesForms } from '@/services/supabase';
+import { getQuestionIDs, getVerbsTensesForms } from '@/services/supabase';
 import {
   // selectedForm,
   // selectedTense,
   // selectedVerb,
   useFormID,
   useForms,
-  useQuestions,
+  useQuestionIDs,
   useTenseID,
   useTenses,
   useVerbID,
@@ -26,13 +26,11 @@ const Welcome = () => {
   const { verbID, setVerbID } = useVerbID();
   const { tenseID, setTenseID } = useTenseID();
   const { formID, setFormID } = useFormID();
-  // const currentVerb = useRecoilValue(selectedVerb);
-  // const currentTense = useRecoilValue(selectedTense);
-  // const currentForm = useRecoilValue(selectedForm);
+
   const { verbs, setVerbs } = useVerbs();
   const { tenses, setTenses } = useTenses();
   const { forms, setForms } = useForms();
-  const { setQuestions } = useQuestions();
+  const { setQuestionIDs } = useQuestionIDs();
   const [showStart, setShowStart] = useState(false);
   const navigate = useNavigate();
 
@@ -60,8 +58,12 @@ const Welcome = () => {
   };
 
   const prepareToStart = () => {
-    getQuestions('bat_questions', verbID, tenseID, formID, setQuestions);
-    navigate('/chat');
+    getQuestionIDs('bat_questions', verbID, tenseID, formID).then((res) => {
+      if (res) {
+        setQuestionIDs(res);
+        navigate('/chat');
+      }
+    });
   };
 
   return (

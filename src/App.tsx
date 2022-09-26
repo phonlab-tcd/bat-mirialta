@@ -24,9 +24,9 @@ function App() {
       setSession(session);
     });
 
-    supabase.auth.setSession('u4tnu1nTDxD8J7siCokOew').then(({ data: { session } }) => {
-      console.log('session:', session);
-    });
+    // supabase.auth.setSession('u4tnu1nTDxD8J7siCokOew').then(({ data: { session } }) => {
+    //   console.log('session:', session);
+    // });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

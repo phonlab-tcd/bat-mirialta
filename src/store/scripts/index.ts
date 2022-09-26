@@ -1,6 +1,6 @@
 import { atom, selector, useRecoilState } from 'recoil';
 
-import { questionModel, verbTenseFormModel } from '@/models';
+import { verbTenseFormModel } from '@/models';
 
 const verbIDState = atom<number | undefined>({
   key: 'verbID-state',
@@ -62,14 +62,14 @@ const useForms = () => {
   return { forms, setForms };
 };
 
-const questionsState = atom<questionModel[]>({
-  key: 'questions-state',
+const questionIDsState = atom<number[]>({
+  key: 'questionIDs-state',
   default: [],
 });
 
-const useQuestions = () => {
-  const [questions, setQuestions] = useRecoilState(questionsState);
-  return { questions, setQuestions };
+const useQuestionIDs = () => {
+  const [questionIDs, setQuestionIDs] = useRecoilState(questionIDsState);
+  return { questionIDs, setQuestionIDs };
 };
 
 const selectedVerb = selector({
@@ -106,7 +106,7 @@ export {
   useVerbID,
   useTenseID,
   useFormID,
-  useQuestions,
+  useQuestionIDs,
   useVerbs,
   useTenses,
   useForms,

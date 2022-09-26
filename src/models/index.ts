@@ -1,4 +1,4 @@
-import { messageModel } from './message';
+import { displayMessageModel, messageModel } from './message';
 import { questionModel, verbTenseFormModel } from './question';
 
-export type { verbTenseFormModel, questionModel, messageModel };
+export type { verbTenseFormModel, questionModel, messageModel, displayMessageModel };

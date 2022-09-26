@@ -10,4 +10,9 @@ interface messageModel {
   question?: questionModel;
 }
 
-export type { messageModel };
+interface displayMessageModel {
+  message: string | undefined | 'start' | 'end';
+  sender: 'robot' | 'you';
+}
+
+export type { messageModel, displayMessageModel };
