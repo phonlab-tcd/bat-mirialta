@@ -3,16 +3,12 @@
 // import { questionModel } from '@/models/question';
 import supabase from '@/services/supabase';
 
-const postMessage = async (
-  questionID: number,
-  // messages: messageModel[],
-  // setter: SetterOrUpdater<messageModel[]>,
-) => {
+const postMessage = async (questionID: number, repeat: number) => {
   console.log('questionID:', questionID);
   try {
     const { data, error } = await supabase
       .from('bat_messages')
-      .insert([{ question_id: questionID }])
+      .insert([{ question_id: questionID, retry_attempt: repeat }])
       .select(
         `id, bat_questions (question_text, answer, hints), text, correct, retry_attempt, bat_response`,
       )

@@ -3,12 +3,12 @@
 // import { questionModel } from '@/models/question';
 import supabase from '@/services/supabase';
 
-const patchMessage = async (messageID: number, text: string) => {
+const patchMessage = async (messageID: number, text: string, correct: boolean) => {
   console.log('messageID:', messageID);
   try {
     const { data, error } = await supabase
       .from('bat_messages')
-      .upsert([{ id: messageID, text: text }])
+      .upsert([{ id: messageID, text: text, correct: correct }])
       .select(
         `id, bat_questions (question_text, answer, hints), text, correct, retry_attempt, bat_response`,
       )
