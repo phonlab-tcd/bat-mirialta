@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
 import getQuestionIDs from './getQuestionIDs';
-import getVerbsTensesForms from './getVerbsTensesForms';
+import getTaskSelection from './getTaskSelection';
 import patchMessage from './patchMessage';
 import postMessage from './postMessage';
 
@@ -10,4 +10,4 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default supabase;
-export { getVerbsTensesForms, getQuestionIDs, postMessage, patchMessage };
+export { getTaskSelection, getQuestionIDs, postMessage, patchMessage };

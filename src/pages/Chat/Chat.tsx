@@ -136,7 +136,7 @@ function Chat() {
       setTimeout(() => {
         setDisplayMessages([
           ...displayMessages,
-          { message: 'déanaimis cleachtadh ar an...', sender: 'robot' },
+          { message: 'déanfaimid cleachtadh ar an...', sender: 'robot' },
         ]);
         setBatTyping(false);
       }, 1000 + Math.random() * 1000);
@@ -190,7 +190,7 @@ function Chat() {
         setDisplayMessages([
           ...displayMessages,
           {
-            message: `anois, cuirfimid tús leis an gcleachtas`,
+            message: `anois, cuirfimid tús leis an gcleachtadh`,
             sender: 'robot',
           },
         ]);
@@ -222,10 +222,10 @@ function Chat() {
           if (messages[messages.length - 1].correct) {
             setDisplayMessages([...displayMessages, { message: 'ceart', sender: 'robot' }]);
           } else {
-            setDisplayMessages([...displayMessages, { message: 'míceart', sender: 'robot' }]);
+            setDisplayMessages([...displayMessages, { message: 'mícheart', sender: 'robot' }]);
           }
         }, 1000);
-      } else if (dM.message === 'míceart') {
+      } else if (dM.message === 'mícheart') {
         createMessage(currentQuestionID, repeatAttempt + 1);
         setRepeatAttempt(repeatAttempt + 1);
         setTimeout(() => {
