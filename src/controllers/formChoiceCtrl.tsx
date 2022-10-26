@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import AbButton from '@/components/AbButton';
+import { verbTenseFormModel } from '@/models';
 import { availableForms, useSelectedForm, useShowStart } from '@/store/scripts';
 
 const FormChoiceCtrl = () => {
@@ -14,7 +15,7 @@ const FormChoiceCtrl = () => {
   const { selectedForm, setSelectedForm } = useSelectedForm();
   const { setShowStart } = useShowStart();
 
-  const toggleForm = (choice: string) => {
+  const toggleForm = (choice: verbTenseFormModel) => {
     selectedForm === choice ? setSelectedForm(undefined) : setSelectedForm(choice);
     setShowStart(true);
   };
@@ -38,9 +39,9 @@ const FormChoiceCtrl = () => {
             <AbButton
               label={v.name}
               onClick={() => {
-                toggleForm(v.name);
+                toggleForm(v);
               }}
-              selected={v.name === selectedForm ? true : false}
+              selected={v === selectedForm ? true : false}
               variation="Form"
               color="secondary"
             />

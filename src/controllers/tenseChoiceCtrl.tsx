@@ -9,39 +9,38 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import AbButton from '@/components/AbButton';
+import { verbTenseFormModel } from '@/models';
 import { getAvailableForms } from '@/services/supabase';
 import {
   availableTenses,
-  selectedTenseID,
-  selectedVerbID,
   useAvailableFormIDs,
   useSelectedForm,
   useSelectedTense,
+  useSelectedVerb,
   useShowStart,
 } from '@/store/scripts';
 
 const TenseChoiceCtrl = () => {
   const availableTensesValue = useRecoilValue(availableTenses);
+  const { selectedVerb } = useSelectedVerb();
   const { selectedTense, setSelectedTense } = useSelectedTense();
   const { setSelectedForm } = useSelectedForm();
   const { setShowStart } = useShowStart();
   const { setAvailableFormIDs } = useAvailableFormIDs();
-  const selectedTenseIDValue = useRecoilValue(selectedTenseID);
-  const selectedVerbIDValue = useRecoilValue(selectedVerbID);
 
-  const toggleTense = (choice: string) => {
+  const toggleTense = (choice: verbTenseFormModel) => {
     selectedTense === choice ? setSelectedTense(undefined) : setSelectedTense(choice);
     setSelectedForm(undefined);
     setShowStart(false);
   };
 
   useEffect(() => {
-    if (selectedTenseIDValue !== undefined) {
-      getAvailableForms(selectedVerbIDValue, selectedTenseIDValue).then((res: any) => {
+    if (selectedTense !== undefined && selectedVerb !== undefined) {
+      getAvailableForms(selectedVerb.id, selectedTense.id).then((res: any) => {
         setAvailableFormIDs(res);
       });
     }
-  }, [selectedTenseIDValue]);
+  }, [selectedTense]);
 
   return (
     <>
@@ -63,9 +62,9 @@ const TenseChoiceCtrl = () => {
             <AbButton
               label={v.name}
               onClick={() => {
-                toggleTense(v.name);
+                toggleTense(v);
               }}
-              selected={v.name === selectedTense ? true : false}
+              selected={v === selectedTense ? true : false}
               variation="Tense"
               color="secondary"
             />

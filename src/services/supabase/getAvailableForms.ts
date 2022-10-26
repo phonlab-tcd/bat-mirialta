@@ -1,6 +1,6 @@
 import supabase from '@/services/supabase';
 
-const getForms = async (verb_id: number | undefined, tense_id: number | undefined) => {
+const getAvailableForms = async (verb_id: number | undefined, tense_id: number | undefined) => {
   try {
     const { data, error } = await supabase.rpc(`getforms`, { v_id: verb_id, t_id: tense_id });
 
@@ -15,4 +15,4 @@ const getForms = async (verb_id: number | undefined, tense_id: number | undefine
   }
 };
 
-export default getForms;
+export default getAvailableForms;

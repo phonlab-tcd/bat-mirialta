@@ -1,7 +1,7 @@
 import { atom, selector, useRecoilState } from 'recoil';
 
 import { displayMessageModel, messageModel } from '@/models';
-import { selectedForm, selectedTense, selectedVerb } from '@/store/scripts';
+import { selectedFormState, selectedTenseState, selectedVerbState } from '@/store/scripts';
 
 const messagesState = atom<messageModel[]>({
   key: 'messages-state',
@@ -27,9 +27,9 @@ const displayMessages = selector({
   key: 'display-messages',
   get: ({ get }) => {
     const messages = get(messagesState);
-    const verb = get(selectedVerb);
-    const tense = get(selectedTense);
-    const form = get(selectedForm);
+    const verb = get(selectedVerbState);
+    const tense = get(selectedTenseState);
+    const form = get(selectedFormState);
     const msgs: displayMessageModel[] = [];
     messages.map((m, i) => {
       if (i === 0) {
@@ -40,15 +40,7 @@ const displayMessages = selector({
             sender: 'robot',
           },
           {
-            message: `briathar - <strong>${verb}</strong>`,
-            sender: 'robot',
-          },
-          {
-            message: `aimsir - <strong>${tense}</strong>`,
-            sender: 'robot',
-          },
-          {
-            message: `foirm - <strong>${form}</strong>`,
+            message: `briathar - <strong>${verb?.name}</strong>\naimsir - <strong>${tense?.name}</strong>\nfoirm - <strong>${form?.name}</strong>`,
             sender: 'robot',
           },
           {

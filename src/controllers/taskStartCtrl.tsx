@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -7,35 +8,40 @@ import Typography from '@mui/material/Typography';
 import AbButton from '@/components/AbButton';
 import { getQuestionIDs } from '@/services/supabase';
 import {
-  selectedFormID,
-  selectedTenseID,
-  selectedVerbID,
   useQuestionIDs,
+  useSelectedForm,
+  useSelectedTense,
+  useSelectedVerb,
   useShowStart,
 } from '@/store/scripts';
 
 const TaskStartCtrl = () => {
   const navigate = useNavigate();
-  const { setQuestionIDs } = useQuestionIDs();
+  const { questionIDs, setQuestionIDs } = useQuestionIDs();
   const { showStart } = useShowStart();
-  const selectedVerbIDValue = useRecoilValue(selectedVerbID);
-  const selectedTenseIDValue = useRecoilValue(selectedTenseID);
-  const selectedFormIDValue = useRecoilValue(selectedFormID);
+  const { selectedVerb } = useSelectedVerb();
+  const { selectedTense } = useSelectedTense();
+  const { selectedForm } = useSelectedForm();
 
   const prepareToStart = () => {
-    getQuestionIDs(
-      'bat_questions',
-      selectedVerbIDValue,
-      selectedTenseIDValue,
-      selectedFormIDValue,
-    ).then((res) => {
-      if (res) {
-        setQuestionIDs(res);
-        console.log('res:', res);
-        navigate('/chat');
-      }
-    });
+    if (selectedVerb !== undefined && selectedTense !== undefined && selectedForm !== undefined) {
+      getQuestionIDs('bat_questions', selectedVerb.id, selectedTense.id, selectedForm.id).then(
+        (res) => {
+          if (res) {
+            setQuestionIDs(res);
+          }
+        },
+      );
+    } else {
+      alert('undefined task');
+    }
   };
+
+  useEffect(() => {
+    if (questionIDs.length > 0) {
+      navigate('/chat');
+    }
+  }, [questionIDs]);
 
   return showStart ? (
     <Box>
