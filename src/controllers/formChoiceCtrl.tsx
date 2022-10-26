@@ -1,17 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import AbButton from '@/components/AbButton';
-import { getTaskSelection } from '@/services/supabase';
-import { useForms, useSelectedForm, useShowStart } from '@/store/scripts';
+import { availableForms, useSelectedForm, useShowStart } from '@/store/scripts';
 
 const FormChoiceCtrl = () => {
-  const { forms, setForms } = useForms();
+  const availableFormsValue = useRecoilValue(availableForms);
   const { selectedForm, setSelectedForm } = useSelectedForm();
   const { setShowStart } = useShowStart();
 
@@ -19,13 +18,6 @@ const FormChoiceCtrl = () => {
     selectedForm === choice ? setSelectedForm(undefined) : setSelectedForm(choice);
     setShowStart(true);
   };
-
-  useEffect(() => {
-    getTaskSelection('forms').then((res: any) => {
-      console.log('forms:', res);
-      setForms(res);
-    });
-  }, []);
 
   return (
     <>
@@ -41,7 +33,7 @@ const FormChoiceCtrl = () => {
         maxWidth="xs"
         px={{ sm: 4, xs: 2 }}
       >
-        {forms.map((v, i) => (
+        {availableFormsValue.map((v, i) => (
           <Grid key={i} item>
             <AbButton
               label={v.name}

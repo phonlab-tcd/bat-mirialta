@@ -24,15 +24,8 @@ const getMessages = async (
       throw error;
     } else {
       console.log('error:', error);
+      return data;
     }
-
-    // setter({
-    //   id: data.id,
-    //   dialect: dialect.name,
-    //   gender: gender.name,
-    //   year: data.year,
-    // });
-    console.log('Messages data:', data);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {

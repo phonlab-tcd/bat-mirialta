@@ -42,6 +42,16 @@ const useTenses = () => {
   return { tenses, setTenses };
 };
 
+const availableTenseIDsState = atom<number[]>({
+  key: 'available-tenseIDs-state',
+  default: [],
+});
+
+const useAvailableTenseIDs = () => {
+  const [availabletenseIDs, setAvailableTenseIDs] = useRecoilState(availableTenseIDsState);
+  return { availabletenseIDs, setAvailableTenseIDs };
+};
+
 const selectedTenseState = atom<string | undefined>({
   key: 'selected-tense-state',
   default: undefined,
@@ -62,6 +72,18 @@ const selectedTenseID = selector({
   },
 });
 
+const availableTenses = selector({
+  key: 'available-tenses',
+  get: ({ get }) => {
+    const ids = get(availableTenseIDsState);
+
+    const list = get(tensesState);
+    const obj = list.filter((item) => ids.includes(item.id));
+
+    return obj !== undefined ? obj : [];
+  },
+});
+
 const formsState = atom<verbTenseFormModel[]>({
   key: 'forms-state',
   default: [],
@@ -70,6 +92,16 @@ const formsState = atom<verbTenseFormModel[]>({
 const useForms = () => {
   const [forms, setForms] = useRecoilState(formsState);
   return { forms, setForms };
+};
+
+const availableFormIDsState = atom<number[]>({
+  key: 'available-FormIDs-state',
+  default: [],
+});
+
+const useAvailableFormIDs = () => {
+  const [availableFormIDs, setAvailableFormIDs] = useRecoilState(availableFormIDsState);
+  return { availableFormIDs, setAvailableFormIDs };
 };
 
 const selectedFormState = atom<string | undefined>({
@@ -89,6 +121,18 @@ const selectedFormID = selector({
     const list = get(formsState);
     const obj = list.find((item) => item.name === selectedForm);
     return obj !== undefined ? obj.id : undefined;
+  },
+});
+
+const availableForms = selector({
+  key: 'available-forms',
+  get: ({ get }) => {
+    const ids = get(availableFormIDsState);
+
+    const list = get(formsState);
+    const obj = list.filter((item) => ids.includes(item.id));
+
+    return obj !== undefined ? obj : [];
   },
 });
 
@@ -123,5 +167,9 @@ export {
   selectedVerbID,
   selectedTenseID,
   selectedFormID,
+  useAvailableTenseIDs,
+  useAvailableFormIDs,
+  availableTenses,
+  availableForms,
   useShowStart,
 };

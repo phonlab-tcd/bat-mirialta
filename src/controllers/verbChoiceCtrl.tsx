@@ -2,26 +2,31 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import AbButton from '@/components/AbButton';
-import { getTaskSelection } from '@/services/supabase';
+import { getAvailableTenses } from '@/services/supabase';
 import {
+  selectedVerbID,
+  useAvailableTenseIDs,
   useSelectedForm,
   useSelectedTense,
   useSelectedVerb,
-  useShowStart,
+  useShowStart, // useTenses,
   useVerbs,
 } from '@/store/scripts';
 
 const VerbChoiceCtrl = () => {
-  const { verbs, setVerbs } = useVerbs();
+  const { verbs } = useVerbs();
   const { selectedVerb, setSelectedVerb } = useSelectedVerb();
   const { setShowStart } = useShowStart();
   const { setSelectedForm } = useSelectedForm();
   const { setSelectedTense } = useSelectedTense();
+  const { setAvailableTenseIDs } = useAvailableTenseIDs();
+  const selectedVerbIDValue = useRecoilValue(selectedVerbID);
 
   const toggleVerb = (choice: string) => {
     selectedVerb === choice ? setSelectedVerb(undefined) : setSelectedVerb(choice);
@@ -31,10 +36,12 @@ const VerbChoiceCtrl = () => {
   };
 
   useEffect(() => {
-    getTaskSelection('verbs').then((res: any) => {
-      setVerbs(res);
-    });
-  }, []);
+    if (selectedVerbIDValue !== undefined) {
+      getAvailableTenses(selectedVerbIDValue).then((res: any) => {
+        setAvailableTenseIDs(res);
+      });
+    }
+  }, [selectedVerbIDValue]);
 
   return (
     <>

@@ -1,21 +1,33 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// import { useEffect } from 'react';
 import { useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import AbButton from '@/components/AbButton';
-import { getTaskSelection } from '@/services/supabase';
-import { useSelectedForm, useSelectedTense, useShowStart, useTenses } from '@/store/scripts';
+import { getAvailableForms } from '@/services/supabase';
+import {
+  availableTenses,
+  selectedTenseID,
+  selectedVerbID,
+  useAvailableFormIDs,
+  useSelectedForm,
+  useSelectedTense,
+  useShowStart,
+} from '@/store/scripts';
 
 const TenseChoiceCtrl = () => {
-  const { tenses, setTenses } = useTenses();
-
+  const availableTensesValue = useRecoilValue(availableTenses);
   const { selectedTense, setSelectedTense } = useSelectedTense();
   const { setSelectedForm } = useSelectedForm();
   const { setShowStart } = useShowStart();
+  const { setAvailableFormIDs } = useAvailableFormIDs();
+  const selectedTenseIDValue = useRecoilValue(selectedTenseID);
+  const selectedVerbIDValue = useRecoilValue(selectedVerbID);
 
   const toggleTense = (choice: string) => {
     selectedTense === choice ? setSelectedTense(undefined) : setSelectedTense(choice);
@@ -24,10 +36,12 @@ const TenseChoiceCtrl = () => {
   };
 
   useEffect(() => {
-    getTaskSelection('tenses').then((res: any) => {
-      setTenses(res);
-    });
-  }, []);
+    if (selectedTenseIDValue !== undefined) {
+      getAvailableForms(selectedVerbIDValue, selectedTenseIDValue).then((res: any) => {
+        setAvailableFormIDs(res);
+      });
+    }
+  }, [selectedTenseIDValue]);
 
   return (
     <>
@@ -44,7 +58,7 @@ const TenseChoiceCtrl = () => {
         maxWidth="xs"
         px={{ sm: 4, xs: 2 }}
       >
-        {tenses.map((v, i) => (
+        {availableTensesValue.map((v, i) => (
           <Grid key={i} item>
             <AbButton
               label={v.name}

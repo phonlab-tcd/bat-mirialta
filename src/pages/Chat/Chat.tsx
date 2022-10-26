@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { useRecoilValue } from 'recoil';
 
+// import { useRecoilValue } from 'recoil';
 import {
   Avatar,
   ChatContainer,
@@ -17,7 +17,7 @@ import Meta from '@/components/Meta';
 // import { messageModel } from '@/models';
 import { patchMessage, postMessage } from '@/services/supabase';
 import { useDisplayMessages, useMessages } from '@/store/messages';
-import { selectedForm, selectedTense, selectedVerb } from '@/store/scripts';
+// import { selectedForm, selectedTense, selectedVerb } from '@/store/scripts';
 import { useQuestionIDs } from '@/store/scripts';
 // import getMessages from '@/services/supabase/getMessages';
 // import { useSession } from '@/store/auth';
@@ -31,9 +31,9 @@ function Chat() {
   const { questionIDs, setQuestionIDs } = useQuestionIDs();
   const { messages, setMessages } = useMessages();
   const { displayMessages, setDisplayMessages } = useDisplayMessages();
-  const verb = useRecoilValue(selectedVerb);
-  const tense = useRecoilValue(selectedTense);
-  const form = useRecoilValue(selectedForm);
+  // const verb = useRecoilValue(selectedVerb);
+  // const tense = useRecoilValue(selectedTense);
+  // const form = useRecoilValue(selectedForm);
   const [chatText, setChatText] = useState('');
   const [repeatAttempt, setRepeatAttempt] = useState(0);
   const [currentQuestionID, setCurrentQuestionID] = useState<number>(1);
