@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from 'react';
 
+import Box from '@mui/material/Box';
+
 // import { useRecoilValue } from 'recoil';
 import {
   Avatar,
@@ -131,7 +133,7 @@ function Chat() {
   };
 
   return (
-    <>
+    <Box height={'95%'}>
       <Meta title="Chat" />
       <ChatContainer>
         <ConversationHeader>
@@ -174,7 +176,7 @@ function Chat() {
         />
       </ChatContainer>
       <IntroMessagesCtrl />
-    </>
+    </Box>
   );
 }
 
