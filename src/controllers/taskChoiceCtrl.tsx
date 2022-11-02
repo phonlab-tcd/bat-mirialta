@@ -9,14 +9,27 @@ import FormChoiceCtrl from '@/controllers/formChoiceCtrl';
 import TenseChoiceCtrl from '@/controllers/tenseChoiceCtrl';
 import VerbChoiceCtrl from '@/controllers/verbChoiceCtrl';
 import { getTaskSelection } from '@/services/supabase';
-import { useForms, useSelectedTense, useSelectedVerb, useTenses, useVerbs } from '@/store/scripts';
+import { useDisplayMessages, useMessages } from '@/store/messages';
+import {
+  useForms,
+  useQuestionIDs,
+  useSelectedTense,
+  useSelectedVerb,
+  useShowStart,
+  useTenses,
+  useVerbs,
+} from '@/store/scripts';
 
 const TaskChoiceCtrl = () => {
-  const { selectedVerb } = useSelectedVerb();
-  const { selectedTense } = useSelectedTense();
+  const { selectedVerb, setSelectedVerb } = useSelectedVerb();
+  const { selectedTense, setSelectedTense } = useSelectedTense();
   const { setVerbs } = useVerbs();
   const { setTenses } = useTenses();
   const { setForms } = useForms();
+  const { setDisplayMessages } = useDisplayMessages();
+  const { setMessages } = useMessages();
+  const { setQuestionIDs } = useQuestionIDs();
+  const { setShowStart } = useShowStart();
 
   useEffect(() => {
     getTaskSelection('verbs').then((res: any) => {
@@ -28,6 +41,12 @@ const TaskChoiceCtrl = () => {
     getTaskSelection('forms').then((res: any) => {
       setForms(res);
     });
+    setMessages([]);
+    setDisplayMessages([]);
+    setQuestionIDs([]);
+    setSelectedVerb(undefined);
+    setSelectedTense(undefined);
+    setShowStart(false);
   }, []);
 
   return (

@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
@@ -17,18 +16,24 @@ import {
 
 const TaskStartCtrl = () => {
   const navigate = useNavigate();
-  const { questionIDs, setQuestionIDs } = useQuestionIDs();
+  const { setQuestionIDs } = useQuestionIDs();
   const { showStart } = useShowStart();
   const { selectedVerb } = useSelectedVerb();
   const { selectedTense } = useSelectedTense();
   const { selectedForm } = useSelectedForm();
+  // const [firstLoad, setFirstLoad] = useState(true);
 
   const prepareToStart = () => {
     if (selectedVerb !== undefined && selectedTense !== undefined && selectedForm !== undefined) {
       getQuestionIDs('bat_questions', selectedVerb.id, selectedTense.id, selectedForm.id).then(
         (res) => {
           if (res) {
-            setQuestionIDs(res);
+            setQuestionIDs(() => {
+              return res;
+            });
+            if (res.length > 0) {
+              navigate('/chat');
+            }
           }
         },
       );
@@ -36,12 +41,6 @@ const TaskStartCtrl = () => {
       alert('undefined task');
     }
   };
-
-  useEffect(() => {
-    if (questionIDs.length > 0) {
-      navigate('/chat');
-    }
-  }, [questionIDs]);
 
   return showStart ? (
     <Box>

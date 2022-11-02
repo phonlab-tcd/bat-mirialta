@@ -65,4 +65,63 @@ const displayMessages = selector({
   },
 });
 
-export { useMessages, displayMessages, useDisplayMessages };
+const batTypingState = atom<boolean>({
+  key: 'bat-typing-state',
+  default: false,
+});
+
+const useBatTyping = () => {
+  const [batTyping, setBatTyping] = useRecoilState(batTypingState);
+  return { batTyping, setBatTyping };
+};
+
+const messageInputDisabledState = atom<boolean>({
+  key: 'message-input-disabled-state',
+  default: false,
+});
+
+const useMessageInputDisabled = () => {
+  const [messageInputDisabled, setMessageInputDisabled] = useRecoilState(messageInputDisabledState);
+  return { messageInputDisabled, setMessageInputDisabled };
+};
+
+const currentQuestionIDState = atom<number>({
+  key: 'current-question-ID-state',
+  default: 0,
+});
+
+const useCurrentQuestionID = () => {
+  const [currentQuestionID, setCurrentQuestionID] = useRecoilState(currentQuestionIDState);
+  return { currentQuestionID, setCurrentQuestionID };
+};
+
+const repeatAttemptState = atom<number>({
+  key: 'repeat-attempt-state',
+  default: 0,
+});
+
+const useRepeatAttempt = () => {
+  const [repeatAttempt, setRepeatAttempt] = useRecoilState(repeatAttemptState);
+  return { repeatAttempt, setRepeatAttempt };
+};
+
+const chatTextState = atom<string>({
+  key: 'chat-text-state',
+  default: '',
+});
+
+const useChatText = () => {
+  const [chatText, setChatText] = useRecoilState(chatTextState);
+  return { chatText, setChatText };
+};
+
+export {
+  useMessages,
+  displayMessages,
+  useDisplayMessages,
+  useBatTyping,
+  useMessageInputDisabled,
+  useCurrentQuestionID,
+  useRepeatAttempt,
+  useChatText,
+};
