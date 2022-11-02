@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // import { useRecoilValue } from 'recoil';
 import {
@@ -38,7 +38,7 @@ function Chat() {
   const { setCurrentQuestionID } = useCurrentQuestionID();
   const { messages, setMessages } = useMessages();
   const { displayMessages, setDisplayMessages } = useDisplayMessages();
-
+  const [date] = useState(new Date().toUTCString());
   const { chatText, setChatText } = useChatText();
   const { questionIDs, setQuestionIDs } = useQuestionIDs();
 
@@ -142,7 +142,7 @@ function Chat() {
         <MessageList
           typingIndicator={batTyping ? <TypingIndicator content="Tá Bat ag clóscríobh" /> : null}
         >
-          <MessageSeparator content={new Date().toUTCString()} />
+          <MessageSeparator>{date}</MessageSeparator>
           {displayMessages.map((m, j) => (
             <Message
               key={j}
