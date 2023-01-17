@@ -2,6 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 
 import getAvailableForms from './getAvailableForms';
 import getAvailableTenses from './getAvailableTenses';
+import getProfile from './getProfile';
 import getQuestionIDs from './getQuestionIDs';
 import getTaskSelection from './getTaskSelection';
 import patchMessage from './patchMessage';
@@ -15,6 +16,7 @@ export default supabase;
 export {
   getTaskSelection,
   getQuestionIDs,
+  getProfile,
   postMessage,
   patchMessage,
   getAvailableTenses,

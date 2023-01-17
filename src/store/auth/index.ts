@@ -4,7 +4,7 @@ import { Session } from '@supabase/supabase-js';
 
 const sessionState = atom<Session | null>({
   key: 'session',
-  default: undefined,
+  default: null,
 });
 
 const useSession = () => {
