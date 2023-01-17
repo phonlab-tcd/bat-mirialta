@@ -133,7 +133,7 @@ function Chat() {
   };
 
   return (
-    <Box height={'95%'}>
+    <Box height={'100%'}>
       <Meta title="Chat" />
       <ChatContainer>
         <ConversationHeader>
