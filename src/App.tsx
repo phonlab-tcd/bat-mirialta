@@ -1,21 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Fragment, useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 
+import { CenteredFlexBox } from '@/display/components/styled';
+import Header from '@/display/sections/Header';
 import { withErrorHandler } from '@/error-handling';
 import AppErrorBoundaryFallback from '@/error-handling/fallbacks/App';
 import Pages from '@/routes/Pages';
-import Header from '@/sections/Header';
 import supabase from '@/services/supabase';
 import { getProfile } from '@/services/supabase';
-
-import { CenteredFlexBox } from './components/styled';
-import { useSession } from './store/auth';
+import { useProfile, useSession } from '@/store/auth';
 
 function App() {
   const { session, setSession } = useSession();
+  const { profile, setProfile } = useProfile();
 
   // Log in fake user for development
   const [email] = useState('test@test.com');
@@ -36,13 +37,25 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // useEffect(() => {
+  //   // console.log('localStorage:', localStorage['sb-pdntukcptgktuzpynlsv-auth-token']);
+  //   // setSession(localStorage['sb-pdntukcptgktuzpynlsv-auth-token'])
+  //   // const sess = JSON.parse(localStorage['sb-pdntukcptgktuzpynlsv-auth-token']);
+  //   session !== null ? getMessages(session) : null;
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
   useEffect(() => {
     if (session !== null) {
       getProfile(session).then((p) => {
-        console.log('p:', p);
+        setProfile(p);
       });
     }
   }, [session]);
+
+  useEffect(() => {
+    console.log('profile:', profile);
+  }, [profile]);
 
   return (
     <Fragment>

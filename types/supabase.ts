@@ -104,6 +104,38 @@ export interface Database {
           url?: string | null
         }
       }
+      bat_adjacency_pairs: {
+        Row: {
+          correct: boolean | null
+          created_at: string | null
+          id: number
+          question_id: number | null
+          response_id: number | null
+          retry_attempt: number | null
+          text: string | null
+          user_id: string | null
+        }
+        Insert: {
+          correct?: boolean | null
+          created_at?: string | null
+          id?: number
+          question_id?: number | null
+          response_id?: number | null
+          retry_attempt?: number | null
+          text?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          correct?: boolean | null
+          created_at?: string | null
+          id?: number
+          question_id?: number | null
+          response_id?: number | null
+          retry_attempt?: number | null
+          text?: string | null
+          user_id?: string | null
+        }
+      }
       bat_forms: {
         Row: {
           created_at: string | null
@@ -119,38 +151,6 @@ export interface Database {
           created_at?: string | null
           id?: number
           name?: string | null
-        }
-      }
-      bat_messages: {
-        Row: {
-          bat_response: string | null
-          correct: boolean | null
-          created_at: string | null
-          id: number
-          question_id: number | null
-          retry_attempt: number | null
-          text: string | null
-          user_id: string | null
-        }
-        Insert: {
-          bat_response?: string | null
-          correct?: boolean | null
-          created_at?: string | null
-          id?: number
-          question_id?: number | null
-          retry_attempt?: number | null
-          text?: string | null
-          user_id?: string | null
-        }
-        Update: {
-          bat_response?: string | null
-          correct?: boolean | null
-          created_at?: string | null
-          id?: number
-          question_id?: number | null
-          retry_attempt?: number | null
-          text?: string | null
-          user_id?: string | null
         }
       }
       bat_questions: {
@@ -183,6 +183,43 @@ export interface Database {
           question_text?: string | null
           tense_id?: number | null
           verb_id?: number | null
+        }
+      }
+      bat_response_categories: {
+        Row: {
+          created_at: string | null
+          id: number
+          type: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          type?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          type?: string | null
+        }
+      }
+      bat_responses: {
+        Row: {
+          created_at: string | null
+          id: number
+          response_category: number | null
+          text: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          response_category?: number | null
+          text?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          response_category?: number | null
+          text?: string | null
         }
       }
       bat_tenses: {

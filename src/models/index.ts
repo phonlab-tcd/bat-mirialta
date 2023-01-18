@@ -1,4 +1,4 @@
-import { displayMessageModel, messageModel } from './message';
-import { questionModel, verbTenseFormModel } from './question';
+import { ChatBubbleModel } from './ChatBubble';
+import { QuestionModel, VerbTenseFormModel } from './Question';
 
-export type { verbTenseFormModel, questionModel, messageModel, displayMessageModel };
+export type { VerbTenseFormModel, QuestionModel, ChatBubbleModel };

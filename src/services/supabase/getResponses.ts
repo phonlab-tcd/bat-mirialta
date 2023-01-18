@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Session } from '@supabase/supabase-js';
-
 import supabase from '@/services/supabase';
 
-const getProfile = async (sess: Session) => {
+const getResponses = async (responseIDs: number[]) => {
   try {
-    const { user } = sess;
-
-    const { data, error } = await supabase.from('profiles').select(`*`).eq('id', user.id).single();
+    const { data, error } = await supabase.from('bat_responses').select(`*`).in('id', responseIDs);
 
     if (error) {
       console.log('error:', error);
@@ -20,4 +16,4 @@ const getProfile = async (sess: Session) => {
   }
 };
 
-export default getProfile;
+export default getResponses;

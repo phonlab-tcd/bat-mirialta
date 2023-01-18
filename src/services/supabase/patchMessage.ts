@@ -7,7 +7,7 @@ const patchMessage = async (messageID: number, text: string, correct: boolean) =
   console.log('messageID:', messageID);
   try {
     const { data, error } = await supabase
-      .from('bat_messages')
+      .from('bat_interactions')
       .upsert([{ id: messageID, text: text, correct: correct }])
       .select(
         `id, bat_questions (question_text, answer, hints), text, correct, retry_attempt, bat_response`,

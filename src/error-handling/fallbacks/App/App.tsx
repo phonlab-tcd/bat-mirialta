@@ -5,8 +5,8 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
-import { FullSizeCenteredFlexBox } from '@/components/styled';
 import { email, messages } from '@/config';
+import { FullSizeCenteredFlexBox } from '@/display/components/styled';
 import resetApp from '@/utils/reset-app';
 
 function AppErrorBoundaryFallback() {
