@@ -4,8 +4,7 @@ import { ChatBubbleModel } from '@/models';
 
 import { adjacencyPairsState } from '../adjacencyPairs';
 import { questionsState } from '../questions';
-
-// import { responsesState } from '../responses';
+import { responsesState } from '../responses';
 
 // import { selectedFormState, selectedTenseState, selectedVerbState } from '@/store/scripts';
 
@@ -24,7 +23,7 @@ const chatBubblesState = selector({
   get: ({ get }) => {
     const adjacencyPairs = get(adjacencyPairsState);
     const questions = get(questionsState);
-    // const responses = get(responsesState);
+    const responses = get(responsesState);
     // const verb = get(selectedVerbState);
     // const tense = get(selectedTenseState);
     // const form = get(selectedFormState);
@@ -56,6 +55,12 @@ const chatBubblesState = selector({
           chatBubbles.push({
             text: m.text,
             sender: 'you',
+          });
+        }
+        if (m.response_id !== null) {
+          chatBubbles.push({
+            text: responses.map((r) => r.id === m.response_id && r.text),
+            sender: 'robot',
           });
         }
       }

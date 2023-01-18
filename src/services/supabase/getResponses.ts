@@ -2,6 +2,7 @@
 import supabase from '@/services/supabase';
 
 const getResponses = async (responseIDs: number[]) => {
+  console.log('responseIDs:', responseIDs);
   try {
     const { data, error } = await supabase.from('bat_responses').select(`*`).in('id', responseIDs);
 
@@ -9,6 +10,7 @@ const getResponses = async (responseIDs: number[]) => {
       console.log('error:', error);
       return;
     } else {
+      console.log('responses data:', data);
       return data;
     }
   } catch (e: any) {

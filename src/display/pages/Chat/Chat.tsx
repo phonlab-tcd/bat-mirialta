@@ -67,8 +67,11 @@ function Chat() {
       });
       const responseIDs = adjacencyPairs.map((aP) => aP !== null && aP.response_id);
       const uniqueResponseIDs = Array.from(new Set(responseIDs));
+      console.log('uniqueResponseIDs:', uniqueResponseIDs);
+
       getResponses(uniqueResponseIDs as number[]).then((r) => {
         if (r !== undefined) {
+          console.log('r:', r);
           setResponses(r);
         }
       });
