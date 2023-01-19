@@ -11,6 +11,6 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: '../dist/qa/bat/',
+    outDir: '../dist/qa/bat/', // so it can be displayed on abair.ie/qa/bat/
   },
 });
