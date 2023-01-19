@@ -5,12 +5,12 @@ import { Pages, Routes } from './types';
 const routes: Routes = {
   [Pages.Welcome]: {
     component: asyncComponentLoader(() => import('@/display/pages/Welcome')),
-    path: '/',
+    path: '/qa/bat',
     title: 'Welcome',
   },
   [Pages.Chat]: {
     component: asyncComponentLoader(() => import('@/display/pages/Chat')),
-    path: '/chat',
+    path: 'qa/bat/chat',
     title: 'Chat',
   },
   [Pages.NotFound]: {
