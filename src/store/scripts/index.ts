@@ -1,8 +1,8 @@
 import { atom, selector, useRecoilState } from 'recoil';
 
-import { verbTenseFormModel } from '@/models';
+import { VerbTenseFormModel } from '@/models';
 
-const verbsState = atom<verbTenseFormModel[]>({
+const verbsState = atom<VerbTenseFormModel[]>({
   key: 'verbs-state',
   default: [],
 });
@@ -12,7 +12,7 @@ const useVerbs = () => {
   return { verbs, setVerbs };
 };
 
-const selectedVerbState = atom<verbTenseFormModel | undefined>({
+const selectedVerbState = atom<VerbTenseFormModel | undefined>({
   key: 'selected-verb-state',
   default: undefined,
 });
@@ -22,7 +22,7 @@ const useSelectedVerb = () => {
   return { selectedVerb, setSelectedVerb };
 };
 
-const tensesState = atom<verbTenseFormModel[]>({
+const tensesState = atom<VerbTenseFormModel[]>({
   key: 'tenses-state',
   default: [],
 });
@@ -42,7 +42,7 @@ const useAvailableTenseIDs = () => {
   return { availabletenseIDs, setAvailableTenseIDs };
 };
 
-const selectedTenseState = atom<verbTenseFormModel | undefined>({
+const selectedTenseState = atom<VerbTenseFormModel | undefined>({
   key: 'selected-tense-state',
   default: undefined,
 });
@@ -64,7 +64,7 @@ const availableTenses = selector({
   },
 });
 
-const formsState = atom<verbTenseFormModel[]>({
+const formsState = atom<VerbTenseFormModel[]>({
   key: 'forms-state',
   default: [],
 });
@@ -84,7 +84,7 @@ const useAvailableFormIDs = () => {
   return { availableFormIDs, setAvailableFormIDs };
 };
 
-const selectedFormState = atom<verbTenseFormModel | undefined>({
+const selectedFormState = atom<VerbTenseFormModel | undefined>({
   key: 'selected-form-state',
   default: undefined,
 });

@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 
 import { AbButton } from 'abair-components';
 
-import { verbTenseFormModel } from '@/models';
+import { VerbTenseFormModel } from '@/models';
 import { availableForms, useSelectedForm, useShowStart } from '@/store/scripts';
 
 const FormChoice = () => {
@@ -16,7 +16,7 @@ const FormChoice = () => {
   const { selectedForm, setSelectedForm } = useSelectedForm();
   const { setShowStart } = useShowStart();
 
-  const toggleForm = (choice: verbTenseFormModel) => {
+  const toggleForm = (choice: VerbTenseFormModel) => {
     selectedForm === choice ? setSelectedForm(undefined) : setSelectedForm(choice);
     setShowStart(true);
   };
@@ -43,7 +43,7 @@ const FormChoice = () => {
                 toggleForm(v);
               }}
               selected={v === selectedForm ? true : false}
-              variation="Form"
+              // variation="Form"
               color="secondary"
             />
           </Grid>

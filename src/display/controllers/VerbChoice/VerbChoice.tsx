@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 
 import { AbButton } from 'abair-components';
 
-import { verbTenseFormModel } from '@/models';
+import { VerbTenseFormModel } from '@/models';
 import { getAvailableTenses } from '@/services/supabase';
 import {
   // selectedVerbID,
@@ -28,7 +28,7 @@ const VerbChoice = () => {
   const { setSelectedTense } = useSelectedTense();
   const { setAvailableTenseIDs } = useAvailableTenseIDs();
 
-  const toggleVerb = (choice: verbTenseFormModel) => {
+  const toggleVerb = (choice: VerbTenseFormModel) => {
     selectedVerb === choice ? setSelectedVerb(undefined) : setSelectedVerb(choice);
     setSelectedTense(undefined);
     setSelectedForm(undefined);
@@ -65,7 +65,7 @@ const VerbChoice = () => {
                 toggleVerb(v);
               }}
               selected={selectedVerb !== undefined ? (v === selectedVerb ? true : false) : false}
-              variation="verb"
+              // variation="verb"
               color="secondary"
             />
           </Grid>

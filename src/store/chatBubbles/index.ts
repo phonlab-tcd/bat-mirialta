@@ -3,10 +3,9 @@ import { atom, selector, useRecoilState } from 'recoil';
 import { ChatBubbleModel } from '@/models';
 
 import { adjacencyPairsState } from '../adjacencyPairs';
-import { questionsState } from '../questions';
-import { responsesState } from '../responses';
 
-// import { selectedFormState, selectedTenseState, selectedVerbState } from '@/store/scripts';
+// import { questionsState } from '../questions';
+// import { responsesState } from '../responses';
 
 const repeatAttemptState = atom<number>({
   key: 'repeat-attempt-state',
@@ -22,13 +21,14 @@ const chatBubblesState = selector({
   key: 'chat-bubbles',
   get: ({ get }) => {
     const adjacencyPairs = get(adjacencyPairsState);
-    const questions = get(questionsState);
-    const responses = get(responsesState);
+    // const questions = get(questionsState);
+    // const responses = get(responsesState);
     const chatBubbles: ChatBubbleModel[] = [];
     adjacencyPairs.map((m) => {
       if (m !== null) {
         chatBubbles.push({
-          text: questions.map((q) => q.id === m.question_id && q.question_text),
+          // text: questions.map((q) => q.id === m.question_id && q.question_text),
+          text: 'hi',
           sender: 'robot',
         });
         if (m.text) {
@@ -39,7 +39,8 @@ const chatBubblesState = selector({
         }
         if (m.response_id !== null) {
           chatBubbles.push({
-            text: responses.map((r) => r.id === m.response_id && r.text),
+            // text: responses.map((r) => r.id === m.response_id && r.text),
+            text: 'howdy',
             sender: 'robot',
           });
         }
