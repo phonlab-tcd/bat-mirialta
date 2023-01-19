@@ -33,7 +33,7 @@ const TaskStart = () => {
               return res;
             });
             if (res.length > 0) {
-              navigate('/chat');
+              navigate('/qa/bat/chat');
             }
           }
         },
