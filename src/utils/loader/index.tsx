@@ -1,5 +1,5 @@
-import Loading from '@/components/Loading';
 import { loader as loaderDefaultOptions } from '@/config';
+import Loading from '@/display/components/Loading';
 
 import asyncComponentLoader from './loader';
 import type { AnyProps, LoadComponent, LoaderDefaultOptions } from './types';

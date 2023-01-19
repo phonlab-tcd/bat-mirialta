@@ -7,7 +7,7 @@ const postMessage = async (questionID: number, repeat: number) => {
   console.log('questionID:', questionID);
   try {
     const { data, error } = await supabase
-      .from('bat_messages')
+      .from('bat_interactions')
       .insert([{ question_id: questionID, retry_attempt: repeat }])
       .select(
         `id, bat_questions (question_text, answer, hints), text, correct, retry_attempt, bat_response`,

@@ -4,17 +4,17 @@ import { Pages, Routes } from './types';
 
 const routes: Routes = {
   [Pages.Welcome]: {
-    component: asyncComponentLoader(() => import('@/pages/Welcome')),
+    component: asyncComponentLoader(() => import('@/display/pages/Welcome')),
     path: '/',
     title: 'Welcome',
   },
   [Pages.Chat]: {
-    component: asyncComponentLoader(() => import('@/pages/Chat')),
+    component: asyncComponentLoader(() => import('@/display/pages/Chat')),
     path: '/chat',
     title: 'Chat',
   },
   [Pages.NotFound]: {
-    component: asyncComponentLoader(() => import('@/pages/NotFound')),
+    component: asyncComponentLoader(() => import('@/display/pages/NotFound')),
     path: '*',
   },
 };
