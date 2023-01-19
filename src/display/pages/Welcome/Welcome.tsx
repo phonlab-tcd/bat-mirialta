@@ -1,6 +1,6 @@
-import Meta from '@/components/Meta';
-import TaskChoice from '@/controllers/taskChoice';
-import TaskStart from '@/controllers/taskStart';
+import Meta from '@/display/components/Meta';
+import TaskChoice from '@/display/controllers/TaskChoice';
+import TaskStart from '@/display/controllers/TaskStart';
 
 const Welcome = () => {
   return (

@@ -5,11 +5,11 @@ import { useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 
-import FormChoice from '@/controllers/formChoice';
-import TenseChoice from '@/controllers/tenseChoice';
-import VerbChoice from '@/controllers/verbChoice';
+import FormChoice from '@/display/controllers/FormChoice';
+import TenseChoice from '@/display/controllers/TenseChoice';
+import VerbChoice from '@/display/controllers/VerbChoice';
 import { getTaskSelection } from '@/services/supabase';
-import { useChatBubbles, useMessages } from '@/store/adjacencyPairs';
+// import { useChatBubbles, useMessages } from '@/store/adjacencyPairs';
 import {
   useForms,
   useQuestionIDs,
@@ -26,8 +26,8 @@ const TaskChoice = () => {
   const { setVerbs } = useVerbs();
   const { setTenses } = useTenses();
   const { setForms } = useForms();
-  const { setChatBubbles } = useChatBubbles();
-  const { setMessages } = useMessages();
+  // const { setChatBubbles } = useChatBubbles();
+  // const { setMessages } = useMessages();
   const { setQuestionIDs } = useQuestionIDs();
   const { setShowStart } = useShowStart();
 
@@ -41,8 +41,8 @@ const TaskChoice = () => {
     getTaskSelection('forms').then((res: any) => {
       setForms(res);
     });
-    setMessages([]);
-    setChatBubbles([]);
+    // setMessages([]);
+    // setChatBubbles([]);
     setQuestionIDs([]);
     setSelectedVerb(undefined);
     setSelectedTense(undefined);
