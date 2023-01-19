@@ -10,7 +10,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  build: {
-    outDir: './dist/qa/bat/', // so it can be displayed on abair.ie/qa/bat/
-  },
+  // build: {
+  //   outDir: './dist/qa/bat/', // so it can be displayed on abair.ie/qa/bat/
+  // },
 });
