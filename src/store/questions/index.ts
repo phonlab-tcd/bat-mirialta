@@ -22,4 +22,14 @@ const useCurrentQuestionID = () => {
   return { currentQuestionID, setCurrentQuestionID };
 };
 
-export { questionsState, useQuestions, useCurrentQuestionID };
+const questionIDsState = atom<number[]>({
+  key: 'questionIDs-state',
+  default: [],
+});
+
+const useQuestionIDs = () => {
+  const [questionIDs, setQuestionIDs] = useRecoilState(questionIDsState);
+  return { questionIDs, setQuestionIDs };
+};
+
+export { questionsState, useQuestions, useCurrentQuestionID, useQuestionIDs };

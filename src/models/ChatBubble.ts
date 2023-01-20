@@ -1,5 +1,5 @@
 interface ChatBubbleModel {
-  text: string | undefined;
+  text: string | null;
   sender: 'robot' | 'you';
 }
 

@@ -10,7 +10,6 @@ const getResponses = async (responseIDs: number[]) => {
       console.log('error:', error);
       return;
     } else {
-      console.log('responses data:', data);
       return data;
     }
   } catch (e: any) {

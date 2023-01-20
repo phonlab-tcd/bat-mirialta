@@ -19,16 +19,22 @@ import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 
 import Meta from '@/display/components/Meta';
 // import useHandleSend from '@/hooks/useHandleSend';
-import { getAdjacencyPairs, getQuestions, getResponses } from '@/services/supabase';
-import { useAdjacencyPairs } from '@/store/adjacencyPairs';
+import {
+  getAdjacencyPairs,
+  getQuestions,
+  getResponses,
+  postAdjacencyPair,
+} from '@/services/supabase';
+import { newAdjacencyPairNeededState, useAdjacencyPairs } from '@/store/adjacencyPairs';
 import { useSession } from '@/store/auth';
 import { chatBubblesState } from '@/store/chatBubbles';
-import { useQuestions } from '@/store/questions';
+import { useCurrentQuestionID, useQuestionIDs, useQuestions } from '@/store/questions';
 import { useResponses } from '@/store/responses';
 import {
   useBatTyping,
   /*, useChatText, useMessageInputDisabled */
 } from '@/store/textInput';
+import generateNewQuestionID from '@/utils/generateNewQuestionID';
 
 import femaleImg from '/assets/images/avatar-female.svg';
 import robotImg from '/assets/images/robot.png';
@@ -38,10 +44,13 @@ function Chat() {
   const { session } = useSession();
   const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
   const { setQuestions } = useQuestions();
+  const { questionIDs, setQuestionIDs } = useQuestionIDs();
+  const { setCurrentQuestionID } = useCurrentQuestionID();
   const { setResponses } = useResponses();
 
   const [date] = useState(new Date().toUTCString());
   const chatBubbles = useRecoilValue(chatBubblesState);
+  const newAdjacencyPairNeeded = useRecoilValue(newAdjacencyPairNeededState);
   const { batTyping } = useBatTyping();
   // const { messageInputDisabled } = useMessageInputDisabled();
   // const { chatText, setChatText } = useChatText();
@@ -67,16 +76,44 @@ function Chat() {
       });
       const responseIDs = adjacencyPairs.map((aP) => aP !== null && aP.response_id);
       const uniqueResponseIDs = Array.from(new Set(responseIDs));
-      console.log('uniqueResponseIDs:', uniqueResponseIDs);
 
       getResponses(uniqueResponseIDs as number[]).then((r) => {
         if (r !== undefined) {
-          console.log('r:', r);
           setResponses(r);
         }
       });
     }
   }, [adjacencyPairs]);
+
+  useEffect(() => {
+    if (session && newAdjacencyPairNeeded) {
+      let newQuestionID;
+      let remainingQuestionsList;
+      let retryAttempt = 0;
+      if (adjacencyPairs.length !== 0) {
+        const lastAdjacencyPair = adjacencyPairs[adjacencyPairs.length - 1];
+        if (lastAdjacencyPair.correct) {
+          [newQuestionID, remainingQuestionsList] = generateNewQuestionID(questionIDs);
+          setCurrentQuestionID(newQuestionID);
+          setQuestionIDs(remainingQuestionsList);
+        } else if (lastAdjacencyPair.correct === false) {
+          if (lastAdjacencyPair.retry_attempt !== null) {
+            retryAttempt = lastAdjacencyPair.retry_attempt + 1;
+          } else {
+            console.log('error: retry attempt is null');
+          }
+          newQuestionID = lastAdjacencyPair.question_id;
+        }
+      }
+      if (typeof newQuestionID === 'number') {
+        postAdjacencyPair(session.user.id, newQuestionID, retryAttempt).then((a_p) => {
+          setAdjacencyPairs([...adjacencyPairs, a_p]);
+        });
+      } else {
+        console.log('error: newQuestionID is not a number');
+      }
+    }
+  }, [newAdjacencyPairNeeded]);
 
   return (
     <Box height={'100%'}>

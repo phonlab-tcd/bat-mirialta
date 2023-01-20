@@ -3,15 +3,13 @@
 // import { questionModel } from '@/models/question';
 import supabase from '@/services/supabase';
 
-const postMessage = async (questionID: number, repeat: number) => {
+const postAdjacenyPair = async (userID: string, questionID: number, repeat: number) => {
   console.log('questionID:', questionID);
   try {
     const { data, error } = await supabase
-      .from('bat_interactions')
-      .insert([{ question_id: questionID, retry_attempt: repeat }])
-      .select(
-        `id, bat_questions (question_text, answer, hints), text, correct, retry_attempt, bat_response`,
-      )
+      .from('bat_adjacency_pairs')
+      .insert([{ user_id: userID, question_id: questionID, retry_attempt: repeat }])
+      .select(`*`)
       .single();
 
     if (error) {
@@ -27,4 +25,4 @@ const postMessage = async (questionID: number, repeat: number) => {
   }
 };
 
-export default postMessage;
+export default postAdjacenyPair;

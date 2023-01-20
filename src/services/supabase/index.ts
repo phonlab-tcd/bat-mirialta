@@ -9,7 +9,7 @@ import getQuestions from './getQuestions';
 import getResponses from './getResponses';
 import getTaskSelection from './getTaskSelection';
 import patchMessage from './patchMessage';
-import postMessage from './postMessage';
+import postAdjacencyPair from './postAdjacencyPair';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -22,7 +22,7 @@ export {
   getQuestionIDs,
   getProfile,
   getResponses,
-  postMessage,
+  postAdjacencyPair,
   patchMessage,
   getAvailableTenses,
   getAvailableForms,
