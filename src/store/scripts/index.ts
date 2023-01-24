@@ -1,8 +1,8 @@
 import { atom, selector, useRecoilState } from 'recoil';
 
-import { VerbTenseFormModel } from '@/models';
+import { Database } from '../../../types/supabase';
 
-const verbsState = atom<VerbTenseFormModel[]>({
+const verbsState = atom<Database['public']['Tables']['bat_verbs']['Row'][]>({
   key: 'verbs-state',
   default: [],
 });
@@ -12,7 +12,7 @@ const useVerbs = () => {
   return { verbs, setVerbs };
 };
 
-const selectedVerbState = atom<VerbTenseFormModel | undefined>({
+const selectedVerbState = atom<Database['public']['Tables']['bat_verbs']['Row'] | undefined>({
   key: 'selected-verb-state',
   default: undefined,
 });
@@ -22,7 +22,7 @@ const useSelectedVerb = () => {
   return { selectedVerb, setSelectedVerb };
 };
 
-const tensesState = atom<VerbTenseFormModel[]>({
+const tensesState = atom<Database['public']['Tables']['bat_tenses']['Row'][]>({
   key: 'tenses-state',
   default: [],
 });
@@ -42,7 +42,7 @@ const useAvailableTenseIDs = () => {
   return { availabletenseIDs, setAvailableTenseIDs };
 };
 
-const selectedTenseState = atom<VerbTenseFormModel | undefined>({
+const selectedTenseState = atom<Database['public']['Tables']['bat_tenses']['Row'] | undefined>({
   key: 'selected-tense-state',
   default: undefined,
 });
@@ -64,7 +64,7 @@ const availableTenses = selector({
   },
 });
 
-const formsState = atom<VerbTenseFormModel[]>({
+const formsState = atom<Database['public']['Tables']['bat_forms']['Row'][]>({
   key: 'forms-state',
   default: [],
 });
@@ -84,7 +84,7 @@ const useAvailableFormIDs = () => {
   return { availableFormIDs, setAvailableFormIDs };
 };
 
-const selectedFormState = atom<VerbTenseFormModel | undefined>({
+const selectedFormState = atom<Database['public']['Tables']['bat_forms']['Row'] | undefined>({
   key: 'selected-form-state',
   default: undefined,
 });
@@ -126,6 +126,36 @@ const useShowStart = () => {
   return { showStart, setShowStart };
 };
 
+const taskSelectedState = selector({
+  key: 'task-selected',
+  get: ({ get }) => {
+    const selectedVerb = get(selectedVerbState);
+    const selectedTense = get(selectedTenseState);
+    const selectedForm = get(selectedFormState);
+
+    if (selectedVerb !== undefined && selectedTense !== undefined && selectedForm !== undefined) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+});
+
+const tasksPopulatedState = selector({
+  key: 'tasks-populated',
+  get: ({ get }) => {
+    const verbs = get(verbsState);
+    const tenses = get(tensesState);
+    const forms = get(formsState);
+
+    if (verbs.length !== 0 && tenses.length !== 0 && forms.length !== 0) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+});
+
 export {
   useSelectedVerb,
   useSelectedTense,
@@ -142,4 +172,6 @@ export {
   availableTenses,
   availableForms,
   useShowStart,
+  tasksPopulatedState,
+  taskSelectedState,
 };

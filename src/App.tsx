@@ -16,14 +16,14 @@ import { useProfile, useSession } from '@/store/auth';
 
 function App() {
   const { session, setSession } = useSession();
-  const { profile, setProfile } = useProfile();
+  const { setProfile } = useProfile();
 
   // Log in fake user for development
   const [email] = useState('test@test.com');
   const [password] = useState('xxxxxx');
   useEffect(() => {
     supabase.auth.signInWithPassword({ email, password }).then(() => {
-      console.log('logged in');
+      // console.log('logged in');
     });
 
     // supabase.auth.getSession().then(({ data: { session } }) => {
@@ -53,9 +53,9 @@ function App() {
     }
   }, [session]);
 
-  useEffect(() => {
-    console.log('profile:', profile);
-  }, [profile]);
+  // useEffect(() => {
+  //   console.log('profile:', profile);
+  // }, [profile]);
 
   return (
     <Fragment>

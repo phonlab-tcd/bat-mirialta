@@ -1,8 +1,8 @@
 import supabase from '@/services/supabase';
 
-const getVerbsTensesForms = async (table: string) => {
+const getForms = async () => {
   try {
-    const { data, error } = await supabase.from(`bat_${table}`).select(`id, name`);
+    const { data, error } = await supabase.from(`bat_forms`).select(`*`);
     if (error) {
       throw error;
     } else {
@@ -14,4 +14,4 @@ const getVerbsTensesForms = async (table: string) => {
   }
 };
 
-export default getVerbsTensesForms;
+export default getForms;

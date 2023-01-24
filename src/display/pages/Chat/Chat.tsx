@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import Box from '@mui/material/Box';
@@ -10,6 +10,7 @@ import {
   Avatar,
   ConversationHeader,
   Message,
+  MessageInput,
   MessageList,
   MessageSeparator,
   TypingIndicator,
@@ -18,68 +19,73 @@ import { ChatContainer } from '@chatscope/chat-ui-kit-react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 
 import Meta from '@/display/components/Meta';
-// import useHandleSend from '@/hooks/useHandleSend';
-import { getAdjacencyPairs, getQuestions, getResponses } from '@/services/supabase';
-import { useAdjacencyPairs } from '@/store/adjacencyPairs';
+import useAdjacencyPairLogic from '@/hooks/useAdjacencyPairLogic';
+import useChatLoadState from '@/hooks/useChatLoadState';
+import useHandleSend from '@/hooks/useHandleSend';
+import { getAdjacencyPairs } from '@/services/supabase';
+import { useAdjacencyPairs, useReceivedAdjacencyPairHistory } from '@/store/adjacencyPairs';
 import { useSession } from '@/store/auth';
 import { chatBubblesState } from '@/store/chatBubbles';
-import { useQuestions } from '@/store/questions';
-import { useResponses } from '@/store/responses';
-import {
-  useBatTyping,
-  /*, useChatText, useMessageInputDisabled */
-} from '@/store/textInput';
+import { currentQuestionState, useQuestionSet } from '@/store/questions';
+import { useBatTyping, useChatText, useMessageInputDisabled } from '@/store/textInput';
 
 import femaleImg from '/assets/images/avatar-female.svg';
 import robotImg from '/assets/images/robot.png';
 
 function Chat() {
-  // const messageInputRef = useRef(null);
-  const { session } = useSession();
-  const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
-  const { setQuestions } = useQuestions();
-  const { setResponses } = useResponses();
+  const messageInputRef = useRef(null);
 
   const [date] = useState(new Date().toUTCString());
+  const [firstLoad, setFirstLoad] = useState(true);
+
   const chatBubbles = useRecoilValue(chatBubblesState);
+  const currentQuestion = useRecoilValue(currentQuestionState);
+
+  const { session } = useSession();
+  const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
+  const { questionSet } = useQuestionSet();
+
   const { batTyping } = useBatTyping();
-  // const { messageInputDisabled } = useMessageInputDisabled();
-  // const { chatText, setChatText } = useChatText();
-  // const handleSend = useHandleSend();
+  const { messageInputDisabled } = useMessageInputDisabled();
+  const { chatText, setChatText } = useChatText();
+  const adjacencyPairLogic = useAdjacencyPairLogic();
+  const chatLoadState = useChatLoadState();
+
+  const { receivedAdjacencyPairHistory, setReceivedAdjacencyPairHistory } =
+    useReceivedAdjacencyPairHistory();
+
+  const handleSend = useHandleSend();
 
   useEffect(() => {
-    session !== null &&
+    if (session !== null && adjacencyPairs.length === 0) {
       getAdjacencyPairs(session.user.id).then((a_p) => {
+        setReceivedAdjacencyPairHistory(true);
         if (a_p !== undefined) {
           setAdjacencyPairs(a_p);
-        }
-      });
-  }, [session]);
-
-  useEffect(() => {
-    if (adjacencyPairs.length !== 0) {
-      const questionIDs = adjacencyPairs.map((aP) => aP !== null && aP.question_id);
-      const uniqueQuestionIDs = Array.from(new Set(questionIDs));
-      getQuestions(uniqueQuestionIDs as number[]).then((q) => {
-        if (q !== undefined) {
-          setQuestions(q);
-        }
-      });
-      const responseIDs = adjacencyPairs.map((aP) => aP !== null && aP.response_id);
-      const uniqueResponseIDs = Array.from(new Set(responseIDs));
-      console.log('uniqueResponseIDs:', uniqueResponseIDs);
-
-      getResponses(uniqueResponseIDs as number[]).then((r) => {
-        if (r !== undefined) {
-          console.log('r:', r);
-          setResponses(r);
+        } else {
+          setAdjacencyPairs([]);
         }
       });
     }
-  }, [adjacencyPairs]);
+  }, [session]);
+
+  useEffect(() => {
+    if (firstLoad && receivedAdjacencyPairHistory) {
+      setFirstLoad(false);
+      chatLoadState();
+    }
+  }, [firstLoad, receivedAdjacencyPairHistory]);
+
+  useEffect(() => {
+    if (currentQuestion && session !== null) {
+      adjacencyPairLogic();
+    } else {
+      console.log("don't have current question");
+    }
+  }, [adjacencyPairs, questionSet]);
 
   return (
-    <Box height={'100%'}>
+    <Box height="100%">
       <Meta title="Chat" />
       <ChatContainer>
         <ConversationHeader>
@@ -108,7 +114,7 @@ function Chat() {
             </Message>
           ))}
         </MessageList>
-        {/* <MessageInput
+        <MessageInput
           value={chatText}
           onChange={(t: string) => {
             setChatText(t);
@@ -118,7 +124,7 @@ function Chat() {
           attachButton={false}
           placeholder={'scríobh anseo'}
           ref={messageInputRef}
-        /> */}
+        />
       </ChatContainer>
     </Box>
   );

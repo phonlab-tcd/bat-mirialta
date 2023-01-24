@@ -5,7 +5,8 @@ const getAdjacencyPairs = async (userID: string) => {
     const { data, error } = await supabase
       .from('bat_adjacency_pairs')
       .select(`*`)
-      .eq('user_id', userID);
+      .eq('user_id', userID)
+      .order('id', { ascending: true });
 
     if (error) {
       console.log('error:', error);
@@ -16,8 +17,6 @@ const getAdjacencyPairs = async (userID: string) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
     alert(e.message);
-  } finally {
-    // setLoader(false);
   }
 };
 

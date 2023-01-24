@@ -43,7 +43,6 @@ const FormChoice = () => {
                 toggleForm(v);
               }}
               selected={v === selectedForm ? true : false}
-              // variation="Form"
               color="secondary"
             />
           </Grid>

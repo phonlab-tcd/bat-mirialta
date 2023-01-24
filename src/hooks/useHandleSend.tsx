@@ -1,38 +1,32 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { patchMessage } from '@/services/supabase';
-import { useAdjacencyPairs } from '@/store/adjacencyPairs';
-import { useChatText, useMessageInputDisabled } from '@/store/textInput';
+import { useRecoilValue } from 'recoil';
 
-// import { replaceFinalMessage } from '@/store/utils';
+import { patchAdjacencyPairText } from '@/services/supabase';
+import { currentAdjacencyPairState, useAdjacencyPairs } from '@/store/adjacencyPairs';
+import { currentQuestionState } from '@/store/questions';
+import { useChatText, useMessageInputDisabled } from '@/store/textInput';
+import { replaceFinalAdjacencyPair } from '@/store/utils';
 
 const useHandleSend = () => {
-  const { adjacencyPairs /*, setAdjacencyPairs */ } = useAdjacencyPairs();
-
+  const currentAdjacencyPair = useRecoilValue(currentAdjacencyPairState);
+  const currentQuestion = useRecoilValue(currentQuestionState);
+  const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
   const { chatText, setChatText } = useChatText();
   const { setMessageInputDisabled } = useMessageInputDisabled();
   const handleSend = () => {
-    // const correct =
-    // chatText === adjacencyPairs[adjacencyPairs.length - 1].question?.answer ? true : false;
-    const correct = true;
-
-    patchMessage(adjacencyPairs[adjacencyPairs.length - 1].id, chatText, correct).then(() => {
-      // (data: any) => {
-      // const question: any = data?.bat_questions;
-      // setAdjacencyPairs(
-      //   replaceFinalMessage(adjacencyPairs, {
-      //     id: data?.id,
-      //     question_id: data?.question_id,
-      //     text: data?.text,
-      //     correct: data?.correct,
-      //     retry_attempt: data?.retry_attempt,
-      //     response_id: data?.response_id,
-      //   }),
-      // );
+    if (currentQuestion !== undefined && currentAdjacencyPair !== undefined) {
       setChatText('');
       setMessageInputDisabled(true);
-    });
+      const correct = chatText === currentQuestion.answer ? true : false;
+      patchAdjacencyPairText(currentAdjacencyPair.id, chatText, correct).then((a_p) => {
+        setAdjacencyPairs(replaceFinalAdjacencyPair(adjacencyPairs, a_p));
+        setMessageInputDisabled(false);
+      });
+    } else {
+      alert('currentQuestion is undefined');
+    }
   };
 
   return handleSend;

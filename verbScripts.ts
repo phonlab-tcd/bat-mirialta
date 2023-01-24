@@ -23,7 +23,7 @@ export default getVerbScripts;
 //               const hints = [questionData.hint1]
 //               questionData.hint2 !== undefined && hints.push(questionData.hint2)
 //               const vID = verbs
-//               allVerbs.push({question_text: questionData.question, answer: questionData.answer, hints: hints})
+//               allVerbs.push({text: questionData.question, answer: questionData.answer, hints: hints})
 
 //               // if (!verbObject[verb][tense][form].includes(questionData.answer.toLowerCase())) {
 //                 // verbObject[verb][tense][form].push(questionData.answer.toLowerCase());
@@ -11358,7 +11358,7 @@ const verbScripts: any = {
         },
         {
           questions:
-            '____ ___________ aon rogha dó agus b’éigean dó é a dhéanamh. (sinn, diúltach)',
+            "____ ___________ aon rogha dó agus b'éigean dó é a dhéanamh. (sinn, diúltach)",
           answer: 'níor thugamar',
           answer2: 'níor thug muid',
           hint1: 'diúltach',

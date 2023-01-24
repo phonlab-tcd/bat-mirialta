@@ -1,4 +1,4 @@
-import { atom, useRecoilState } from 'recoil';
+import { atom, selector, useRecoilState } from 'recoil';
 
 import { Database } from '../../../types/supabase';
 
@@ -12,14 +12,26 @@ const useQuestions = () => {
   return { questions, setQuestions };
 };
 
-const currentQuestionIDState = atom<number>({
-  key: 'current-question-ID-state',
-  default: 0,
+const questionSetState = atom<Database['public']['Tables']['bat_questions']['Row'][]>({
+  key: 'question-set-state',
+  default: [],
 });
 
-const useCurrentQuestionID = () => {
-  const [currentQuestionID, setCurrentQuestionID] = useRecoilState(currentQuestionIDState);
-  return { currentQuestionID, setCurrentQuestionID };
+const useQuestionSet = () => {
+  const [questionSet, setQuestionSet] = useRecoilState(questionSetState);
+  return { questionSet, setQuestionSet };
 };
 
-export { questionsState, useQuestions, useCurrentQuestionID };
+const currentQuestionState = selector({
+  key: 'current-question-state',
+  get: ({ get }) => {
+    const questions = get(questionsState);
+    if (questions.length !== 0) {
+      return questions[questions.length - 1];
+    } else {
+      return undefined;
+    }
+  },
+});
+
+export { questionsState, useQuestions, useQuestionSet, currentQuestionState };

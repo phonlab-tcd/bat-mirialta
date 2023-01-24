@@ -1,15 +1,20 @@
 import { createClient } from '@supabase/supabase-js';
 
-import getAdjacencyPairs from './getAdjacencyPairs';
+import getAdjacencyPairs from './adjacencyPairs/getAdjacencyPairs';
+import patchAdjacencyPairResponse from './adjacencyPairs/patchAdjacencyPairResponse';
+import patchAdjacencyPairText from './adjacencyPairs/patchAdjacencyPairText';
+import postAdjacencyPair from './adjacencyPairs/postAdjacencyPair';
 import getAvailableForms from './getAvailableForms';
 import getAvailableTenses from './getAvailableTenses';
+import getForms from './getForms';
 import getProfile from './getProfile';
-import getQuestionIDs from './getQuestionIDs';
-import getQuestions from './getQuestions';
+import getResponseCategories from './getResponseCategories';
 import getResponses from './getResponses';
-import getTaskSelection from './getTaskSelection';
-import patchMessage from './patchMessage';
-import postMessage from './postMessage';
+import getTenses from './getTenses';
+import getVerbs from './getVerbs';
+import getQuestion from './questions/getQuestion';
+import getQuestionSet from './questions/getQuestionSet';
+import getQuestions from './questions/getQuestions';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -17,13 +22,18 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default supabase;
 export {
+  getQuestion,
   getQuestions,
-  getTaskSelection,
-  getQuestionIDs,
+  getQuestionSet,
+  getVerbs,
+  getTenses,
+  getForms,
   getProfile,
   getResponses,
-  postMessage,
-  patchMessage,
+  getResponseCategories,
+  postAdjacencyPair,
+  patchAdjacencyPairText,
+  patchAdjacencyPairResponse,
   getAvailableTenses,
   getAvailableForms,
   getAdjacencyPairs,

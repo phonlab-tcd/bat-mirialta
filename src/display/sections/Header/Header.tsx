@@ -18,7 +18,7 @@ function Header() {
             <Button
               color="info"
               onClick={() => {
-                navigate('/');
+                navigate('/qa/bat');
               }}
             >
               {title}

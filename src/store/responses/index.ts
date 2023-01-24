@@ -12,4 +12,16 @@ const useResponses = () => {
   return { responses, setResponses };
 };
 
-export { responsesState, useResponses };
+const responseCategoriesState = atom<
+  Database['public']['Tables']['bat_response_categories']['Row'][]
+>({
+  key: 'response-categories-state',
+  default: [],
+});
+
+const useResponseCategories = () => {
+  const [responseCategories, setResponseCategories] = useRecoilState(responseCategoriesState);
+  return { responseCategories, setResponseCategories };
+};
+
+export { responsesState, useResponses, useResponseCategories };

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import supabase from '@/services/supabase';
 
-const getResponses = async () => {
+const getQuestion = async (ID: number) => {
   try {
-    const { data, error } = await supabase.from('bat_responses').select(`*`);
+    const { data, error } = await supabase.from('bat_questions').select(`*`).eq('id', ID).single();
 
     if (error) {
       console.log('error:', error);
@@ -16,4 +16,4 @@ const getResponses = async () => {
   }
 };
 
-export default getResponses;
+export default getQuestion;
