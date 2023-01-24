@@ -23,6 +23,7 @@ import useAdjacencyPairLogic from '@/hooks/useAdjacencyPairLogic';
 import useChatLoadState from '@/hooks/useChatLoadState';
 import useHandleSend from '@/hooks/useHandleSend';
 import { getAdjacencyPairs } from '@/services/supabase';
+import checkBroadSlender from '@/services/supabase/edgeFunctions/checkBroadSlender';
 import { useAdjacencyPairs, useReceivedAdjacencyPairHistory } from '@/store/adjacencyPairs';
 import { useSession } from '@/store/auth';
 import { chatBubblesState } from '@/store/chatBubbles';
@@ -73,6 +74,7 @@ function Chat() {
       setFirstLoad(false);
       chatLoadState();
     }
+    checkBroadSlender('wordy');
   }, [firstLoad, receivedAdjacencyPairHistory]);
 
   useEffect(() => {
