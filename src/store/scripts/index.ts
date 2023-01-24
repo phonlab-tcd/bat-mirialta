@@ -106,16 +106,6 @@ const availableForms = selector({
   },
 });
 
-const questionIDsState = atom<number[]>({
-  key: 'questionIDs-state',
-  default: [],
-});
-
-const useQuestionIDs = () => {
-  const [questionIDs, setQuestionIDs] = useRecoilState(questionIDsState);
-  return { questionIDs, setQuestionIDs };
-};
-
 const showStartState = atom<boolean>({
   key: 'show-start-state',
   default: false,
@@ -160,7 +150,6 @@ export {
   useSelectedVerb,
   useSelectedTense,
   useSelectedForm,
-  useQuestionIDs,
   useVerbs,
   useTenses,
   useForms,
