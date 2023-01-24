@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
+import useGenerateNextQuestion from '@/hooks/useGenerateNextQuestion';
 import { getQuestion, getResponseCategories, getResponses } from '@/services/supabase';
 import { currentAdjacencyPairState, useAdjacencyPairs } from '@/store/adjacencyPairs';
 import { useSession } from '@/store/auth';
@@ -21,7 +22,6 @@ import {
   useVerbs,
 } from '@/store/scripts';
 
-import useGenerateNextQuestion from './useGenerateNextQuestion';
 import usePopulateQuestionSet from './usePopulateQuestionSet';
 import usePopulateQuestions from './usePopulateQuestions';
 import usePopulateVerbsTensesForms from './usePopulateVerbsTensesForms';
@@ -34,7 +34,7 @@ const useChatLoadState = () => {
   const populateQuestions = usePopulateQuestions();
   const populateQuestionSet = usePopulateQuestionSet();
 
-  const generateNextQuestion = useGenerateNextQuestion();
+  const { session } = useSession();
   const { setResponses } = useResponses();
   const { setResponseCategories } = useResponseCategories();
 
@@ -43,6 +43,7 @@ const useChatLoadState = () => {
   const { adjacencyPairs } = useAdjacencyPairs();
   const { questions } = useQuestions();
   const { questionSet } = useQuestionSet();
+  const generateNextQuestion = useGenerateNextQuestion();
 
   const { responses } = useResponses();
   const { verbs } = useVerbs();
@@ -53,25 +54,12 @@ const useChatLoadState = () => {
   const { setSelectedForm } = useSelectedForm();
 
   const navigate = useNavigate();
-  const { session } = useSession();
 
   useEffect(() => {
     if (taskSelected && questionSet.length === 0) {
       populateQuestionSet();
     }
   }, [taskSelected]);
-
-  useEffect(() => {
-    if (
-      adjacencyPairs.length === 0 &&
-      currentAdjacencyPair === undefined &&
-      session !== null &&
-      questionSet.length !== 0
-    ) {
-      console.log('generating next question:', questionSet);
-      generateNextQuestion();
-    }
-  }, [questionSet]);
 
   useEffect(() => {
     if (tasksPopulated) {
@@ -103,6 +91,18 @@ const useChatLoadState = () => {
       }
     }
   }, [tasksPopulated]);
+
+  useEffect(() => {
+    if (
+      adjacencyPairs.length === 0 &&
+      currentAdjacencyPair === undefined &&
+      session !== null &&
+      questionSet.length !== 0
+    ) {
+      console.log('generating next question:', questionSet);
+      generateNextQuestion();
+    }
+  }, [questionSet]);
 
   const chatLoadState = () => {
     // loads verbs tenses and forms if not done already.
