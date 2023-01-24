@@ -8,7 +8,6 @@ import Typography from '@mui/material/Typography';
 
 import { AbButton } from 'abair-components';
 
-import { VerbTenseFormModel } from '@/models';
 import { getAvailableTenses } from '@/services/supabase';
 import {
   // selectedVerbID,
@@ -20,6 +19,8 @@ import {
   useVerbs,
 } from '@/store/scripts';
 
+import { Database } from '../../../../types/supabase';
+
 const VerbChoice = () => {
   const { verbs } = useVerbs();
   const { selectedVerb, setSelectedVerb } = useSelectedVerb();
@@ -28,7 +29,7 @@ const VerbChoice = () => {
   const { setSelectedTense } = useSelectedTense();
   const { setAvailableTenseIDs } = useAvailableTenseIDs();
 
-  const toggleVerb = (choice: VerbTenseFormModel) => {
+  const toggleVerb = (choice: Database['public']['Tables']['bat_verbs']['Row']) => {
     selectedVerb === choice ? setSelectedVerb(undefined) : setSelectedVerb(choice);
     setSelectedTense(undefined);
     setSelectedForm(undefined);
@@ -60,7 +61,7 @@ const VerbChoice = () => {
         {verbs.map((v, i) => (
           <Grid key={i} item>
             <AbButton
-              label={v.name}
+              label={v !== undefined ? v.name : ''}
               onClick={() => {
                 toggleVerb(v);
               }}

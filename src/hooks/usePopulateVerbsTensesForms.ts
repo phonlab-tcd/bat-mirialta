@@ -8,13 +8,25 @@ function usePopulateVerbsTensesForms() {
   const { setForms } = useForms();
   const populateVerbsTensesForms = () => {
     getVerbs().then((v) => {
-      setVerbs(v);
+      if (v !== undefined) {
+        setVerbs(v);
+      } else {
+        alert('v is undefined');
+      }
     });
     getTenses().then((t) => {
-      setTenses(t);
+      if (t !== undefined) {
+        setTenses(t);
+      } else {
+        alert('t is undefined');
+      }
     });
     getForms().then((f) => {
-      setForms(f);
+      if (f !== undefined) {
+        setForms(f);
+      } else {
+        alert('f is undefined');
+      }
     });
   };
 

@@ -8,15 +8,16 @@ import Typography from '@mui/material/Typography';
 
 import { AbButton } from 'abair-components';
 
-import { VerbTenseFormModel } from '@/models';
 import { availableForms, useSelectedForm, useShowStart } from '@/store/scripts';
+
+import { Database } from '../../../../types/supabase';
 
 const FormChoice = () => {
   const availableFormsValue = useRecoilValue(availableForms);
   const { selectedForm, setSelectedForm } = useSelectedForm();
   const { setShowStart } = useShowStart();
 
-  const toggleForm = (choice: VerbTenseFormModel) => {
+  const toggleForm = (choice: Database['public']['Tables']['bat_forms']['Row']) => {
     selectedForm === choice ? setSelectedForm(undefined) : setSelectedForm(choice);
     setShowStart(true);
   };

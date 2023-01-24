@@ -10,7 +10,6 @@ import Typography from '@mui/material/Typography';
 
 import { AbButton } from 'abair-components';
 
-import { VerbTenseFormModel } from '@/models';
 import { getAvailableForms } from '@/services/supabase';
 import {
   availableTenses,
@@ -21,6 +20,8 @@ import {
   useShowStart,
 } from '@/store/scripts';
 
+import { Database } from '../../../../types/supabase';
+
 const TenseChoice = () => {
   const availableTensesValue = useRecoilValue(availableTenses);
   const { selectedVerb } = useSelectedVerb();
@@ -29,7 +30,7 @@ const TenseChoice = () => {
   const { setShowStart } = useShowStart();
   const { setAvailableFormIDs } = useAvailableFormIDs();
 
-  const toggleTense = (choice: VerbTenseFormModel) => {
+  const toggleTense = (choice: Database['public']['Tables']['bat_tenses']['Row']) => {
     selectedTense === choice ? setSelectedTense(undefined) : setSelectedTense(choice);
     setSelectedForm(undefined);
     setShowStart(false);
