@@ -56,7 +56,7 @@ const useChatLoadState = () => {
   const { session } = useSession();
 
   useEffect(() => {
-    if (taskSelected && questionSet.length !== 0) {
+    if (taskSelected && questionSet.length === 0) {
       populateQuestionSet();
     }
   }, [taskSelected]);
@@ -68,6 +68,7 @@ const useChatLoadState = () => {
       session !== null &&
       questionSet.length !== 0
     ) {
+      console.log('generating next question:', questionSet);
       generateNextQuestion();
     }
   }, [questionSet]);

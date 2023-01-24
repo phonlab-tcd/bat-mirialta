@@ -9,19 +9,20 @@ import FormChoice from '@/display/controllers/FormChoice';
 import TenseChoice from '@/display/controllers/TenseChoice';
 import VerbChoice from '@/display/controllers/VerbChoice';
 import usePopulateVerbsTensesForms from '@/hooks/usePopulateVerbsTensesForms';
-import { useQuestionIDs, useSelectedTense, useSelectedVerb, useShowStart } from '@/store/scripts';
+import { useQuestions } from '@/store/questions';
+import { useSelectedTense, useSelectedVerb, useShowStart } from '@/store/scripts';
 
 const TaskChoice = () => {
   const { selectedVerb, setSelectedVerb } = useSelectedVerb();
   const { selectedTense, setSelectedTense } = useSelectedTense();
   const populateVerbsTensesForms = usePopulateVerbsTensesForms();
 
-  const { setQuestionIDs } = useQuestionIDs();
+  const { setQuestions } = useQuestions();
   const { setShowStart } = useShowStart();
 
   useEffect(() => {
     populateVerbsTensesForms();
-    setQuestionIDs([]);
+    setQuestions([]);
     setSelectedVerb(undefined);
     setSelectedTense(undefined);
     setShowStart(false);

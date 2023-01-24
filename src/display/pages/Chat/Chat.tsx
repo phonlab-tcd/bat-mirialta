@@ -26,7 +26,7 @@ import { getAdjacencyPairs } from '@/services/supabase';
 import { useAdjacencyPairs, useReceivedAdjacencyPairHistory } from '@/store/adjacencyPairs';
 import { useSession } from '@/store/auth';
 import { chatBubblesState } from '@/store/chatBubbles';
-import { currentQuestionState, useQuestionSet } from '@/store/questions';
+import { currentQuestionState } from '@/store/questions';
 import { useBatTyping, useChatText, useMessageInputDisabled } from '@/store/textInput';
 
 import femaleImg from '/assets/images/avatar-female.svg';
@@ -43,7 +43,6 @@ function Chat() {
 
   const { session } = useSession();
   const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
-  const { questionSet } = useQuestionSet();
 
   const { batTyping } = useBatTyping();
   const { messageInputDisabled } = useMessageInputDisabled();
@@ -82,7 +81,7 @@ function Chat() {
     } else {
       console.log("don't have current question");
     }
-  }, [adjacencyPairs, questionSet]);
+  }, [adjacencyPairs]);
 
   return (
     <Box height="100%">
