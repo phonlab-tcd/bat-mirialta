@@ -23,7 +23,7 @@ import useAdjacencyPairLogic from '@/hooks/useAdjacencyPairLogic';
 import useChatLoadState from '@/hooks/useChatLoadState';
 import useHandleSend from '@/hooks/useHandleSend';
 import { getAdjacencyPairs } from '@/services/supabase';
-import checkBroadSlender from '@/services/supabase/edgeFunctions/checkBroadSlender';
+import { checkError } from '@/services/supabase';
 import { useAdjacencyPairs, useReceivedAdjacencyPairHistory } from '@/store/adjacencyPairs';
 import { useSession } from '@/store/auth';
 import { chatBubblesState } from '@/store/chatBubbles';
@@ -73,8 +73,9 @@ function Chat() {
     if (firstLoad && receivedAdjacencyPairHistory) {
       setFirstLoad(false);
       chatLoadState();
+      const error = checkError('duirt', 'dúirt');
+      console.log('error:', error);
     }
-    checkBroadSlender('wordy');
   }, [firstLoad, receivedAdjacencyPairHistory]);
 
   useEffect(() => {

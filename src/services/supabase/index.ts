@@ -4,6 +4,7 @@ import getAdjacencyPairs from './adjacencyPairs/getAdjacencyPairs';
 import patchAdjacencyPairResponse from './adjacencyPairs/patchAdjacencyPairResponse';
 import patchAdjacencyPairText from './adjacencyPairs/patchAdjacencyPairText';
 import postAdjacencyPair from './adjacencyPairs/postAdjacencyPair';
+import checkError from './edgeFunctions/checkError';
 import getAvailableForms from './getAvailableForms';
 import getAvailableTenses from './getAvailableTenses';
 import getForms from './getForms';
@@ -22,6 +23,7 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default supabase;
 export {
+  checkError,
   getQuestion,
   getQuestions,
   getQuestionSet,
