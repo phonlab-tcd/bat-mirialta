@@ -7,7 +7,7 @@ const repository = 'https://github.com/JohnSloan8/bat-mirialta';
 const messages = {
   app: {
     crash: {
-      title: 'Oooops... Sorry, I guess, something went wrong. You can:',
+      title: 'Something went wrong. You can:',
       options: {
         email: `contact with author by this email - ${email}`,
         reset: 'Press here to reset the application',
