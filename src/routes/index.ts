@@ -5,7 +5,7 @@ import { Pages, Routes } from './types';
 const routes: Routes = {
   [Pages.Welcome]: {
     component: asyncComponentLoader(() => import('@/display/pages/Welcome')),
-    path: '/',
+    path: '',
     title: 'Welcome',
   },
   [Pages.Chat]: {
