@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Fragment, useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
@@ -23,7 +25,7 @@ function App() {
   const [password] = useState('xxxxxx');
   useEffect(() => {
     supabase.auth.signInWithPassword({ email, password }).then(() => {
-      // console.log('logged in');
+      console.log('logged in');
     });
 
     // supabase.auth.getSession().then(({ data: { session } }) => {
@@ -38,15 +40,14 @@ function App() {
   }, []);
 
   // useEffect(() => {
-  //   // console.log('localStorage:', localStorage['sb-pdntukcptgktuzpynlsv-auth-token']);
-  //   // setSession(localStorage['sb-pdntukcptgktuzpynlsv-auth-token'])
-  //   // const sess = JSON.parse(localStorage['sb-pdntukcptgktuzpynlsv-auth-token']);
-  //   session !== null ? getMessages(session) : null;
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   const sessionFromLocalStorage = JSON.parse(localStorage['sb-pdntukcptgktuzpynlsv-auth-token']);
+  //   console.log('sessionFromLocalStorage:', sessionFromLocalStorage);
+  //   setSession(sessionFromLocalStorage);
   // }, []);
 
   useEffect(() => {
     if (session !== null) {
+      console.log('session:', session);
       getProfile(session).then((p) => {
         setProfile(p);
       });

@@ -13,6 +13,7 @@ import getResponseCategories from './getResponseCategories';
 import getResponses from './getResponses';
 import getTenses from './getTenses';
 import getVerbs from './getVerbs';
+import getAllQuestions from './questions/getAllQuestions';
 import getQuestion from './questions/getQuestion';
 import getQuestionSet from './questions/getQuestionSet';
 import getQuestions from './questions/getQuestions';
@@ -39,4 +40,5 @@ export {
   getAvailableTenses,
   getAvailableForms,
   getAdjacencyPairs,
+  getAllQuestions,
 };
