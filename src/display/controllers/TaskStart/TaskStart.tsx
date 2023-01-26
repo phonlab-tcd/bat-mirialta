@@ -26,7 +26,7 @@ const TaskStart = () => {
             return res;
           });
           if (res.length > 0) {
-            navigate('/qa/bat/chat');
+            navigate('/chat');
           }
         }
       });
