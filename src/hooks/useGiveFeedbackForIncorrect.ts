@@ -15,6 +15,9 @@ const useGiveFeedbackForIncorrect = () => {
   const GiveFeedbackForIncorrect = () => {
     if (currentAdjacencyPair !== undefined) {
       console.log('responses:', responses);
+
+      // NEED TO CHECK FOR TYPE OF ERROR
+
       const incorrectResponses = responses.filter((r) => r.category === 2);
       const randomIncorrectResponse =
         incorrectResponses[Math.floor(Math.random() * incorrectResponses.length)];
