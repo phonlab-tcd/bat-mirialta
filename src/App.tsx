@@ -35,11 +35,14 @@ function App() {
   }, []);
 
   useEffect(() => {
+    console.log('session changed');
     if (session !== null) {
       getProfile(session).then((p) => {
         setProfile(p);
         console.log('p:', p);
       });
+    } else {
+      console.log('session is null');
     }
   }, [session]);
 

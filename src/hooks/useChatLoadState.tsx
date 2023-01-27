@@ -86,7 +86,7 @@ const useChatLoadState = () => {
         }
       } else {
         if (!taskSelected) {
-          navigate('/');
+          navigate('/qa/bat');
         }
       }
     }
