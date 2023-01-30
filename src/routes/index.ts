@@ -1,3 +1,4 @@
+import { rootURL } from '@/config';
 import asyncComponentLoader from '@/utils/loader';
 
 import { Pages, Routes } from './types';
@@ -5,12 +6,12 @@ import { Pages, Routes } from './types';
 const routes: Routes = {
   [Pages.Welcome]: {
     component: asyncComponentLoader(() => import('@/display/pages/Welcome')),
-    path: '/qa/bat/',
+    path: `${rootURL}`,
     title: 'Welcome',
   },
   [Pages.Chat]: {
     component: asyncComponentLoader(() => import('@/display/pages/Chat')),
-    path: '/qa/bat/chat',
+    path: `${rootURL}chat`,
     title: 'Chat',
   },
   [Pages.NotFound]: {

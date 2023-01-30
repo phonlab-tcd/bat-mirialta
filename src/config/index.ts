@@ -4,6 +4,9 @@ const email = 'sloanjo@tcd.ie';
 
 const repository = 'https://github.com/JohnSloan8/bat-mirialta';
 
+const production = false;
+const rootURL = production ? '/qa/bat/' : '/';
+
 const messages = {
   app: {
     crash: {
@@ -37,4 +40,14 @@ const defaultMetaTags = {
 };
 const giphy404 = 'https://giphy.com/embed/xTiN0L7EW5trfOvEk0';
 
-export { loader, dateFormat, messages, repository, email, title, defaultMetaTags, giphy404 };
+export {
+  rootURL,
+  loader,
+  dateFormat,
+  messages,
+  repository,
+  email,
+  title,
+  defaultMetaTags,
+  giphy404,
+};
