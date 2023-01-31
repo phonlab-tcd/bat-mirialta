@@ -4,8 +4,10 @@ const email = 'sloanjo@tcd.ie';
 
 const repository = 'https://github.com/JohnSloan8/bat-mirialta';
 
-const production = false;
+const production = true;
 const rootURL = production ? '/qa/bat/' : '/';
+
+const authRedirectRootURL = 'https://abair.ie/qa/abair/';
 
 const messages = {
   app: {
@@ -50,4 +52,5 @@ export {
   title,
   defaultMetaTags,
   giphy404,
+  authRedirectRootURL,
 };

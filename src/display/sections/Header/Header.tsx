@@ -10,7 +10,7 @@ import Toolbar from '@mui/material/Toolbar';
 import { AbIconButton } from 'abair-components';
 import { AbMenu } from 'abair-components';
 
-import { rootURL } from '@/config';
+import { authRedirectRootURL, rootURL } from '@/config';
 import { title } from '@/config';
 import { FlexBox } from '@/display/components/styled';
 import supabase from '@/services/supabase';
@@ -22,22 +22,27 @@ function Header() {
   const [items, setItems] = useState<string[]>([]);
 
   const handleMenuChoice = async (item: string) => {
-    console.log('item clicked:', item);
-    if (item === 'log out') {
-      await supabase.auth.signOut();
+    if (item === 'logout') {
+      supabase.auth.signOut().then(() => {
+        setItems(['log in', 'sign up']);
+      });
     } else if (item === 'profile') {
-      window.location.href = 'https://abair.ie/qa/abair/profile?origin=bat';
+      window.location.href = `${authRedirectRootURL}profile?origin=bat`;
+    } else if (item === 'sign up' || item === 'log in') {
+      window.location.href = `${authRedirectRootURL}login?origin=bat`;
     }
   };
 
   useEffect(() => {
-    console.log('profile:', profile);
     if (profile) {
+      console.log('profile:', profile);
       if (profile.username !== null) {
         setItems([profile.username, 'profile', 'logout']);
       } else {
         setItems([]);
       }
+    } else {
+      console.log('profile:', profile);
     }
   }, [profile]);
 

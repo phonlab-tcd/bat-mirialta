@@ -32,11 +32,11 @@ function App() {
     supabase.auth.signInWithPassword({ email, password }).then(() => {
       console.log('signed in');
     });
-    const supabaseLocalStorage = localStorage['sb-pdntukcptgktuzpynlsv-auth-token'];
-    console.log('supabaseLocalStorage:', supabaseLocalStorage);
-    if (supabaseLocalStorage !== undefined) {
-      setSession(JSON.parse(supabaseLocalStorage));
-    }
+    // const supabaseLocalStorage = localStorage['sb-pdntukcptgktuzpynlsv-auth-token'];
+    // console.log('supabaseLocalStorage:', supabaseLocalStorage);
+    // if (supabaseLocalStorage !== undefined) {
+    //   setSession(JSON.parse(supabaseLocalStorage));
+    // }
   }, []);
 
   useEffect(() => {
