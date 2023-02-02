@@ -5,7 +5,7 @@ const email = 'sloanjo@tcd.ie';
 const repository = 'https://github.com/JohnSloan8/bat-mirialta';
 
 const production = true;
-const rootURL = production ? '/qa/bat/' : '/';
+const rootURL = production ? '/bat/' : '/';
 
 const authRedirectRootURL = 'https://abair.ie/qa/abair/';
 
