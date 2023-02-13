@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
-import { rootURL } from '@/config';
+import { basePath } from '@/config';
 import useGenerateNextQuestion from '@/hooks/useGenerateNextQuestion';
 import { getQuestion, getResponseCategories, getResponses } from '@/services/supabase';
 import { currentAdjacencyPairState, useAdjacencyPairs } from '@/store/adjacencyPairs';
@@ -87,7 +87,7 @@ const useChatLoadState = () => {
         }
       } else {
         if (!taskSelected) {
-          navigate(`${rootURL}`);
+          navigate(`${basePath}`);
         }
       }
     }

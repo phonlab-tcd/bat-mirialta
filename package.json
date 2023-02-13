@@ -14,10 +14,11 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --base=/applications/bat-mirialta/",
     "preview": "vite preview",
     "https-preview": "serve dist",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "update-types": "npx supabase gen types typescript --project-id \"pdntukcptgktuzpynlsv\" > types/supabase.ts"
   },
   "dependencies": {
     "@chatscope/chat-ui-kit-react": "^1.9.7",

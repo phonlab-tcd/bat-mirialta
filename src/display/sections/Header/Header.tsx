@@ -10,7 +10,7 @@ import Toolbar from '@mui/material/Toolbar';
 import { AbIconButton } from 'abair-components';
 import { AbMenu } from 'abair-components';
 
-import { authRedirectRootURL, rootURL } from '@/config';
+import { basePath, domain } from '@/config';
 import { title } from '@/config';
 import { FlexBox } from '@/display/components/styled';
 import supabase from '@/services/supabase';
@@ -19,7 +19,7 @@ import { useProfile } from '@/store/auth';
 function Header() {
   const navigate = useNavigate();
   const { profile } = useProfile();
-  const [items, setItems] = useState<string[]>([]);
+  const [items, setItems] = useState<string[]>(['log in/sign up']);
 
   const handleMenuChoice = async (item: string) => {
     if (item === 'logout') {
@@ -27,9 +27,9 @@ function Header() {
         setItems(['log in', 'sign up']);
       });
     } else if (item === 'profile') {
-      window.location.href = `${authRedirectRootURL}profile?origin=bat`;
-    } else if (item === 'sign up' || item === 'log in') {
-      window.location.href = `${authRedirectRootURL}login?origin=bat`;
+      window.location.href = `${domain}profile?origin=applications/bat-mirialta`;
+    } else if (item === 'log in/sign up') {
+      window.location.href = `${domain}login?origin=applications/bat-mirialta`;
     }
   };
 
@@ -39,12 +39,16 @@ function Header() {
       if (profile.username !== null) {
         setItems([profile.username, 'profile', 'logout']);
       } else {
-        setItems([]);
+        setItems(['log in/sign up']);
       }
     } else {
       console.log('profile:', profile);
     }
   }, [profile]);
+
+  useEffect(() => {
+    console.log('items:', items);
+  }, [items]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -63,7 +67,7 @@ function Header() {
             <Button
               color="info"
               onClick={() => {
-                navigate(`${rootURL}`);
+                navigate(`${basePath}`);
               }}
             >
               {title}

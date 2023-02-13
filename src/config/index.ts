@@ -4,10 +4,10 @@ const email = 'sloanjo@tcd.ie';
 
 const repository = 'https://github.com/JohnSloan8/bat-mirialta';
 
-const production = false;
-const rootURL = production ? '/bat/' : '/';
+const production = true;
+const basePath = production ? '/applications/bat-mirialta/' : '/';
 
-const authRedirectRootURL = 'https://abair.ie/qa/abair/';
+const domain = 'http://localhost/';
 
 const messages = {
   app: {
@@ -43,7 +43,7 @@ const defaultMetaTags = {
 const giphy404 = 'https://giphy.com/embed/xTiN0L7EW5trfOvEk0';
 
 export {
-  rootURL,
+  basePath,
   loader,
   dateFormat,
   messages,
@@ -52,5 +52,5 @@ export {
   title,
   defaultMetaTags,
   giphy404,
-  authRedirectRootURL,
+  domain,
 };
