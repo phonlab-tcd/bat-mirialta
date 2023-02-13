@@ -7,7 +7,7 @@ const repository = 'https://github.com/JohnSloan8/bat-mirialta';
 const production = true;
 const basePath = production ? '/applications/bat-mirialta/' : '/';
 
-const domain = 'http://localhost/';
+const domain = production ? 'http://68.183.41.58/' : 'http://localhost/';
 
 const messages = {
   app: {
