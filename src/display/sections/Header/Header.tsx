@@ -24,7 +24,7 @@ function Header() {
   const handleMenuChoice = async (item: string) => {
     if (item === 'logout') {
       supabase.auth.signOut().then(() => {
-        setItems(['log in', 'sign up']);
+        setItems(['log in/sign up']);
       });
     } else if (item === 'profile') {
       window.location.href = `${domain}profile?origin=applications/bat-mirialta`;
