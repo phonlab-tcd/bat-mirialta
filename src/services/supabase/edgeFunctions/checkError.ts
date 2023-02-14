@@ -2,7 +2,7 @@
 import supabase from '@/services/supabase';
 
 const checkError = async (word: string, target: string) => {
-  console.log('checking broad slender');
+  // console.log('checking broad slender');
   try {
     const { data, error } = await supabase.functions.invoke('error-check', {
       body: { word: word, target: target },
@@ -12,7 +12,7 @@ const checkError = async (word: string, target: string) => {
     }
 
     if (data) {
-      console.log('data:', data);
+      // console.log('data:', data);
 
       return data;
     }

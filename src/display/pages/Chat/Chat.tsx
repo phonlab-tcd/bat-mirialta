@@ -21,9 +21,10 @@ import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import Meta from '@/display/components/Meta';
 import useAdjacencyPairLogic from '@/hooks/useAdjacencyPairLogic';
 import useChatLoadState from '@/hooks/useChatLoadState';
+import useGenerateNextQuestion from '@/hooks/useGenerateNextQuestion';
 import useHandleSend from '@/hooks/useHandleSend';
 import { getAdjacencyPairs } from '@/services/supabase';
-import { checkError } from '@/services/supabase';
+// import { checkError } from '@/services/supabase';
 import { useAdjacencyPairs, useReceivedAdjacencyPairHistory } from '@/store/adjacencyPairs';
 import { useSession } from '@/store/auth';
 import { chatBubblesState } from '@/store/chatBubbles';
@@ -50,6 +51,7 @@ function Chat() {
   const { chatText, setChatText } = useChatText();
   const adjacencyPairLogic = useAdjacencyPairLogic();
   const chatLoadState = useChatLoadState();
+  const generateNextQuestion = useGenerateNextQuestion();
 
   const { receivedAdjacencyPairHistory, setReceivedAdjacencyPairHistory } =
     useReceivedAdjacencyPairHistory();
@@ -73,8 +75,8 @@ function Chat() {
     if (firstLoad && receivedAdjacencyPairHistory) {
       setFirstLoad(false);
       chatLoadState();
-      const error = checkError('duirt', 'dúirt');
-      console.log('error:', error);
+      // const error = checkError('duirt', 'dúirt');
+      // console.log('error:', error);
     }
   }, [firstLoad, receivedAdjacencyPairHistory]);
 
@@ -82,7 +84,8 @@ function Chat() {
     if (currentQuestion && session !== null) {
       adjacencyPairLogic();
     } else {
-      console.log("don't have current question");
+      console.log("don't have current question, so generating new one");
+      generateNextQuestion();
     }
   }, [adjacencyPairs]);
 

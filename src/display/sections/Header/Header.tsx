@@ -35,20 +35,20 @@ function Header() {
 
   useEffect(() => {
     if (profile) {
-      console.log('profile:', profile);
+      // console.log('profile:', profile);
       if (profile.username !== null) {
         setItems([profile.username, 'profile', 'logout']);
       } else {
         setItems(['log in/sign up']);
       }
     } else {
-      console.log('profile:', profile);
+      // console.log('profile:', profile);
     }
   }, [profile]);
 
-  useEffect(() => {
-    console.log('items:', items);
-  }, [items]);
+  // useEffect(() => {
+  //   console.log('items:', items);
+  // }, [items]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
