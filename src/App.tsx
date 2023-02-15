@@ -22,7 +22,7 @@ function App() {
   const [password] = useState('xxxxxx');
 
   useEffect(() => {
-    if (!production) {
+    if (!production && session === null) {
       supabase.auth.signInWithPassword({ email, password }).then(() => {
         console.log('signed in');
       });

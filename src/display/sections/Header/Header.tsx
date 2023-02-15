@@ -73,7 +73,11 @@ function Header() {
               {title}
             </Button>
 
-            <AbMenu items={items} handleMenuChoice={handleMenuChoice} />
+            <AbMenu
+              avatar={profile !== null ? profile.avatar : ''}
+              items={items}
+              handleMenuChoice={handleMenuChoice}
+            />
           </FlexBox>
         </Toolbar>
       </AppBar>

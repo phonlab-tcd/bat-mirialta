@@ -21,21 +21,21 @@ import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import Meta from '@/display/components/Meta';
 import useAdjacencyPairLogic from '@/hooks/useAdjacencyPairLogic';
 import useChatLoadState from '@/hooks/useChatLoadState';
-import useGenerateNextQuestion from '@/hooks/useGenerateNextQuestion';
 import useHandleSend from '@/hooks/useHandleSend';
 import { getAdjacencyPairs } from '@/services/supabase';
-// import { checkError } from '@/services/supabase';
 import { useAdjacencyPairs, useReceivedAdjacencyPairHistory } from '@/store/adjacencyPairs';
 import { useSession } from '@/store/auth';
+import { useProfile } from '@/store/auth';
 import { chatBubblesState } from '@/store/chatBubbles';
 import { currentQuestionState } from '@/store/questions';
 import { useBatTyping, useChatText, useMessageInputDisabled } from '@/store/textInput';
 
-import femaleImg from '/assets/images/avatar-female.svg';
+import anonImg from '/assets/images/anon-avatar.png';
 import robotImg from '/assets/images/robot.png';
 
 function Chat() {
   const messageInputRef = useRef(null);
+  const { profile } = useProfile();
 
   const [date] = useState(new Date().toUTCString());
   const [firstLoad, setFirstLoad] = useState(true);
@@ -51,41 +51,46 @@ function Chat() {
   const { chatText, setChatText } = useChatText();
   const adjacencyPairLogic = useAdjacencyPairLogic();
   const chatLoadState = useChatLoadState();
-  const generateNextQuestion = useGenerateNextQuestion();
 
   const { receivedAdjacencyPairHistory, setReceivedAdjacencyPairHistory } =
     useReceivedAdjacencyPairHistory();
 
   const handleSend = useHandleSend();
 
+  // sets the conversation history or redirects to the login page
   useEffect(() => {
-    if (session !== null && adjacencyPairs.length === 0) {
+    // if session is null, redirect to login page
+    if (session !== null) {
+      // get history of adjacency pairs
       getAdjacencyPairs(session.user.id).then((a_p) => {
         setReceivedAdjacencyPairHistory(true);
+        // if adjacency pairs exist, set adjacency pairs
         if (a_p !== undefined) {
           setAdjacencyPairs(a_p);
+          // if adjacency pairs don't exist, set adjacency pairs to []
         } else {
           setAdjacencyPairs([]);
         }
       });
+    } else {
+      console.log('session is null');
     }
   }, [session]);
 
+  // after receiving adjacency pairs from the server, loads the chat and sets first load to false
   useEffect(() => {
     if (firstLoad && receivedAdjacencyPairHistory) {
       setFirstLoad(false);
       chatLoadState();
-      // const error = checkError('duirt', 'dúirt');
-      // console.log('error:', error);
     }
   }, [firstLoad, receivedAdjacencyPairHistory]);
 
+  // anytime adjacency pairs is updated, runs the logic to determine next part of conversation
   useEffect(() => {
     if (currentQuestion && session !== null) {
       adjacencyPairLogic();
     } else {
-      console.log("don't have current question, so generating new one");
-      generateNextQuestion();
+      console.log("don't have current question");
     }
   }, [adjacencyPairs]);
 
@@ -113,7 +118,13 @@ function Chat() {
               }}
             >
               <Avatar
-                src={c_b.sender === 'robot' ? robotImg : femaleImg}
+                src={
+                  c_b.sender === 'robot'
+                    ? robotImg
+                    : profile !== null && profile.avatar !== ''
+                    ? profile.avatar
+                    : anonImg
+                }
                 name={c_b.sender === 'robot' ? 'Robot' : 'You'}
               />
             </Message>

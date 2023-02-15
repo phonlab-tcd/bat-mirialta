@@ -4,7 +4,7 @@
 // import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import useGenerateNextQuestion from '@/hooks/useGenerateNextQuestion';
+import useGenerateNextQuestion from '@/hooks/questions/useGenerateNextQuestion';
 import useGiveFeedbackForCorrect from '@/hooks/useGiveFeedbackForCorrect';
 import useGiveFeedbackForIncorrect from '@/hooks/useGiveFeedbackForIncorrect';
 import { currentAdjacencyPairState } from '@/store/adjacencyPairs';

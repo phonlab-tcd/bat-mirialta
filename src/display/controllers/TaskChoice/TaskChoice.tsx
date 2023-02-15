@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import FormChoice from '@/display/controllers/FormChoice';
 import TenseChoice from '@/display/controllers/TenseChoice';
 import VerbChoice from '@/display/controllers/VerbChoice';
-import usePopulateVerbsTensesForms from '@/hooks/usePopulateVerbsTensesForms';
+import usePopulateVerbsTensesForms from '@/hooks/tasks/usePopulateVerbsTensesForms';
 import { useQuestions } from '@/store/questions';
 import { useSelectedTense, useSelectedVerb, useShowStart } from '@/store/scripts';
 
