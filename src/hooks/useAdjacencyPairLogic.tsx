@@ -5,6 +5,7 @@
 import { useRecoilValue } from 'recoil';
 
 import useGenerateNextQuestion from '@/hooks/questions/useGenerateNextQuestion';
+import useDelayBatFeedback from '@/hooks/useDelayBatFeedback';
 import useGiveFeedbackForCorrect from '@/hooks/useGiveFeedbackForCorrect';
 import useGiveFeedbackForIncorrect from '@/hooks/useGiveFeedbackForIncorrect';
 import { currentAdjacencyPairState } from '@/store/adjacencyPairs';
@@ -14,17 +15,18 @@ const useChatAdjacencyPairLogic = () => {
   const generateNextQuestion = useGenerateNextQuestion();
   const giveFeedbackForCorrect = useGiveFeedbackForCorrect();
   const giveFeedbackForIncorrect = useGiveFeedbackForIncorrect();
+  const delayBatFeedback = useDelayBatFeedback();
 
   const chatAdjacencyPairLogic = () => {
     if (currentAdjacencyPair !== undefined) {
       if (currentAdjacencyPair.response_id !== null) {
-        generateNextQuestion();
+        delayBatFeedback(generateNextQuestion, 3000, true);
       } else {
         if (currentAdjacencyPair.text !== null && currentAdjacencyPair.correct !== null) {
           if (currentAdjacencyPair.correct) {
-            giveFeedbackForCorrect();
+            delayBatFeedback(giveFeedbackForCorrect, 1000, false);
           } else {
-            giveFeedbackForIncorrect();
+            delayBatFeedback(giveFeedbackForIncorrect, 1000, false);
           }
         }
       }

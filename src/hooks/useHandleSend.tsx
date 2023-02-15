@@ -22,7 +22,6 @@ const useHandleSend = () => {
       const correct = chatText === currentQuestion.answer ? true : false;
       patchAdjacencyPairText(currentAdjacencyPair.id, chatText, correct).then((a_p) => {
         setAdjacencyPairs(replaceFinalAdjacencyPair(adjacencyPairs, a_p));
-        setMessageInputDisabled(false);
       });
     } else {
       alert('currentQuestion is undefined');

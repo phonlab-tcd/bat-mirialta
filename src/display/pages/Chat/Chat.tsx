@@ -34,7 +34,7 @@ import anonImg from '/assets/images/anon-avatar.png';
 import robotImg from '/assets/images/robot.png';
 
 function Chat() {
-  const messageInputRef = useRef(null);
+  const messageInputRef = useRef<HTMLInputElement>(null);
   const { profile } = useProfile();
 
   const [date] = useState(new Date().toUTCString());
@@ -82,6 +82,9 @@ function Chat() {
     if (firstLoad && receivedAdjacencyPairHistory) {
       setFirstLoad(false);
       chatLoadState();
+      if (messageInputRef.current !== null) {
+        messageInputRef.current.focus();
+      }
     }
   }, [firstLoad, receivedAdjacencyPairHistory]);
 
@@ -93,6 +96,14 @@ function Chat() {
       console.log("don't have current question");
     }
   }, [adjacencyPairs]);
+
+  useEffect(() => {
+    if (!messageInputDisabled) {
+      if (messageInputRef.current !== null) {
+        messageInputRef.current.focus();
+      }
+    }
+  }, [messageInputDisabled]);
 
   return (
     <Box height="100%">
@@ -138,7 +149,7 @@ function Chat() {
           onSend={handleSend}
           disabled={messageInputDisabled}
           attachButton={false}
-          placeholder={'scríobh anseo'}
+          placeholder={messageInputDisabled ? 'fán le do thoil' : 'scríobh anseo'}
           ref={messageInputRef}
         />
       </ChatContainer>
