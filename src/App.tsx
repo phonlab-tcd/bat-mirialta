@@ -54,8 +54,8 @@ function App() {
     <Fragment>
       <CssBaseline />
       <BrowserRouter>
-        <CenteredFlexBox sx={{ backgroundColor: 'background.dark' }}>
-          <Box sx={{ maxWidth: 'sm', width: '100%' }}>
+        <CenteredFlexBox sx={{ backgroundColor: 'background.dark', height: '100vh' }}>
+          <Box sx={{ maxWidth: 'sm', width: '100%', height: '100%' }}>
             <Header />
             <Pages />
           </Box>
