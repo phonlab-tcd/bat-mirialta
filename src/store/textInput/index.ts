@@ -30,4 +30,14 @@ const useMessageInputDisabled = () => {
   return { messageInputDisabled, setMessageInputDisabled };
 };
 
-export { useBatTyping, useMessageInputDisabled, useChatText };
+const taNilInputChoiceState = atom<boolean>({
+  key: 'ta-nil-input-choice-state',
+  default: false,
+});
+
+const useTaNilInputChoice = () => {
+  const [taNilInputChoice, setTaNilInputChoice] = useRecoilState(taNilInputChoiceState);
+  return { taNilInputChoice, setTaNilInputChoice };
+};
+
+export { useBatTyping, useMessageInputDisabled, useChatText, useTaNilInputChoice };

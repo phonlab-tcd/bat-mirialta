@@ -19,6 +19,7 @@ import { ChatContainer } from '@chatscope/chat-ui-kit-react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 
 import Meta from '@/display/components/Meta';
+import MessageInputButtons from '@/display/controllers/MessageInputButtons';
 import useAdjacencyPairLogic from '@/hooks/useAdjacencyPairLogic';
 import useChatLoadState from '@/hooks/useChatLoadState';
 import useHandleSend from '@/hooks/useHandleSend';
@@ -28,7 +29,12 @@ import { useSession } from '@/store/auth';
 import { useProfile } from '@/store/auth';
 import { chatBubblesState } from '@/store/chatBubbles';
 import { currentQuestionState } from '@/store/questions';
-import { useBatTyping, useChatText, useMessageInputDisabled } from '@/store/textInput';
+import {
+  useBatTyping,
+  useChatText,
+  useMessageInputDisabled,
+  useTaNilInputChoice,
+} from '@/store/textInput';
 
 import anonImg from '/assets/images/anon-avatar.png';
 import robotImg from '/assets/images/robot.png';
@@ -45,6 +51,7 @@ function Chat() {
 
   const { session } = useSession();
   const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
+  const { taNilInputChoice } = useTaNilInputChoice();
 
   const { batTyping } = useBatTyping();
   const { messageInputDisabled } = useMessageInputDisabled();
@@ -106,8 +113,9 @@ function Chat() {
   }, [messageInputDisabled]);
 
   return (
-    <Box height="100%">
+    <Box height="100%" sx={{ position: 'relative' }}>
       <Meta title="Chat" />
+      <MessageInputButtons vis={taNilInputChoice ? 'visible' : 'hidden'} />
       <ChatContainer>
         <ConversationHeader>
           <Avatar src={robotImg} name="Bat" />
