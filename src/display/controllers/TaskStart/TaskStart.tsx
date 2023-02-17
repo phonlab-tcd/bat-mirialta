@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 
 import { AbButton } from 'abair-components';
 
+import { basePath } from '@/config';
 import { getQuestionSet } from '@/services/supabase';
 import { useQuestionSet } from '@/store/questions';
 import { useSelectedForm, useSelectedTense, useSelectedVerb, useShowStart } from '@/store/scripts';
@@ -26,7 +27,7 @@ const TaskStart = () => {
             return res;
           });
           if (res.length > 0) {
-            navigate('/chat');
+            navigate(`${basePath}chat`);
           }
         }
       });

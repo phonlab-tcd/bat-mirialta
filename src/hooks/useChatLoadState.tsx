@@ -5,7 +5,11 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
-import useGenerateNextQuestion from '@/hooks/useGenerateNextQuestion';
+import { basePath } from '@/config';
+import useGenerateNextQuestion from '@/hooks/questions/useGenerateNextQuestion';
+import usePopulateQuestionSet from '@/hooks/questions/usePopulateQuestionSet';
+import usePopulateQuestions from '@/hooks/questions/usePopulateQuestions';
+import usePopulateVerbsTensesForms from '@/hooks/tasks/usePopulateVerbsTensesForms';
 import { getQuestion, getResponseCategories, getResponses } from '@/services/supabase';
 import { currentAdjacencyPairState, useAdjacencyPairs } from '@/store/adjacencyPairs';
 import { useSession } from '@/store/auth';
@@ -21,10 +25,6 @@ import {
   useTenses,
   useVerbs,
 } from '@/store/scripts';
-
-import usePopulateQuestionSet from './usePopulateQuestionSet';
-import usePopulateQuestions from './usePopulateQuestions';
-import usePopulateVerbsTensesForms from './usePopulateVerbsTensesForms';
 
 const useChatLoadState = () => {
   const currentAdjacencyPair = useRecoilValue(currentAdjacencyPairState);
@@ -61,8 +61,10 @@ const useChatLoadState = () => {
     }
   }, [taskSelected]);
 
+  // runs when verb, tense and form are all selected
   useEffect(() => {
     if (tasksPopulated) {
+      // gets all possible BAT responses, and their categories
       if (responses.length === 0) {
         getResponses().then((r) => {
           if (r !== undefined) {
@@ -75,6 +77,8 @@ const useChatLoadState = () => {
           }
         });
       }
+
+      //
       if (adjacencyPairs.length !== 0) {
         if (questions.length === 0 && currentAdjacencyPair !== undefined) {
           getQuestion(currentAdjacencyPair.question_id).then((q) => {
@@ -86,7 +90,7 @@ const useChatLoadState = () => {
         }
       } else {
         if (!taskSelected) {
-          navigate('/');
+          navigate(`${basePath}`);
         }
       }
     }

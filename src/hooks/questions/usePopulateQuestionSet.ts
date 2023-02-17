@@ -14,6 +14,7 @@ function usePopulateQuestionSet() {
       getQuestionSet(selectedVerb.id, selectedTense.id, selectedForm.id).then((q_s) => {
         if (q_s !== undefined) {
           setQuestionSet(q_s);
+          // console.log('q_s:', q_s);
         } else {
           console.log('question set undefined');
         }
