@@ -35,7 +35,6 @@ const chatBubblesState = selector({
           });
         }
         if (Array.isArray(m.response)) {
-          console.log('m.response:', m.response);
           m.response.map((r: ResponseModel) => {
             chatBubbles.push({
               text: r.text,
