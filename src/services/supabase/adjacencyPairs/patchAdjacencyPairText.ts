@@ -1,10 +1,10 @@
 import supabase from '@/services/supabase';
 
-const patchAdjacencyPairText = async (AdjacencyPairID: number, text: string, correct: boolean) => {
+const patchAdjacencyPairText = async (AdjacencyPairID: number, text: string) => {
   try {
     const { data, error } = await supabase
       .from('bat_adjacency_pairs')
-      .update({ id: AdjacencyPairID, text: text, correct: correct })
+      .update({ id: AdjacencyPairID, text: text })
       .select()
       .single();
 

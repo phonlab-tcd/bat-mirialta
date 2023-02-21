@@ -10,11 +10,10 @@ import useGenerateNextQuestion from '@/hooks/questions/useGenerateNextQuestion';
 import usePopulateQuestionSet from '@/hooks/questions/usePopulateQuestionSet';
 import usePopulateQuestions from '@/hooks/questions/usePopulateQuestions';
 import usePopulateVerbsTensesForms from '@/hooks/tasks/usePopulateVerbsTensesForms';
-import { getQuestion, getResponseCategories, getResponses } from '@/services/supabase';
+import { getQuestion } from '@/services/supabase';
 import { currentAdjacencyPairState, useAdjacencyPairs } from '@/store/adjacencyPairs';
 import { useSession } from '@/store/auth';
 import { useQuestionSet, useQuestions } from '@/store/questions';
-import { useResponseCategories, useResponses } from '@/store/responses';
 import {
   taskSelectedState,
   tasksPopulatedState,
@@ -35,8 +34,6 @@ const useChatLoadState = () => {
   const populateQuestionSet = usePopulateQuestionSet();
 
   const { session } = useSession();
-  const { setResponses } = useResponses();
-  const { setResponseCategories } = useResponseCategories();
 
   const populateVerbsTensesForms = usePopulateVerbsTensesForms();
 
@@ -45,7 +42,6 @@ const useChatLoadState = () => {
   const { questionSet } = useQuestionSet();
   const generateNextQuestion = useGenerateNextQuestion();
 
-  const { responses } = useResponses();
   const { verbs } = useVerbs();
   const { tenses } = useTenses();
   const { forms } = useForms();
@@ -64,21 +60,6 @@ const useChatLoadState = () => {
   // runs when verb, tense and form are all selected
   useEffect(() => {
     if (tasksPopulated) {
-      // gets all possible BAT responses, and their categories
-      if (responses.length === 0) {
-        getResponses().then((r) => {
-          if (r !== undefined) {
-            setResponses(r);
-          }
-        });
-        getResponseCategories().then((r_c) => {
-          if (r_c !== undefined) {
-            setResponseCategories(r_c);
-          }
-        });
-      }
-
-      //
       if (adjacencyPairs.length !== 0) {
         if (questions.length === 0 && currentAdjacencyPair !== undefined) {
           getQuestion(currentAdjacencyPair.question_id).then((q) => {
@@ -103,7 +84,7 @@ const useChatLoadState = () => {
       session !== null &&
       questionSet.length !== 0
     ) {
-      console.log('generating next question:', questionSet);
+      console.log('generating next question in ChatLoadState:', questionSet);
       generateNextQuestion();
     }
   }, [questionSet]);

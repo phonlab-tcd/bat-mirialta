@@ -9,6 +9,8 @@ const basePath = production ? '/applications/bat-mirialta/' : '/';
 
 const domain = production ? 'http://68.183.41.58/' : 'http://localhost/';
 
+const errorCheckURL = 'http://localhost:8081/';
+
 const messages = {
   app: {
     crash: {
@@ -54,4 +56,5 @@ export {
   giphy404,
   production,
   domain,
+  errorCheckURL,
 };

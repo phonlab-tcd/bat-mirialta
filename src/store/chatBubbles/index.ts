@@ -1,10 +1,9 @@
 import { atom, selector, useRecoilState } from 'recoil';
 
-import { ChatBubbleModel } from '@/models';
+import { ChatBubbleModel, ResponseModel } from '@/models';
 
 import { adjacencyPairsState } from '../adjacencyPairs';
 import { questionsState } from '../questions';
-import { responsesState } from '../responses';
 
 const repeatAttemptState = atom<number>({
   key: 'repeat-attempt-state',
@@ -21,7 +20,6 @@ const chatBubblesState = selector({
   get: ({ get }) => {
     const adjacencyPairs = get(adjacencyPairsState);
     const questions = get(questionsState);
-    const responses = get(responsesState);
     const chatBubbles: ChatBubbleModel[] = [];
     adjacencyPairs.map((m) => {
       if (m !== null) {
@@ -36,11 +34,13 @@ const chatBubblesState = selector({
             sender: 'you',
           });
         }
-        if (m.response_id !== null) {
-          const response = responses.find((r) => m.response_id === r.id);
-          chatBubbles.push({
-            text: response !== undefined ? response.text : 'error: no response',
-            sender: 'robot',
+        if (Array.isArray(m.response)) {
+          console.log('m.response:', m.response);
+          m.response.map((r: ResponseModel) => {
+            chatBubbles.push({
+              text: r.text,
+              sender: 'robot',
+            });
           });
         }
       }

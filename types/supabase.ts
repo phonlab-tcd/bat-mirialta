@@ -1,22 +1,10 @@
+import { ResponseModel } from '@/models';
+
 export type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
 
 export interface Database {
   public: {
     Tables: {
-      aac_profiles: {
-        Row: {
-          created_at: string | null;
-          id: number;
-        };
-        Insert: {
-          created_at?: string | null;
-          id?: number;
-        };
-        Update: {
-          created_at?: string | null;
-          id?: number;
-        };
-      };
       ab_publications: {
         Row: {
           abstract: string | null;
@@ -102,9 +90,10 @@ export interface Database {
         Row: {
           correct: boolean | null;
           created_at: string | null;
+          error_data: Json | null;
           id: number;
           question_id: number;
-          response_id: number | null;
+          response: ResponseModel[];
           retry_attempt: number;
           text: string | null;
           user_id: string | null;
@@ -112,9 +101,10 @@ export interface Database {
         Insert: {
           correct?: boolean | null;
           created_at?: string | null;
+          error_data?: Json | null;
           id?: number;
           question_id: number;
-          response_id?: number | null;
+          response?: ResponseModel[];
           retry_attempt?: number;
           text?: string | null;
           user_id?: string | null;
@@ -122,9 +112,10 @@ export interface Database {
         Update: {
           correct?: boolean | null;
           created_at?: string | null;
+          error_data?: Json | null;
           id?: number;
           question_id?: number;
-          response_id?: number | null;
+          response?: ResponseModel[];
           retry_attempt?: number;
           text?: string | null;
           user_id?: string | null;
@@ -177,43 +168,6 @@ export interface Database {
           tense_id?: number;
           text?: string;
           verb_id?: number;
-        };
-      };
-      bat_response_categories: {
-        Row: {
-          created_at: string | null;
-          id: number;
-          type: string | null;
-        };
-        Insert: {
-          created_at?: string | null;
-          id?: number;
-          type?: string | null;
-        };
-        Update: {
-          created_at?: string | null;
-          id?: number;
-          type?: string | null;
-        };
-      };
-      bat_responses: {
-        Row: {
-          category: number;
-          created_at: string | null;
-          id: number;
-          text: string;
-        };
-        Insert: {
-          category: number;
-          created_at?: string | null;
-          id?: number;
-          text: string;
-        };
-        Update: {
-          category?: number;
-          created_at?: string | null;
-          id?: number;
-          text?: string;
         };
       };
       bat_tenses: {
@@ -327,31 +281,31 @@ export interface Database {
       };
       profiles: {
         Row: {
+          avatar: string;
           dialect: number | null;
           gender: number | null;
           id: string;
           updated_at: string | null;
           username: string | null;
           year: number | null;
-          avatar: string;
         };
         Insert: {
+          avatar?: string;
           dialect?: number | null;
           gender?: number | null;
           id: string;
           updated_at?: string | null;
           username?: string | null;
           year?: number | null;
-          avatar: string;
         };
         Update: {
+          avatar?: string;
           dialect?: number | null;
           gender?: number | null;
           id?: string;
           updated_at?: string | null;
           username?: string | null;
           year?: number | null;
-          avatar: string;
         };
       };
       synthesis_requests: {
@@ -426,18 +380,26 @@ export interface Database {
       getforms:
         | {
             Args: Record<PropertyKey, never>;
-            Returns: number;
+            Returns: number[];
           }
         | {
-            Args: { v_id: number; t_id: number };
-            Returns: number;
+            Args: {
+              v_id: number;
+              t_id: number;
+            };
+            Returns: number[];
           };
       gettenses: {
-        Args: { v_id: number };
-        Returns: number;
+        Args: {
+          v_id: number;
+        };
+        Returns: number[];
       };
     };
     Enums: {
+      [_ in never]: never;
+    };
+    CompositeTypes: {
       [_ in never]: never;
     };
   };

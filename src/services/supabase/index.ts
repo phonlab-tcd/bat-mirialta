@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
 import getAdjacencyPairs from './adjacencyPairs/getAdjacencyPairs';
-import patchAdjacencyPairResponse from './adjacencyPairs/patchAdjacencyPairResponse';
+import patchAdjacencyPairFeedback from './adjacencyPairs/patchAdjacencyPairFeedback';
 import patchAdjacencyPairText from './adjacencyPairs/patchAdjacencyPairText';
 import postAdjacencyPair from './adjacencyPairs/postAdjacencyPair';
 import checkError from './edgeFunctions/checkError';
@@ -9,8 +9,6 @@ import getAvailableForms from './getAvailableForms';
 import getAvailableTenses from './getAvailableTenses';
 import getForms from './getForms';
 import getProfile from './getProfile';
-import getResponseCategories from './getResponseCategories';
-import getResponses from './getResponses';
 import getTenses from './getTenses';
 import getVerbs from './getVerbs';
 import getAllQuestions from './questions/getAllQuestions';
@@ -32,11 +30,9 @@ export {
   getTenses,
   getForms,
   getProfile,
-  getResponses,
-  getResponseCategories,
   postAdjacencyPair,
   patchAdjacencyPairText,
-  patchAdjacencyPairResponse,
+  patchAdjacencyPairFeedback,
   getAvailableTenses,
   getAvailableForms,
   getAdjacencyPairs,

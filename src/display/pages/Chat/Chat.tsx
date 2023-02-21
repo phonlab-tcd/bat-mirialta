@@ -97,7 +97,7 @@ function Chat() {
 
   // anytime adjacency pairs is updated, runs the logic to determine next part of conversation
   useEffect(() => {
-    if (currentQuestion && session !== null) {
+    if (currentQuestion && session !== null && !firstLoad) {
       adjacencyPairLogic();
     } else {
       console.log("don't have current question");

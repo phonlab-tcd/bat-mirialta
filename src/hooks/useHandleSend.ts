@@ -19,12 +19,13 @@ const useHandleSend = () => {
     if (currentQuestion !== undefined && currentAdjacencyPair !== undefined) {
       setChatText('');
       setMessageInputDisabled(true);
-      const correct = chatText === currentQuestion.answer ? true : false;
-      patchAdjacencyPairText(currentAdjacencyPair.id, chatText, correct).then((a_p) => {
+      patchAdjacencyPairText(currentAdjacencyPair.id, chatText).then((a_p) => {
         setAdjacencyPairs(replaceFinalAdjacencyPair(adjacencyPairs, a_p));
       });
     } else {
-      alert('currentQuestion is undefined');
+      console.log('useHandleSend: currentQuestion or currentAdjacencyPair is undefined');
+      console.log('currentQuestion: ', currentQuestion);
+      console.log('currentAdjacencyPair: ', currentAdjacencyPair);
     }
   };
 
