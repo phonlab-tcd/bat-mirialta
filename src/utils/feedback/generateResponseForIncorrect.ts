@@ -8,14 +8,13 @@ const generateResponseForIncorrect = (word: string, target: string, errorData: a
   // placeholder for now
 
   const incorrectResponses = ['níl se ceart', 'mícheart'];
-  const incorrectFollowUp = ['...', '...'];
 
   responseObject.push({
     text: incorrectResponses[Math.floor(Math.random() * incorrectResponses.length)],
     form: 'statement',
   });
   responseObject.push({
-    text: incorrectFollowUp[Math.floor(Math.random() * incorrectFollowUp.length)],
+    text: '...',
     form: 'statement',
   });
 
