@@ -7,6 +7,7 @@ import postAdjacencyPair from './adjacencyPairs/postAdjacencyPair';
 import checkError from './edgeFunctions/checkError';
 import getAvailableForms from './getAvailableForms';
 import getAvailableTenses from './getAvailableTenses';
+import getAvailableVerbs from './getAvailableVerbs';
 import getForms from './getForms';
 import getProfile from './getProfile';
 import getTenses from './getTenses';
@@ -33,6 +34,7 @@ export {
   postAdjacencyPair,
   patchAdjacencyPairText,
   patchAdjacencyPairFeedback,
+  getAvailableVerbs,
   getAvailableTenses,
   getAvailableForms,
   getAdjacencyPairs,

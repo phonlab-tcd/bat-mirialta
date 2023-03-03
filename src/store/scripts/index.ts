@@ -12,6 +12,15 @@ const useVerbs = () => {
   return { verbs, setVerbs };
 };
 
+const availableVerbIDsState = atom<number[]>({
+  key: 'available-VerbIDs-state',
+  default: [],
+});
+
+const useAvailableVerbIDs = () => {
+  const [availableVerbIDs, setAvailableVerbIDs] = useRecoilState(availableVerbIDsState);
+  return { availableVerbIDs, setAvailableVerbIDs };
+};
 const selectedVerbState = atom<Database['public']['Tables']['bat_verbs']['Row'] | undefined>({
   key: 'selected-verb-state',
   default: undefined,
@@ -21,6 +30,18 @@ const useSelectedVerb = () => {
   const [selectedVerb, setSelectedVerb] = useRecoilState(selectedVerbState);
   return { selectedVerb, setSelectedVerb };
 };
+
+const availableVerbsState = selector({
+  key: 'available-verbs',
+  get: ({ get }) => {
+    const ids = get(availableVerbIDsState);
+
+    const list = get(verbsState);
+    const obj = list.filter((item) => ids.includes(item.id));
+
+    return obj !== undefined ? obj : [];
+  },
+});
 
 const tensesState = atom<Database['public']['Tables']['bat_tenses']['Row'][]>({
   key: 'tenses-state',
@@ -38,8 +59,8 @@ const availableTenseIDsState = atom<number[]>({
 });
 
 const useAvailableTenseIDs = () => {
-  const [availabletenseIDs, setAvailableTenseIDs] = useRecoilState(availableTenseIDsState);
-  return { availabletenseIDs, setAvailableTenseIDs };
+  const [availableTenseIDs, setAvailableTenseIDs] = useRecoilState(availableTenseIDsState);
+  return { availableTenseIDs, setAvailableTenseIDs };
 };
 
 const selectedTenseState = atom<Database['public']['Tables']['bat_tenses']['Row'] | undefined>({
@@ -52,7 +73,7 @@ const useSelectedTense = () => {
   return { selectedTense, setSelectedTense };
 };
 
-const availableTenses = selector({
+const availableTensesState = selector({
   key: 'available-tenses',
   get: ({ get }) => {
     const ids = get(availableTenseIDsState);
@@ -94,14 +115,13 @@ const useSelectedForm = () => {
   return { selectedForm, setSelectedForm };
 };
 
-const availableForms = selector({
+const availableFormsState = selector({
   key: 'available-forms',
   get: ({ get }) => {
     const ids = get(availableFormIDsState);
 
     const list = get(formsState);
     const obj = list.filter((item) => ids.includes(item.id));
-
     return obj !== undefined ? obj : [];
   },
 });
@@ -146,6 +166,16 @@ const tasksPopulatedState = selector({
   },
 });
 
+const noQuestionsState = atom<number>({
+  key: 'no-questions-state',
+  default: 5,
+});
+
+const useNoQuestions = () => {
+  const [noQuestions, setNoQuestions] = useRecoilState(noQuestionsState);
+  return { noQuestions, setNoQuestions };
+};
+
 export {
   useSelectedVerb,
   useSelectedTense,
@@ -156,11 +186,14 @@ export {
   selectedVerbState,
   selectedTenseState,
   selectedFormState,
+  useAvailableVerbIDs,
   useAvailableTenseIDs,
   useAvailableFormIDs,
-  availableTenses,
-  availableForms,
+  availableVerbsState,
+  availableTensesState,
+  availableFormsState,
   useShowStart,
   tasksPopulatedState,
   taskSelectedState,
+  useNoQuestions,
 };

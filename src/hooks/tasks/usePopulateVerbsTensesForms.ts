@@ -1,11 +1,29 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { getForms, getTenses, getVerbs } from '@/services/supabase';
-import { useForms, useTenses, useVerbs } from '@/store/scripts';
+import {
+  getAvailableForms,
+  getAvailableTenses,
+  getAvailableVerbs,
+  getForms,
+  getTenses,
+  getVerbs,
+} from '@/services/supabase';
+import {
+  useAvailableFormIDs,
+  useAvailableTenseIDs,
+  useAvailableVerbIDs,
+  useForms,
+  useTenses,
+  useVerbs,
+} from '@/store/scripts';
 
 function usePopulateVerbsTensesForms() {
   const { setVerbs } = useVerbs();
   const { setTenses } = useTenses();
   const { setForms } = useForms();
+  const { setAvailableVerbIDs } = useAvailableVerbIDs();
+  const { setAvailableTenseIDs } = useAvailableTenseIDs();
+  const { setAvailableFormIDs } = useAvailableFormIDs();
+
   const populateVerbsTensesForms = () => {
     getVerbs().then((v) => {
       if (v !== undefined) {
@@ -26,6 +44,21 @@ function usePopulateVerbsTensesForms() {
         setForms(f);
       } else {
         alert('f is undefined');
+      }
+    });
+    getAvailableVerbs(undefined, undefined).then((verbs) => {
+      if (verbs !== undefined) {
+        setAvailableVerbIDs(verbs);
+      }
+    });
+    getAvailableTenses(undefined, undefined).then((tenses) => {
+      if (tenses !== undefined) {
+        setAvailableTenseIDs(tenses);
+      }
+    });
+    getAvailableForms(undefined, undefined).then((forms) => {
+      if (forms !== undefined) {
+        setAvailableFormIDs(forms);
       }
     });
   };

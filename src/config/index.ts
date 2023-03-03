@@ -4,14 +4,14 @@ const email = 'sloanjo@tcd.ie';
 
 const repository = 'https://github.com/JohnSloan8/bat-mirialta';
 
-const production = true;
+const production = false;
 
 const basePath = production ? '/applications/bat-mirialta/' : '/';
 
 const domain = production ? 'http://abair-qa.duckdns.org/' : 'http://localhost/';
 
 const errorCheckURL = production
-  ? 'https://abair-qa.duckdns.org/api/error-check/run-full-check'
+  ? 'https://abair-qa.duckdns.org/apis/error-check/run-full-check'
   : 'http://localhost:8002/run-full-check';
 
 const messages = {
