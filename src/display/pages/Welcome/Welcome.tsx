@@ -5,49 +5,47 @@ import { useRecoilValue } from 'recoil';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-import { AbButton } from 'abair-components';
+// import Typography from '@mui/material/Typography';
 import Image from 'mui-image';
 
-import AbSelect from '@/display/components/AbSelect';
 import Meta from '@/display/components/Meta';
 import { CenteredFlexBox } from '@/display/components/styled';
+import ContinueChatOrNew from '@/display/controllers/ContinueChatOrNew';
+import SetTask from '@/display/controllers/SetTask';
+import usePopulateChats from '@/hooks/chats/usePopulateChats';
 import { useAvailables, useGetAvailables } from '@/hooks/selectTask';
 import usePopulateVerbsTensesForms from '@/hooks/tasks/usePopulateVerbsTensesForms';
-import {
-  availableFormsState,
-  availableTensesState,
-  availableVerbsState,
-  useNoQuestions,
-  useSelectedForm,
-  useSelectedTense,
-  useSelectedVerb,
-  useVerbs,
-} from '@/store/scripts';
+import { useSession } from '@/store/auth';
+import { mostRecentChatState, useChats } from '@/store/chats';
+import { useVerbs } from '@/store/scripts';
 
 import robotImg from '/assets/images/robot.png';
 
 const Welcome = () => {
-  const { verbs } = useVerbs();
-
-  const populateVerbsTensesForms = usePopulateVerbsTensesForms();
-
   useAvailables();
   useGetAvailables();
-
-  const availableVerbs = useRecoilValue(availableVerbsState);
-  const { selectedVerb, setSelectedVerb } = useSelectedVerb();
-  const availableTenses = useRecoilValue(availableTensesState);
-  const { selectedTense, setSelectedTense } = useSelectedTense();
-  const availableForms = useRecoilValue(availableFormsState);
-  const { selectedForm, setSelectedForm } = useSelectedForm();
-  const { noQuestions, setNoQuestions } = useNoQuestions();
+  const { verbs } = useVerbs();
+  const { chats } = useChats();
+  const { session } = useSession();
+  const populateVerbsTensesForms = usePopulateVerbsTensesForms();
+  const populateChats = usePopulateChats();
+  const mostRecentChat = useRecoilValue(mostRecentChatState);
 
   useEffect(() => {
+    console.log('first load of tasks and chats');
     if (verbs.length === 0) {
-      console.log('first load\n\ngetting verbs, tenses and forms');
       populateVerbsTensesForms();
     }
-  }, []);
+
+    if (chats.length === 0 && session !== null) {
+      console.log('populating chats');
+      populateChats(session.user.id);
+    }
+  }, [session]);
+
+  useEffect(() => {
+    console.log('chats:', chats);
+  }, [chats]);
 
   return (
     <Box>
@@ -63,97 +61,21 @@ const Welcome = () => {
           showLoading
         />
       </CenteredFlexBox>
-      <CenteredFlexBox>
-        <Box
-          sx={{ backgroundColor: '#67add6' }}
-          width={300}
-          border={4}
-          borderRadius={3}
-          borderColor={'#3e435a'}
-          p={2}
-          pt={1}
-        >
+      <Box>
+        {mostRecentChat !== undefined && !mostRecentChat.complete ? (
           <Box>
-            <Typography align="center" fontSize={20} color="#3e435a" fontFamily={'Comic Neue'}>
-              VERB
-            </Typography>
-            <AbSelect
-              handleChange={(e) => {
-                setSelectedVerb(availableVerbs.find((v) => v.name === e.target.value));
-              }}
-              value={selectedVerb !== undefined ? selectedVerb.name : 'all'}
-              label={'Verbs'}
-              items={availableVerbs.map((aV) => aV.name)}
-            />
+            <Typography align="center">Already A chat in progress. Would you like to</Typography>
+            <Typography align="center">New Chat</Typography>
+            <CenteredFlexBox>
+              <ContinueChatOrNew />
+            </CenteredFlexBox>
           </Box>
-          <Box mt={1}>
-            <Typography align="center" fontSize={20} color="#3e435a" fontFamily={'Comic Neue'}>
-              TENSE
-            </Typography>
-            <AbSelect
-              handleChange={(e) => {
-                setSelectedTense(availableTenses.find((t) => t.name === e.target.value));
-              }}
-              value={selectedTense !== undefined ? selectedTense.name : 'all'}
-              label={'Tenses'}
-              items={availableTenses.map((aT) => aT.name)}
-            />
-          </Box>
-          <Box mt={1}>
-            <Typography align="center" fontSize={20} color="#3e435a" fontFamily={'Comic Neue'}>
-              FORM
-            </Typography>
-            <AbSelect
-              handleChange={(e) => {
-                setSelectedForm(availableForms.find((t) => t.name === e.target.value));
-              }}
-              value={selectedForm !== undefined ? selectedForm.name : 'all'}
-              label={'Forms'}
-              items={availableForms.map((aF) => aF.name)}
-            />
-          </Box>
-          <Box mt={1}>
-            <Typography
-              align="center"
-              fontWeight={'bold'}
-              fontSize={20}
-              color="#3e435a"
-              fontFamily={'Comic Neue'}
-            >
-              QUESTIONS
-            </Typography>
-
-            <AbSelect
-              handleChange={(e) => {
-                setNoQuestions(e.target.value as number);
-              }}
-              value={String(noQuestions)}
-              label={'noQuestions'}
-              items={[3, 5, 10]}
-            />
-          </Box>
-          <CenteredFlexBox mt={3}>
-            <Box
-              sx={{ backgroundColor: '#67add6' }}
-              width={300}
-              border={4}
-              borderRadius={3}
-              borderColor={'#3e435a'}
-            >
-              <AbButton
-                size="large"
-                fullWidth={true}
-                label="start"
-                onClick={() => {
-                  startChat();
-                }}
-                selected={true}
-                color="secondary"
-              />
-            </Box>
+        ) : (
+          <CenteredFlexBox>
+            <SetTask />
           </CenteredFlexBox>
-        </Box>
-      </CenteredFlexBox>
+        )}
+      </Box>
     </Box>
   );
 };
