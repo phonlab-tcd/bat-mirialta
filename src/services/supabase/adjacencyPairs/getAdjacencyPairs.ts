@@ -1,11 +1,11 @@
 import supabase from '@/services/supabase';
 
-const getAdjacencyPairs = async (userID: string) => {
+const getAdjacencyPairs = async (chatID: number) => {
   try {
     const { data, error } = await supabase
       .from('bat_adjacency_pairs')
       .select(`*`)
-      .eq('user_id', userID)
+      .eq('chat_id', chatID)
       .order('id', { ascending: true });
 
     if (error) {

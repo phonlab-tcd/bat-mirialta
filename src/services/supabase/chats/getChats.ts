@@ -11,7 +11,6 @@ const getChats = async (userID: string) => {
     if (error) {
       console.log('error:', error);
     } else {
-      console.log('data:', data);
       return data;
     }
 

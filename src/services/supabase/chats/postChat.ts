@@ -5,7 +5,7 @@ const postChat = async (
   verb: string | null,
   tense: string | null,
   form: string | null,
-  questions: number,
+  questions: number[],
 ) => {
   console.log('userID:', userID);
   try {

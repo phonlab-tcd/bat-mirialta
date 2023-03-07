@@ -1,6 +1,8 @@
 import { atom, selector, useRecoilState } from 'recoil';
 
 import { Database } from '../../../types/supabase';
+import { currentAdjacencyPairState } from '../adjacencyPairs';
+import { activeChatState } from '../chats';
 
 const questionsState = atom<Database['public']['Tables']['bat_questions']['Row'][]>({
   key: 'questions-state',
@@ -22,16 +24,37 @@ const useQuestionSet = () => {
   return { questionSet, setQuestionSet };
 };
 
-const currentQuestionState = selector({
-  key: 'current-question-state',
+const currentQuestionIndexState = selector({
+  key: 'current-question-index-state',
   get: ({ get }) => {
-    const questions = get(questionsState);
-    if (questions.length !== 0) {
-      return questions[questions.length - 1];
+    const activeChat = get(activeChatState);
+    const currentAdjacencyPair = get(currentAdjacencyPairState);
+    if (activeChat !== undefined && currentAdjacencyPair !== undefined) {
+      return activeChat.questions.indexOf(currentAdjacencyPair.question_id);
     } else {
       return undefined;
     }
   },
 });
 
-export { questionsState, useQuestions, useQuestionSet, currentQuestionState };
+const currentQuestionState = selector({
+  key: 'current-question-state',
+  get: ({ get }) => {
+    const activeChat = get(activeChatState);
+    const questions = get(questionsState);
+    const currentQuestionIndex = get(currentQuestionIndexState);
+    if (activeChat !== undefined && currentQuestionIndex !== undefined) {
+      return questions.find((q) => q.id === activeChat.questions[currentQuestionIndex]);
+    } else {
+      return undefined;
+    }
+  },
+});
+
+export {
+  questionsState,
+  useQuestions,
+  currentQuestionIndexState,
+  currentQuestionState,
+  useQuestionSet,
+};

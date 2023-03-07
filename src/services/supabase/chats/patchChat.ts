@@ -1,10 +1,13 @@
 import supabase from '@/services/supabase';
 
-const patchChat = async (chatID: string, complete: boolean) => {
+const patchChat = async (chatID: number, complete: boolean) => {
+  console.log('patching chat\n');
+  console.log('chatID: ', chatID);
+  console.log('complete: ', complete);
   try {
     const { data, error } = await supabase
       .from('bat_chats')
-      .update({ chat_id: chatID, complete: complete })
+      .update({ id: chatID, complete: complete })
       .select()
       .single();
 

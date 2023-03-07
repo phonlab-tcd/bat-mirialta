@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
@@ -11,9 +12,11 @@ import { AbButton } from 'abair-components';
 
 import AbSelect from '@/display/components/AbSelect';
 import { CenteredFlexBox } from '@/display/components/styled';
+import usePopulateQuestionSet from '@/hooks/questions/usePopulateQuestionSet';
 import { postChat } from '@/services/supabase/chats';
 import { useSession } from '@/store/auth';
 import { useChats } from '@/store/chats';
+import { useQuestionSet } from '@/store/questions';
 import {
   availableFormsState,
   availableTensesState,
@@ -23,6 +26,7 @@ import {
   useSelectedTense,
   useSelectedVerb,
 } from '@/store/scripts';
+import getRandomArrayFromArray from '@/utils/getRandomArrayFromArray';
 
 const SetTask = () => {
   const availableVerbs = useRecoilValue(availableVerbsState);
@@ -32,25 +36,34 @@ const SetTask = () => {
   const availableForms = useRecoilValue(availableFormsState);
   const { selectedForm, setSelectedForm } = useSelectedForm();
   const { noQuestions, setNoQuestions } = useNoQuestions();
+  const { questionSet } = useQuestionSet();
   const { chats, setChats } = useChats();
   const navigate = useNavigate();
   const { session } = useSession();
+  const populateQuestionSet = usePopulateQuestionSet();
 
   const startChat = () => {
     console.log('starting chat');
     if (session !== null) {
+      populateQuestionSet();
+    }
+  };
+
+  useEffect(() => {
+    if (questionSet.length !== 0 && session !== null) {
+      const randomQuestionSet = getRandomArrayFromArray(questionSet, noQuestions);
       postChat(
         session.user.id,
         selectedVerb !== undefined ? selectedVerb.name : null,
         selectedTense !== undefined ? selectedTense.name : null,
         selectedForm !== undefined ? selectedForm.name : null,
-        noQuestions,
+        randomQuestionSet,
       ).then((c) => {
         setChats([...chats, c]);
         navigate('/chat');
       });
     }
-  };
+  }, [questionSet]);
 
   return (
     <Box
@@ -118,7 +131,7 @@ const SetTask = () => {
           }}
           value={String(noQuestions)}
           label={'noQuestions'}
-          items={[3, 5, 10]}
+          items={[3, 5, 8]}
         />
       </Box>
       <CenteredFlexBox mt={3}>

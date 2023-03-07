@@ -1,5 +1,6 @@
 import { ResponseModel } from '@/models';
 
+// bat_chats questions?: number[]
 export type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
 
 export interface Database {

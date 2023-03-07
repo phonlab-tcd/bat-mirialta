@@ -2,6 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
 import Box from '@mui/material/Box';
 
@@ -10,19 +11,20 @@ import { AbButton } from 'abair-components';
 import { CenteredFlexBox } from '@/display/components/styled';
 import { patchChat } from '@/services/supabase/chats';
 import { useSession } from '@/store/auth';
-import { useChats } from '@/store/chats';
+import { activeChatState, useChats } from '@/store/chats';
 
 const ContinueChatOrNew = () => {
   const navigate = useNavigate();
   const { session } = useSession();
   const { chats, setChats } = useChats();
+  const activeChat = useRecoilValue(activeChatState);
 
   const continueChat = (cont: boolean) => {
     if (cont) {
       navigate('/chat');
     } else {
-      if (session !== null) {
-        patchChat(session.user.id, false).then((c) => {
+      if (session !== null && activeChat !== undefined) {
+        patchChat(activeChat.id, true).then((c) => {
           setChats([...chats, c]);
           console.log('chat updated successfully');
         });
@@ -51,7 +53,7 @@ const ContinueChatOrNew = () => {
             fullWidth={true}
             label="continue"
             onClick={() => {
-              continueChat(false);
+              continueChat(true);
             }}
             selected={true}
             color="secondary"
@@ -69,7 +71,7 @@ const ContinueChatOrNew = () => {
             fullWidth={true}
             label="start new"
             onClick={() => {
-              continueChat(true);
+              continueChat(false);
             }}
             selected={true}
             color="secondary"

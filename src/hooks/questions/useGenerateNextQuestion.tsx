@@ -6,43 +6,16 @@ import { useRecoilValue } from 'recoil';
 import { postAdjacencyPair } from '@/services/supabase';
 import { currentAdjacencyPairState, useAdjacencyPairs } from '@/store/adjacencyPairs';
 import { useSession } from '@/store/auth';
-import { currentQuestionState, useQuestionSet, useQuestions } from '@/store/questions';
+import { activeChatState } from '@/store/chats';
+import { currentQuestionIndexState } from '@/store/questions';
 
 const useGenerateNextQuestion = () => {
-  const { questions, setQuestions } = useQuestions();
-  const { questionSet } = useQuestionSet();
   const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
   const currentAdjacencyPair = useRecoilValue(currentAdjacencyPairState);
-  const currentQuestion = useRecoilValue(currentQuestionState);
+
+  const currentQuestionIndex = useRecoilValue(currentQuestionIndexState);
   const { session } = useSession();
-
-  const calcQuestionIDsAskedThisSet = () => {
-    if (adjacencyPairs.length === 0) {
-      return [];
-    } else {
-      const questionIDsAskedThisSetTemp = [];
-      let inCurrentQuestionSet = true;
-      let i = adjacencyPairs.length - 1;
-      while (inCurrentQuestionSet) {
-        const foundQuestion = questionSet.find((q) => q.id === adjacencyPairs[i].question_id);
-        if (foundQuestion !== undefined) {
-          questionIDsAskedThisSetTemp.push(foundQuestion.id);
-          if (i > 0) {
-            i -= 1;
-          } else {
-            inCurrentQuestionSet = false;
-          }
-        } else {
-          inCurrentQuestionSet = false;
-        }
-      }
-      return questionIDsAskedThisSetTemp;
-    }
-  };
-
-  const getUnaskedQuestionsSet = (askedIDs: number[]) => {
-    return questionSet.filter((qS) => !askedIDs.includes(qS.id));
-  };
+  const activeChat = useRecoilValue(activeChatState);
 
   const determineRepeatForNewAdjacencyPair = () => {
     if (currentAdjacencyPair === undefined) {
@@ -55,35 +28,44 @@ const useGenerateNextQuestion = () => {
   };
 
   const generateNextQuestion = () => {
-    if (session !== null) {
+    if (session !== null && activeChat !== undefined) {
       // if wrong, ask again with retry_attempt iterated
-      const repeat = determineRepeatForNewAdjacencyPair();
-      if (repeat === 0) {
-        // generate new question from set
-        // check how many questions of this set have been asked
-        const questionIDsAskedThisSet = calcQuestionIDsAskedThisSet();
-        const unaskedQuestionsSet = getUnaskedQuestionsSet(questionIDsAskedThisSet);
-        if (unaskedQuestionsSet.length === 0) {
-          alert('all questions in this set asked');
-        } else {
-          const randomQuestion =
-            unaskedQuestionsSet[Math.floor(Math.random() * unaskedQuestionsSet.length)];
 
-          postAdjacencyPair(session.user.id, randomQuestion.id, repeat).then((a_p) => {
-            setAdjacencyPairs([...adjacencyPairs, a_p]);
-            setQuestions([...questions, randomQuestion]);
-          });
-        }
+      let questionID;
+      let repeat;
+      if (currentAdjacencyPair === undefined) {
+        questionID = activeChat.questions[0];
+        repeat = 0;
       } else {
-        //ask same question
-        if (currentQuestion !== undefined) {
-          postAdjacencyPair(session.user.id, currentQuestion.id, repeat).then((a_p) => {
-            setAdjacencyPairs([...adjacencyPairs, a_p]);
-            setQuestions([...questions, currentQuestion]);
-          });
+        if (currentQuestionIndex !== undefined) {
+          repeat = determineRepeatForNewAdjacencyPair();
+          if (repeat === 0) {
+            // check if all questions complete
+            if (
+              currentAdjacencyPair.question_id === activeChat.questions[activeChat.questions.length]
+            ) {
+              // finish the current chat
+              alert('Congratulations! You have finished the chat!');
+            } else {
+              // generate new question
+
+              questionID = activeChat.questions[currentQuestionIndex + 1];
+            }
+          } else {
+            // same question repeated
+            questionID = activeChat.questions[currentQuestionIndex];
+          }
         } else {
-          alert('currentQuestion is undefined');
+          console.log('currentQuestionIndex is undefined');
         }
+      }
+
+      if (questionID !== undefined && repeat !== undefined) {
+        postAdjacencyPair(session.user.id, activeChat.id, questionID, repeat).then((a_p) => {
+          setAdjacencyPairs([...adjacencyPairs, a_p]);
+        });
+      } else {
+        console.log('questionID or repeat is undefined');
       }
     } else {
       alert('session is null');

@@ -12,15 +12,15 @@ const useChats = () => {
   return { chats, setChats };
 };
 
-const mostRecentChatState = selector({
+const activeChatState = selector({
   key: 'chat-in-progress',
   get: ({ get }) => {
     const chats = get(chatsState);
-    if (chats.length > 0) {
+    if (chats.length > 0 && !chats[chats.length - 1].complete) {
       return chats[chats.length - 1];
     }
     return undefined;
   },
 });
 
-export { useChats, mostRecentChatState };
+export { useChats, activeChatState };
