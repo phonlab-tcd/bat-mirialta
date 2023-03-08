@@ -10,7 +10,7 @@ const sharedTheme = {
       default: '#fff',
       paper: '#fafafa',
       dark: '#f1f1f1',
-      main: '#fff',
+      main: '#e1eaf7',
     },
     primary: {
       main: '#67add6',

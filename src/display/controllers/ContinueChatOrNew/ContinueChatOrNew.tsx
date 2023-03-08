@@ -8,7 +8,8 @@ import Box from '@mui/material/Box';
 
 import { AbButton } from 'abair-components';
 
-import { CenteredFlexBox } from '@/display/components/styled';
+import BatBox from '@/display/components/BatBox';
+import ChatInProgress from '@/display/controllers/ChatInProgress';
 import { patchChat } from '@/services/supabase';
 import { useSession } from '@/store/auth';
 import { activeChatState, useChats } from '@/store/chats';
@@ -25,7 +26,7 @@ const ContinueChatOrNew = () => {
     } else {
       if (session !== null && activeChat !== undefined) {
         patchChat(activeChat.id, true).then((c) => {
-          setChats([...chats, c]);
+          setChats([...chats.slice(0, chats.length - 1), c]);
           console.log('chat updated successfully');
         });
       }
@@ -33,21 +34,10 @@ const ContinueChatOrNew = () => {
   };
 
   return (
-    <Box
-      sx={{ backgroundColor: '#67add6' }}
-      width={300}
-      border={4}
-      borderRadius={3}
-      borderColor={'#3e435a'}
-      p={2}
-    >
+    <BatBox>
       <Box>
-        <CenteredFlexBox
-          sx={{ backgroundColor: '#67add6' }}
-          border={4}
-          borderRadius={3}
-          borderColor={'#3e435a'}
-        >
+        <ChatInProgress />
+        <BatBox button={true} width={'100%'}>
           <AbButton
             size="large"
             fullWidth={true}
@@ -58,14 +48,11 @@ const ContinueChatOrNew = () => {
             selected={true}
             color="secondary"
           />
-        </CenteredFlexBox>
-        <CenteredFlexBox
-          sx={{ backgroundColor: '#67add6' }}
-          border={4}
-          borderRadius={3}
-          borderColor={'#3e435a'}
-          mt={2}
-        >
+        </BatBox>
+      </Box>
+
+      <Box mt={2}>
+        <BatBox button={true} width={'100%'}>
           <AbButton
             size="large"
             fullWidth={true}
@@ -76,9 +63,9 @@ const ContinueChatOrNew = () => {
             selected={true}
             color="secondary"
           />
-        </CenteredFlexBox>
+        </BatBox>
       </Box>
-    </Box>
+    </BatBox>
   );
 };
 

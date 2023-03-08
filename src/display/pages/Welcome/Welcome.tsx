@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 
 // import Typography from '@mui/material/Typography';
 import Image from 'mui-image';
@@ -12,11 +11,13 @@ import Meta from '@/display/components/Meta';
 import { CenteredFlexBox } from '@/display/components/styled';
 import ContinueChatOrNew from '@/display/controllers/ContinueChatOrNew';
 import SetTask from '@/display/controllers/SetTask';
+import Stats from '@/display/controllers/Stats';
 import { usePopulateChats, useSetSelectedTaskFromActiveChat } from '@/hooks/chats';
 import { useAvailables, useGetAvailables } from '@/hooks/selectTask';
 import usePopulateVerbsTensesForms from '@/hooks/tasks/usePopulateVerbsTensesForms';
 import { useSession } from '@/store/auth';
 import { activeChatState, useChats } from '@/store/chats';
+import { useQuestionSet } from '@/store/questions';
 import { useVerbs } from '@/store/scripts';
 
 import robotImg from '/assets/images/robot.png';
@@ -31,8 +32,11 @@ const Welcome = () => {
   const populateVerbsTensesForms = usePopulateVerbsTensesForms();
   const populateChats = usePopulateChats();
   const activeChat = useRecoilValue(activeChatState);
+  const { setQuestionSet } = useQuestionSet();
 
   useEffect(() => {
+    // reset the question set, so no redirect to chat
+    setQuestionSet([]);
     if (verbs.length === 0) {
       populateVerbsTensesForms();
     }
@@ -56,38 +60,20 @@ const Welcome = () => {
           showLoading
         />
       </CenteredFlexBox>
-      <Box>
-        {activeChat !== undefined ? (
-          <Box>
-            <Box>
-              <Typography mb={2} align="center">
-                You already have a chat in progress
-              </Typography>
-            </Box>
-            <Box my={2}>
-              <CenteredFlexBox>
-                <Typography>verb: </Typography>
-                <Typography fontWeight="bold">{activeChat.verb}</Typography>
-              </CenteredFlexBox>
-              <CenteredFlexBox>
-                <Typography>tense: </Typography>
-                <Typography fontWeight="bold">{activeChat.tense}</Typography>
-              </CenteredFlexBox>
-              <CenteredFlexBox>
-                <Typography>form: </Typography>
-                <Typography fontWeight="bold">{activeChat.form}</Typography>
-              </CenteredFlexBox>
-            </Box>
-            <CenteredFlexBox>
-              <ContinueChatOrNew />
-            </CenteredFlexBox>
-          </Box>
-        ) : (
-          <CenteredFlexBox>
-            <SetTask />
-          </CenteredFlexBox>
-        )}
-      </Box>
+
+      {activeChat !== undefined ? (
+        <CenteredFlexBox>
+          <ContinueChatOrNew />
+        </CenteredFlexBox>
+      ) : (
+        <CenteredFlexBox>
+          <SetTask />
+        </CenteredFlexBox>
+      )}
+
+      <CenteredFlexBox mt={2}>
+        <Stats />
+      </CenteredFlexBox>
     </Box>
   );
 };

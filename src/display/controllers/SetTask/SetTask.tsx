@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import { AbButton } from 'abair-components';
 
 import AbSelect from '@/display/components/AbSelect';
+import BatBox from '@/display/components/BatBox';
 import { CenteredFlexBox } from '@/display/components/styled';
 import usePopulateQuestionSet from '@/hooks/questions/usePopulateQuestionSet';
 import { postChat } from '@/services/supabase';
@@ -66,15 +67,7 @@ const SetTask = () => {
   }, [questionSet]);
 
   return (
-    <Box
-      sx={{ backgroundColor: '#67add6' }}
-      width={300}
-      border={4}
-      borderRadius={3}
-      borderColor={'#3e435a'}
-      p={2}
-      pt={1}
-    >
+    <BatBox>
       <Box>
         <Typography align="center" fontSize={20} color="#3e435a" fontFamily={'Comic Neue'}>
           VERB
@@ -154,7 +147,7 @@ const SetTask = () => {
           />
         </Box>
       </CenteredFlexBox>
-    </Box>
+    </BatBox>
   );
 };
 
