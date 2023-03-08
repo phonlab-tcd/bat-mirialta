@@ -1,5 +1,7 @@
 import { atom, selector, useRecoilState } from 'recoil';
 
+import { ResponseModel } from '@/models';
+
 import { Database } from '../../../types/supabase';
 
 const chatsState = atom<Database['public']['Tables']['bat_chats']['Row'][]>({
@@ -23,4 +25,14 @@ const activeChatState = selector({
   },
 });
 
-export { useChats, activeChatState };
+const introState = atom<ResponseModel[]>({
+  key: 'intro',
+  default: [],
+});
+
+const useIntro = () => {
+  const [intro, setIntro] = useRecoilState(introState);
+  return { intro, setIntro };
+};
+
+export { useChats, activeChatState, introState, useIntro };

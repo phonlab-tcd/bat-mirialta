@@ -1,6 +1,7 @@
 import { atom, selector, useRecoilState } from 'recoil';
 
 import { ChatBubbleModel, ResponseModel } from '@/models';
+import { introState } from '@/store/chats';
 
 import { adjacencyPairsState } from '../adjacencyPairs';
 import { questionsState } from '../questions';
@@ -20,7 +21,16 @@ const chatBubblesState = selector({
   get: ({ get }) => {
     const adjacencyPairs = get(adjacencyPairsState);
     const questions = get(questionsState);
+    const intro = get(introState);
     const chatBubbles: ChatBubbleModel[] = [];
+    intro.map((i) => {
+      if (i.text) {
+        chatBubbles.push({
+          text: i.text,
+          sender: 'robot',
+        });
+      }
+    });
     adjacencyPairs.map((m) => {
       if (m !== null) {
         const question = questions.find((q) => m.question_id === q.id);

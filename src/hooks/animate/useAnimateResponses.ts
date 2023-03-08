@@ -4,18 +4,18 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
+import useDelayBatFeedback from '@/hooks/animate/useDelayBatFeedback';
 import useGenerateNextQuestion from '@/hooks/questions/useGenerateNextQuestion';
 import { ResponseModel } from '@/models';
 import { useAdjacencyPairs } from '@/store/adjacencyPairs';
 import { currentAdjacencyPairState } from '@/store/adjacencyPairs';
-import { replaceFinalAdjacencyPair } from '@/store/utils';
+import { replaceFinalObject } from '@/store/utils';
 import {
   updateCorrectionInFinalAdjacencyPair,
   updateResponsesInFinalAdjacencyPair,
 } from '@/store/utils';
 
-import { Database } from '../../types/supabase';
-import useDelayBatFeedback from './useDelayBatFeedback';
+import { Database } from '../../../types/supabase';
 
 const useAnimateResponses = () => {
   const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
@@ -34,10 +34,7 @@ const useAnimateResponses = () => {
           responses.slice(0, currentAdjacencyPair.response.length + 1),
           currentAdjacencyPair,
         );
-        const updatedAdjacencyPairs = replaceFinalAdjacencyPair(
-          adjacencyPairs,
-          updatedAdjacencyPair,
-        );
+        const updatedAdjacencyPairs = replaceFinalObject(adjacencyPairs, updatedAdjacencyPair);
 
         delayBatFeedback(
           () => {

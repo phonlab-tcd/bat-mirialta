@@ -8,7 +8,7 @@ interface BatBoxProps {
   button?: boolean;
 }
 
-const BatBox = ({ children, width = '95%', button = false }: BatBoxProps) => {
+const BatBox = ({ children, width = '90%', button = false }: BatBoxProps) => {
   return (
     <Box
       sx={{ backgroundColor: '#67add6' }}

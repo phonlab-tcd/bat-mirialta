@@ -1,3 +1,4 @@
+import { ResponseModel } from '@/models';
 import supabase from '@/services/supabase';
 
 const postChat = async (
@@ -6,12 +7,20 @@ const postChat = async (
   tense: string | null,
   form: string | null,
   questions: number[],
+  intro: ResponseModel[],
 ) => {
   console.log('userID:', userID);
   try {
     const { data, error } = await supabase
       .from('bat_chats')
-      .insert({ user_id: userID, verb: verb, tense: tense, form: form, questions: questions })
+      .insert({
+        user_id: userID,
+        verb: verb,
+        tense: tense,
+        form: form,
+        questions: questions,
+        intro: intro,
+      })
       .select(`*`)
       .single();
 

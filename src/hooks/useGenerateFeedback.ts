@@ -3,7 +3,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRecoilValue } from 'recoil';
 
-import useAnimateResponses from '@/hooks/useAnimateResponses';
+import useAnimateResponses from '@/hooks/animate/useAnimateResponses';
 import { ResponseModel } from '@/models';
 import { postError } from '@/services/error-check';
 import { patchAdjacencyPairFeedback } from '@/services/supabase';

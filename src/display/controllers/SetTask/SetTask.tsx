@@ -14,9 +14,11 @@ import AbSelect from '@/display/components/AbSelect';
 import BatBox from '@/display/components/BatBox';
 import { CenteredFlexBox } from '@/display/components/styled';
 import usePopulateQuestionSet from '@/hooks/questions/usePopulateQuestionSet';
+import { ResponseModel } from '@/models';
 import { postChat } from '@/services/supabase';
 import { useSession } from '@/store/auth';
-import { useChats } from '@/store/chats';
+import { useProfile } from '@/store/auth';
+import { useChats, useIntro } from '@/store/chats';
 import { useQuestionSet } from '@/store/questions';
 import {
   availableFormsState,
@@ -39,12 +41,13 @@ const SetTask = () => {
   const { noQuestions, setNoQuestions } = useNoQuestions();
   const { questionSet } = useQuestionSet();
   const { chats, setChats } = useChats();
+  const { setIntro } = useIntro();
   const navigate = useNavigate();
   const { session } = useSession();
   const populateQuestionSet = usePopulateQuestionSet();
+  const { profile } = useProfile();
 
   const startChat = () => {
-    console.log('starting chat');
     if (session !== null) {
       populateQuestionSet();
     }
@@ -52,6 +55,21 @@ const SetTask = () => {
 
   useEffect(() => {
     if (questionSet.length !== 0 && session !== null) {
+      const intro: ResponseModel[] = [
+        {
+          text: `Hi ${profile !== null ? profile.username : 'there'}!`,
+          form: 'statement',
+        },
+        {
+          text: `Let's practice ${noQuestions} of ${
+            selectedVerb !== undefined ? selectedVerb.name : 'all verbs'
+          }, ${selectedTense !== undefined ? selectedTense.name : 'all tenses'}, and ${
+            selectedForm !== undefined ? selectedForm.name : 'all forms'
+          }`,
+          form: 'statement',
+        },
+      ];
+      setIntro([]); // fro animation needs to be empty first
       const randomQuestionSet = getRandomArrayFromArray(questionSet, noQuestions);
       postChat(
         session.user.id,
@@ -59,6 +77,7 @@ const SetTask = () => {
         selectedTense !== undefined ? selectedTense.name : null,
         selectedForm !== undefined ? selectedForm.name : null,
         randomQuestionSet,
+        intro,
       ).then((c) => {
         setChats([...chats, c]);
         navigate('/chat');
@@ -125,6 +144,7 @@ const SetTask = () => {
           value={String(noQuestions)}
           label={'noQuestions'}
           items={[1, 3, 5, 8]}
+          all={false}
         />
       </Box>
       <CenteredFlexBox mt={3}>

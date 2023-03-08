@@ -7,7 +7,7 @@ import { patchAdjacencyPairText } from '@/services/supabase';
 import { currentAdjacencyPairState, useAdjacencyPairs } from '@/store/adjacencyPairs';
 import { currentQuestionState } from '@/store/questions';
 import { useChatText, useMessageInputDisabled } from '@/store/textInput';
-import { replaceFinalAdjacencyPair } from '@/store/utils';
+import { replaceFinalObject } from '@/store/utils';
 
 const useHandleSend = () => {
   const currentAdjacencyPair = useRecoilValue(currentAdjacencyPairState);
@@ -20,7 +20,7 @@ const useHandleSend = () => {
       setChatText('');
       setMessageInputDisabled(true);
       patchAdjacencyPairText(currentAdjacencyPair.id, chatText).then((a_p) => {
-        setAdjacencyPairs(replaceFinalAdjacencyPair(adjacencyPairs, a_p));
+        setAdjacencyPairs(replaceFinalObject(adjacencyPairs, a_p));
       });
     } else {
       console.log('useHandleSend: currentQuestion or currentAdjacencyPair is undefined');

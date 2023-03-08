@@ -99,8 +99,6 @@ function Chat() {
 
   useEffect(() => {
     if (session !== null && activeChat !== undefined && receivedAdjacencyPairHistory) {
-      console.log('running adjacency pair logic');
-
       adjacencyPairLogic();
     } else {
       console.log("don't have current question");

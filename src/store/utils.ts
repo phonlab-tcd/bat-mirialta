@@ -7,10 +7,7 @@ const removeNumberAtIndex = (arr: number[], index: number) => {
   return [...arr.slice(0, index), ...arr.slice(index + 1)];
 };
 
-const replaceFinalAdjacencyPair = (
-  arr: Database['public']['Tables']['bat_adjacency_pairs']['Row'][],
-  newValue: Database['public']['Tables']['bat_adjacency_pairs']['Row'],
-) => {
+const replaceFinalObject = (arr: any[], newValue: any) => {
   return [...arr.slice(0, arr.length - 1), newValue];
 };
 
@@ -31,9 +28,18 @@ const updateResponsesInFinalAdjacencyPair = (
   return newAdjacencyPair;
 };
 
+const updateIntroInActiveChat = (
+  intro: ResponseModel[],
+  chat: Database['public']['Tables']['bat_chats']['Row'],
+) => {
+  const newActiveChat = { ...chat, intro: intro };
+  return newActiveChat;
+};
+
 export {
   removeNumberAtIndex,
-  replaceFinalAdjacencyPair,
+  replaceFinalObject,
   updateResponsesInFinalAdjacencyPair,
   updateCorrectionInFinalAdjacencyPair,
+  updateIntroInActiveChat,
 };
