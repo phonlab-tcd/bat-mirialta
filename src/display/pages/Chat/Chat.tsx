@@ -21,10 +21,13 @@ import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import Meta from '@/display/components/Meta';
 import MessageInputButtons from '@/display/controllers/MessageInputButtons';
 import { usePopulateChats } from '@/hooks/chats';
+import useCheckChatComplete from '@/hooks/chats/useCheckChatComplete';
+import useGenerateNextQuestion from '@/hooks/questions/useGenerateNextQuestion';
 import useAdjacencyPairLogic from '@/hooks/useAdjacencyPairLogic';
 import useHandleSend from '@/hooks/useHandleSend';
 import { getAdjacencyPairs, getQuestions } from '@/services/supabase';
 import { useAdjacencyPairs, useReceivedAdjacencyPairHistory } from '@/store/adjacencyPairs';
+import { currentAdjacencyPairState } from '@/store/adjacencyPairs';
 import { useSession } from '@/store/auth';
 import { useProfile } from '@/store/auth';
 import { chatBubblesState } from '@/store/chatBubbles';
@@ -41,11 +44,14 @@ import anonImg from '/assets/images/anon-avatar.png';
 import robotImg from '/assets/images/robot.png';
 
 function Chat() {
+  useCheckChatComplete();
+
   const messageInputRef = useRef<HTMLInputElement>(null);
   const { profile } = useProfile();
 
   const [date] = useState(new Date().toUTCString());
   const [firstLoad, setFirstLoad] = useState(true);
+  const generateNextQuestion = useGenerateNextQuestion();
 
   const chatBubbles = useRecoilValue(chatBubblesState);
 
@@ -53,6 +59,7 @@ function Chat() {
   const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
   const { setQuestions } = useQuestions();
   const { taNilInputChoice } = useTaNilInputChoice();
+  const currentAdjacencyPair = useRecoilValue(currentAdjacencyPairState);
 
   const { batTyping } = useBatTyping();
   const { messageInputDisabled } = useMessageInputDisabled();
@@ -74,8 +81,6 @@ function Chat() {
             setQuestions(q);
             getAdjacencyPairs(activeChat.id).then((a_p) => {
               setReceivedAdjacencyPairHistory(true);
-              console.log('a_p:', a_p);
-              console.log('activeChat:', activeChat);
               if (a_p !== undefined) {
                 setAdjacencyPairs(a_p);
               } else {
@@ -93,17 +98,21 @@ function Chat() {
   }, [session, activeChat]);
 
   useEffect(() => {
-    if (session !== null && activeChat !== undefined) {
+    if (session !== null && activeChat !== undefined && receivedAdjacencyPairHistory) {
       console.log('running adjacency pair logic');
 
       adjacencyPairLogic();
     } else {
       console.log("don't have current question");
     }
-  }, [adjacencyPairs]);
+  }, [adjacencyPairs, receivedAdjacencyPairHistory]);
 
   useEffect(() => {
     if (firstLoad && receivedAdjacencyPairHistory) {
+      // generate new question if needed from first load - unusual that aP will have a response and no next questions, but in the case:
+      if (currentAdjacencyPair !== undefined && currentAdjacencyPair.response !== null) {
+        generateNextQuestion();
+      }
       setFirstLoad(false);
       if (messageInputRef.current !== null) {
         messageInputRef.current.focus();

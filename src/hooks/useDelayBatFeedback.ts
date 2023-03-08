@@ -1,3 +1,4 @@
+import { batDelayMultiplier } from '@/config';
 import { useBatTyping, useMessageInputDisabled } from '@/store/textInput';
 
 const useDelayBatFeedback = () => {
@@ -13,8 +14,8 @@ const useDelayBatFeedback = () => {
         if (focusOnInput) {
           setMessageInputDisabled(false);
         }
-      }, delay);
-    }, 750);
+      }, batDelayMultiplier * delay);
+    }, batDelayMultiplier * 750);
   };
 
   return delayBatFeedback;

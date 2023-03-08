@@ -13,7 +13,7 @@ import { AbButton } from 'abair-components';
 import AbSelect from '@/display/components/AbSelect';
 import { CenteredFlexBox } from '@/display/components/styled';
 import usePopulateQuestionSet from '@/hooks/questions/usePopulateQuestionSet';
-import { postChat } from '@/services/supabase/chats';
+import { postChat } from '@/services/supabase';
 import { useSession } from '@/store/auth';
 import { useChats } from '@/store/chats';
 import { useQuestionSet } from '@/store/questions';
@@ -131,7 +131,7 @@ const SetTask = () => {
           }}
           value={String(noQuestions)}
           label={'noQuestions'}
-          items={[3, 5, 8]}
+          items={[1, 3, 5, 8]}
         />
       </Box>
       <CenteredFlexBox mt={3}>

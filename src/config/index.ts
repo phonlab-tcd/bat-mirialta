@@ -10,6 +10,8 @@ const basePath = production ? '/applications/bat-mirialta/' : '/';
 
 const domain = production ? 'http://abair-qa.duckdns.org/' : 'http://localhost/';
 
+const batDelayMultiplier = production ? 1 : 0.01;
+
 const errorCheckURL = production
   ? 'https://abair-qa.duckdns.org/apis/error-check/run-full-check'
   : 'http://localhost:8002/run-full-check';
@@ -60,4 +62,5 @@ export {
   production,
   domain,
   errorCheckURL,
+  batDelayMultiplier,
 };

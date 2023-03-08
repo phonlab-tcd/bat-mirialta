@@ -1,3 +1,5 @@
+import { ResponseModel } from '@/models';
+
 export type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
 
 export interface Database {
@@ -92,7 +94,7 @@ export interface Database {
           error_data: Json | null;
           id: number;
           question_id: number;
-          response: Json | null;
+          response: ResponseModel[];
           retry_attempt: number;
           text: string | null;
           user_id: string | null;
@@ -104,7 +106,7 @@ export interface Database {
           error_data?: Json | null;
           id?: number;
           question_id: number;
-          response?: Json | null;
+          response?: ResponseModel[];
           retry_attempt?: number;
           text?: string | null;
           user_id?: string | null;
@@ -116,7 +118,7 @@ export interface Database {
           error_data?: Json | null;
           id?: number;
           question_id?: number;
-          response?: Json | null;
+          response?: ResponseModel[];
           retry_attempt?: number;
           text?: string | null;
           user_id?: string | null;

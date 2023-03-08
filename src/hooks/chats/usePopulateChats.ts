@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { getChats } from '@/services/supabase/chats';
+import { getChats } from '@/services/supabase';
 import { useChats } from '@/store/chats';
 
 function usePopulateChats() {

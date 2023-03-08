@@ -59,8 +59,25 @@ const Welcome = () => {
       <Box>
         {activeChat !== undefined ? (
           <Box>
-            <Typography align="center">Already A chat in progress. Would you like to</Typography>
-            <Typography align="center">New Chat</Typography>
+            <Box>
+              <Typography mb={2} align="center">
+                You already have a chat in progress
+              </Typography>
+            </Box>
+            <Box my={2}>
+              <CenteredFlexBox>
+                <Typography>verb: </Typography>
+                <Typography fontWeight="bold">{activeChat.verb}</Typography>
+              </CenteredFlexBox>
+              <CenteredFlexBox>
+                <Typography>tense: </Typography>
+                <Typography fontWeight="bold">{activeChat.tense}</Typography>
+              </CenteredFlexBox>
+              <CenteredFlexBox>
+                <Typography>form: </Typography>
+                <Typography fontWeight="bold">{activeChat.form}</Typography>
+              </CenteredFlexBox>
+            </Box>
             <CenteredFlexBox>
               <ContinueChatOrNew />
             </CenteredFlexBox>

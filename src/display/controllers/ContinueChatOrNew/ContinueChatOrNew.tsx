@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import { AbButton } from 'abair-components';
 
 import { CenteredFlexBox } from '@/display/components/styled';
-import { patchChat } from '@/services/supabase/chats';
+import { patchChat } from '@/services/supabase';
 import { useSession } from '@/store/auth';
 import { activeChatState, useChats } from '@/store/chats';
 

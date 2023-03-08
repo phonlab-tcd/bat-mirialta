@@ -1,16 +1,14 @@
 import supabase from '@/services/supabase';
 
-import { Database } from '../../../../types/supabase';
-
 const getQuestionSet = async (
   verbIds: number[],
   tenseIds: number[],
   formIds: number[],
-): Promise<Database['public']['Tables']['bat_questions']['Row'][] | undefined> => {
+): Promise<{ id: number }[] | undefined> => {
   try {
     const { data, error } = await supabase
       .from('bat_questions')
-      .select(`*`)
+      .select(`id`)
       .in('verb_id', verbIds)
       .in('tense_id', tenseIds)
       .in('form_id', formIds);

@@ -1,6 +1,4 @@
 const getRandomArrayFromArray = (arr: number[], n: number): number[] => {
-  console.log('arr', arr);
-  console.log('n', n);
   const result = new Array(n);
   let len = arr.length;
   const taken = new Array(len);

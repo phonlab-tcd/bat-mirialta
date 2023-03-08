@@ -14,7 +14,7 @@ const useQuestions = () => {
   return { questions, setQuestions };
 };
 
-const questionSetState = atom<Database['public']['Tables']['bat_questions']['Row'][]>({
+const questionSetState = atom<number[]>({
   key: 'question-set-state',
   default: [],
 });

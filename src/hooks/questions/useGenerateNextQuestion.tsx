@@ -3,19 +3,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRecoilValue } from 'recoil';
 
-import { postAdjacencyPair } from '@/services/supabase';
+import { patchChat, postAdjacencyPair } from '@/services/supabase';
 import { currentAdjacencyPairState, useAdjacencyPairs } from '@/store/adjacencyPairs';
 import { useSession } from '@/store/auth';
-import { activeChatState } from '@/store/chats';
-import { currentQuestionIndexState } from '@/store/questions';
+import { activeChatState, useChats } from '@/store/chats';
+import { currentQuestionIndexState, useQuestionSet } from '@/store/questions';
 
 const useGenerateNextQuestion = () => {
   const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
+  const { chats, setChats } = useChats();
   const currentAdjacencyPair = useRecoilValue(currentAdjacencyPairState);
-
   const currentQuestionIndex = useRecoilValue(currentQuestionIndexState);
   const { session } = useSession();
   const activeChat = useRecoilValue(activeChatState);
+  const { setQuestionSet } = useQuestionSet();
 
   const determineRepeatForNewAdjacencyPair = () => {
     if (currentAdjacencyPair === undefined) {
@@ -42,10 +43,14 @@ const useGenerateNextQuestion = () => {
           if (repeat === 0) {
             // check if all questions complete
             if (
-              currentAdjacencyPair.question_id === activeChat.questions[activeChat.questions.length]
+              currentAdjacencyPair.question_id ===
+              activeChat.questions[activeChat.questions.length - 1]
             ) {
               // finish the current chat
-              alert('Congratulations! You have finished the chat!');
+              patchChat(activeChat.id, true).then((c) => {
+                setChats([...chats.slice(0, chats.length - 1), c]);
+                setQuestionSet([]);
+              });
             } else {
               // generate new question
 

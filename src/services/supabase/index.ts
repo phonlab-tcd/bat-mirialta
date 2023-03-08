@@ -4,6 +4,9 @@ import getAdjacencyPairs from './adjacencyPairs/getAdjacencyPairs';
 import patchAdjacencyPairFeedback from './adjacencyPairs/patchAdjacencyPairFeedback';
 import patchAdjacencyPairText from './adjacencyPairs/patchAdjacencyPairText';
 import postAdjacencyPair from './adjacencyPairs/postAdjacencyPair';
+import getChats from './chats/getChats';
+import patchChat from './chats/patchChat';
+import postChat from './chats/postChat';
 import checkError from './edgeFunctions/checkError';
 import getAvailableForms from './getAvailableForms';
 import getAvailableTenses from './getAvailableTenses';
@@ -39,4 +42,7 @@ export {
   getAvailableForms,
   getAdjacencyPairs,
   getAllQuestions,
+  getChats,
+  patchChat,
+  postChat,
 };
