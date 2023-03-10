@@ -34,6 +34,7 @@ import { useSession } from '@/store/auth';
 import { useProfile } from '@/store/auth';
 import { chatBubblesState } from '@/store/chatBubbles';
 import { activeChatState, useIntro } from '@/store/chats';
+import { useShowPoints } from '@/store/points';
 import { useQuestions } from '@/store/questions';
 import {
   useBatTyping,
@@ -56,6 +57,7 @@ function Chat() {
   const generateNextQuestion = useGenerateNextQuestion();
 
   const chatBubbles = useRecoilValue(chatBubblesState);
+  const { showPoints, setShowPoints } = useShowPoints();
 
   const { session } = useSession();
   const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
@@ -85,7 +87,7 @@ function Chat() {
               setReceivedAdjacencyPairHistory(true);
               if (a_p !== undefined) {
                 setAdjacencyPairs(a_p);
-
+                setShowPoints(true);
                 if (a_p.length !== 0) {
                   setIntro(activeChat.intro);
                 }
@@ -136,7 +138,8 @@ function Chat() {
     <Box height="100%" sx={{ position: 'relative' }}>
       <Meta title="Chat" />
       <MessageInputButtons vis={taNilInputChoice ? 'visible' : 'hidden'} />
-      <ChatPoints />
+
+      {showPoints && <ChatPoints />}
 
       <ChatContainer>
         <ConversationHeader>

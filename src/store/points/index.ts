@@ -40,6 +40,16 @@ const useShowThisPenalty = () => {
   return { showThisPenalty, setShowThisPenalty };
 };
 
+const showPointsState = atom<boolean>({
+  key: 'show-points',
+  default: false,
+});
+
+const useShowPoints = () => {
+  const [showPoints, setShowPoints] = useRecoilState(showPointsState);
+  return { showPoints, setShowPoints };
+};
+
 const completedQuestionsState = atom<number>({
   key: 'completed-questions',
   default: 0,
@@ -56,4 +66,5 @@ export {
   useCompletedQuestions,
   useThisPenalty,
   useShowThisPenalty,
+  useShowPoints,
 };

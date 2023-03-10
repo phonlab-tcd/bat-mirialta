@@ -15,7 +15,7 @@ const calculateTotalPoints = (
   let totalPoints = 0;
   const completedQuestionIDs: number[] = [];
   const startingPoints = 5;
-  console.log('calculating Points');
+  console.log('aPs:', aPs);
 
   aPs.forEach((aP) => {
     thisPenalty = 0;

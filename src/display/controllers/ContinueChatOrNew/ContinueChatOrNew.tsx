@@ -9,8 +9,9 @@ import Box from '@mui/material/Box';
 import { AbButton } from 'abair-components';
 
 import BatBox from '@/display/components/BatBox';
-import ChatInProgress from '@/display/controllers/ChatInProgress';
+// import ChatInProgress from '@/display/controllers/ChatInProgress';
 import { patchChat } from '@/services/supabase';
+import { useAdjacencyPairs } from '@/store/adjacencyPairs';
 import { useSession } from '@/store/auth';
 import { activeChatState, useChats } from '@/store/chats';
 
@@ -19,6 +20,7 @@ const ContinueChatOrNew = () => {
   const { session } = useSession();
   const { chats, setChats } = useChats();
   const activeChat = useRecoilValue(activeChatState);
+  const { setAdjacencyPairs } = useAdjacencyPairs();
 
   const continueChat = (cont: boolean) => {
     if (cont) {
@@ -26,6 +28,7 @@ const ContinueChatOrNew = () => {
     } else {
       if (session !== null && activeChat !== undefined) {
         patchChat(activeChat.id, true).then((c) => {
+          setAdjacencyPairs([]);
           setChats([...chats.slice(0, chats.length - 1), c]);
           console.log('chat updated successfully');
         });
@@ -36,7 +39,7 @@ const ContinueChatOrNew = () => {
   return (
     <BatBox>
       <Box>
-        <ChatInProgress />
+        {/* <ChatInProgress /> */}
         <BatBox button={true} width={'100%'}>
           <AbButton
             size="large"

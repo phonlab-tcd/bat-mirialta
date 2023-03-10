@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-import { FullSizeCenteredFlexBox, FullSizeFlexBox } from '@/display/components/styled';
+import { FlexBox, FullSizeCenteredFlexBox, FullSizeFlexBox } from '@/display/components/styled';
 import {
   useAvailablePoints,
   useCompletedQuestions,
@@ -19,9 +19,8 @@ const ChatPoints = () => {
   const { totalPoints } = useTotalPoints();
   const { availablePoints } = useAvailablePoints();
   const { completedQuestions } = useCompletedQuestions();
-  const { showThisPenalty } = useShowThisPenalty();
+  const { showThisPenalty, setShowThisPenalty } = useShowThisPenalty();
   const { thisPenalty } = useThisPenalty();
-  const { setShowThisPenalty } = useShowThisPenalty();
 
   useEffect(() => {
     if (thisPenalty !== 0) {
@@ -35,6 +34,17 @@ const ChatPoints = () => {
   return (
     <Box width={'100%'} height={65} sx={{ position: 'absolute' }}>
       <FullSizeCenteredFlexBox sx={{ position: 'absolute' }}>
+        <FlexBox sx={{ position: 'relative' }}>
+          <Typography variant="h6">{totalPoints}</Typography>
+          <Typography variant="h6">{`/${5 * completedQuestions}`}</Typography>
+        </FlexBox>
+      </FullSizeCenteredFlexBox>
+      <FullSizeFlexBox
+        justifyContent="flex-end"
+        alignItems="center"
+        sx={{ position: 'absolute' }}
+        px={2}
+      >
         <Box sx={{ position: 'relative' }}>
           <Typography
             pt={-0.5}
@@ -44,11 +54,11 @@ const ChatPoints = () => {
               position: 'absolute',
               visibility: showThisPenalty ? 'visible' : 'hidden',
               top: -8,
-              left: 35,
+              left: 25,
             }}
           >{`-${thisPenalty}`}</Typography>
           <Typography
-            variant="h4"
+            variant="h6"
             px={1.25}
             borderRadius={100}
             sx={{ backgroundColor: showThisPenalty ? 'red' : 'gold' }}
@@ -56,15 +66,6 @@ const ChatPoints = () => {
             {availablePoints}
           </Typography>
         </Box>
-      </FullSizeCenteredFlexBox>
-      <FullSizeFlexBox
-        justifyContent="flex-end"
-        alignItems="center"
-        sx={{ position: 'absolute' }}
-        px={2}
-      >
-        <Typography variant="h6">{totalPoints}</Typography>
-        <Typography variant="h6">{`/${5 * completedQuestions}`}</Typography>
       </FullSizeFlexBox>
     </Box>
   );

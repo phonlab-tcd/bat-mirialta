@@ -7,9 +7,11 @@ import { useRecoilValue } from 'recoil';
 import useDelayBatFeedback from '@/hooks/animate/useDelayBatFeedback';
 import useGenerateNextQuestion from '@/hooks/questions/useGenerateNextQuestion';
 import { activeChatState, useIntro } from '@/store/chats';
+import { useShowPoints } from '@/store/points';
 
 const useAnimateIntro = () => {
   const { intro, setIntro } = useIntro();
+  const { setShowPoints } = useShowPoints();
 
   const [animatingIntro, setAnimatingIntro] = useState(false);
   const delayBatFeedback = useDelayBatFeedback();
@@ -19,9 +21,7 @@ const useAnimateIntro = () => {
   useEffect(() => {
     if (animatingIntro && activeChat !== undefined) {
       setAnimatingIntro(false);
-      console.log('animatingIntro');
-      console.log('activeChat.intro:', activeChat.intro);
-      console.log('intro:', intro);
+
       if (intro.length < activeChat.intro.length) {
         delayBatFeedback(
           () => {
@@ -34,6 +34,7 @@ const useAnimateIntro = () => {
       } else if (activeChat.intro.length === intro.length) {
         delayBatFeedback(
           () => {
+            setShowPoints(true);
             generateNextQuestion();
           },
           2000,
