@@ -4,6 +4,7 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
+import { useUpdatePoints } from '@/hooks';
 import useDelayBatFeedback from '@/hooks/animate/useDelayBatFeedback';
 import useGenerateNextQuestion from '@/hooks/questions/useGenerateNextQuestion';
 import { ResponseModel } from '@/models';
@@ -24,6 +25,7 @@ const useAnimateResponses = () => {
   const [responses, setResponses] = useState<ResponseModel[]>([]);
   const delayBatFeedback = useDelayBatFeedback();
   const generateNextQuestion = useGenerateNextQuestion();
+  const updatePoints = useUpdatePoints();
 
   useEffect(() => {
     if (animatingResponses && currentAdjacencyPair !== undefined) {
@@ -40,6 +42,9 @@ const useAnimateResponses = () => {
           () => {
             setAdjacencyPairs(updatedAdjacencyPairs);
             setAnimatingResponses(true);
+            if (currentAdjacencyPair.response.length === 0) {
+              updatePoints();
+            }
           },
           2000,
           false,
@@ -63,7 +68,7 @@ const useAnimateResponses = () => {
         a_p.error_data,
         currentAdjacencyPair,
       );
-      setAdjacencyPairs(replaceFinalAdjacencyPair(adjacencyPairs, updatedCorrection));
+      setAdjacencyPairs(replaceFinalObject(adjacencyPairs, updatedCorrection));
       setResponses(a_p.response);
       setAnimatingResponses(true);
     }

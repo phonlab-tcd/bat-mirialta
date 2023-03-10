@@ -9,8 +9,11 @@ function useCheckChatComplete() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('in useeCheckChatComplete');
-    if (chats !== undefined && chats[chats.length - 1].complete) {
+    if (
+      chats !== undefined &&
+      chats[chats.length - 1] !== undefined &&
+      chats[chats.length - 1].complete
+    ) {
       alert('Congratulations! You have finished the chat!');
       navigate('/');
     }

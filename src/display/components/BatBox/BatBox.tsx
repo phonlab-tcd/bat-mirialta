@@ -18,7 +18,6 @@ const BatBox = ({ children, width = '90%', button = false }: BatBoxProps) => {
       borderColor={'#3e435a'}
       p={button ? 0 : 2}
       maxWidth={400}
-      minWidth={200}
     >
       {children}
     </Box>

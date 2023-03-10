@@ -38,7 +38,7 @@ const SetTask = () => {
   const { selectedTense, setSelectedTense } = useSelectedTense();
   const availableForms = useRecoilValue(availableFormsState);
   const { selectedForm, setSelectedForm } = useSelectedForm();
-  const { noQuestions, setNoQuestions } = useNoQuestions();
+  const { noQuestions } = useNoQuestions();
   const { questionSet } = useQuestionSet();
   const { chats, setChats } = useChats();
   const { setIntro } = useIntro();
@@ -69,7 +69,7 @@ const SetTask = () => {
           form: 'statement',
         },
       ];
-      setIntro([]); // fro animation needs to be empty first
+      setIntro([]); // for animation needs to be empty first
       const randomQuestionSet = getRandomArrayFromArray(questionSet, noQuestions);
       postChat(
         session.user.id,
@@ -126,7 +126,7 @@ const SetTask = () => {
           items={availableForms.map((aF) => aF.name)}
         />
       </Box>
-      <Box mt={1}>
+      {/* <Box mt={1}>
         <Typography
           align="center"
           fontWeight={'bold'}
@@ -146,7 +146,7 @@ const SetTask = () => {
           items={[1, 3, 5, 8]}
           all={false}
         />
-      </Box>
+      </Box> */}
       <CenteredFlexBox mt={3}>
         <Box
           sx={{ backgroundColor: '#67add6' }}

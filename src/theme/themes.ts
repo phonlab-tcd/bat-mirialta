@@ -13,6 +13,7 @@ const sharedTheme = {
       main: '#e1eaf7',
     },
     primary: {
+      wafer: '#ebf4fa',
       main: '#67add6',
       dark: '#3e435a',
     },
@@ -26,7 +27,7 @@ const sharedTheme = {
       dark: red[800],
     },
     info: {
-      main: '#fff',
+      main: '#506d99',
     },
   },
   typography: {

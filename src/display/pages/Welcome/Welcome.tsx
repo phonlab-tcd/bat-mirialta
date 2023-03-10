@@ -9,6 +9,7 @@ import Image from 'mui-image';
 
 import Meta from '@/display/components/Meta';
 import { CenteredFlexBox } from '@/display/components/styled';
+import ChatHistories from '@/display/controllers/ChatHistories';
 import ContinueChatOrNew from '@/display/controllers/ContinueChatOrNew';
 import SetTask from '@/display/controllers/SetTask';
 import Stats from '@/display/controllers/Stats';
@@ -70,7 +71,9 @@ const Welcome = () => {
           <SetTask />
         </CenteredFlexBox>
       )}
-
+      <CenteredFlexBox mt={2}>
+        <ChatHistories />
+      </CenteredFlexBox>
       <CenteredFlexBox mt={2}>
         <Stats />
       </CenteredFlexBox>

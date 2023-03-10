@@ -98,6 +98,7 @@ export interface Database {
           retry_attempt: number;
           text: string | null;
           user_id: string | null;
+          hint: boolean | null;
         };
         Insert: {
           chat_id: number;
@@ -110,6 +111,7 @@ export interface Database {
           retry_attempt?: number;
           text?: string | null;
           user_id?: string | null;
+          hint?: boolean | null;
         };
         Update: {
           chat_id?: number;
@@ -122,12 +124,13 @@ export interface Database {
           retry_attempt?: number;
           text?: string | null;
           user_id?: string | null;
+          hint?: boolean | null;
         };
       };
       bat_chats: {
         Row: {
           complete: boolean;
-          created_at: string | null;
+          created_at: string;
           form: string | null;
           id: number;
           intro: ResponseModel[];
@@ -139,7 +142,7 @@ export interface Database {
         };
         Insert: {
           complete?: boolean;
-          created_at?: string | null;
+          created_at?: string;
           form?: string | null;
           id?: number;
           intro?: ResponseModel[];
@@ -151,7 +154,7 @@ export interface Database {
         };
         Update: {
           complete?: boolean;
-          created_at?: string | null;
+          created_at?: string;
           form?: string | null;
           id?: number;
           intro?: ResponseModel[];

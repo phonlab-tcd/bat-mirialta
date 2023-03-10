@@ -51,7 +51,7 @@ const ContinueChatOrNew = () => {
         </BatBox>
       </Box>
 
-      <Box mt={2}>
+      <Box mt={1}>
         <BatBox button={true} width={'100%'}>
           <AbButton
             size="large"
