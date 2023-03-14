@@ -14,14 +14,22 @@ const calculateTotalPoints = (
   let thisPenalty = 0;
   let totalPoints = 0;
   const completedQuestionIDs: number[] = [];
-  const startingPoints = 5;
-  console.log('aPs:', aPs);
+  const startingPoints = 3;
 
   aPs.forEach((aP) => {
     thisPenalty = 0;
+
+    if (aP.retry_attempt === 0) {
+      totalPenalty = 0;
+    }
+
     if (aP.correct === false) {
-      totalPenalty += 1;
-      thisPenalty = 1;
+      if (totalPenalty !== startingPoints) {
+        totalPenalty += 1;
+        thisPenalty = 1;
+      } else {
+        totalPenalty = 0;
+      }
     }
     if (aP.hint) {
       totalPenalty += 1;
@@ -29,10 +37,13 @@ const calculateTotalPoints = (
     }
     if (aP.correct) {
       totalPoints += startingPoints - totalPenalty;
-
       totalPenalty = 0;
     }
-    if (!completedQuestionIDs.includes(aP.id) && aP.correct) {
+
+    if (
+      (!completedQuestionIDs.includes(aP.id) && aP.correct) ||
+      (!aP.correct && aP.retry_attempt === 2)
+    ) {
       completedQuestionIDs.push(aP.id);
     }
   });

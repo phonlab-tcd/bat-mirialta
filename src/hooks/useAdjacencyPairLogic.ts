@@ -5,6 +5,7 @@
 import { useRecoilValue } from 'recoil';
 
 import { useAnimateIntro } from '@/hooks';
+import { useUpdatePoints } from '@/hooks';
 // import useGenerateNextQuestion from '@/hooks/questions/useGenerateNextQuestion';
 import useGenerateFeedback from '@/hooks/useGenerateFeedback';
 import { currentAdjacencyPairState } from '@/store/adjacencyPairs';
@@ -13,6 +14,7 @@ const useChatAdjacencyPairLogic = () => {
   const currentAdjacencyPair = useRecoilValue(currentAdjacencyPairState);
   // const generateNextQuestion = useGenerateNextQuestion();
   const animateIntro = useAnimateIntro();
+  const updatePoints = useUpdatePoints();
 
   const generateFeedback = useGenerateFeedback();
 
@@ -23,6 +25,8 @@ const useChatAdjacencyPairLogic = () => {
     } else {
       if (currentAdjacencyPair.text !== null && currentAdjacencyPair.correct === null) {
         generateFeedback();
+      } else if (currentAdjacencyPair.text === null) {
+        updatePoints();
       }
     }
     return true;

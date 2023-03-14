@@ -135,7 +135,7 @@ export interface Database {
           id: number;
           intro: ResponseModel[];
           outro: ResponseModel[];
-          questions: Json;
+          questions: number[];
           tense: string | null;
           user_id: string | null;
           verb: string | null;
@@ -147,7 +147,7 @@ export interface Database {
           id?: number;
           intro?: ResponseModel[];
           outro?: ResponseModel[];
-          questions?: Json;
+          questions?: number[];
           tense?: string | null;
           user_id?: string | null;
           verb?: string | null;
@@ -159,7 +159,7 @@ export interface Database {
           id?: number;
           intro?: ResponseModel[];
           outro?: ResponseModel[];
-          questions?: Json;
+          questions?: number[];
           tense?: string | null;
           user_id?: string | null;
           verb?: string | null;

@@ -8,6 +8,7 @@ import { ResponseModel } from '@/models';
 import { postError } from '@/services/error-check';
 import { patchAdjacencyPairFeedback } from '@/services/supabase';
 import { currentAdjacencyPairState } from '@/store/adjacencyPairs';
+import { useAvailablePoints } from '@/store/points';
 import { currentQuestionState } from '@/store/questions';
 import { generateResponseForCorrect, generateResponseForIncorrect } from '@/utils/feedback';
 
@@ -15,6 +16,7 @@ const useGenerateFeedback = () => {
   const currentAdjacencyPair = useRecoilValue(currentAdjacencyPairState);
   const currentQuestion = useRecoilValue(currentQuestionState);
   const animateResponses = useAnimateResponses();
+  const { availablePoints } = useAvailablePoints();
 
   const generateFeedback = () => {
     if (
@@ -36,16 +38,25 @@ const useGenerateFeedback = () => {
           },
         );
       } else {
+        console.log('availablePoints:', availablePoints);
+
         postError(currentAdjacencyPair.text, currentQuestion.answer).then((errorData: any) => {
           // GENERATE RESPONSE OBJECT FROM ERROR DATA
+
           if (currentAdjacencyPair.text !== null) {
             responseObject = generateResponseForIncorrect(
               currentAdjacencyPair.text,
               currentQuestion.answer,
               errorData,
             );
+            if (availablePoints === 1) {
+              responseObject = [
+                { text: 'níl sé ceart', form: 'statement' },
+                { text: `the correct answer is ${currentQuestion.answer}`, form: 'statement' },
+                { text: `on to the next question`, form: 'statement' },
+              ];
+            }
           }
-
           patchAdjacencyPairFeedback(
             currentAdjacencyPair.id,
             correct,

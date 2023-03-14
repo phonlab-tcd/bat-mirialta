@@ -23,6 +23,8 @@ const useGenerateNextQuestion = () => {
       return 0;
     } else if (currentAdjacencyPair.correct) {
       return 0;
+    } else if (currentAdjacencyPair.retry_attempt === 2) {
+      return 0;
     } else {
       return currentAdjacencyPair.retry_attempt + 1;
     }

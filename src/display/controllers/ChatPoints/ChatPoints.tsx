@@ -20,14 +20,15 @@ const ChatPoints = () => {
   const { availablePoints } = useAvailablePoints();
   const { completedQuestions } = useCompletedQuestions();
   const { showThisPenalty, setShowThisPenalty } = useShowThisPenalty();
-  const { thisPenalty } = useThisPenalty();
+  const { thisPenalty, setThisPenalty } = useThisPenalty();
 
   useEffect(() => {
     if (thisPenalty !== 0) {
       setShowThisPenalty(true);
       setTimeout(() => {
         setShowThisPenalty(false);
-      }, 2000);
+        setThisPenalty(0);
+      }, 500);
     }
   }, [thisPenalty]);
 
@@ -36,7 +37,7 @@ const ChatPoints = () => {
       <FullSizeCenteredFlexBox sx={{ position: 'absolute' }}>
         <FlexBox sx={{ position: 'relative' }}>
           <Typography variant="h6">{totalPoints}</Typography>
-          <Typography variant="h6">{`/${5 * completedQuestions}`}</Typography>
+          <Typography variant="h6">{`/${3 * completedQuestions}`}</Typography>
         </FlexBox>
       </FullSizeCenteredFlexBox>
       <FullSizeFlexBox

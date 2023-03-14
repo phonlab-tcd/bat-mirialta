@@ -52,6 +52,7 @@ const useAnimateResponses = () => {
       } else if (currentAdjacencyPair.response.length === responses.length) {
         delayBatFeedback(
           () => {
+            // updatePoints();
             generateNextQuestion();
           },
           2000,
