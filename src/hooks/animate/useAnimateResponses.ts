@@ -10,6 +10,7 @@ import useGenerateNextQuestion from '@/hooks/questions/useGenerateNextQuestion';
 import { ResponseModel } from '@/models';
 import { useAdjacencyPairs } from '@/store/adjacencyPairs';
 import { currentAdjacencyPairState } from '@/store/adjacencyPairs';
+import { useShowAvailablePoints } from '@/store/points';
 import { replaceFinalObject } from '@/store/utils';
 import {
   updateCorrectionInFinalAdjacencyPair,
@@ -26,6 +27,7 @@ const useAnimateResponses = () => {
   const delayBatFeedback = useDelayBatFeedback();
   const generateNextQuestion = useGenerateNextQuestion();
   const updatePoints = useUpdatePoints();
+  const { setShowAvailablePoints } = useShowAvailablePoints();
 
   useEffect(() => {
     if (animatingResponses && currentAdjacencyPair !== undefined) {
@@ -44,6 +46,9 @@ const useAnimateResponses = () => {
             setAnimatingResponses(true);
             if (currentAdjacencyPair.response.length === 0) {
               updatePoints();
+              if (currentAdjacencyPair.correct) {
+                setShowAvailablePoints(false);
+              }
             }
           },
           2000,
@@ -54,6 +59,7 @@ const useAnimateResponses = () => {
           () => {
             // updatePoints();
             generateNextQuestion();
+            setShowAvailablePoints(true);
           },
           2000,
           true,

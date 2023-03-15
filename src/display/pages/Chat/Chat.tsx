@@ -19,8 +19,10 @@ import { ChatContainer } from '@chatscope/chat-ui-kit-react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 
 import Meta from '@/display/components/Meta';
-import ChatPoints from '@/display/controllers/ChatPoints';
+import { CenteredFlexBox } from '@/display/components/styled';
+import ChatButtons from '@/display/controllers/ChatButtons';
 import MessageInputButtons from '@/display/controllers/MessageInputButtons';
+import QuestionNumber from '@/display/controllers/QuestionNumber';
 import { useUpdatePoints } from '@/hooks';
 import { usePopulateChats } from '@/hooks/chats';
 import useCheckChatComplete from '@/hooks/chats/useCheckChatComplete';
@@ -135,12 +137,12 @@ function Chat() {
   }, [messageInputDisabled]);
 
   return (
-    <Box height="100%" sx={{ position: 'relative' }}>
+    <Box height="calc(100% - 100px)" sx={{ position: 'relative' }}>
       <Meta title="Chat" />
       <MessageInputButtons vis={taNilInputChoice ? 'visible' : 'hidden'} />
-
-      {showPoints && <ChatPoints />}
-
+      <CenteredFlexBox sx={{ position: 'absolute', height: 64, width: '100%' }}>
+        {showPoints && <QuestionNumber />}
+      </CenteredFlexBox>
       <ChatContainer>
         <ConversationHeader>
           <Avatar src={robotImg} name="Bat" />
@@ -186,6 +188,9 @@ function Chat() {
           ref={messageInputRef}
         />
       </ChatContainer>
+      <CenteredFlexBox px={0.5} height={100} sx={{ backgroundColor: 'background.default' }}>
+        <ChatButtons />
+      </CenteredFlexBox>
     </Box>
   );
 }

@@ -20,6 +20,16 @@ const useAvailablePoints = () => {
   return { availablePoints, setAvailablePoints };
 };
 
+const showAvailablePointsState = atom<boolean>({
+  key: 'show-available-points',
+  default: true,
+});
+
+const useShowAvailablePoints = () => {
+  const [showAvailablePoints, setShowAvailablePoints] = useRecoilState(showAvailablePointsState);
+  return { showAvailablePoints, setShowAvailablePoints };
+};
+
 const thisPenaltyState = atom<number>({
   key: 'this-penalty',
   default: 0,
@@ -67,4 +77,5 @@ export {
   useThisPenalty,
   useShowThisPenalty,
   useShowPoints,
+  useShowAvailablePoints,
 };
