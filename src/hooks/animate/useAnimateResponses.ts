@@ -73,6 +73,8 @@ const useAnimateResponses = () => {
         } else {
           delayBatFeedback(
             () => {
+              console.log('AnimateResponses calling generateNextQuestion');
+
               generateNextQuestion();
               setShowAvailablePoints(true);
             },

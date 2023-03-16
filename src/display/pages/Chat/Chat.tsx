@@ -122,6 +122,7 @@ function Chat() {
     if (firstLoad && receivedAdjacencyPairHistory) {
       // generate new question if needed from first load - unusual that aP will have a response and no next questions, but in the case:
       if (currentAdjacencyPair !== undefined && currentAdjacencyPair.response !== null) {
+        console.log('Chat calling generateNextQuestion');
         generateNextQuestion();
       }
       updatePoints();
