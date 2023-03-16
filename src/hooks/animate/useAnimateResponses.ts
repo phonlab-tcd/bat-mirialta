@@ -5,12 +5,14 @@ import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { useUpdatePoints } from '@/hooks';
+import { useAnimateOutro } from '@/hooks';
 import useDelayBatFeedback from '@/hooks/animate/useDelayBatFeedback';
 import useGenerateNextQuestion from '@/hooks/questions/useGenerateNextQuestion';
 import { ResponseModel } from '@/models';
 import { useAdjacencyPairs } from '@/store/adjacencyPairs';
 import { currentAdjacencyPairState } from '@/store/adjacencyPairs';
-import { useShowAvailablePoints } from '@/store/points';
+import { activeChatState } from '@/store/chats';
+import { useShowAvailablePoints, useShowHint } from '@/store/points';
 import { replaceFinalObject } from '@/store/utils';
 import {
   updateCorrectionInFinalAdjacencyPair,
@@ -28,9 +30,12 @@ const useAnimateResponses = () => {
   const generateNextQuestion = useGenerateNextQuestion();
   const updatePoints = useUpdatePoints();
   const { setShowAvailablePoints } = useShowAvailablePoints();
+  const { setShowHint } = useShowHint();
+  const animateOutro = useAnimateOutro();
+  const activeChat = useRecoilValue(activeChatState);
 
   useEffect(() => {
-    if (animatingResponses && currentAdjacencyPair !== undefined) {
+    if (activeChat !== undefined && animatingResponses && currentAdjacencyPair !== undefined) {
       setAnimatingResponses(false);
 
       if (currentAdjacencyPair.response.length < responses.length) {
@@ -48,6 +53,7 @@ const useAnimateResponses = () => {
               updatePoints();
               if (currentAdjacencyPair.correct) {
                 setShowAvailablePoints(false);
+                setShowHint(false);
               }
             }
           },
@@ -55,15 +61,25 @@ const useAnimateResponses = () => {
           false,
         );
       } else if (currentAdjacencyPair.response.length === responses.length) {
-        delayBatFeedback(
-          () => {
-            // updatePoints();
-            generateNextQuestion();
-            setShowAvailablePoints(true);
-          },
-          2000,
-          true,
-        );
+        // check if all questions complete
+        if (
+          currentAdjacencyPair.question_id ===
+            activeChat.questions[activeChat.questions.length - 1] &&
+          (currentAdjacencyPair.correct ||
+            (!currentAdjacencyPair.correct && currentAdjacencyPair.retry_attempt === 2))
+        ) {
+          // finish the current chat
+          animateOutro();
+        } else {
+          delayBatFeedback(
+            () => {
+              generateNextQuestion();
+              setShowAvailablePoints(true);
+            },
+            2000,
+            true,
+          );
+        }
       }
     }
   }, [animatingResponses]);

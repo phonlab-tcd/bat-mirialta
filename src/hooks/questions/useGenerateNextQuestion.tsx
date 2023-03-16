@@ -3,20 +3,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRecoilValue } from 'recoil';
 
-import { patchChat, postAdjacencyPair } from '@/services/supabase';
+import { postAdjacencyPair } from '@/services/supabase';
 import { currentAdjacencyPairState, useAdjacencyPairs } from '@/store/adjacencyPairs';
 import { useSession } from '@/store/auth';
-import { activeChatState, useChats } from '@/store/chats';
-import { currentQuestionIndexState, useQuestionSet } from '@/store/questions';
+import { activeChatState } from '@/store/chats';
+import { currentQuestionIndexState } from '@/store/questions';
 
 const useGenerateNextQuestion = () => {
   const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
-  const { chats, setChats } = useChats();
   const currentAdjacencyPair = useRecoilValue(currentAdjacencyPairState);
   const currentQuestionIndex = useRecoilValue(currentQuestionIndexState);
   const { session } = useSession();
   const activeChat = useRecoilValue(activeChatState);
-  const { setQuestionSet } = useQuestionSet();
 
   const determineRepeatForNewAdjacencyPair = () => {
     if (currentAdjacencyPair === undefined) {
@@ -43,21 +41,9 @@ const useGenerateNextQuestion = () => {
         if (currentQuestionIndex !== undefined) {
           repeat = determineRepeatForNewAdjacencyPair();
           if (repeat === 0) {
-            // check if all questions complete
-            if (
-              currentAdjacencyPair.question_id ===
-              activeChat.questions[activeChat.questions.length - 1]
-            ) {
-              // finish the current chat
-              patchChat(activeChat.id, true).then((c) => {
-                setChats([...chats.slice(0, chats.length - 1), c]);
-                setQuestionSet([]);
-              });
-            } else {
-              // generate new question
+            // generate new question
 
-              questionID = activeChat.questions[currentQuestionIndex + 1];
-            }
+            questionID = activeChat.questions[currentQuestionIndex + 1];
           } else {
             // same question repeated
             questionID = activeChat.questions[currentQuestionIndex];

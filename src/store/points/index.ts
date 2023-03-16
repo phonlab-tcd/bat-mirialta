@@ -60,6 +60,26 @@ const useShowPoints = () => {
   return { showPoints, setShowPoints };
 };
 
+const showHintState = atom<boolean>({
+  key: 'show-hint',
+  default: true,
+});
+
+const useShowHint = () => {
+  const [showHint, setShowHint] = useRecoilState(showHintState);
+  return { showHint, setShowHint };
+};
+
+const showHomeState = atom<boolean>({
+  key: 'show-home',
+  default: false,
+});
+
+const useShowHome = () => {
+  const [showHome, setShowHome] = useRecoilState(showHomeState);
+  return { showHome, setShowHome };
+};
+
 const completedQuestionsState = atom<number>({
   key: 'completed-questions',
   default: 0,
@@ -78,4 +98,6 @@ export {
   useShowThisPenalty,
   useShowPoints,
   useShowAvailablePoints,
+  useShowHint,
+  useShowHome,
 };

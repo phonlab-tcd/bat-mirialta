@@ -5,7 +5,7 @@ import patchAdjacencyPairFeedback from './adjacencyPairs/patchAdjacencyPairFeedb
 import patchAdjacencyPairText from './adjacencyPairs/patchAdjacencyPairText';
 import postAdjacencyPair from './adjacencyPairs/postAdjacencyPair';
 import getChats from './chats/getChats';
-import patchChat from './chats/patchChat';
+import patchChatComplete from './chats/patchChatComplete';
 import postChat from './chats/postChat';
 import checkError from './edgeFunctions/checkError';
 import getAvailableForms from './getAvailableForms';
@@ -43,6 +43,6 @@ export {
   getAdjacencyPairs,
   getAllQuestions,
   getChats,
-  patchChat,
+  patchChatComplete,
   postChat,
 };

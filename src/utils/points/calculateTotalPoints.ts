@@ -42,7 +42,7 @@ const calculateTotalPoints = (
 
     if (
       (!completedQuestionIDs.includes(aP.id) && aP.correct) ||
-      (!aP.correct && aP.retry_attempt === 2)
+      (aP.correct === false && aP.retry_attempt === 2)
     ) {
       completedQuestionIDs.push(aP.id);
     }

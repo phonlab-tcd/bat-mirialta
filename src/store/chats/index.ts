@@ -35,4 +35,14 @@ const useIntro = () => {
   return { intro, setIntro };
 };
 
-export { useChats, activeChatState, introState, useIntro };
+const outroState = atom<ResponseModel[]>({
+  key: 'outro',
+  default: [],
+});
+
+const useOutro = () => {
+  const [outro, setOutro] = useRecoilState(outroState);
+  return { outro, setOutro };
+};
+
+export { useChats, activeChatState, introState, useIntro, outroState, useOutro };

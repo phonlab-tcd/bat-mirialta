@@ -7,7 +7,7 @@ import { useRecoilValue } from 'recoil';
 import { useAnimateIntro } from '@/hooks';
 import { useUpdatePoints } from '@/hooks';
 // import useGenerateNextQuestion from '@/hooks/questions/useGenerateNextQuestion';
-import useGenerateFeedback from '@/hooks/useGenerateFeedback';
+import { useGenerateFeedback } from '@/hooks';
 import { currentAdjacencyPairState } from '@/store/adjacencyPairs';
 
 const useChatAdjacencyPairLogic = () => {
