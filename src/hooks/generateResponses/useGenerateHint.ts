@@ -80,6 +80,7 @@ const useGenerateHint = () => {
             if (currentAdjacencyPair.hints !== null) {
               hintToBeStored = currentAdjacencyPair.hints.concat(hintToBeStored);
             }
+
             patchAdjacencyPairHint(currentAdjacencyPair.id, hintToBeStored).then((a_p) => {
               animateHints(a_p);
             });
