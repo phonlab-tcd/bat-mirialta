@@ -98,7 +98,7 @@ export interface Database {
           retry_attempt: number;
           text: string | null;
           user_id: string | null;
-          hint: boolean | null;
+          hints: ResponseModel[] | null;
         };
         Insert: {
           chat_id: number;
@@ -111,7 +111,7 @@ export interface Database {
           retry_attempt?: number;
           text?: string | null;
           user_id?: string | null;
-          hint?: boolean | null;
+          hints?: ResponseModel[] | null;
         };
         Update: {
           chat_id?: number;
@@ -124,7 +124,7 @@ export interface Database {
           retry_attempt?: number;
           text?: string | null;
           user_id?: string | null;
-          hint?: boolean | null;
+          hints?: ResponseModel[] | null;
         };
       };
       bat_chats: {

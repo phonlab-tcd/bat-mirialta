@@ -31,9 +31,9 @@ const calculateTotalPoints = (
         totalPenalty = 0;
       }
     }
-    if (aP.hint) {
-      totalPenalty += 1;
-      thisPenalty = 1;
+    if (aP.hints !== null) {
+      totalPenalty += aP.hints.length;
+      thisPenalty = aP.hints.length;
     }
     if (aP.correct) {
       totalPoints += startingPoints - totalPenalty;

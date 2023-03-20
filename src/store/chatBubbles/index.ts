@@ -39,6 +39,20 @@ const chatBubblesState = selector({
           text: question !== undefined ? question.text : 'error: no question',
           sender: 'robot',
         });
+        if (Array.isArray(m.hints)) {
+          m.hints.map((r: ResponseModel) => {
+            chatBubbles.push({
+              text: 'hint',
+              sender: 'you',
+            });
+            if (r.text !== 'temp') {
+              chatBubbles.push({
+                text: r.text,
+                sender: 'robot',
+              });
+            }
+          });
+        }
         if (m.text) {
           chatBubbles.push({
             text: m.text,

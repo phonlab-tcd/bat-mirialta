@@ -54,7 +54,7 @@ const useGenerateNextQuestion = () => {
       }
 
       if (questionID !== undefined && repeat !== undefined) {
-        console.log('generating next question');
+        console.log('in generateNextQuestion');
         postAdjacencyPair(session.user.id, activeChat.id, questionID, repeat).then((a_p) => {
           setAdjacencyPairs([...adjacencyPairs, a_p]);
         });

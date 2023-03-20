@@ -2,6 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 
 import getAdjacencyPairs from './adjacencyPairs/getAdjacencyPairs';
 import patchAdjacencyPairFeedback from './adjacencyPairs/patchAdjacencyPairFeedback';
+import patchAdjacencyPairHint from './adjacencyPairs/patchAdjacencyPairHint';
 import patchAdjacencyPairText from './adjacencyPairs/patchAdjacencyPairText';
 import postAdjacencyPair from './adjacencyPairs/postAdjacencyPair';
 import getChats from './chats/getChats';
@@ -12,6 +13,7 @@ import getAvailableForms from './getAvailableForms';
 import getAvailableTenses from './getAvailableTenses';
 import getAvailableVerbs from './getAvailableVerbs';
 import getForms from './getForms';
+import getHint from './getHint';
 import getProfile from './getProfile';
 import getTenses from './getTenses';
 import getVerbs from './getVerbs';
@@ -37,6 +39,7 @@ export {
   postAdjacencyPair,
   patchAdjacencyPairText,
   patchAdjacencyPairFeedback,
+  patchAdjacencyPairHint,
   getAvailableVerbs,
   getAvailableTenses,
   getAvailableForms,
@@ -45,4 +48,5 @@ export {
   getChats,
   patchChatComplete,
   postChat,
+  getHint,
 };

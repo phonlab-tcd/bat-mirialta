@@ -8,12 +8,11 @@ import { useGenerateOutro } from '@/hooks';
 import useDelayBatFeedback from '@/hooks/animate/useDelayBatFeedback';
 import { patchChatComplete } from '@/services/supabase';
 import { activeChatState, useChats, useOutro } from '@/store/chats';
-import { useShowAvailablePoints, useShowHint, useShowHome } from '@/store/points';
+import { useShowAvailablePoints, useShowHome } from '@/store/points';
 
 const useAnimateOutro = () => {
   const { outro, setOutro } = useOutro();
   const { chats, setChats } = useChats();
-  const { setShowHint } = useShowHint();
   const { setShowHome } = useShowHome();
   const { setShowAvailablePoints } = useShowAvailablePoints();
   const generateOutro = useGenerateOutro();
@@ -54,7 +53,6 @@ const useAnimateOutro = () => {
       patchChatComplete(activeChat.id, generatedOutro, false).then((c) => {
         setChats([...chats.slice(0, chats.length - 1), c]);
         setAnimatingOutro(true);
-        setShowHint(false);
         setShowAvailablePoints(false);
       });
     } else {

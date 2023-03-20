@@ -12,7 +12,7 @@ import { ResponseModel } from '@/models';
 import { useAdjacencyPairs } from '@/store/adjacencyPairs';
 import { currentAdjacencyPairState } from '@/store/adjacencyPairs';
 import { activeChatState } from '@/store/chats';
-import { useShowAvailablePoints, useShowHint } from '@/store/points';
+import { useShowAvailablePoints } from '@/store/points';
 import { replaceFinalObject } from '@/store/utils';
 import {
   updateCorrectionInFinalAdjacencyPair,
@@ -30,7 +30,6 @@ const useAnimateResponses = () => {
   const generateNextQuestion = useGenerateNextQuestion();
   const updatePoints = useUpdatePoints();
   const { setShowAvailablePoints } = useShowAvailablePoints();
-  const { setShowHint } = useShowHint();
   const animateOutro = useAnimateOutro();
   const activeChat = useRecoilValue(activeChatState);
 
@@ -53,7 +52,6 @@ const useAnimateResponses = () => {
               updatePoints();
               if (currentAdjacencyPair.correct) {
                 setShowAvailablePoints(false);
-                setShowHint(false);
               }
             }
           },

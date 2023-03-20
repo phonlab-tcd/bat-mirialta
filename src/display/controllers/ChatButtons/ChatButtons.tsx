@@ -2,6 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
 import Grid from '@mui/material/Grid';
 
@@ -12,25 +13,29 @@ import { CenteredFlexBox } from '@/display/components/styled';
 import PointsAvailable from '@/display/controllers/PointsAvailable';
 import QuestionNumber from '@/display/controllers/QuestionNumber';
 import TotalPoints from '@/display/controllers/TotalPoints';
-import { useShowAvailablePoints, useShowHint, useShowHome, useShowPoints } from '@/store/points';
+import { useGenerateHint } from '@/hooks';
+import { useAwaitingHint } from '@/store/adjacencyPairs';
+import { showHintState, useShowAvailablePoints, useShowHome, useShowPoints } from '@/store/points';
 
 const ChatButtons = () => {
   const { showAvailablePoints } = useShowAvailablePoints();
+  const { awaitingHint } = useAwaitingHint();
   const { showPoints } = useShowPoints();
-  const { showHint } = useShowHint();
+  const showHint = useRecoilValue(showHintState);
   const { showHome } = useShowHome();
   const navigate = useNavigate();
+  const generateHint = useGenerateHint();
 
   return (
     <CenteredFlexBox width={'100%'} height={84}>
       {showPoints && (
         <BatBox width={'95%'} height={'100%'}>
-          <Grid container>
+          <Grid container height={'100%'}>
             <Grid item xs={2}>
-              {showPoints && <QuestionNumber />}
+              <QuestionNumber />
             </Grid>
             <Grid item xs={4}>
-              {showHint ? (
+              {showHint && !awaitingHint ? (
                 <CenteredFlexBox>
                   <BatBox button={true} width={'70%'}>
                     <AbButton
@@ -38,7 +43,7 @@ const ChatButtons = () => {
                       fullWidth={true}
                       label={`hint`}
                       onClick={() => {
-                        console.log('hi');
+                        generateHint();
                       }}
                       selected={true}
                       color={'warning'}

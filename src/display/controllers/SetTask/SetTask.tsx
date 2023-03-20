@@ -19,7 +19,7 @@ import { postChat } from '@/services/supabase';
 import { useAdjacencyPairs } from '@/store/adjacencyPairs';
 import { useSession } from '@/store/auth';
 import { useChats, useIntro, useOutro } from '@/store/chats';
-import { useShowAvailablePoints, useShowHint, useShowHome, useShowPoints } from '@/store/points';
+import { useShowAvailablePoints, useShowHome, useShowPoints } from '@/store/points';
 import { useQuestionSet } from '@/store/questions';
 import {
   availableFormsState,
@@ -61,13 +61,12 @@ const SetTask = () => {
 
   const { setShowAvailablePoints } = useShowAvailablePoints();
   const { setShowPoints } = useShowPoints();
-  const { setShowHint } = useShowHint();
+
   const { setShowHome } = useShowHome();
 
   useEffect(() => {
     if (questionSet.length !== 0 && session !== null && clickedStart) {
       setClickedStart(false);
-      setShowHint(true);
       setShowPoints(false);
       setShowHome(false);
       setShowAvailablePoints(true);
