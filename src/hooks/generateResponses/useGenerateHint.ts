@@ -26,7 +26,7 @@ const useGenerateHint = () => {
       console.log('availablePoints: ', availablePoints);
       if (availablePoints === 3) {
         getHint('hard', currentQuestion.verb_id).then((hints) => {
-          console.log('hard hints:', hints);
+          // console.log('hard hints:', hints);
           let correctLengthHints: string[] = [];
           if (hints !== undefined) {
             if (currentQuestion.text.includes('_ _')) {
@@ -47,7 +47,7 @@ const useGenerateHint = () => {
               hintsToBeGiven = [currentQuestion.answer].concat(correctLengthHints);
             }
             hintsToBeGiven.sort(() => (Math.random() > 0.5 ? 1 : -1));
-            console.log('hintsToBeGiven:', hintsToBeGiven);
+            // console.log('hintsToBeGiven:', hintsToBeGiven);
             const hintToBeStored: ResponseModel[] = [
               {
                 form: 'statement',
@@ -67,10 +67,10 @@ const useGenerateHint = () => {
           currentQuestion.form_id,
         ).then((hints) => {
           if (hints !== undefined) {
-            console.log('easy hints:', hints);
+            // console.log('easy hints:', hints);
             const hintsToBeGiven = hints;
             hintsToBeGiven.sort(() => (Math.random() > 0.5 ? 1 : -1));
-            console.log('hintsToBeGiven:', hintsToBeGiven);
+            // console.log('hintsToBeGiven:', hintsToBeGiven);
             let hintToBeStored: ResponseModel[] = [
               {
                 form: 'statement',
@@ -87,10 +87,6 @@ const useGenerateHint = () => {
           }
         });
       }
-
-      //   patchAdjacencyPairHint(currentAdjacencyPair.id, hint).then((a_p) => {
-      //     animateHints(a_p);
-      //   });
     } else {
       alert('current adjacencyPair or currentQuestion is undefined');
     }

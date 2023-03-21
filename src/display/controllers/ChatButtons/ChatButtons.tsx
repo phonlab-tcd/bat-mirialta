@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 import { AbButton } from 'abair-components';
 
 import BatBox from '@/display/components/BatBox';
-import { CenteredFlexBox } from '@/display/components/styled';
+import { CenteredFlexBox, FlexBox } from '@/display/components/styled';
 import PointsAvailable from '@/display/controllers/PointsAvailable';
 import QuestionNumber from '@/display/controllers/QuestionNumber';
 import TotalPoints from '@/display/controllers/TotalPoints';
@@ -34,10 +34,17 @@ const ChatButtons = () => {
             <Grid item xs={2}>
               <QuestionNumber />
             </Grid>
-            <Grid item xs={4}>
+
+            <Grid item xs={3}>
+              {showAvailablePoints && <PointsAvailable />}
+            </Grid>
+            <Grid item xs={2}>
+              <TotalPoints />
+            </Grid>
+            <Grid item xs={5}>
               {showHint && !awaitingHint ? (
-                <CenteredFlexBox>
-                  <BatBox button={true} width={'70%'}>
+                <FlexBox width="100%" justifyContent="flex-end">
+                  <BatBox button={true} width={'80%'}>
                     <AbButton
                       size="medium"
                       fullWidth={true}
@@ -49,10 +56,10 @@ const ChatButtons = () => {
                       color={'warning'}
                     />
                   </BatBox>
-                </CenteredFlexBox>
+                </FlexBox>
               ) : showHome ? (
-                <CenteredFlexBox>
-                  <BatBox button={true} width={'70%'}>
+                <FlexBox width="100%" justifyContent="flex-end">
+                  <BatBox button={true} width={'80%'}>
                     <AbButton
                       size="medium"
                       fullWidth={true}
@@ -64,15 +71,8 @@ const ChatButtons = () => {
                       color={'secondary'}
                     />
                   </BatBox>
-                </CenteredFlexBox>
+                </FlexBox>
               ) : null}
-            </Grid>
-
-            <Grid item xs={3}>
-              {showAvailablePoints && <PointsAvailable />}
-            </Grid>
-            <Grid item xs={3}>
-              <TotalPoints />
             </Grid>
           </Grid>
         </BatBox>

@@ -64,7 +64,10 @@ const useAnimateResponses = () => {
           currentAdjacencyPair.question_id ===
             activeChat.questions[activeChat.questions.length - 1] &&
           (currentAdjacencyPair.correct ||
-            (!currentAdjacencyPair.correct && currentAdjacencyPair.retry_attempt === 2))
+            (!currentAdjacencyPair.correct && currentAdjacencyPair.retry_attempt === 2) ||
+            (currentAdjacencyPair.correct === false &&
+              Array.isArray(currentAdjacencyPair.hints) &&
+              currentAdjacencyPair.retry_attempt + currentAdjacencyPair.hints.length === 2))
         ) {
           // finish the current chat
           animateOutro();
@@ -72,7 +75,7 @@ const useAnimateResponses = () => {
           delayBatFeedback(
             () => {
               console.log('AnimateResponses calling generateNextQuestion');
-
+              updatePoints();
               generateNextQuestion();
               setShowAvailablePoints(true);
             },

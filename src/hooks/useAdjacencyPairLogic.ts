@@ -27,7 +27,7 @@ const useChatAdjacencyPairLogic = () => {
         console.log('already called intro');
       }
     } else {
-      console.log('currentAdjacencyPair:', currentAdjacencyPair);
+      // console.log('currentAdjacencyPair:', currentAdjacencyPair);
       if (currentAdjacencyPair.text !== null && currentAdjacencyPair.correct === null) {
         generateFeedback();
       } else if (currentAdjacencyPair.text === null) {

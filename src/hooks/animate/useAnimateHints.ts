@@ -62,28 +62,6 @@ const useAnimateHints = () => {
         2000,
         false,
       );
-      //   // check if all questions complete
-      //   if (
-      //     currentAdjacencyPair.question_id ===
-      //       activeChat.questions[activeChat.questions.length - 1] &&
-      //     (currentAdjacencyPair.correct ||
-      //       (!currentAdjacencyPair.correct && currentAdjacencyPair.retry_attempt === 2))
-      //   ) {
-      //     // finish the current chat
-      //     animateOutro();
-      //   } else {
-      //     delayBatFeedback(
-      //       () => {
-      //         console.log('AnimateHints calling generateNextQuestion');
-
-      //         generateNextQuestion();
-      //         setShowAvailablePoints(true);
-      //       },
-      //       2000,
-      //       true,
-      //     );
-      //   }
-      // }
     }
   }, [animatingHints]);
 

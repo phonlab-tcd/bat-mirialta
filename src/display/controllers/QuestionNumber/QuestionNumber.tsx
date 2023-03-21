@@ -2,8 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import Box from '@mui/material/Box';
-import { useEffect } from 'react';
-
+// import { useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 
 import { FullSizeCenteredFlexBox } from '@/display/components/styled';
@@ -15,9 +14,9 @@ const QuestionNumber = () => {
   const { questions } = useQuestions();
   const { showPoints } = useShowPoints();
 
-  useEffect(() => {
-    console.log('completedQuestions:', completedQuestions);
-  }, [completedQuestions]);
+  // useEffect(() => {
+  //   console.log('completedQuestions:', completedQuestions);
+  // }, [completedQuestions]);
 
   return (
     <FullSizeCenteredFlexBox>

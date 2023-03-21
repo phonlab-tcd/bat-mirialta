@@ -23,8 +23,20 @@ const useGenerateNextQuestion = () => {
       return 0;
     } else if (currentAdjacencyPair.retry_attempt === 2) {
       return 0;
-    } else {
-      return currentAdjacencyPair.retry_attempt + 1;
+    } else if (!currentAdjacencyPair.correct) {
+      if (Array.isArray(currentAdjacencyPair.hints)) {
+        if (currentAdjacencyPair.retry_attempt === 1 && currentAdjacencyPair.hints.length === 1) {
+          return 0;
+        } else if (
+          currentAdjacencyPair.retry_attempt === 0 &&
+          currentAdjacencyPair.hints.length === 2
+        ) {
+          console.log('returning 0 for ' + currentAdjacencyPair);
+          return 0;
+        }
+      } else {
+        return currentAdjacencyPair.retry_attempt + 1;
+      }
     }
   };
 
