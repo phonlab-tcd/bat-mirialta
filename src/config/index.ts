@@ -4,11 +4,13 @@ const email = 'sloanjo@tcd.ie';
 
 const repository = 'https://github.com/JohnSloan8/bat-mirialta';
 
-const production = false;
+const production = true;
 
-const basePath = production ? '/applications/bat-mirialta/' : '/';
+// const basePath = production ? '/applications/bat-mirialta/' : '/';
+const basePath = '/';
 
-const domain = production ? 'http://abair-qa.duckdns.org/' : 'http://localhost/';
+// const domain = production ? 'http://abair-qa.duckdns.org/' : 'http://localhost/';
+const domain = production ? 'https://detail-design-develop.com/' : 'http://localhost/';
 
 const batDelayMultiplier = production ? 1 : 0.5;
 

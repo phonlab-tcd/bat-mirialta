@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -15,6 +17,7 @@ interface ChatHistoryProps {
 }
 
 const ChatHistory = ({ chat }: ChatHistoryProps) => {
+  const navigate = useNavigate();
   return (
     <Box mt={1}>
       <Grid container>
