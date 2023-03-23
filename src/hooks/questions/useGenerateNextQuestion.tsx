@@ -9,12 +9,15 @@ import { useSession } from '@/store/auth';
 import { activeChatState } from '@/store/chats';
 import { currentQuestionIndexState } from '@/store/questions';
 
+// import { useAvailablePoints } from '@/store/points';
+
 const useGenerateNextQuestion = () => {
   const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
   const currentAdjacencyPair = useRecoilValue(currentAdjacencyPairState);
   const currentQuestionIndex = useRecoilValue(currentQuestionIndexState);
   const { session } = useSession();
   const activeChat = useRecoilValue(activeChatState);
+  // const { availablePoints } = useAvailablePoints();
 
   const determineRepeatForNewAdjacencyPair = () => {
     if (currentAdjacencyPair === undefined) {
@@ -23,16 +26,14 @@ const useGenerateNextQuestion = () => {
       return 0;
     } else if (currentAdjacencyPair.retry_attempt === 2) {
       return 0;
+      // } else if (availablePoints === 3) {
+      //   return 0
     } else if (!currentAdjacencyPair.correct) {
       if (Array.isArray(currentAdjacencyPair.hints)) {
-        if (currentAdjacencyPair.retry_attempt === 1 && currentAdjacencyPair.hints.length === 1) {
+        if (currentAdjacencyPair.retry_attempt + currentAdjacencyPair.hints.length === 2) {
           return 0;
-        } else if (
-          currentAdjacencyPair.retry_attempt === 0 &&
-          currentAdjacencyPair.hints.length === 2
-        ) {
-          console.log('returning 0 for ' + currentAdjacencyPair);
-          return 0;
+        } else {
+          return currentAdjacencyPair.retry_attempt + 1;
         }
       } else {
         return currentAdjacencyPair.retry_attempt + 1;
@@ -43,6 +44,7 @@ const useGenerateNextQuestion = () => {
   const generateNextQuestion = () => {
     if (session !== null && activeChat !== undefined) {
       // if wrong, ask again with retry_attempt iterated
+      console.log('currentQuestionIndex:', currentQuestionIndex);
 
       let questionID;
       let repeat;
@@ -65,6 +67,8 @@ const useGenerateNextQuestion = () => {
         }
       }
 
+      console.log('questionID:', questionID);
+      console.log('repeat:', repeat);
       if (questionID !== undefined && repeat !== undefined) {
         console.log('in generateNextQuestion');
         postAdjacencyPair(session.user.id, activeChat.id, questionID, repeat).then((a_p) => {

@@ -15,6 +15,7 @@ import QuestionNumber from '@/display/controllers/QuestionNumber';
 import TotalPoints from '@/display/controllers/TotalPoints';
 import { useGenerateHint } from '@/hooks';
 import { useAwaitingHint } from '@/store/adjacencyPairs';
+import { useAnimatingResponses } from '@/store/animate';
 import { showHintState, useShowAvailablePoints, useShowHome, useShowPoints } from '@/store/points';
 
 const ChatButtons = () => {
@@ -25,7 +26,7 @@ const ChatButtons = () => {
   const { showHome } = useShowHome();
   const navigate = useNavigate();
   const generateHint = useGenerateHint();
-
+  const { animatingResponses } = useAnimatingResponses();
   return (
     <CenteredFlexBox width={'100%'} height={84}>
       {showPoints && (
@@ -42,7 +43,7 @@ const ChatButtons = () => {
               <TotalPoints />
             </Grid>
             <Grid item xs={5}>
-              {showHint && !awaitingHint ? (
+              {showHint && !awaitingHint && !animatingResponses ? (
                 <FlexBox width="100%" justifyContent="flex-end">
                   <BatBox button={true} width={'80%'}>
                     <AbButton

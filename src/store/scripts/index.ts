@@ -168,7 +168,7 @@ const tasksPopulatedState = selector({
 
 const noQuestionsState = atom<number>({
   key: 'no-questions-state',
-  default: 1,
+  default: 5,
 });
 
 const useNoQuestions = () => {

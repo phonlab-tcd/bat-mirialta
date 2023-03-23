@@ -9,8 +9,8 @@ import { useAnimateOutro } from '@/hooks';
 import useDelayBatFeedback from '@/hooks/animate/useDelayBatFeedback';
 import useGenerateNextQuestion from '@/hooks/questions/useGenerateNextQuestion';
 import { ResponseModel } from '@/models';
-import { useAdjacencyPairs } from '@/store/adjacencyPairs';
-import { currentAdjacencyPairState } from '@/store/adjacencyPairs';
+import { currentAdjacencyPairState, useAdjacencyPairs } from '@/store/adjacencyPairs';
+import { useAnimatingResponses } from '@/store/animate';
 import { activeChatState } from '@/store/chats';
 import { useShowAvailablePoints } from '@/store/points';
 import { replaceFinalObject } from '@/store/utils';
@@ -24,7 +24,8 @@ import { Database } from '../../../types/supabase';
 const useAnimateResponses = () => {
   const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
   const currentAdjacencyPair = useRecoilValue(currentAdjacencyPairState);
-  const [animatingResponses, setAnimatingResponses] = useState(false);
+  const { setAnimatingResponses } = useAnimatingResponses();
+  const [animatingSingleResponse, setAnimatingSingleResponse] = useState(false);
   const [responses, setResponses] = useState<ResponseModel[]>([]);
   const delayBatFeedback = useDelayBatFeedback();
   const generateNextQuestion = useGenerateNextQuestion();
@@ -34,8 +35,8 @@ const useAnimateResponses = () => {
   const activeChat = useRecoilValue(activeChatState);
 
   useEffect(() => {
-    if (activeChat !== undefined && animatingResponses && currentAdjacencyPair !== undefined) {
-      setAnimatingResponses(false);
+    if (activeChat !== undefined && animatingSingleResponse && currentAdjacencyPair !== undefined) {
+      setAnimatingSingleResponse(false);
 
       if (currentAdjacencyPair.response.length < responses.length) {
         const updatedAdjacencyPair = updateResponsesInFinalAdjacencyPair(
@@ -47,7 +48,7 @@ const useAnimateResponses = () => {
         delayBatFeedback(
           () => {
             setAdjacencyPairs(updatedAdjacencyPairs);
-            setAnimatingResponses(true);
+            setAnimatingSingleResponse(true);
             if (currentAdjacencyPair.response.length === 0) {
               updatePoints();
               if (currentAdjacencyPair.correct) {
@@ -76,6 +77,7 @@ const useAnimateResponses = () => {
             () => {
               console.log('AnimateResponses calling generateNextQuestion');
               updatePoints();
+              setAnimatingResponses(false);
               generateNextQuestion();
               setShowAvailablePoints(true);
             },
@@ -85,7 +87,7 @@ const useAnimateResponses = () => {
         }
       }
     }
-  }, [animatingResponses]);
+  }, [animatingSingleResponse]);
 
   const animateResponses = (a_p: Database['public']['Tables']['bat_adjacency_pairs']['Row']) => {
     if (currentAdjacencyPair && a_p.correct !== null) {
@@ -97,6 +99,7 @@ const useAnimateResponses = () => {
       setAdjacencyPairs(replaceFinalObject(adjacencyPairs, updatedCorrection));
       setResponses(a_p.response);
       setAnimatingResponses(true);
+      setAnimatingSingleResponse(true);
     }
   };
 
