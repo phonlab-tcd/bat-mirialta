@@ -28,6 +28,14 @@ const updateResponsesInFinalAdjacencyPair = (
   return newAdjacencyPair;
 };
 
+const updateHintsInFinalAdjacencyPair = (
+  r: ResponseModel[],
+  a_p: Database['public']['Tables']['bat_adjacency_pairs']['Row'],
+) => {
+  const newAdjacencyPair = { ...a_p, hints: r };
+  return newAdjacencyPair;
+};
+
 const updateIntroInActiveChat = (
   intro: ResponseModel[],
   chat: Database['public']['Tables']['bat_chats']['Row'],
@@ -42,4 +50,5 @@ export {
   updateResponsesInFinalAdjacencyPair,
   updateCorrectionInFinalAdjacencyPair,
   updateIntroInActiveChat,
+  updateHintsInFinalAdjacencyPair,
 };

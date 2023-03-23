@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
@@ -13,12 +13,13 @@ import { AbButton } from 'abair-components';
 import AbSelect from '@/display/components/AbSelect';
 import BatBox from '@/display/components/BatBox';
 import { CenteredFlexBox } from '@/display/components/styled';
+import { useGenerateIntro } from '@/hooks';
 import usePopulateQuestionSet from '@/hooks/questions/usePopulateQuestionSet';
-import { ResponseModel } from '@/models';
 import { postChat } from '@/services/supabase';
+import { useAdjacencyPairs } from '@/store/adjacencyPairs';
 import { useSession } from '@/store/auth';
-import { useProfile } from '@/store/auth';
-import { useChats, useIntro } from '@/store/chats';
+import { useChats, useIntro, useOutro } from '@/store/chats';
+import { useShowAvailablePoints, useShowHome, useShowPoints } from '@/store/points';
 import { useQuestionSet } from '@/store/questions';
 import {
   availableFormsState,
@@ -29,6 +30,7 @@ import {
   useSelectedTense,
   useSelectedVerb,
 } from '@/store/scripts';
+import { useMessageInputDisabled } from '@/store/textInput';
 import getRandomArrayFromArray from '@/utils/getRandomArrayFromArray';
 
 const SetTask = () => {
@@ -40,36 +42,40 @@ const SetTask = () => {
   const { selectedForm, setSelectedForm } = useSelectedForm();
   const { noQuestions } = useNoQuestions();
   const { questionSet } = useQuestionSet();
+  const [clickedStart, setClickedStart] = useState(false);
   const { chats, setChats } = useChats();
   const { setIntro } = useIntro();
+  const { setOutro } = useOutro();
   const navigate = useNavigate();
   const { session } = useSession();
   const populateQuestionSet = usePopulateQuestionSet();
-  const { profile } = useProfile();
-
+  const generateIntro = useGenerateIntro();
+  const { setAdjacencyPairs } = useAdjacencyPairs();
   const startChat = () => {
     if (session !== null) {
+      setClickedStart(true);
       populateQuestionSet();
     }
   };
+  const { setMessageInputDisabled } = useMessageInputDisabled();
+
+  const { setShowAvailablePoints } = useShowAvailablePoints();
+  const { setShowPoints } = useShowPoints();
+
+  const { setShowHome } = useShowHome();
 
   useEffect(() => {
-    if (questionSet.length !== 0 && session !== null) {
-      const intro: ResponseModel[] = [
-        {
-          text: `Hi ${profile !== null ? profile.username : 'there'}!`,
-          form: 'statement',
-        },
-        {
-          text: `Let's practice ${noQuestions} of ${
-            selectedVerb !== undefined ? selectedVerb.name : 'all verbs'
-          }, ${selectedTense !== undefined ? selectedTense.name : 'all tenses'}, and ${
-            selectedForm !== undefined ? selectedForm.name : 'all forms'
-          }`,
-          form: 'statement',
-        },
-      ];
-      setIntro([]); // for animation needs to be empty first
+    if (questionSet.length !== 0 && session !== null && clickedStart) {
+      setClickedStart(false);
+      setShowPoints(false);
+      setShowHome(false);
+      setShowAvailablePoints(true);
+      setIntro([]);
+      setOutro([]);
+      setAdjacencyPairs([]);
+      setMessageInputDisabled(true);
+      const intro = generateIntro();
+
       const randomQuestionSet = getRandomArrayFromArray(questionSet, noQuestions);
       postChat(
         session.user.id,
@@ -126,27 +132,6 @@ const SetTask = () => {
           items={availableForms.map((aF) => aF.name)}
         />
       </Box>
-      {/* <Box mt={1}>
-        <Typography
-          align="center"
-          fontWeight={'bold'}
-          fontSize={20}
-          color="#3e435a"
-          fontFamily={'Comic Neue'}
-        >
-          QUESTIONS
-        </Typography>
-
-        <AbSelect
-          handleChange={(e) => {
-            setNoQuestions(e.target.value as number);
-          }}
-          value={String(noQuestions)}
-          label={'noQuestions'}
-          items={[1, 3, 5, 8]}
-          all={false}
-        />
-      </Box> */}
       <CenteredFlexBox mt={3}>
         <Box
           sx={{ backgroundColor: '#67add6' }}

@@ -53,7 +53,6 @@ const useGenerateFeedback = () => {
               responseObject = [
                 { text: 'níl sé ceart', form: 'statement' },
                 { text: `the correct answer is ${currentQuestion.answer}`, form: 'statement' },
-                { text: `on to the next question`, form: 'statement' },
               ];
             }
           }

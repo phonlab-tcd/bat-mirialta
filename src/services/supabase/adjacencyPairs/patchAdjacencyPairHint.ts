@@ -1,13 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ResponseModel } from '@/models';
 import supabase from '@/services/supabase';
 
-const patchChat = async (chatID: number, complete: boolean) => {
-  console.log('patching chat\n');
-  console.log('chatID: ', chatID);
-  console.log('complete: ', complete);
+const patchAdjacencyPairHint = async (AdjacencyPairID: number, hint: ResponseModel[]) => {
   try {
     const { data, error } = await supabase
-      .from('bat_chats')
-      .update({ id: chatID, complete: complete })
+      .from('bat_adjacency_pairs')
+      .update({
+        id: AdjacencyPairID,
+        hints: hint,
+      })
       .select()
       .single();
 
@@ -24,4 +26,4 @@ const patchChat = async (chatID: number, complete: boolean) => {
   }
 };
 
-export default patchChat;
+export default patchAdjacencyPairHint;

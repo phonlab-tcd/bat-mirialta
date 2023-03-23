@@ -11,14 +11,13 @@ import { useAvailablePoints, useShowThisPenalty, useThisPenalty } from '@/store/
 const PointsAvailable = () => {
   const { availablePoints } = useAvailablePoints();
   const { showThisPenalty, setShowThisPenalty } = useShowThisPenalty();
-  const { thisPenalty, setThisPenalty } = useThisPenalty();
+  const { thisPenalty } = useThisPenalty();
 
   useEffect(() => {
-    if (thisPenalty !== 0) {
+    if (thisPenalty !== 0 && thisPenalty !== 3) {
       setShowThisPenalty(true);
       setTimeout(() => {
         setShowThisPenalty(false);
-        setThisPenalty(0);
       }, 500);
     }
   }, [thisPenalty]);

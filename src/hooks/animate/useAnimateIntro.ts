@@ -35,6 +35,8 @@ const useAnimateIntro = () => {
         delayBatFeedback(
           () => {
             setShowPoints(true);
+            console.log('AnimateIntro calling generateNextQuestion');
+
             generateNextQuestion();
           },
           2000,
@@ -46,6 +48,8 @@ const useAnimateIntro = () => {
 
   const animateIntro = () => {
     if (activeChat !== undefined) {
+      console.log('AnimateIntro called');
+
       setAnimatingIntro(true);
     }
   };

@@ -10,7 +10,7 @@ import { AbButton } from 'abair-components';
 
 import BatBox from '@/display/components/BatBox';
 // import ChatInProgress from '@/display/controllers/ChatInProgress';
-import { patchChat } from '@/services/supabase';
+import { patchChatComplete } from '@/services/supabase';
 import { useAdjacencyPairs } from '@/store/adjacencyPairs';
 import { useSession } from '@/store/auth';
 import { activeChatState, useChats } from '@/store/chats';
@@ -27,7 +27,8 @@ const ContinueChatOrNew = () => {
       navigate('/chat');
     } else {
       if (session !== null && activeChat !== undefined) {
-        patchChat(activeChat.id, true).then((c) => {
+        console.log('finishing previously unfinished chat');
+        patchChatComplete(activeChat.id, null, true).then((c) => {
           setAdjacencyPairs([]);
           setChats([...chats.slice(0, chats.length - 1), c]);
           console.log('chat updated successfully');

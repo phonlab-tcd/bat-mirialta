@@ -1,4 +1,4 @@
-import { atom, useRecoilState } from 'recoil';
+import { atom, selector, useRecoilState } from 'recoil';
 
 const totalPointsState = atom<number>({
   key: 'total-points',
@@ -60,6 +60,24 @@ const useShowPoints = () => {
   return { showPoints, setShowPoints };
 };
 
+const showHintState = selector({
+  key: 'show-hint-state',
+  get: ({ get }) => {
+    const availablePoints = get(availablePointsState);
+    return availablePoints > 1 ? true : false;
+  },
+});
+
+const showHomeState = atom<boolean>({
+  key: 'show-home',
+  default: false,
+});
+
+const useShowHome = () => {
+  const [showHome, setShowHome] = useRecoilState(showHomeState);
+  return { showHome, setShowHome };
+};
+
 const completedQuestionsState = atom<number>({
   key: 'completed-questions',
   default: 0,
@@ -78,4 +96,6 @@ export {
   useShowThisPenalty,
   useShowPoints,
   useShowAvailablePoints,
+  showHintState,
+  useShowHome,
 };

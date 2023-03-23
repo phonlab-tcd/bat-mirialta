@@ -31,9 +31,9 @@ const calculateTotalPoints = (
         totalPenalty = 0;
       }
     }
-    if (aP.hint) {
-      totalPenalty += 1;
-      thisPenalty = 1;
+    if (aP.hints !== null) {
+      totalPenalty += aP.hints.length;
+      thisPenalty = aP.hints.length;
     }
     if (aP.correct) {
       totalPoints += startingPoints - totalPenalty;
@@ -42,7 +42,8 @@ const calculateTotalPoints = (
 
     if (
       (!completedQuestionIDs.includes(aP.id) && aP.correct) ||
-      (!aP.correct && aP.retry_attempt === 2)
+      (aP.correct === false && aP.retry_attempt === 2) ||
+      (aP.correct === false && Array.isArray(aP.hints) && aP.retry_attempt + aP.hints.length === 2)
     ) {
       completedQuestionIDs.push(aP.id);
     }
