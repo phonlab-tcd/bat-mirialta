@@ -18,7 +18,7 @@ const PointsAvailable = () => {
       setShowThisPenalty(true);
       setTimeout(() => {
         setShowThisPenalty(false);
-      }, 500);
+      }, 1000);
     }
   }, [thisPenalty]);
 
@@ -39,7 +39,11 @@ const PointsAvailable = () => {
         variant="h6"
         px={1.25}
         borderRadius={100}
-        sx={{ backgroundColor: showThisPenalty ? 'warning.light' : 'secondary.light' }}
+        sx={{
+          backgroundColor:
+            availablePoints === 3 ? '#FFD700' : availablePoints === 2 ? 'silver' : '#CD7F32',
+          visibility: availablePoints !== 0 ? 'visible' : 'hidden',
+        }}
       >
         {availablePoints}
       </Typography>
