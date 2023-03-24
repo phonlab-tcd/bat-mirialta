@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
@@ -11,7 +11,6 @@ import {
   Avatar,
   ConversationHeader,
   Message,
-  MessageInput,
   MessageList,
   MessageSeparator,
   TypingIndicator,
@@ -19,15 +18,17 @@ import {
 import { ChatContainer } from '@chatscope/chat-ui-kit-react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 
+import BatBox from '@/display/components/BatBox';
 import Meta from '@/display/components/Meta';
 import { CenteredFlexBox } from '@/display/components/styled';
 import ChatButtons from '@/display/controllers/ChatButtons';
+import IrishKeyboard from '@/display/controllers/IrishKeyboard';
 import MessageInputButtons from '@/display/controllers/MessageInputButtons';
 import { useUpdatePoints } from '@/hooks';
 import { usePopulateChats } from '@/hooks';
 import useGenerateNextQuestion from '@/hooks/questions/useGenerateNextQuestion';
 import useAdjacencyPairLogic from '@/hooks/useAdjacencyPairLogic';
-import useHandleSend from '@/hooks/useHandleSend';
+import { getChatHeight } from '@/routes/Pages/utils';
 import { getAdjacencyPairs, getQuestions } from '@/services/supabase';
 import { useAdjacencyPairs, useReceivedAdjacencyPairHistory } from '@/store/adjacencyPairs';
 import { currentAdjacencyPairState } from '@/store/adjacencyPairs';
@@ -38,18 +39,12 @@ import { activeChatState, useIntro } from '@/store/chats';
 import { useChats } from '@/store/chats';
 import { useShowPoints } from '@/store/points';
 import { useQuestions } from '@/store/questions';
-import {
-  useBatTyping,
-  useChatText,
-  useMessageInputDisabled,
-  useTaNilInputChoice,
-} from '@/store/textInput';
+import { useBatTyping, useTaNilInputChoice } from '@/store/textInput';
 
 import anonImg from '/assets/images/anon-avatar.png';
 import robotImg from '/assets/images/robot.png';
 
 function Chat() {
-  const messageInputRef = useRef<HTMLInputElement>(null);
   const { profile } = useProfile();
   const updatePoints = useUpdatePoints();
   const [date] = useState(new Date().toUTCString());
@@ -66,8 +61,6 @@ function Chat() {
   const currentAdjacencyPair = useRecoilValue(currentAdjacencyPairState);
 
   const { batTyping } = useBatTyping();
-  const { messageInputDisabled } = useMessageInputDisabled();
-  const { chatText, setChatText } = useChatText();
   const adjacencyPairLogic = useAdjacencyPairLogic();
   const populateChats = usePopulateChats();
   const activeChat = useRecoilValue(activeChatState);
@@ -75,8 +68,6 @@ function Chat() {
   const { receivedAdjacencyPairHistory, setReceivedAdjacencyPairHistory } =
     useReceivedAdjacencyPairHistory();
   const { chats } = useChats();
-
-  const handleSend = useHandleSend();
 
   useEffect(() => {
     if (session !== null) {
@@ -128,72 +119,58 @@ function Chat() {
       updatePoints();
 
       setFirstLoad(false);
-      if (messageInputRef.current !== null) {
-        messageInputRef.current.focus();
-      }
     }
   }, [firstLoad, receivedAdjacencyPairHistory]);
 
-  useEffect(() => {
-    if (!messageInputDisabled) {
-      if (messageInputRef.current !== null) {
-        messageInputRef.current.focus();
-      }
-    }
-  }, [messageInputDisabled]);
-
   return (
-    <Box height="calc(100% - 100px)" sx={{ position: 'relative' }}>
+    <Box>
       <Meta title="Chat" />
       <MessageInputButtons vis={taNilInputChoice ? 'visible' : 'hidden'} />
 
-      <ChatContainer>
-        <ConversationHeader>
-          <Avatar src={robotImg} name="Bat" />
-          <ConversationHeader.Content userName="Bat" info="Active Now" />
-        </ConversationHeader>
-        <MessageList
-          typingIndicator={batTyping ? <TypingIndicator content="Tá Bat ag clóscríobh" /> : null}
-        >
-          <MessageSeparator>{date}</MessageSeparator>
-          {chatBubbles.map((c_b, j) => (
-            <Message
-              key={j}
-              model={{
-                message: String(c_b.text),
-                sentTime: 'now',
-                sender: c_b.sender,
-                direction: c_b.sender === 'robot' ? 'incoming' : 'outgoing',
-                position: 'single',
-              }}
-            >
-              <Avatar
-                src={
-                  c_b.sender === 'robot'
-                    ? robotImg
-                    : profile !== null && profile.avatar !== ''
-                    ? profile.avatar
-                    : anonImg
-                }
-                name={c_b.sender === 'robot' ? 'Robot' : 'You'}
-              />
-            </Message>
-          ))}
-        </MessageList>
-        <MessageInput
-          value={chatText}
-          onChange={(t: string) => {
-            setChatText(t);
-          }}
-          onSend={handleSend}
-          disabled={messageInputDisabled}
-          attachButton={false}
-          placeholder={messageInputDisabled ? 'fán le do thoil' : 'scríobh anseo'}
-          ref={messageInputRef}
-        />
-      </ChatContainer>
-      <CenteredFlexBox px={0.5} height={100} sx={{ backgroundColor: 'background.default' }}>
-        <ChatButtons />
+      <Box sx={{ overflowY: 'scroll', height: getChatHeight() }}>
+        <ChatContainer>
+          <ConversationHeader>
+            <Avatar src={robotImg} name="Bat" />
+            <ConversationHeader.Content userName="Bat" info="Active Now" />
+          </ConversationHeader>
+          <MessageList
+            typingIndicator={batTyping ? <TypingIndicator content="Tá Bat ag clóscríobh" /> : null}
+          >
+            <MessageSeparator>{date}</MessageSeparator>
+            {chatBubbles.map((c_b, j) => (
+              <Message
+                key={j}
+                model={{
+                  message: String(c_b.text),
+                  sentTime: 'now',
+                  sender: c_b.sender,
+                  direction: c_b.sender === 'robot' ? 'incoming' : 'outgoing',
+                  position: 'single',
+                }}
+              >
+                <Avatar
+                  src={
+                    c_b.sender === 'robot'
+                      ? robotImg
+                      : profile !== null && profile.avatar !== ''
+                      ? profile.avatar
+                      : anonImg
+                  }
+                  name={c_b.sender === 'robot' ? 'Robot' : 'You'}
+                />
+              </Message>
+            ))}
+          </MessageList>
+        </ChatContainer>
+      </Box>
+
+      <CenteredFlexBox height={345} p={1} sx={{ backgroundColor: 'white' }}>
+        <BatBox width={'98%'} padding={0}>
+          <CenteredFlexBox px={0.5}>
+            <ChatButtons />
+          </CenteredFlexBox>
+          <IrishKeyboard />
+        </BatBox>
       </CenteredFlexBox>
     </Box>
   );

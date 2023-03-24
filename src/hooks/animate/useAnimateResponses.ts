@@ -72,6 +72,7 @@ const useAnimateResponses = () => {
         ) {
           // finish the current chat
           animateOutro();
+          setAnimatingResponses(false);
         } else {
           delayBatFeedback(
             () => {

@@ -1,0 +1,24 @@
+.defaults {
+  background-color: rgb(231, 231, 231) !important;
+  border-width: 3px;
+  border-style: solid;
+  border-color: rgb(0, 0, 0);
+  border-radius: '8px';
+}
+
+.fadas {
+  background-color: lightgreen !important;
+}
+
+.urús {
+  background-color: khaki !important;
+  border: '3px solid black' !important;
+}
+
+.séimhiús {
+  background-color: lightskyblue !important;
+}
+
+.base {
+  background-color: #67add6 !important;
+}

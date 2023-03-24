@@ -9,17 +9,14 @@ import {
   useTotalPoints,
 } from '@/store/points';
 
-// import { useShowAvailablePoints } from '@/store/points';
-
 const TotalPoints = () => {
   const { totalPoints } = useTotalPoints();
-  // const { showAvailablePoints } = useShowAvailablePoints();
 
   // const { completedQuestions } = useCompletedQuestions();
 
   return (
     <FullSizeCenteredFlexBox>
-      <CenteredFlexBox>
+      <CenteredFlexBox sx={{ position: 'relative' }}>
         <Typography fontWeight="bold" variant="h4">
           {totalPoints}
         </Typography>

@@ -6,15 +6,13 @@ const repository = 'https://github.com/JohnSloan8/bat-mirialta';
 
 const production = false;
 
-// const basePath = production ? '/applications/bat-mirialta/' : '/';
 const basePath = '/';
 
-// const domain = production ? 'http://abair-qa.duckdns.org/' : 'http://localhost/';
 const domain = production ? 'https://detail-design-develop.com/' : 'http://localhost/';
 
 const batDelayMultiplier = production ? 1 : 0.2;
 
-const errorCheckURL = 'https://abair-qa.duckdns.org/apis/error-check/run-full-check';
+const errorCheckURL = 'https://error-check.detail-design-develop.com/run-full-check';
 
 const messages = {
   app: {

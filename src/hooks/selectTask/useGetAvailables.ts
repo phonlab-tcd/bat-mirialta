@@ -27,6 +27,7 @@ const useGetAvailables = () => {
       selectedTense !== undefined ? selectedTense.id : undefined,
     ).then((a_f) => {
       if (a_f !== undefined) {
+        // remove additional question
         setAvailableFormIDs(a_f);
       } else {
         setAvailableFormIDs([]);

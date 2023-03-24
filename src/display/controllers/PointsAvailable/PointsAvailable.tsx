@@ -14,7 +14,7 @@ const PointsAvailable = () => {
   const { thisPenalty } = useThisPenalty();
 
   useEffect(() => {
-    if (thisPenalty !== 0 && thisPenalty !== 3) {
+    if (thisPenalty !== 0) {
       setShowThisPenalty(true);
       setTimeout(() => {
         setShowThisPenalty(false);
@@ -30,9 +30,9 @@ const PointsAvailable = () => {
         variant="body1"
         sx={{
           position: 'absolute',
-          visibility: showThisPenalty ? 'visible' : 'hidden',
+          visibility: thisPenalty === 0 ? 'hidden' : showThisPenalty ? 'visible' : 'hidden',
           top: -8,
-          left: 50,
+          left: 35,
         }}
       >{`-${thisPenalty}`}</Typography>
       <Typography
