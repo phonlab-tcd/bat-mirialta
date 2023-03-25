@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 
 import SendIcon from '@mui/icons-material/Send';
+import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
 
 import { AbIconButton } from 'abair-components';
 
@@ -81,7 +81,7 @@ const IrishKeyboard = () => {
 
   return (
     <Box>
-      <CenteredFlexBox p={1}>
+      <CenteredFlexBox p={1} sx={{ position: 'relative' }}>
         <BatBox width={'100%'} padding={0.5}>
           <Grid container py={1}>
             <Grid item xs={1.5}>
@@ -89,31 +89,15 @@ const IrishKeyboard = () => {
             </Grid>
 
             <Grid item xs={9}>
-              <TextField
-                ref={messageInputRef}
-                sx={{
-                  '& fieldset': {
-                    borderRadius: 0,
-
-                    borderWidth: 2,
-                    borderColor: 'primary.dark',
-                  },
-                }}
-                variant="outlined"
-                fullWidth
-                value={chatText}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                  handleChange(e.target.value);
-                }}
-                disabled={messageInputDisabled}
-                placeholder={messageInputDisabled ? 'fán le do thoil' : 'scríobh anseo'}
-                inputProps={{
-                  style: {
-                    padding: 10,
-                    backgroundColor: 'white',
-                  },
-                }}
-              />
+              <FullSizeCenteredFlexBox
+                border={2}
+                borderColor={'primary.dark'}
+                sx={{ backgroundColor: messageInputDisabled ? '#ddd' : '#fff' }}
+              >
+                <Typography ref={messageInputRef} alignItems="center">
+                  {chatText}
+                </Typography>
+              </FullSizeCenteredFlexBox>
             </Grid>
             <Grid item xs={1.5}>
               <FullSizeFlexBox justifyContent="flex-end" alignItems="center">
@@ -129,20 +113,22 @@ const IrishKeyboard = () => {
             </Grid>
           </Grid>
 
-          <Keyboard
-            keyboardRef={(r) => (keyboard.current = r)}
-            layoutName={layoutName}
-            layout={keyboardOptions.layout}
-            onChange={(e) => {
-              handleChange(e);
-            }}
-            onKeyPress={(e) => {
-              handleKeyPress(e);
-            }}
-            display={keyboardOptions.display}
-            buttonTheme={keyboardOptions.button}
-            theme="hg-theme-default base"
-          />
+          <Box border={1}>
+            <Keyboard
+              keyboardRef={(r) => (keyboard.current = r)}
+              layoutName={layoutName}
+              layout={keyboardOptions.layout}
+              onChange={(e) => {
+                handleChange(e);
+              }}
+              onKeyPress={(e) => {
+                handleKeyPress(e);
+              }}
+              display={keyboardOptions.display}
+              buttonTheme={keyboardOptions.button}
+              theme="hg-theme-default base"
+            />
+          </Box>
         </BatBox>
       </CenteredFlexBox>
     </Box>

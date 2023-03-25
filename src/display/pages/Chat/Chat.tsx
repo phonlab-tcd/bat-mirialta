@@ -125,9 +125,9 @@ function Chat() {
           <PointsDisplay />
         </BatBox>
       </CenteredFlexBox>
-      <CenteredFlexBox px={1} sx={{ overflowY: 'scroll', height: getChatHeight() }}>
+      <CenteredFlexBox px={1}>
         <BatBox width={'100%'} backgroundColor={'background.default'} padding={0}>
-          <Box px={0.6} py={0.5}>
+          <Box px={0.6} py={0.5} sx={{ overflowY: 'scroll', height: getChatHeight() }}>
             <ChatContainer>
               <MessageList
                 typingIndicator={
