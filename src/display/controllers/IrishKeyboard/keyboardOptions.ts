@@ -1,28 +1,16 @@
 const keyboardOptions = {
   layout: {
-    default: [
-      '{fada} a e i o u',
-      '{urú} b c d f g p t',
-      '{séimhiú} n m s r l h',
-      '{hint} {space} {bksp} {enter}',
-    ],
-    fada: [
-      '{fada} á é í ó ú',
-      '{urú} b c d f g p t',
-      '{séimhiú} n m s r l h',
-      '{hint} {space} {bksp} {enter}',
-    ],
+    default: ['{fada} a e i o u {bksp}', '{urú} b c d f g p t', '{séimhiú} n m s r l h {space}'],
+    fada: ['{fada} á é í ó ú {bksp}', '{urú} b c d f g p t', '{séimhiú} n m s r l h {space}'],
     urú: [
-      '{fada} a e i o u',
+      '{fada} a e i o u {bksp}',
       '{urú} mb gc nd bhf ng bp dt',
-      '{séimhiú} n m s r l h',
-      '{hint} {space} {bksp} {enter}',
+      '{séimhiú} n m s r l h {space}',
     ],
     séimhiú: [
-      '{fada} a e i o u',
+      '{fada} a e i o u {bksp}',
       '{urú} bh ch dh fh gh bh th',
-      '{séimhiú} n mh sh r l h',
-      '{hint} {space} {bksp} {enter}',
+      '{séimhiú} n mh sh r l h {space}',
     ],
   },
   display: {
@@ -33,14 +21,13 @@ const keyboardOptions = {
     '{séimhiú}': 'séimhiú',
     '{shift}': 'caipitliú',
     '{fada}': 'fada',
-    '{hint}': 'hint',
   },
 
   button: [
     {
       class: 'defaults',
       buttons:
-        '{fada} a e i o u á é í ó ú {urú} b c d f g p t mb gc nd bhf ng bp dt {séimhiú} n m s r l h bh ch dh fh gh bh th mh sh {enter} {space} {bksp}',
+        '{fada} a e i o u á é í ó ú {urú} b c d f g p t mb gc nd bhf ng bp dt {séimhiú} n m s r l h bh ch dh fh gh bh th mh sh {space} {bksp}',
     },
     {
       class: 'fadas',

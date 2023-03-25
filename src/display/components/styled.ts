@@ -1,6 +1,11 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
 
+const FullSizeBox = styled(Box)({
+  width: '100%',
+  height: '100%',
+});
+
 const FlexBox = styled(Box)({
   display: 'flex',
 });
@@ -20,4 +25,4 @@ const FullSizeCenteredFlexBox = styled(CenteredFlexBox)({
   height: '100%',
 });
 
-export { FlexBox, CenteredFlexBox, FullSizeFlexBox, FullSizeCenteredFlexBox };
+export { FlexBox, CenteredFlexBox, FullSizeFlexBox, FullSizeCenteredFlexBox, FullSizeBox };

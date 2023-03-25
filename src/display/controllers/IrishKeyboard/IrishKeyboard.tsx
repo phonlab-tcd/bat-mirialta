@@ -13,7 +13,11 @@ import TextField from '@mui/material/TextField';
 import { AbIconButton } from 'abair-components';
 
 import BatBox from '@/display/components/BatBox';
-import { FullSizeCenteredFlexBox, FullSizeFlexBox } from '@/display/components/styled';
+import {
+  CenteredFlexBox,
+  FullSizeCenteredFlexBox,
+  FullSizeFlexBox,
+} from '@/display/components/styled';
 import useHandleSend from '@/hooks/useHandleSend';
 import { useChatText, useMessageInputDisabled } from '@/store/textInput';
 
@@ -76,53 +80,71 @@ const IrishKeyboard = () => {
   // }
 
   return (
-    <Box p={1}>
-      <Box p={0.5}>
-        <TextField
-          ref={messageInputRef}
-          variant="outlined"
-          fullWidth
-          value={chatText}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            handleChange(e.target.value);
-          }}
-          disabled={messageInputDisabled}
-          placeholder={messageInputDisabled ? 'fán le do thoil' : 'scríobh anseo'}
-        />
-      </Box>
-      <Keyboard
-        keyboardRef={(r) => (keyboard.current = r)}
-        layoutName={layoutName}
-        layout={keyboardOptions.layout}
-        onChange={(e) => {
-          handleChange(e);
-        }}
-        onKeyPress={(e) => {
-          handleKeyPress(e);
-        }}
-        display={keyboardOptions.display}
-        buttonTheme={keyboardOptions.button}
-        theme="hg-theme-default base"
-      />
-      <Grid container>
-        <Grid item xs={6}>
-          <HintOrHomeButtons />
-        </Grid>
-        <Grid item xs={6}>
-          <FullSizeFlexBox pl={1.5} justifyContent="flex-end" alignItems="center">
-            <BatBox button={true} width={'100%'} height={45}>
-              <FullSizeCenteredFlexBox>
-                <AbIconButton
-                  icon={SendIcon}
-                  onClick={handleSend}
-                  fontSize="medium"
-                  color="secondary"
-                />
-              </FullSizeCenteredFlexBox>
-            </BatBox>
-          </FullSizeFlexBox>
-        </Grid>
-      </Grid>
+    <Box>
+      <CenteredFlexBox p={1}>
+        <BatBox width={'100%'} padding={0.5}>
+          <Grid container py={1}>
+            <Grid item xs={1.5}>
+              <HintOrHomeButtons />
+            </Grid>
+
+            <Grid item xs={9}>
+              <TextField
+                ref={messageInputRef}
+                sx={{
+                  '& fieldset': {
+                    borderRadius: 0,
+
+                    borderWidth: 2,
+                    borderColor: 'primary.dark',
+                  },
+                }}
+                variant="outlined"
+                fullWidth
+                value={chatText}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  handleChange(e.target.value);
+                }}
+                disabled={messageInputDisabled}
+                placeholder={messageInputDisabled ? 'fán le do thoil' : 'scríobh anseo'}
+                inputProps={{
+                  style: {
+                    padding: 10,
+                    backgroundColor: 'white',
+                  },
+                }}
+              />
+            </Grid>
+            <Grid item xs={1.5}>
+              <FullSizeFlexBox justifyContent="flex-end" alignItems="center">
+                <FullSizeCenteredFlexBox>
+                  <AbIconButton
+                    icon={SendIcon}
+                    onClick={handleSend}
+                    fontSize="medium"
+                    color="info"
+                  />
+                </FullSizeCenteredFlexBox>
+              </FullSizeFlexBox>
+            </Grid>
+          </Grid>
+
+          <Keyboard
+            keyboardRef={(r) => (keyboard.current = r)}
+            layoutName={layoutName}
+            layout={keyboardOptions.layout}
+            onChange={(e) => {
+              handleChange(e);
+            }}
+            onKeyPress={(e) => {
+              handleKeyPress(e);
+            }}
+            display={keyboardOptions.display}
+            buttonTheme={keyboardOptions.button}
+            theme="hg-theme-default base"
+          />
+        </BatBox>
+      </CenteredFlexBox>
     </Box>
   );
 };

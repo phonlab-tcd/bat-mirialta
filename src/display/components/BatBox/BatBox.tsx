@@ -8,6 +8,7 @@ interface BatBoxProps {
   height?: number | string;
   padding?: number | string;
   button?: boolean;
+  backgroundColor?: string;
 }
 
 const BatBox = ({
@@ -16,14 +17,15 @@ const BatBox = ({
   button = false,
   height = '100%',
   padding = 2,
+  backgroundColor = '#67add6',
 }: BatBoxProps) => {
   return (
     <Box
-      sx={{ backgroundColor: '#67add6' }}
+      sx={{ backgroundColor: backgroundColor, zIndex: 1 }}
       width={width}
       height={height}
-      border={button ? 3 : 4}
-      borderRadius={button ? 1.5 : 3}
+      border={button ? 2 : 4}
+      borderRadius={button ? 2.5 : 4}
       borderColor={'#3e435a'}
       p={button ? 0 : padding}
       maxWidth={400}

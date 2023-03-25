@@ -1,9 +1,9 @@
 .defaults {
   background-color: rgb(231, 231, 231) !important;
-  border-width: 3px;
-  border-style: solid;
-  border-color: rgb(0, 0, 0);
-  border-radius: '8px';
+  border-width: 2px !important;
+  border-style: solid !important;
+  border-color: rgb(0, 0, 0) !important;
+  border-radius: '9px' !important;
 }
 
 .fadas {

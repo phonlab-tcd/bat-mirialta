@@ -7,23 +7,16 @@ import { useRecoilValue } from 'recoil';
 
 import Box from '@mui/material/Box';
 
-import {
-  Avatar,
-  ConversationHeader,
-  Message,
-  MessageList,
-  MessageSeparator,
-  TypingIndicator,
-} from '@chatscope/chat-ui-kit-react';
+import { Avatar, Message, MessageList, TypingIndicator } from '@chatscope/chat-ui-kit-react';
 import { ChatContainer } from '@chatscope/chat-ui-kit-react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 
 import BatBox from '@/display/components/BatBox';
 import Meta from '@/display/components/Meta';
 import { CenteredFlexBox } from '@/display/components/styled';
-import ChatButtons from '@/display/controllers/ChatButtons';
 import IrishKeyboard from '@/display/controllers/IrishKeyboard';
 import MessageInputButtons from '@/display/controllers/MessageInputButtons';
+import PointsDisplay from '@/display/controllers/PointsDisplay';
 import { useUpdatePoints } from '@/hooks';
 import { usePopulateChats } from '@/hooks';
 import useGenerateNextQuestion from '@/hooks/questions/useGenerateNextQuestion';
@@ -47,7 +40,7 @@ import robotImg from '/assets/images/robot.png';
 function Chat() {
   const { profile } = useProfile();
   const updatePoints = useUpdatePoints();
-  const [date] = useState(new Date().toUTCString());
+
   const [firstLoad, setFirstLoad] = useState(true);
   const generateNextQuestion = useGenerateNextQuestion();
   const navigate = useNavigate();
@@ -123,55 +116,54 @@ function Chat() {
   }, [firstLoad, receivedAdjacencyPairHistory]);
 
   return (
-    <Box>
+    <Box sx={{ backgroundColor: 'background' }}>
       <Meta title="Chat" />
       <MessageInputButtons vis={taNilInputChoice ? 'visible' : 'hidden'} />
 
-      <Box sx={{ overflowY: 'scroll', height: getChatHeight() }}>
-        <ChatContainer>
-          <ConversationHeader>
-            <Avatar src={robotImg} name="Bat" />
-            <ConversationHeader.Content userName="Bat" info="Active Now" />
-          </ConversationHeader>
-          <MessageList
-            typingIndicator={batTyping ? <TypingIndicator content="Tá Bat ag clóscríobh" /> : null}
-          >
-            <MessageSeparator>{date}</MessageSeparator>
-            {chatBubbles.map((c_b, j) => (
-              <Message
-                key={j}
-                model={{
-                  message: String(c_b.text),
-                  sentTime: 'now',
-                  sender: c_b.sender,
-                  direction: c_b.sender === 'robot' ? 'incoming' : 'outgoing',
-                  position: 'single',
-                }}
-              >
-                <Avatar
-                  src={
-                    c_b.sender === 'robot'
-                      ? robotImg
-                      : profile !== null && profile.avatar !== ''
-                      ? profile.avatar
-                      : anonImg
-                  }
-                  name={c_b.sender === 'robot' ? 'Robot' : 'You'}
-                />
-              </Message>
-            ))}
-          </MessageList>
-        </ChatContainer>
-      </Box>
-
-      <CenteredFlexBox height={345} p={1} sx={{ backgroundColor: 'white' }}>
-        <BatBox width={'98%'} padding={0}>
-          <CenteredFlexBox px={0.5}>
-            <ChatButtons />
-          </CenteredFlexBox>
-          <IrishKeyboard />
+      <CenteredFlexBox p={1}>
+        <BatBox width={'100%'} padding={0.5}>
+          <PointsDisplay />
         </BatBox>
       </CenteredFlexBox>
+      <CenteredFlexBox px={1} sx={{ overflowY: 'scroll', height: getChatHeight() }}>
+        <BatBox width={'100%'} backgroundColor={'background.default'} padding={0}>
+          <Box px={0.6} py={0.5}>
+            <ChatContainer>
+              <MessageList
+                typingIndicator={
+                  batTyping ? <TypingIndicator content="Tá Bat ag clóscríobh" /> : null
+                }
+              >
+                {chatBubbles.map((c_b, j) => (
+                  <Message
+                    key={j}
+                    model={{
+                      message: String(c_b.text),
+                      sentTime: 'now',
+                      sender: c_b.sender,
+                      direction: c_b.sender === 'robot' ? 'incoming' : 'outgoing',
+                      position: 'single',
+                    }}
+                  >
+                    <Avatar
+                      src={
+                        c_b.sender === 'robot'
+                          ? robotImg
+                          : profile !== null && profile.avatar !== ''
+                          ? profile.avatar
+                          : anonImg
+                      }
+                      name={c_b.sender === 'robot' ? 'Robot' : 'You'}
+                    />
+                  </Message>
+                ))}
+              </MessageList>
+            </ChatContainer>
+          </Box>
+        </BatBox>
+      </CenteredFlexBox>
+
+      <IrishKeyboard />
     </Box>
   );
 }

@@ -6,7 +6,7 @@ function getPageHeight(theme: Theme) {
 }
 
 function getChatHeight() {
-  return `calc(100vh - 430px)`;
+  return `calc(100vh - 380px)`;
 }
 
 export { getPageHeight, getChatHeight };
