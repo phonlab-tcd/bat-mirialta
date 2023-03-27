@@ -1,4 +1,4 @@
-import { atom, useRecoilState } from 'recoil';
+import { atom, selector, useRecoilState } from 'recoil';
 
 const chatTextState = atom<string>({
   key: 'chat-text-state',
@@ -9,6 +9,18 @@ const useChatText = () => {
   const [chatText, setChatText] = useRecoilState(chatTextState);
   return { chatText, setChatText };
 };
+
+const chatTextEmptyState = selector({
+  key: 'chat-text-empty-state',
+  get: ({ get }) => {
+    const chatText = get(chatTextState);
+
+    if (chatText.length !== 0) {
+      return false;
+    }
+    return true;
+  },
+});
 
 const batTypingState = atom<boolean>({
   key: 'bat-typing-state',
@@ -40,4 +52,10 @@ const useTaNilInputChoice = () => {
   return { taNilInputChoice, setTaNilInputChoice };
 };
 
-export { useBatTyping, useMessageInputDisabled, useChatText, useTaNilInputChoice };
+export {
+  useBatTyping,
+  useMessageInputDisabled,
+  useChatText,
+  useTaNilInputChoice,
+  chatTextEmptyState,
+};
