@@ -11,6 +11,7 @@ import { useAnimatingOutro } from '@/store/animate';
 import { activeChatState, useChats, useOutro } from '@/store/chats';
 import {
   useShowAvailablePoints,
+  useTotalPoints,
   /*, useShowHome */
 } from '@/store/points';
 
@@ -20,6 +21,7 @@ const useAnimateOutro = () => {
   // const { setShowHome } = useShowHome();
   const { setShowAvailablePoints } = useShowAvailablePoints();
   const generateOutro = useGenerateOutro();
+  const { totalPoints } = useTotalPoints();
 
   const { animatingOutro, setAnimatingOutro } = useAnimatingOutro();
   const [animatingSingleOutro, setAnimatingSingleOutro] = useState(false);
@@ -40,7 +42,7 @@ const useAnimateOutro = () => {
           false,
         );
       } else if (activeChat.outro.length === outro.length) {
-        patchChatComplete(activeChat.id, activeChat.outro, true).then((c) => {
+        patchChatComplete(activeChat.id, activeChat.outro, true, totalPoints).then((c) => {
           setChats([...chats.slice(0, chats.length - 1), c]);
         });
         setAnimatingOutro(false);
@@ -53,7 +55,7 @@ const useAnimateOutro = () => {
     if (activeChat !== undefined) {
       console.log('animating outro');
       const generatedOutro = generateOutro();
-      patchChatComplete(activeChat.id, generatedOutro, false).then((c) => {
+      patchChatComplete(activeChat.id, generatedOutro, false, null).then((c) => {
         setChats([...chats.slice(0, chats.length - 1), c]);
         setAnimatingOutro(true);
         setAnimatingSingleOutro(true);
