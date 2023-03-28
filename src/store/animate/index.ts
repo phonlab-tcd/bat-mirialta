@@ -10,4 +10,14 @@ const useAnimatingResponses = () => {
   return { animatingResponses, setAnimatingResponses };
 };
 
-export { useAnimatingResponses };
+const animatingOutroState = atom<boolean>({
+  key: 'animating-Outro',
+  default: false,
+});
+
+const useAnimatingOutro = () => {
+  const [animatingOutro, setAnimatingOutro] = useRecoilState(animatingOutroState);
+  return { animatingOutro, setAnimatingOutro };
+};
+
+export { useAnimatingResponses, useAnimatingOutro };

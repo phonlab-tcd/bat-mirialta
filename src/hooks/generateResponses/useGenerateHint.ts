@@ -31,11 +31,11 @@ const useGenerateHint = () => {
           if (hints !== undefined) {
             if (currentQuestion.text.includes('_ _')) {
               correctLengthHints = hints.filter(
-                (h) => h.includes(' ') && h !== currentQuestion.answer,
+                (h) => h.includes(' ') && h !== currentQuestion.answer && h !== '',
               );
             } else {
               correctLengthHints = hints.filter(
-                (h) => !h.includes(' ') && h !== currentQuestion.answer,
+                (h) => !h.includes(' ') && h !== currentQuestion.answer && h !== '',
               );
             }
 

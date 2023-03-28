@@ -36,8 +36,9 @@ const PointsAvailable = () => {
         }}
       >{`-${thisPenalty}`}</Typography>
       <Typography
-        variant="h6"
-        px={1.25}
+        variant="body1"
+        fontWeight="bold"
+        px={1}
         borderRadius={100}
         sx={{
           backgroundColor:

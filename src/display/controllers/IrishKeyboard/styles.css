@@ -1,5 +1,5 @@
 .defaults {
-  background-color: rgb(231, 231, 231) !important;
+  background-color: white !important;
   border-width: 2px !important;
   border-style: solid !important;
   border-color: rgb(0, 0, 0) !important;
@@ -21,4 +21,12 @@
 
 .base {
   background-color: #67add6 !important;
+}
+
+.delete {
+  background-color: rgb(252, 207, 124) !important;
+}
+
+.disabled {
+  opacity: 0.2 !important;
 }
