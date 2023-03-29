@@ -14,14 +14,14 @@ import Grid from '@mui/material/Grid';
 import { AbIconButton } from 'abair-components';
 
 import BatBox from '@/display/components/BatBox';
-import { CenteredFlexBox, FullSizeCenteredFlexBox } from '@/display/components/styled';
+import { CenteredFlexBox, FullSizeBox, FullSizeCenteredFlexBox } from '@/display/components/styled';
 import { patchAdjacencyPairText } from '@/services/supabase';
 import { currentAdjacencyPairState, useAdjacencyPairs } from '@/store/adjacencyPairs';
 import { currentQuestionState } from '@/store/questions';
 import { chatTextEmptyState, useChatText, useMessageInputDisabled } from '@/store/textInput';
 import { replaceFinalObject } from '@/store/utils';
 
-import HintOrHomeButtons from '../HintOrHomeButtons';
+import HintButton from '../HintButton';
 import keyboardOptions from './keyboardOptions';
 import './styles.css';
 
@@ -29,17 +29,17 @@ const IrishKeyboard = () => {
   const [layoutName, setLayoutName] = useState('default');
   const keyboard = useRef<any>();
   const { chatText, setChatText } = useChatText();
-  const { messageInputDisabled } = useMessageInputDisabled();
   const currentAdjacencyPair = useRecoilValue(currentAdjacencyPairState);
   const currentQuestion = useRecoilValue(currentQuestionState);
   const chatTextEmpty = useRecoilValue(chatTextEmptyState);
   const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
-  const { setMessageInputDisabled } = useMessageInputDisabled();
+  const { messageInputDisabled, setMessageInputDisabled } = useMessageInputDisabled();
 
   const handleChange = (input: string) => {
-    setChatText(input);
-    keyboard.current.setInput(input);
-    console.log('Input changed', input);
+    if (!messageInputDisabled) {
+      setChatText(input);
+      keyboard.current.setInput(input);
+    }
   };
 
   const handleKeyPress = (button: string) => {
@@ -54,7 +54,7 @@ const IrishKeyboard = () => {
 
   const handleShift = (button: string) => {
     const buttonBaseName = button.slice(1, button.length - 1);
-    if (keyboard.current !== undefined) {
+    if (keyboard.current !== undefined && !messageInputDisabled) {
       if (buttonBaseName === keyboard.current.options.layoutName) {
         setLayoutName('default');
       } else {
@@ -66,6 +66,7 @@ const IrishKeyboard = () => {
   const handleSend = () => {
     if (currentQuestion !== undefined && currentAdjacencyPair !== undefined) {
       setChatText('');
+
       keyboard.current.setInput('');
       setMessageInputDisabled(true);
       patchAdjacencyPairText(currentAdjacencyPair.id, chatText).then((a_p) => {
@@ -84,7 +85,7 @@ const IrishKeyboard = () => {
         <BatBox width={'100%'} padding={0.5}>
           <Grid container py={1} height={56}>
             <Grid item xs={1.5}>
-              <HintOrHomeButtons />
+              <HintButton />
             </Grid>
 
             <Grid item xs={9}>
@@ -92,7 +93,7 @@ const IrishKeyboard = () => {
                 height={36}
                 border={2}
                 borderColor={'primary.dark'}
-                sx={{ backgroundColor: messageInputDisabled ? '#ddd' : '#fff' }}
+                sx={{ backgroundColor: '#fff', opacity: messageInputDisabled ? 0.2 : 1 }}
               >
                 <Typography alignItems="center">{chatText}</Typography>
               </FullSizeCenteredFlexBox>
@@ -111,7 +112,10 @@ const IrishKeyboard = () => {
             </Grid>
           </Grid>
 
-          <Box>
+          <Box sx={{ opacity: messageInputDisabled ? 0.2 : 1, position: 'relative' }}>
+            {messageInputDisabled && (
+              <FullSizeBox sx={{ position: 'absolute', zIndex: 10 }}></FullSizeBox>
+            )}
             <Keyboard
               keyboardRef={(r) => (keyboard.current = r)}
               layoutName={layoutName}

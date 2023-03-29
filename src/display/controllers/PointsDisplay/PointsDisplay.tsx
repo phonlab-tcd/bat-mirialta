@@ -14,20 +14,23 @@ const PointsDisplay = () => {
   const { showAvailablePoints } = useShowAvailablePoints();
 
   return (
-    <FullSizeBox>
+    <FullSizeBox minHeight={42}>
       {showPoints && (
         <Grid container>
-          <Grid item xs={4}>
+          <Grid item xs={5}></Grid>
+
+          <Grid item xs={2}>
             <FullSizeCenteredFlexBox>
               <QuestionNumber />
             </FullSizeCenteredFlexBox>
           </Grid>
-
-          <Grid item xs={4}>
-            <TotalPoints />
+          <Grid item xs={3}>
+            <FullSizeCenteredFlexBox>
+              {showAvailablePoints && <PointsAvailable />}
+            </FullSizeCenteredFlexBox>
           </Grid>
-          <Grid item xs={4}>
-            {showAvailablePoints && <PointsAvailable />}
+          <Grid item xs={2}>
+            <TotalPoints />
           </Grid>
         </Grid>
       )}

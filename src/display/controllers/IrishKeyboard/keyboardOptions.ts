@@ -15,7 +15,6 @@ const keyboardOptions = {
   },
   display: {
     '{bksp}': 'scrios',
-    '{enter}': '&#9166;',
     '{space}': 'spás',
     '{urú}': 'urú',
     '{séimhiú}': 'séimhiú',
@@ -42,8 +41,8 @@ const keyboardOptions = {
       buttons: '{séimhiú} bh ch dh fh gh bh th mh sh',
     },
     {
-      class: 'blanks',
-      buttons: ' ',
+      class: 'delete',
+      buttons: '{bksp}',
     },
   ],
 };

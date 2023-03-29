@@ -5,12 +5,13 @@ const patchChatComplete = async (
   chatID: number,
   outro: ResponseModel[] | null,
   complete: boolean,
+  totalPoints: number | null,
 ) => {
   console.log('patching chat');
   try {
     const { data, error } = await supabase
       .from('bat_chats')
-      .update({ id: chatID, outro: outro, complete: complete })
+      .update({ id: chatID, outro: outro, complete: complete, points: totalPoints })
       .select()
       .single();
 
