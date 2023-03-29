@@ -46,6 +46,7 @@ const IrishKeyboard = () => {
     if (button === '{fada}' || button === '{urú}' || button === '{séimhiú}') {
       setLayoutName(button.slice(1, button.length - 1));
       handleShift(button);
+      console.log('here');
     } else {
       setLayoutName('default');
     }
