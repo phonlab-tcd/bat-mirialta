@@ -4,6 +4,7 @@ import { PathRouteProps } from 'react-router-dom';
 enum Pages {
   Welcome,
   Chat,
+  SetTask,
   NotFound,
 }
 

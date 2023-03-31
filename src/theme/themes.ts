@@ -29,6 +29,7 @@ const sharedTheme = {
     info: {
       main: '#506d99',
     },
+    // 5692d2
   },
   typography: {
     button: {

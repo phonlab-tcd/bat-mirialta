@@ -17,6 +17,7 @@ import getHint from './getHint';
 import getProfile from './getProfile';
 import getTenses from './getTenses';
 import getVerbs from './getVerbs';
+import getAllPoints from './points/getAllPoints';
 import getAllQuestions from './questions/getAllQuestions';
 import getQuestion from './questions/getQuestion';
 import getQuestionSet from './questions/getQuestionSet';
@@ -49,4 +50,5 @@ export {
   patchChatComplete,
   postChat,
   getHint,
+  getAllPoints,
 };

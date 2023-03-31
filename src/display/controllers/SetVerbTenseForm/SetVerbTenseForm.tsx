@@ -32,7 +32,7 @@ import {
 import { useMessageInputDisabled } from '@/store/textInput';
 import getRandomArrayFromArray from '@/utils/getRandomArrayFromArray';
 
-const SetTask = () => {
+const SetVerbTenseForm = () => {
   const availableVerbs = useRecoilValue(availableVerbsState);
   const { selectedVerb, setSelectedVerb } = useSelectedVerb();
   const availableTenses = useRecoilValue(availableTensesState);
@@ -149,4 +149,4 @@ const SetTask = () => {
   );
 };
 
-export default SetTask;
+export default SetVerbTenseForm;

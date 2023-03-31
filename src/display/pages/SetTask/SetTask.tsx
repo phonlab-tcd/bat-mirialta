@@ -6,9 +6,7 @@ import Box from '@mui/material/Box';
 import Meta from '@/display/components/Meta';
 import RobotImage from '@/display/components/RobotImage';
 import { CenteredFlexBox } from '@/display/components/styled';
-// import ChatHistories from '@/display/controllers/ChatHistories';
-import ContinueChatOrNew from '@/display/controllers/ContinueChatOrNew';
-import Stats from '@/display/controllers/Stats';
+import SetVerbTenseForm from '@/display/controllers/SetVerbTenseForm';
 import { usePopulateChats, useSetSelectedTaskFromActiveChat } from '@/hooks';
 import { useAvailables, useGetAvailables } from '@/hooks/selectTask';
 import usePopulateVerbsTensesForms from '@/hooks/tasks/usePopulateVerbsTensesForms';
@@ -16,7 +14,7 @@ import { useSession } from '@/store/auth';
 import { useChats } from '@/store/chats';
 import { useVerbs } from '@/store/scripts';
 
-const Welcome = () => {
+const SetTask = () => {
   useAvailables();
   useGetAvailables();
   useSetSelectedTaskFromActiveChat();
@@ -39,23 +37,16 @@ const Welcome = () => {
 
   return (
     <Box>
-      <Meta title="Welcome" />
+      <Meta title="SetTask" />
       <CenteredFlexBox p={2}>
         <RobotImage />
       </CenteredFlexBox>
 
       <CenteredFlexBox>
-        <ContinueChatOrNew />
-      </CenteredFlexBox>
-
-      {/* <CenteredFlexBox mt={2}>
-        <ChatHistories />
-      </CenteredFlexBox> */}
-      <CenteredFlexBox mt={2}>
-        <Stats />
+        <SetVerbTenseForm />
       </CenteredFlexBox>
     </Box>
   );
 };
 
-export default Welcome;
+export default SetTask;

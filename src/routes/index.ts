@@ -14,6 +14,11 @@ const routes: Routes = {
     path: `${basePath}chat`,
     title: 'Chat',
   },
+  [Pages.SetTask]: {
+    component: asyncComponentLoader(() => import('@/display/pages/SetTask')),
+    path: `${basePath}set-task`,
+    title: 'Set Task',
+  },
   [Pages.NotFound]: {
     component: asyncComponentLoader(() => import('@/display/pages/NotFound')),
     path: '*',

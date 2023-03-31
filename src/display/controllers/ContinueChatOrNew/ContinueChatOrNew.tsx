@@ -28,34 +28,35 @@ const ContinueChatOrNew = () => {
     } else {
       if (session !== null && activeChat !== undefined) {
         console.log('finishing previously unfinished chat');
-        patchChatComplete(activeChat.id, null, true).then((c) => {
+        patchChatComplete(activeChat.id, null, true, null).then((c) => {
           setAdjacencyPairs([]);
           setChats([...chats.slice(0, chats.length - 1), c]);
-          console.log('chat updated successfully');
         });
       }
+      navigate('/set-task');
     }
   };
 
   return (
     <BatBox>
       <Box>
-        {/* <ChatInProgress /> */}
-        <BatBox button={true} width={'100%'}>
-          <AbButton
-            size="large"
-            fullWidth={true}
-            label="continue"
-            onClick={() => {
-              continueChat(true);
-            }}
-            selected={true}
-            color="secondary"
-          />
-        </BatBox>
+        {activeChat && (
+          <BatBox button={true} width={'100%'}>
+            <AbButton
+              size="large"
+              fullWidth={true}
+              label="continue"
+              onClick={() => {
+                continueChat(true);
+              }}
+              selected={true}
+              color="secondary"
+            />
+          </BatBox>
+        )}
       </Box>
 
-      <Box mt={1}>
+      <Box mt={activeChat ? 1 : 0}>
         <BatBox button={true} width={'100%'}>
           <AbButton
             size="large"
