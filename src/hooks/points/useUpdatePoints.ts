@@ -3,7 +3,7 @@ import { useAdjacencyPairs } from '@/store/adjacencyPairs';
 import {
   useAvailablePoints,
   useCompletedQuestions,
-  useThisPenalty,
+  useMostRecentPenalty,
   useTotalPoints,
 } from '@/store/points';
 import { calculateTotalPoints } from '@/utils/points';
@@ -12,16 +12,16 @@ const useUpdatePoints = () => {
   const { adjacencyPairs } = useAdjacencyPairs();
   const { setTotalPoints } = useTotalPoints();
   const { setAvailablePoints } = useAvailablePoints();
-  const { setThisPenalty } = useThisPenalty();
+  const { setMostRecentPenalty } = useMostRecentPenalty();
   const { setCompletedQuestions } = useCompletedQuestions();
 
   const updatePoints = () => {
-    const { completedQuestions, totalPoints, availablePoints, thisPenalty } =
+    const { completedQuestions, totalPoints, availablePoints, mostRecentPenalty } =
       calculateTotalPoints(adjacencyPairs);
     setTotalPoints(totalPoints);
     setAvailablePoints(availablePoints);
     setCompletedQuestions(completedQuestions);
-    setThisPenalty(thisPenalty);
+    setMostRecentPenalty(mostRecentPenalty);
   };
 
   return updatePoints;

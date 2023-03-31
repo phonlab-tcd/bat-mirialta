@@ -1,5 +1,7 @@
 import { atom, selector, useRecoilState } from 'recoil';
 
+import { hintsGivenState } from '@/store/adjacencyPairs';
+
 const totalPointsState = atom<number>({
   key: 'total-points',
   default: 0,
@@ -30,24 +32,26 @@ const useShowAvailablePoints = () => {
   return { showAvailablePoints, setShowAvailablePoints };
 };
 
-const thisPenaltyState = atom<number>({
+const mostRecentPenaltyState = atom<number>({
   key: 'this-penalty',
   default: 0,
 });
 
-const useThisPenalty = () => {
-  const [thisPenalty, setThisPenalty] = useRecoilState(thisPenaltyState);
-  return { thisPenalty, setThisPenalty };
+const useMostRecentPenalty = () => {
+  const [mostRecentPenalty, setMostRecentPenalty] = useRecoilState(mostRecentPenaltyState);
+  return { mostRecentPenalty, setMostRecentPenalty };
 };
 
-const showThisPenaltyState = atom<boolean>({
+const showMostRecentPenaltyState = atom<boolean>({
   key: 'show-this-penalty',
   default: false,
 });
 
-const useShowThisPenalty = () => {
-  const [showThisPenalty, setShowThisPenalty] = useRecoilState(showThisPenaltyState);
-  return { showThisPenalty, setShowThisPenalty };
+const useShowMostRecentPenalty = () => {
+  const [showMostRecentPenalty, setShowMostRecentPenalty] = useRecoilState(
+    showMostRecentPenaltyState,
+  );
+  return { showMostRecentPenalty, setShowMostRecentPenalty };
 };
 
 const showPointsState = atom<boolean>({
@@ -63,8 +67,9 @@ const useShowPoints = () => {
 const showHintState = selector({
   key: 'show-hint-state',
   get: ({ get }) => {
+    const hintsGiven = get(hintsGivenState);
     const availablePoints = get(availablePointsState);
-    return availablePoints > 1 ? true : false;
+    return availablePoints > 3 && hintsGiven < 2 ? true : false;
   },
 });
 
@@ -92,8 +97,8 @@ export {
   useTotalPoints,
   useAvailablePoints,
   useCompletedQuestions,
-  useThisPenalty,
-  useShowThisPenalty,
+  useMostRecentPenalty,
+  useShowMostRecentPenalty,
   useShowPoints,
   useShowAvailablePoints,
   showHintState,

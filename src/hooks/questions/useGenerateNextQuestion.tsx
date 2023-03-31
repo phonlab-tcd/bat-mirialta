@@ -23,20 +23,10 @@ const useGenerateNextQuestion = () => {
       return 0;
     } else if (currentAdjacencyPair.correct) {
       return 0;
-    } else if (currentAdjacencyPair.retry_attempt === 2) {
-      return 0;
-    } else if (availablePoints === 3 || availablePoints === 0) {
+    } else if (availablePoints <= 0) {
       return 0;
     } else if (!currentAdjacencyPair.correct) {
-      if (Array.isArray(currentAdjacencyPair.hints)) {
-        if (currentAdjacencyPair.retry_attempt + currentAdjacencyPair.hints.length === 2) {
-          return 0;
-        } else {
-          return currentAdjacencyPair.retry_attempt + 1;
-        }
-      } else {
-        return currentAdjacencyPair.retry_attempt + 1;
-      }
+      return currentAdjacencyPair.retry_attempt + 1;
     }
   };
 

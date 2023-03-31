@@ -7,26 +7,23 @@ import useAnimateHints from '@/hooks/animate/useAnimateHints';
 import { ResponseModel } from '@/models';
 import { getHint, patchAdjacencyPairHint } from '@/services/supabase';
 import { useAwaitingHint } from '@/store/adjacencyPairs';
-import { currentAdjacencyPairState } from '@/store/adjacencyPairs';
-import { useAvailablePoints } from '@/store/points';
+import { currentAdjacencyPairState, hintsGivenState } from '@/store/adjacencyPairs';
 import { currentQuestionState } from '@/store/questions';
 
 const useGenerateHint = () => {
   const currentAdjacencyPair = useRecoilValue(currentAdjacencyPairState);
-  // const hintsGiven = useRecoilValue(hintsGivenState);
+  const hintsGiven = useRecoilValue(hintsGivenState);
   const { setAwaitingHint } = useAwaitingHint();
   const currentQuestion = useRecoilValue(currentQuestionState);
-  const { availablePoints } = useAvailablePoints();
 
   const animateHints = useAnimateHints();
 
   const generateHint = () => {
     if (currentAdjacencyPair !== undefined && currentQuestion !== undefined) {
       setAwaitingHint(true);
-      console.log('availablePoints: ', availablePoints);
-      if (availablePoints === 3) {
+      console.log('hints given', hintsGiven);
+      if (hintsGiven === 0) {
         getHint('hard', currentQuestion.verb_id).then((hints) => {
-          // console.log('hard hints:', hints);
           let correctLengthHints: string[] = [];
           if (hints !== undefined) {
             if (currentQuestion.text.includes('_ _')) {
@@ -40,14 +37,13 @@ const useGenerateHint = () => {
             }
 
             let hintsToBeGiven = [];
-            if (correctLengthHints.length > 6) {
+            if (correctLengthHints.length > 4) {
               correctLengthHints.sort(() => (Math.random() > 0.5 ? 1 : -1));
               hintsToBeGiven = [currentQuestion.answer].concat(correctLengthHints.slice(0, 4));
             } else {
               hintsToBeGiven = [currentQuestion.answer].concat(correctLengthHints);
             }
             hintsToBeGiven.sort(() => (Math.random() > 0.5 ? 1 : -1));
-            // console.log('hintsToBeGiven:', hintsToBeGiven);
             const hintToBeStored: ResponseModel[] = [
               {
                 form: 'statement',
@@ -59,7 +55,7 @@ const useGenerateHint = () => {
             });
           }
         });
-      } else if (availablePoints === 2) {
+      } else if (hintsGiven === 1) {
         getHint(
           'easy',
           currentQuestion.verb_id,
@@ -67,10 +63,26 @@ const useGenerateHint = () => {
           currentQuestion.form_id,
         ).then((hints) => {
           if (hints !== undefined) {
-            // console.log('easy hints:', hints);
-            const hintsToBeGiven = hints;
+            let correctLengthHints: string[] = [];
+
+            if (currentQuestion.text.includes('_ _')) {
+              correctLengthHints = hints.filter(
+                (h) => h.includes(' ') && h !== currentQuestion.answer && h !== '',
+              );
+            } else {
+              correctLengthHints = hints.filter(
+                (h) => !h.includes(' ') && h !== currentQuestion.answer && h !== '',
+              );
+            }
+
+            let hintsToBeGiven = [];
+            if (correctLengthHints.length > 1) {
+              correctLengthHints.sort(() => (Math.random() > 0.5 ? 1 : -1));
+              hintsToBeGiven = [currentQuestion.answer].concat(correctLengthHints.slice(0, 1));
+            } else {
+              hintsToBeGiven = [currentQuestion.answer].concat(correctLengthHints);
+            }
             hintsToBeGiven.sort(() => (Math.random() > 0.5 ? 1 : -1));
-            // console.log('hintsToBeGiven:', hintsToBeGiven);
             let hintToBeStored: ResponseModel[] = [
               {
                 form: 'statement',

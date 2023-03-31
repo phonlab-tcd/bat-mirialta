@@ -12,7 +12,6 @@ import { AbButton } from 'abair-components';
 
 import AbSelect from '@/display/components/AbSelect';
 import BatBox from '@/display/components/BatBox';
-import { CenteredFlexBox } from '@/display/components/styled';
 import { useGenerateIntro } from '@/hooks';
 import usePopulateQuestionSet from '@/hooks/questions/usePopulateQuestionSet';
 import { postChat } from '@/services/supabase';
@@ -132,14 +131,8 @@ const SetTask = () => {
           items={availableForms.map((aF) => aF.name)}
         />
       </Box>
-      <CenteredFlexBox mt={3}>
-        <Box
-          sx={{ backgroundColor: '#67add6' }}
-          width={300}
-          border={4}
-          borderRadius={3}
-          borderColor={'#3e435a'}
-        >
+      <Box mt={3}>
+        <BatBox button={true} width={'100%'}>
           <AbButton
             size="large"
             fullWidth={true}
@@ -150,8 +143,8 @@ const SetTask = () => {
             selected={true}
             color="secondary"
           />
-        </Box>
-      </CenteredFlexBox>
+        </BatBox>
+      </Box>
     </BatBox>
   );
 };

@@ -38,8 +38,6 @@ const useGenerateFeedback = () => {
           },
         );
       } else {
-        console.log('availablePoints:', availablePoints);
-
         postError(currentAdjacencyPair.text, currentQuestion.answer).then((errorData: any) => {
           // GENERATE RESPONSE OBJECT FROM ERROR DATA
 
@@ -49,7 +47,8 @@ const useGenerateFeedback = () => {
               currentQuestion.answer,
               errorData,
             );
-            if (availablePoints === 1) {
+            console.log('availablePoints:', availablePoints);
+            if (availablePoints <= 2) {
               responseObject = [
                 { text: 'níl sé ceart', form: 'statement' },
                 { text: `the correct answer is ${currentQuestion.answer}`, form: 'statement' },

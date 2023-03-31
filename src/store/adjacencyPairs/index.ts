@@ -24,22 +24,27 @@ const currentAdjacencyPairState = selector({
   },
 });
 
-// const hintsGivenState = selector({
-//   key: 'hints-given',
-//   get: ({ get }) => {
-//     const adjacencyPairs = get(adjacencyPairsState);
-//     let hints = 0;
-//     adjacencyPairs.map((aP) => {
-//       if (aP.retry_attempt === 0) {
-//         hints = 0;
-//       }
-//       if (aP.hints !== null) {
-//         hints += aP.hints.length;
-//       }
-//     });
-//     return hints;
-//   },
-// });
+const hintsGivenState = selector({
+  key: 'hints-given',
+  get: ({ get }) => {
+    const adjacencyPairs = get(adjacencyPairsState);
+    const currentAdjacencyPair = get(currentAdjacencyPairState);
+    if (currentAdjacencyPair) {
+      const thisQuestionAdjacencyPairs = adjacencyPairs.filter(
+        (aP) => aP.id === currentAdjacencyPair.id,
+      );
+      let hints = 0;
+      thisQuestionAdjacencyPairs.map((aP) => {
+        if (Array.isArray(aP.hints)) {
+          hints += aP.hints.length;
+        }
+      });
+      return hints;
+    } else {
+      return 0;
+    }
+  },
+});
 
 const awaitingHintState = atom<boolean>({
   key: 'awaiting-hint-state',
@@ -68,6 +73,6 @@ export {
   adjacencyPairsState,
   currentAdjacencyPairState,
   useReceivedAdjacencyPairHistory,
-  // hintsGivenState,
+  hintsGivenState,
   useAwaitingHint,
 };
