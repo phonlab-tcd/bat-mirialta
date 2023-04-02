@@ -7,25 +7,25 @@ const generateResponseForIncorrect = (word: string, target: string, errorData: a
 
   let addedFada = false;
   let missingFada = false;
-  let wrongPerson = false;
-  let wrongTense = false;
   let wrongForm = false;
+  let wrongTense = false;
+  let wrongVerb = false;
   let minorTypo = false;
   let broadSlenderMistake = false;
 
-  if (errorData.conjugationOutput == 'incorrectPerson') {
-    wrongPerson = true;
-  } else if (errorData.conjugationOutput == 'incorrectTense') {
-    wrongTense = true;
-  } else if (errorData.conjugationOutput == 'incorrectForm') {
+  if (errorData.stringConjugationOutput === 'incorrectPerson') {
     wrongForm = true;
+  } else if (errorData.stringConjugationOutput === 'incorrectTense') {
+    wrongTense = true;
+  } else if (errorData.stringConjugationOutput === 'incorrectVerb') {
+    wrongVerb = true;
+  } else if (errorData.fadaOutput === 'omittedFada') {
+    missingFada = true;
+  } else if (errorData.fadaOutput === 'extraFada') {
+    addedFada = true;
   } else if (errorData.typoOutput == 1) {
     minorTypo = true;
-  } else if (errorData.fadaOutput == 'omittedFada') {
-    missingFada = true;
-  } else if (errorData.fadaOutput == 'extraFada') {
-    addedFada = true;
-  } else if (errorData.broadSlenderOutput == 'againstRule') {
+  } else if (errorData.broadSlenderOutput === 'againstRule') {
     broadSlenderMistake = true;
   }
 
@@ -35,16 +35,15 @@ const generateResponseForIncorrect = (word: string, target: string, errorData: a
       extraFada: ['wow, no need for that fada', "you don't always need a fada"],
     },
     conjugation: {
-      person: [
-        'tense is right, but check who is doing the action',
-        'the person is incorrect',
-        'try to figure out who is doing the action',
+      form: [
+        'tense is right, but check the form again',
+        'the form is incorrect',
       ],
-      form: [`you said ${word}, but watch out for the correct form`, ''],
+      verb: [`you said ${word}, but make sure to use the correct verb`, 'wrong verb!'],
       tense: ['remember to use the right tense', 'tense!'],
     },
     typo: {
-      one: ['watch out for any minor typos!', 'careful now', "don't add in any"],
+      one: ['watch out for any minor typos!', 'careful now', "don't add in any extra letters"],
     },
     broadSlender: {
       againstRule: [
@@ -65,10 +64,10 @@ const generateResponseForIncorrect = (word: string, target: string, errorData: a
   });
 
   // return conjugation related message
-  if (wrongPerson) {
+  if (wrongForm) {
     responseObject.push({
-      text: errorDataToHumanReadable.conjugation.person[
-        Math.floor(Math.random() * errorDataToHumanReadable.conjugation.person.length)
+      text: errorDataToHumanReadable.conjugation.form[
+        Math.floor(Math.random() * errorDataToHumanReadable.conjugation.form.length)
       ],
       form: 'statement',
     });
@@ -79,10 +78,10 @@ const generateResponseForIncorrect = (word: string, target: string, errorData: a
       ],
       form: 'statement',
     });
-  } else if (wrongForm) {
+  } else if (wrongVerb) {
     responseObject.push({
-      text: errorDataToHumanReadable.conjugation.form[
-        Math.floor(Math.random() * errorDataToHumanReadable.conjugation.form.length)
+      text: errorDataToHumanReadable.conjugation.verb[
+        Math.floor(Math.random() * errorDataToHumanReadable.conjugation.verb.length)
       ],
       form: 'statement',
     });
@@ -106,8 +105,8 @@ const generateResponseForIncorrect = (word: string, target: string, errorData: a
     });
   } else if (addedFada) {
     responseObject.push({
-      text: errorDataToHumanReadable.typo.one[
-        Math.floor(Math.random() * errorDataToHumanReadable.typo.one.length)
+      text: errorDataToHumanReadable.fada.extraFada[
+        Math.floor(Math.random() * errorDataToHumanReadable.fada.extraFada.length)
       ],
       form: 'statement',
     });
