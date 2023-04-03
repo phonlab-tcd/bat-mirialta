@@ -11,7 +11,7 @@ import ChatHistory from '@/display/components/ChatHistory';
 import { useChats } from '@/store/chats';
 
 interface ChatHistoriesProps {
-  showHowMany: number;
+  showHowMany?: number;
 }
 
 const ChatHistories = ({ showHowMany = 3 }: ChatHistoriesProps) => {
