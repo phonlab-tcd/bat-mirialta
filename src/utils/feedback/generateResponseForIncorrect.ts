@@ -10,11 +10,14 @@ const generateResponseForIncorrect = (word: string, target: string, errorData: a
   let wrongForm = false;
   let wrongTense = false;
   let wrongVerb = false;
+  let wrongPerson = false;
   let minorTypo = false;
   let broadSlenderMistake = false;
 
-  if (errorData.stringConjugationOutput === 'incorrectPerson') {
+  if (errorData.stringConjugationOutput === 'incorrectForm') {
     wrongForm = true;
+  } else if (errorData.stringConjugationOutput === 'incorrectPerson') {
+    wrongPerson = true;
   } else if (errorData.stringConjugationOutput === 'incorrectTense') {
     wrongTense = true;
   } else if (errorData.stringConjugationOutput === 'incorrectVerb') {
@@ -35,12 +38,10 @@ const generateResponseForIncorrect = (word: string, target: string, errorData: a
       extraFada: ['wow, no need for that fada', "you don't always need a fada"],
     },
     conjugation: {
-      form: [
-        'tense is right, but check the form again',
-        'the form is incorrect',
-      ],
+      form: ['tense is right, but check the form again', 'the form is incorrect'],
       verb: [`you said ${word}, but make sure to use the correct verb`, 'wrong verb!'],
       tense: ['remember to use the right tense', 'tense!'],
+      person: ['check who is doing the action'],
     },
     typo: {
       one: ['watch out for any minor typos!', 'careful now', "don't add in any extra letters"],
@@ -85,7 +86,15 @@ const generateResponseForIncorrect = (word: string, target: string, errorData: a
       ],
       form: 'statement',
     });
+  } else if (wrongPerson) {
+    responseObject.push({
+      text: errorDataToHumanReadable.conjugation.person[
+        Math.floor(Math.random() * errorDataToHumanReadable.conjugation.person.length)
+      ],
+      form: 'statement',
+    });
   }
+
   // return typo related message
   else if (minorTypo) {
     responseObject.push({
