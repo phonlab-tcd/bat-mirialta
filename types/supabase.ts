@@ -137,6 +137,7 @@ export interface Database {
           outro: ResponseModel[];
           questions: number[];
           tense: string | null;
+          points: number | null;
           user_id: string | null;
           verb: string | null;
         };
@@ -149,6 +150,7 @@ export interface Database {
           outro?: ResponseModel[];
           questions?: number[];
           tense?: string | null;
+          points: number | null;
           user_id?: string | null;
           verb?: string | null;
         };
@@ -161,6 +163,7 @@ export interface Database {
           outro?: ResponseModel[];
           questions?: number[];
           tense?: string | null;
+          points: number | null;
           user_id?: string | null;
           verb?: string | null;
         };

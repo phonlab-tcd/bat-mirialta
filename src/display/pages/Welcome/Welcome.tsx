@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Meta from '@/display/components/Meta';
 import RobotImage from '@/display/components/RobotImage';
 import { CenteredFlexBox } from '@/display/components/styled';
-// import ChatHistories from '@/display/controllers/ChatHistories';
+import ChatHistories from '@/display/controllers/ChatHistories';
 import ContinueChatOrNew from '@/display/controllers/ContinueChatOrNew';
 import Stats from '@/display/controllers/Stats';
 import { usePopulateChats, useSetSelectedTaskFromActiveChat } from '@/hooks';
@@ -48,11 +48,12 @@ const Welcome = () => {
         <ContinueChatOrNew />
       </CenteredFlexBox>
 
-      {/* <CenteredFlexBox mt={2}>
-        <ChatHistories />
-      </CenteredFlexBox> */}
       <CenteredFlexBox mt={2}>
         <Stats />
+      </CenteredFlexBox>
+
+      <CenteredFlexBox mt={2}>
+        <ChatHistories />
       </CenteredFlexBox>
     </Box>
   );

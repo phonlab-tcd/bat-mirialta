@@ -14,6 +14,7 @@ import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import BatBox from '@/display/components/BatBox';
 import Meta from '@/display/components/Meta';
 import { CenteredFlexBox } from '@/display/components/styled';
+import EndChatStats from '@/display/controllers/EndChatStats';
 import IrishKeyboard from '@/display/controllers/IrishKeyboard';
 import MessageInputButtons from '@/display/controllers/MessageInputButtons';
 import PointsDisplay from '@/display/controllers/PointsDisplay';
@@ -64,6 +65,7 @@ function Chat() {
 
   useEffect(() => {
     if (session !== null) {
+      console.log('activeChat:', activeChat);
       if (chats.length !== 0) {
         if (activeChat !== undefined) {
           getQuestions(activeChat.questions as number[]).then((q) => {
@@ -118,6 +120,7 @@ function Chat() {
   return (
     <Box sx={{ backgroundColor: 'background' }}>
       <Meta title="Chat" />
+      <EndChatStats />
       <MessageInputButtons vis={taNilInputChoice ? 'visible' : 'hidden'} />
 
       <CenteredFlexBox p={1}>
@@ -162,8 +165,7 @@ function Chat() {
           </Box>
         </BatBox>
       </CenteredFlexBox>
-
-      <IrishKeyboard />
+      {activeChat !== undefined && <IrishKeyboard />}
     </Box>
   );
 }

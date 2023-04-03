@@ -17,7 +17,7 @@ const TotalPoints = () => {
   return (
     <FullSizeCenteredFlexBox>
       <CenteredFlexBox sx={{ position: 'relative' }}>
-        <Typography variant="h4">{totalPoints}</Typography>
+        <Typography variant="h5">{totalPoints}</Typography>
       </CenteredFlexBox>
     </FullSizeCenteredFlexBox>
   );

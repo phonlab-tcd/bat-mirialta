@@ -93,6 +93,26 @@ const useCompletedQuestions = () => {
   return { completedQuestions, setCompletedQuestions };
 };
 
+const cumFreqArrayState = atom<number[]>({
+  key: 'cum-freq-array-state',
+  default: [],
+});
+
+const useCumFreqArray = () => {
+  const [cumFreqArray, setCumFreqArray] = useRecoilState(cumFreqArrayState);
+  return { cumFreqArray, setCumFreqArray };
+};
+
+const pointsModalOpenState = atom<boolean>({
+  key: 'points-modal-open-state',
+  default: false,
+});
+
+const usePointsModalOpen = () => {
+  const [pointsModalOpen, setPointsModalOpen] = useRecoilState(pointsModalOpenState);
+  return { pointsModalOpen, setPointsModalOpen };
+};
+
 export {
   useTotalPoints,
   useAvailablePoints,
@@ -103,4 +123,6 @@ export {
   useShowAvailablePoints,
   showHintState,
   useShowHome,
+  useCumFreqArray,
+  usePointsModalOpen,
 };

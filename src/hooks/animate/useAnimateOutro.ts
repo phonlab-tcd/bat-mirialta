@@ -6,22 +6,28 @@ import { useRecoilValue } from 'recoil';
 
 import { useGenerateOutro } from '@/hooks';
 import useDelayBatFeedback from '@/hooks/animate/useDelayBatFeedback';
+import { getAllPoints } from '@/services/supabase';
 import { patchChatComplete } from '@/services/supabase';
 import { useAnimatingOutro } from '@/store/animate';
+import { useSession } from '@/store/auth';
 import { activeChatState, useChats, useOutro } from '@/store/chats';
 import {
+  useCumFreqArray,
+  usePointsModalOpen,
   useShowAvailablePoints,
   useTotalPoints,
-  /*, useShowHome */
 } from '@/store/points';
+import { calculateChatPointsCumFreq } from '@/utils/points';
 
 const useAnimateOutro = () => {
+  const { session } = useSession();
   const { outro, setOutro } = useOutro();
   const { chats, setChats } = useChats();
-  // const { setShowHome } = useShowHome();
+  const { setPointsModalOpen } = usePointsModalOpen();
   const { setShowAvailablePoints } = useShowAvailablePoints();
   const generateOutro = useGenerateOutro();
   const { totalPoints } = useTotalPoints();
+  const { setCumFreqArray } = useCumFreqArray();
 
   const { animatingOutro, setAnimatingOutro } = useAnimatingOutro();
   const [animatingSingleOutro, setAnimatingSingleOutro] = useState(false);
@@ -44,9 +50,19 @@ const useAnimateOutro = () => {
       } else if (activeChat.outro.length === outro.length) {
         patchChatComplete(activeChat.id, activeChat.outro, true, totalPoints).then((c) => {
           setChats([...chats.slice(0, chats.length - 1), c]);
+          setAnimatingOutro(false);
+          if (session !== null) {
+            getAllPoints(session.user.id).then((points: number[] | undefined) => {
+              console.log('points: ', points);
+              if (points) {
+                const cumFreq = calculateChatPointsCumFreq(points);
+                console.log('cumFreq: ', cumFreq);
+                setCumFreqArray(Object.values(cumFreq));
+                setPointsModalOpen(true);
+              }
+            });
+          }
         });
-        setAnimatingOutro(false);
-        alert('complete');
       }
     }
   }, [animatingSingleOutro]);

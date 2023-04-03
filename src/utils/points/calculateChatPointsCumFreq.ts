@@ -9,7 +9,7 @@ const calculateChatPointsCumFreq = (chatPoints: number[]) => {
   };
 
   chatPoints.map((chatPoint) => {
-    if (chatPoint) {
+    if (chatPoint !== null) {
       if (chatPoint < 50) {
         cumFreq['49'] = cumFreq['49'] + 1;
       } else if (chatPoint < 60) {

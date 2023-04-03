@@ -35,6 +35,10 @@ const sharedTheme = {
     button: {
       textTransform: 'none',
     },
+    fontFamily: 'Comic Neue',
+    allVariants: {
+      color: '#3e435a',
+    },
   },
   components: {
     MuiButtonBase: {
