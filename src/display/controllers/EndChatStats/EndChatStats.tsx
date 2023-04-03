@@ -30,7 +30,6 @@ const EndChatStats = () => {
       getAllPoints(session.user.id).then((points: number[] | undefined) => {
         if (points) {
           const cumFreq = calculateChatPointsCumFreq(points);
-
           setCumFreqArray(Object.values(cumFreq));
         }
       });

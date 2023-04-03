@@ -95,7 +95,9 @@ const IrishKeyboard = () => {
                 borderColor={'primary.dark'}
                 sx={{ backgroundColor: '#fff', opacity: messageInputDisabled ? 0.2 : 1 }}
               >
-                <Typography alignItems="center">{chatText}</Typography>
+                <Typography fontFamily={'Helvetica'} alignItems="center">
+                  {chatText}
+                </Typography>
               </FullSizeCenteredFlexBox>
             </Grid>
             <Grid item xs={1.5}>

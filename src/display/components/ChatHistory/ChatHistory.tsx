@@ -8,7 +8,8 @@ import { AbButton } from 'abair-components';
 import dayjs from 'dayjs';
 
 import BatBox from '@/display/components/BatBox';
-import { FlexBox, FullSizeCenteredFlexBox } from '@/display/components/styled';
+import TotalPoints from '@/display/components/TotalPoints';
+import { FullSizeCenteredFlexBox } from '@/display/components/styled';
 
 import { Database } from '../../../../types/supabase';
 
@@ -19,31 +20,34 @@ interface ChatHistoryProps {
 const ChatHistory = ({ chat }: ChatHistoryProps) => {
   const navigate = useNavigate();
   return (
-    <Box mt={1}>
+    <Box mt={1} py={0.5} sx={{ backgroundColor: 'primary.light' }} borderRadius={2}>
       <Grid container>
-        <Grid item xs={2.25}>
-          <FullSizeCenteredFlexBox>
-            <Typography>{dayjs(chat.created_at).format('D MMM')}</Typography>
+        <Grid item xs={3}>
+          <FullSizeCenteredFlexBox flexDirection={'column'}>
+            <Typography fontFamily={'Helvetica'} align="center">
+              {dayjs(chat.created_at).format('D MMM')}
+            </Typography>
+            <Box height={35} width={50} sx={{ backgroundColor: 'gold' }} borderRadius={1}>
+              <TotalPoints points={chat.points !== null ? chat.points : 0} />
+            </Box>
           </FullSizeCenteredFlexBox>
         </Grid>
-        <Grid item xs={2.25}>
-          <FullSizeCenteredFlexBox>
-            <Typography>{chat.verb === null ? 'all' : chat.verb}</Typography>
-          </FullSizeCenteredFlexBox>
-        </Grid>
-        <Grid item xs={2.25}>
-          <FullSizeCenteredFlexBox>
-            <Typography>{chat.tense === null ? 'all' : chat.tense}</Typography>
-          </FullSizeCenteredFlexBox>
-        </Grid>
-        <Grid item xs={2.25}>
-          <FullSizeCenteredFlexBox>
-            <Typography>{chat.form === null ? 'all' : chat.form}</Typography>
+        <Grid item xs={6}>
+          <FullSizeCenteredFlexBox flexDirection={'column'}>
+            <Typography fontFamily={'Helvetica'} sx={{ marginBottom: -0.5 }}>
+              {chat.verb === null ? 'all' : chat.verb}
+            </Typography>
+            <Typography fontFamily={'Helvetica'}>
+              {chat.tense === null ? 'all' : chat.tense}
+            </Typography>
+            <Typography fontFamily={'Helvetica'} sx={{ marginTop: -0.5 }}>
+              {chat.form === null ? 'all' : chat.form}
+            </Typography>
           </FullSizeCenteredFlexBox>
         </Grid>
         <Grid item xs={3}>
-          <FlexBox width="100%" justifyContent="flex-end">
-            <BatBox button={true} width={72}>
+          <FullSizeCenteredFlexBox>
+            <BatBox button={true} width={68} height={40.5}>
               <AbButton
                 size="medium"
                 fullWidth={false}
@@ -55,7 +59,7 @@ const ChatHistory = ({ chat }: ChatHistoryProps) => {
                 color={'secondary'}
               />
             </BatBox>
-          </FlexBox>
+          </FullSizeCenteredFlexBox>
         </Grid>
       </Grid>
     </Box>

@@ -10,7 +10,7 @@ const basePath = '/';
 
 const domain = production ? 'https://detail-design-develop.com/' : 'http://localhost/';
 
-const batDelayMultiplier = production ? 1 : 0.2;
+const batDelayMultiplier = production ? 1 : 0.75;
 
 const errorCheckURL = production
   ? 'https://error-check.detail-design-develop.com/run-full-check'

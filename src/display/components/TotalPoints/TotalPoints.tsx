@@ -4,20 +4,16 @@
 import Typography from '@mui/material/Typography';
 
 import { CenteredFlexBox, FullSizeCenteredFlexBox } from '@/display/components/styled';
-import {
-  /*useCompletedQuestions,*/
-  useTotalPoints,
-} from '@/store/points';
 
-const TotalPoints = () => {
-  const { totalPoints } = useTotalPoints();
+interface TotalPointsProps {
+  points: number;
+}
 
-  // const { completedQuestions } = useCompletedQuestions();
-
+const TotalPoints = ({ points }: TotalPointsProps) => {
   return (
     <FullSizeCenteredFlexBox>
       <CenteredFlexBox sx={{ position: 'relative' }}>
-        <Typography variant="h5">{totalPoints}</Typography>
+        <Typography variant="h5">{points}</Typography>
       </CenteredFlexBox>
     </FullSizeCenteredFlexBox>
   );
