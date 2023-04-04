@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
@@ -21,6 +22,7 @@ const ContinueChatOrNew = () => {
   const { chats, setChats } = useChats();
   const activeChat = useRecoilValue(activeChatState);
   const { setAdjacencyPairs } = useAdjacencyPairs();
+  const { t } = useTranslation();
 
   const continueChat = (cont: boolean) => {
     if (cont) {
@@ -45,7 +47,7 @@ const ContinueChatOrNew = () => {
             <AbButton
               size="large"
               fullWidth={true}
-              label="continue"
+              label={t('buttons.continue')}
               onClick={() => {
                 continueChat(true);
               }}
@@ -61,7 +63,7 @@ const ContinueChatOrNew = () => {
           <AbButton
             size="large"
             fullWidth={true}
-            label="start new"
+            label={t('buttons.start')}
             onClick={() => {
               continueChat(false);
             }}

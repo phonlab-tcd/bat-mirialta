@@ -1,6 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
@@ -16,26 +19,31 @@ interface ChatHistoriesProps {
 
 const ChatHistories = ({ showHowMany = 3 }: ChatHistoriesProps) => {
   const { chats } = useChats();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <BatBox>
       <Box mb={2}>
         <Typography variant={'h6'} align="center">
-          History
+          {t('pageTitles.history')}
         </Typography>
 
-        {chats.map(
-          (chat, i) => chat.complete && i < showHowMany && <ChatHistory key={i} chat={chat} />,
-        )}
+        {chats
+          .slice(0)
+          .reverse()
+          .map(
+            (chat, i) => chat.complete && i < showHowMany && <ChatHistory key={i} chat={chat} />,
+          )}
       </Box>
-      {chats.filter((c) => c.complete).length > 0 && (
+      {chats.filter((c) => c.complete).length !== 0 && showHowMany === 3 && (
         <BatBox button={true} width={'100%'}>
           <AbButton
             size="large"
             fullWidth={true}
-            label="see all"
+            label={t('buttons.seeAll')}
             onClick={() => {
-              console.log('show all history');
+              navigate('/history');
             }}
             selected={true}
             color="secondary"

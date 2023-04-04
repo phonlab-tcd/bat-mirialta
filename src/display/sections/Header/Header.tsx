@@ -55,17 +55,20 @@ function Header() {
       <AppBar sx={{ backgroundColor: 'primary.dark' }} elevation={0} position="static">
         <Toolbar>
           <FlexBox width={'100%'} sx={{ justifyContent: 'space-between' }}>
-            <AbIconButton
-              selected={true}
-              color="info"
-              onClick={() => {
-                console.log('menu clicked');
-              }}
-              icon={MenuIcon}
-              fontSize="large"
-            />
+            <Box sx={{ visibility: 'hidden' }}>
+              <AbIconButton
+                selected={true}
+                color="primary"
+                onClick={() => {
+                  console.log('menu clicked');
+                }}
+                icon={MenuIcon}
+                fontSize="large"
+              />
+            </Box>
             <Button
-              color="info"
+              color="primary"
+              size={'large'}
               onClick={() => {
                 navigate(`${basePath}`);
               }}

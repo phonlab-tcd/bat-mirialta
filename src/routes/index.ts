@@ -19,6 +19,11 @@ const routes: Routes = {
     path: `${basePath}set-task`,
     title: 'Set Task',
   },
+  [Pages.History]: {
+    component: asyncComponentLoader(() => import('@/display/pages/History')),
+    path: `${basePath}history`,
+    title: 'History',
+  },
   [Pages.NotFound]: {
     component: asyncComponentLoader(() => import('@/display/pages/NotFound')),
     path: '*',

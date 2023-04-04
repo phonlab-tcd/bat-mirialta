@@ -52,7 +52,7 @@ export const options = {
       },
       title: {
         display: true,
-        text: 'score',
+        text: 'scór',
         font: {
           size: 16,
         },

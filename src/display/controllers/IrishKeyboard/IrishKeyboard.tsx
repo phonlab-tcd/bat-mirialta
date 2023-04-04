@@ -16,7 +16,11 @@ import { AbIconButton } from 'abair-components';
 import BatBox from '@/display/components/BatBox';
 import { CenteredFlexBox, FullSizeBox, FullSizeCenteredFlexBox } from '@/display/components/styled';
 import { patchAdjacencyPairText } from '@/services/supabase';
-import { currentAdjacencyPairState, useAdjacencyPairs } from '@/store/adjacencyPairs';
+import {
+  currentAdjacencyPairState,
+  useAdjacencyPairs,
+  useAwaitingHint,
+} from '@/store/adjacencyPairs';
 import { currentQuestionState } from '@/store/questions';
 import { chatTextEmptyState, useChatText, useMessageInputDisabled } from '@/store/textInput';
 import { replaceFinalObject } from '@/store/utils';
@@ -34,6 +38,7 @@ const IrishKeyboard = () => {
   const chatTextEmpty = useRecoilValue(chatTextEmptyState);
   const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
   const { messageInputDisabled, setMessageInputDisabled } = useMessageInputDisabled();
+  const { awaitingHint } = useAwaitingHint();
 
   const handleChange = (input: string) => {
     if (!messageInputDisabled) {
@@ -93,7 +98,10 @@ const IrishKeyboard = () => {
                 height={36}
                 border={2}
                 borderColor={'primary.dark'}
-                sx={{ backgroundColor: '#fff', opacity: messageInputDisabled ? 0.2 : 1 }}
+                sx={{
+                  backgroundColor: '#fff',
+                  opacity: messageInputDisabled || awaitingHint ? 0.2 : 1,
+                }}
               >
                 <Typography fontFamily={'Helvetica'} alignItems="center">
                   {chatText}
@@ -114,10 +122,12 @@ const IrishKeyboard = () => {
             </Grid>
           </Grid>
 
-          <Box sx={{ opacity: messageInputDisabled ? 0.2 : 1, position: 'relative' }}>
-            {messageInputDisabled && (
+          <Box
+            sx={{ opacity: messageInputDisabled || awaitingHint ? 0.2 : 1, position: 'relative' }}
+          >
+            {messageInputDisabled || awaitingHint ? (
               <FullSizeBox sx={{ position: 'absolute', zIndex: 10 }}></FullSizeBox>
-            )}
+            ) : null}
             <Keyboard
               keyboardRef={(r) => (keyboard.current = r)}
               layoutName={layoutName}

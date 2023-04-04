@@ -2,6 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
@@ -20,6 +21,7 @@ const Stats = () => {
   // const navigate = useNavigate();
   const { session } = useSession();
   const [cumFreqArray, setCumFreqArray] = useState<number[]>([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (session) {
@@ -31,13 +33,13 @@ const Stats = () => {
         }
       });
     }
-  }, []);
+  }, [session]);
 
   return (
     <BatBox>
       <FullSizeBox>
         <Typography align="center" variant="h6">
-          Stats
+          {t('headers.stats')}
         </Typography>
         <PlayedChatStats />
         <Box width={'100%'} height={200} sx={{ position: 'relative' }}>

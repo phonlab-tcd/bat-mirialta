@@ -2,6 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
@@ -57,6 +58,7 @@ const SetVerbTenseForm = () => {
     }
   };
   const { setMessageInputDisabled } = useMessageInputDisabled();
+  const { t } = useTranslation();
 
   const { setShowAvailablePoints } = useShowAvailablePoints();
   const { setShowPoints } = useShowPoints();
@@ -93,8 +95,8 @@ const SetVerbTenseForm = () => {
   return (
     <BatBox>
       <Box>
-        <Typography align="center" fontSize={20} color="#3e435a" fontFamily={'Comic Neue'}>
-          VERB
+        <Typography align="center" variant={'h6'}>
+          {t('headers.verb')}
         </Typography>
         <AbSelect
           handleChange={(e) => {
@@ -106,8 +108,8 @@ const SetVerbTenseForm = () => {
         />
       </Box>
       <Box mt={1}>
-        <Typography align="center" fontSize={20} color="#3e435a" fontFamily={'Comic Neue'}>
-          TENSE
+        <Typography align="center" variant={'h6'}>
+          {t('headers.tense')}
         </Typography>
         <AbSelect
           handleChange={(e) => {
@@ -119,8 +121,8 @@ const SetVerbTenseForm = () => {
         />
       </Box>
       <Box mt={1}>
-        <Typography align="center" fontSize={20} color="#3e435a" fontFamily={'Comic Neue'}>
-          FORM
+        <Typography align="center" variant={'h6'}>
+          {t('headers.form')}
         </Typography>
         <AbSelect
           handleChange={(e) => {
@@ -136,7 +138,7 @@ const SetVerbTenseForm = () => {
           <AbButton
             size="large"
             fullWidth={true}
-            label="start"
+            label={t('buttons.start')}
             onClick={() => {
               startChat();
             }}

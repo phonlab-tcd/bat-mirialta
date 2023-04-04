@@ -2,6 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Grid, Typography } from '@mui/material';
 
@@ -12,6 +13,7 @@ const PlayedChatStats = () => {
   const [avScore, setAvScore] = useState<number>(0);
   const [completedChats, setCompletedChats] = useState<number>(0);
   const { chats } = useChats();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const allChats = chats.filter((c) => c.points !== null);
@@ -42,12 +44,12 @@ const PlayedChatStats = () => {
         </Grid>
         <Grid item xs={6}>
           <Typography align="center" variant="body2">
-            played
+            {t('subHeaders.played')}
           </Typography>
         </Grid>
         <Grid item xs={6}>
           <Typography align="center" variant="body2">
-            average
+            {t('subHeaders.average')}
           </Typography>
         </Grid>
       </Grid>

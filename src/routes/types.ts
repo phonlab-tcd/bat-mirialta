@@ -6,6 +6,7 @@ enum Pages {
   Chat,
   SetTask,
   NotFound,
+  History,
 }
 
 type PathRouteCustomProps = {
