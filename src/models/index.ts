@@ -1,4 +1,4 @@
 import { ChatBubbleModel } from './ChatBubble';
-import { ResponseModel } from './Response';
+import { ResponseModel, TranslationContextModel } from './Response';
 
-export type { ChatBubbleModel, ResponseModel };
+export type { ChatBubbleModel, ResponseModel, TranslationContextModel };

@@ -8,6 +8,9 @@ import useGenerateFeedback from './generateResponses/useGenerateFeedback';
 import useGenerateHint from './generateResponses/useGenerateHint';
 import useGenerateIntro from './generateResponses/useGenerateIntro';
 import useGenerateOutro from './generateResponses/useGenerateOutro';
+import useGenerateResponseForCorrect from './generateResponses/useGenerateResponseForCorrect';
+import useGenerateResponseForIncorrect from './generateResponses/useGenerateResponseForIncorrect';
+import usePushRandomResponse from './generateResponses/usePushRandomResponse';
 import useUpdatePoints from './points/useUpdatePoints';
 
 export {
@@ -22,4 +25,7 @@ export {
   useGenerateOutro,
   useAnimateHints,
   useGenerateHint,
+  useGenerateResponseForCorrect,
+  useGenerateResponseForIncorrect,
+  usePushRandomResponse,
 };

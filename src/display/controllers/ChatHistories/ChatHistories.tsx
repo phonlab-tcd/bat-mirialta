@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,11 +23,16 @@ const ChatHistories = ({ showHowMany = 3 }: ChatHistoriesProps) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
+  useEffect(() => {
+    console.log();
+  }, []);
+
   return (
     <BatBox>
       <Box mb={2}>
         <Typography variant={'h6'} align="center">
           {t('pageTitles.history')}
+          {/* {t('errorFeedback.conjugation.form', { context: '01' })} */}
         </Typography>
 
         {chats

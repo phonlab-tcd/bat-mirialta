@@ -42,17 +42,10 @@ const EndChatStats = () => {
       onClose={() => {
         setPointsModalOpen(false);
       }}
+      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
     >
-      <Box
-        sx={{
-          width: '90%',
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-        }}
-      >
-        <BatBox width={'100%'}>
+      <Box width={400}>
+        <BatBox width={'100%'} height={386}>
           <Typography align="center" variant="h6">
             Stats
           </Typography>

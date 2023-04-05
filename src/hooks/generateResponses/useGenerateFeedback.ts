@@ -3,6 +3,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRecoilValue } from 'recoil';
 
+import { useGenerateResponseForCorrect, useGenerateResponseForIncorrect } from '@/hooks';
 import useAnimateResponses from '@/hooks/animate/useAnimateResponses';
 import { ResponseModel } from '@/models';
 import { postError } from '@/services/error-check';
@@ -10,12 +11,13 @@ import { patchAdjacencyPairFeedback } from '@/services/supabase';
 import { currentAdjacencyPairState } from '@/store/adjacencyPairs';
 import { useAvailablePoints } from '@/store/points';
 import { currentQuestionState } from '@/store/questions';
-import { generateResponseForCorrect, generateResponseForIncorrect } from '@/utils/feedback';
 
 const useGenerateFeedback = () => {
   const currentAdjacencyPair = useRecoilValue(currentAdjacencyPairState);
   const currentQuestion = useRecoilValue(currentQuestionState);
   const animateResponses = useAnimateResponses();
+  const generateResponseForCorrect = useGenerateResponseForCorrect();
+  const generateResponseForIncorrect = useGenerateResponseForIncorrect();
   const { availablePoints } = useAvailablePoints();
 
   const generateFeedback = () => {

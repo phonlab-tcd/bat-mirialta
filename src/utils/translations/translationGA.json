@@ -1,0 +1,178 @@
+{
+  "pageTitles": {
+    "home": "Baile",
+    "chat": "Comhrá",
+    "history": "Mo Stair"
+  },
+  "headers": {
+    "stats": "Mo Staitisticí",
+    "verb": "Briathar",
+    "tense": "Aimsir",
+    "form": "Foirm"
+  },
+  "subHeaders": {
+    "played": "A Imrítear",
+    "average": "Meánscór",
+    "score": "Scór",
+    "all": "go léir"
+  },
+  "buttons": {
+    "start": "Tús a Chur le Comhrá Nua",
+    "seeAll": "Gach Rud a Fheicáil",
+    "continue": "Leanúint ar Aghaidh ag Comhrá"
+  },
+  "months": {
+    "jan": "Ean",
+    "feb": "Fea",
+    "mar": "Már",
+    "apr": "Aib",
+    "may": "Bea",
+    "jun": "Mei",
+    "jul": "Iúi",
+    "aug": "Lún",
+    "sep": "MFó",
+    "oct": "DFó",
+    "nov": "Sam",
+    "dec": "Nol"
+  },
+
+  "filler": {
+    "intro": {
+      "greeting": {
+        "naive": {
+          "text_01": "Hi {{name}}!",
+          "text_02": "Welcome {{name}}!"
+        }
+      },
+      "taskDescription": {
+        "basic": {
+          "text_01": "We will practise {{verb}}, {{tense}}, and {{form}}",
+          "text_02": "In this chat we will use {{verb}}, {{tense}}, and {{form}}"
+        }
+      },
+      "questionDescription": {
+        "basic": {
+          "text_01": "10 questions in total, with 10 points for each"
+        }
+      },
+      "getReady": {
+        "basic": {
+          "text_01": "Ok, here comes your first question",
+          "text_02": "get ready for your first question"
+        }
+      }
+    },
+    "outro": {
+      "beginning": {
+        "basic": {
+          "text_01": "Well done, that's the last question {{name}}!",
+          "text_02": "Congratulations, you are now finished {{name}}!"
+        }
+      },
+      "points": {
+        "basic": {
+          "text_01": "You scored {{points}} points"
+        }
+      },
+
+      "ending": {
+        "basic": {
+          "text_01": "I look forward to seeing you again soon",
+          "text_02": "Keep up the good work!"
+        }
+      }
+    }
+  },
+
+  "feedback": {
+    "incorrect": {
+      "general": {
+        "notice": {
+          "text_01": "GA - níl sé ceart",
+          "text_02": "GA - mícheart"
+        }
+      },
+
+      "fada": {
+        "omitted": {
+          "text_01": "GA - hey, you left out a fada",
+          "text_02": "GA - looks like no fada",
+          "text_03": "GA - add in a fada somewhere"
+        },
+        "extra": {
+          "text_01": "GA - wow, no need for that fada",
+          "text_02": "GA - you don't always need a fada"
+        }
+      },
+      "conjugation": {
+        "form": {
+          "text_01": "GA - tense is right, but check the form again",
+          "text_02": "GA - the form is incorrect"
+        },
+        "verb": {
+          "text_01": "GA - make sure to use the correct verb",
+          "text_02": "GA - wrong verb"
+        },
+        "tense": {
+          "text_01": "GA - remember to use the right tense",
+          "text_02": "GA - wrong tense"
+        },
+        "person": {
+          "text_01": "GA - check who is doing the action"
+        }
+      },
+      "typo": {
+        "one": {
+          "text_01": "GA - watch out for any minor typos!",
+          "text_02": "GA - careful now",
+          "text_03": "GA - don't add in any extra letters"
+        }
+      },
+      "broadSlender": {
+        "againstRule": {
+          "text_01": "GA - remember the caol le caol, leathan le leathan rule",
+          "text_02": "GA - watch out for the broad/slender vowels"
+        }
+      },
+      "other": {
+        "error": {
+          "text_01": "GA - you might want to rethink that one",
+          "text_02": "GA - have another go"
+        }
+      }
+    },
+    "correct": {
+      "general": {
+        "notice": {
+          "text_01": "tá sé ceart",
+          "text_02": "foirfe"
+        },
+        "followUp": {
+          "text_01": "maith thú",
+          "text_02": "maith thú {{name}}",
+          "text_03": "go hiontach",
+          "text_04": "go hiontach {{name}}"
+        }
+      }
+    }
+  },
+
+  "errorMessages": {
+    "app": {
+      "crash": {
+        "title": "Hmmmmm… chlis ar an gcóras. Is féidir leat:",
+        "options": {
+          "email": "Dul i dteagmháil le foireann ABAIR ag an seoladh - sloanjs@tcd.ie",
+          "reset": "Brúigh anseo chun an feidhmchlár a athshocrú"
+        }
+      }
+    },
+    "loader": {
+      "fail": "There is something wrong with this component loading process... please try again later"
+    },
+    "images": {
+      "failed": "something went wrong during image loading :("
+    },
+    "404": "No route for this URL"
+  }
+}

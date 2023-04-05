@@ -1,35 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-/* eslint-disable react-hooks/exhaustive-deps */
-import { ResponseModel } from '@/models';
-
-// import { useProfile } from '@/store/auth';
-// import {
-//   useNoQuestions,
-//   useSelectedForm,
-//   useSelectedTense,
-//   useSelectedVerb,
-// } from '@/store/scripts';
+import { usePushRandomResponse } from '@/hooks';
+import { useProfile } from '@/store/auth';
+import { useTotalPoints } from '@/store/points';
 
 const useGenerateOutro = () => {
-  // const { profile } = useProfile();
-  // const { selectedVerb } = useSelectedVerb();
-  // const { noQuestions } = useNoQuestions();
-  // const { selectedTense } = useSelectedTense();
-  // const { selectedForm } = useSelectedForm();
+  const pushRandomResponse = usePushRandomResponse();
+  const { profile } = useProfile();
+  const { totalPoints } = useTotalPoints();
 
   const generateOutro = () => {
-    const outro: ResponseModel[] = [
-      {
-        text: `Well done!`,
-        form: 'statement',
-      },
-      {
-        text: `You are now finished`,
-        form: 'statement',
-      },
-    ];
-    return outro;
+    let responseObject = pushRandomResponse([], 'filler', 'outro', 'beginning', 'basic', {
+      name: profile !== null && profile.username !== null ? profile.username : '',
+    });
+    responseObject = pushRandomResponse(responseObject, 'filler', 'outro', 'points', 'basic', {
+      points: totalPoints,
+    });
+    responseObject = pushRandomResponse(responseObject, 'filler', 'outro', 'ending', 'basic', {});
+
+    return responseObject;
   };
 
   return generateOutro;

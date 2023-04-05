@@ -4,4 +4,8 @@ interface ResponseModel {
   answer?: string;
 }
 
-export type { ResponseModel };
+interface TranslationContextModel {
+  [key: string]: string | number;
+}
+
+export type { ResponseModel, TranslationContextModel };

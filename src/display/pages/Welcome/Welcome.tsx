@@ -38,13 +38,13 @@ const Welcome = () => {
   }, [session]);
 
   return (
-    <Box>
+    <Box py={2}>
       <Meta title="Welcome" />
-      <CenteredFlexBox p={2}>
+      <CenteredFlexBox>
         <RobotImage />
       </CenteredFlexBox>
 
-      <CenteredFlexBox>
+      <CenteredFlexBox mt={1}>
         <ContinueChatOrNew />
       </CenteredFlexBox>
 

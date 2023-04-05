@@ -1,38 +1,45 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 /* eslint-disable react-hooks/exhaustive-deps */
-import { ResponseModel } from '@/models';
+import { usePushRandomResponse } from '@/hooks';
 import { useProfile } from '@/store/auth';
-import {
-  useNoQuestions,
-  useSelectedForm,
-  useSelectedTense,
-  useSelectedVerb,
-} from '@/store/scripts';
+import { useSelectedForm, useSelectedTense, useSelectedVerb } from '@/store/scripts';
 
 const useGenerateIntro = () => {
   const { profile } = useProfile();
   const { selectedVerb } = useSelectedVerb();
-  const { noQuestions } = useNoQuestions();
+
   const { selectedTense } = useSelectedTense();
   const { selectedForm } = useSelectedForm();
+  const pushRandomResponse = usePushRandomResponse();
 
   const generateIntro = () => {
-    const intro: ResponseModel[] = [
+    let responseObject = pushRandomResponse([], 'filler', 'intro', 'greeting', 'naive', {
+      name: profile !== null && profile.username !== null ? profile.username : 'there',
+    });
+    responseObject = pushRandomResponse(
+      responseObject,
+      'filler',
+      'intro',
+      'taskDescription',
+      'basic',
       {
-        text: `Hi ${profile !== null ? profile.username : 'there'}!`,
-        form: 'statement',
+        verb: selectedVerb !== undefined ? selectedVerb.name : 'all verbs',
+        tense: selectedTense !== undefined ? selectedTense.name : 'all tenses',
+        form: selectedForm !== undefined ? selectedForm.name : 'all forms',
       },
-      {
-        text: `Let's practice ${noQuestions} of ${
-          selectedVerb !== undefined ? selectedVerb.name : 'all verbs'
-        }, ${selectedTense !== undefined ? selectedTense.name : 'all tenses'}, and ${
-          selectedForm !== undefined ? selectedForm.name : 'all forms'
-        }`,
-        form: 'statement',
-      },
-    ];
-    return intro;
+    );
+    responseObject = pushRandomResponse(
+      responseObject,
+      'filler',
+      'intro',
+      'questionDescription',
+      'basic',
+      {},
+    );
+    responseObject = pushRandomResponse(responseObject, 'filler', 'intro', 'getReady', 'basic', {});
+
+    return responseObject;
   };
 
   return generateIntro;

@@ -1,0 +1,178 @@
+{
+  "pageTitles": {
+    "home": "Home",
+    "chat": "Chat",
+    "history": "My History"
+  },
+  "headers": {
+    "stats": "My Stats",
+    "verb": "Verb",
+    "tense": "Tense",
+    "form": "Form"
+  },
+  "subHeaders": {
+    "played": "Played",
+    "average": "Average",
+    "score": "Score",
+    "all": "all"
+  },
+  "buttons": {
+    "start": "Start",
+    "seeAll": "See All",
+    "continue": "Continue"
+  },
+  "months": {
+    "jan": "Jan",
+    "feb": "Feb",
+    "mar": "Mar",
+    "apr": "Apr",
+    "may": "May",
+    "jun": "Jun",
+    "jul": "Jul",
+    "aug": "Aug",
+    "sep": "Sep",
+    "oct": "Oct",
+    "nov": "Nov",
+    "dec": "Dec"
+  },
+
+  "filler": {
+    "intro": {
+      "greeting": {
+        "naive": {
+          "text_01": "Hi {{name}}!",
+          "text_02": "Welcome {{name}}!"
+        }
+      },
+      "taskDescription": {
+        "basic": {
+          "text_01": "We will practise {{verb}}, {{tense}}, and {{form}}",
+          "text_02": "In this chat we will use {{verb}}, {{tense}}, and {{form}}"
+        }
+      },
+      "questionDescription": {
+        "basic": {
+          "text_01": "10 questions in total, with 10 points for each"
+        }
+      },
+      "getReady": {
+        "basic": {
+          "text_01": "Ok, here comes your first question",
+          "text_02": "get ready for your first question"
+        }
+      }
+    },
+    "outro": {
+      "beginning": {
+        "basic": {
+          "text_01": "Well done, that's the last question {{name}}!",
+          "text_02": "Congratulations, you are now finished {{name}}!"
+        }
+      },
+      "points": {
+        "basic": {
+          "text_01": "You scored {{points}} points"
+        }
+      },
+
+      "ending": {
+        "basic": {
+          "text_01": "I look forward to seeing you again soon",
+          "text_02": "Keep up the good work!"
+        }
+      }
+    }
+  },
+
+  "feedback": {
+    "incorrect": {
+      "general": {
+        "notice": {
+          "text_01": "níl sé ceart",
+          "text_02": "mícheart"
+        }
+      },
+
+      "fada": {
+        "omitted": {
+          "text_01": "hey, you left out a fada",
+          "text_02": "looks like no fada",
+          "text_03": "add in a fada somewhere"
+        },
+        "extra": {
+          "text_01": "wow, no need for that fada",
+          "text_02": "you don't always need a fada"
+        }
+      },
+      "conjugation": {
+        "form": {
+          "text_01": "tense is right, but check the form again",
+          "text_02": "the form is incorrect"
+        },
+        "verb": {
+          "text_01": "make sure to use the correct verb",
+          "text_02": "wrong verb"
+        },
+        "tense": {
+          "text_01": "remember to use the right tense",
+          "text_02": "wrong tense"
+        },
+        "person": {
+          "text_01": "check who is doing the action"
+        }
+      },
+      "typo": {
+        "one": {
+          "text_01": "watch out for any minor typos!",
+          "text_02": "careful now",
+          "text_03": "don't add in any extra letters"
+        }
+      },
+      "broadSlender": {
+        "againstRule": {
+          "text_01": "remember the caol le caol, leathan le leathan rule",
+          "text_02": "watch out for the broad/slender vowels"
+        }
+      },
+      "other": {
+        "error": {
+          "text_01": "you might want to rethink that one",
+          "text_02": "have another go"
+        }
+      }
+    },
+    "correct": {
+      "general": {
+        "notice": {
+          "text_01": "tá sé ceart",
+          "text_02": "foirfe"
+        },
+        "followUp": {
+          "text_01": "maith thú",
+          "text_02": "maith thú {{name}}",
+          "text_03": "go hiontach",
+          "text_04": "go hiontach {{name}}"
+        }
+      }
+    }
+  },
+
+  "errorMessages": {
+    "app": {
+      "crash": {
+        "title": "Hmmmm... something went wrong. You can:",
+        "options": {
+          "email": "contact the Abair team through this email - sloanjs@tcd.ie",
+          "reset": "Press here to reset the application"
+        }
+      }
+    },
+    "loader": {
+      "fail": "There is something wrong with this component loading process... please try again later"
+    },
+    "images": {
+      "failed": "something went wrong during image loading :("
+    },
+    "404": "No route for this URL"
+  }
+}

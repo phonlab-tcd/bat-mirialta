@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import MenuIcon from '@mui/icons-material/Menu';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 
-import { AbIconButton } from 'abair-components';
 import { AbMenu } from 'abair-components';
 
 import { basePath, domain } from '@/config';
@@ -20,6 +20,7 @@ function Header() {
   const navigate = useNavigate();
   const { profile } = useProfile();
   const [items, setItems] = useState<string[]>(['log in/sign up']);
+  const { i18n } = useTranslation();
 
   const handleMenuChoice = async (item: string) => {
     if (item === 'logout') {
@@ -46,26 +47,20 @@ function Header() {
     }
   }, [profile]);
 
-  // useEffect(() => {
-  //   console.log('items:', items);
-  // }, [items]);
-
+  const changeLang = () => {
+    i18n.language === 'en' ? i18n.changeLanguage('ga') : i18n.changeLanguage('en');
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar sx={{ backgroundColor: 'primary.dark' }} elevation={0} position="static">
         <Toolbar>
           <FlexBox width={'100%'} sx={{ justifyContent: 'space-between' }}>
-            <Box sx={{ visibility: 'hidden' }}>
-              <AbIconButton
-                selected={true}
-                color="primary"
-                onClick={() => {
-                  console.log('menu clicked');
-                }}
-                icon={MenuIcon}
-                fontSize="large"
-              />
-            </Box>
+            <Button size={'large'} onClick={changeLang}>
+              <Typography color={i18n.language === 'ga' ? 'secondary' : 'primary'}>ga</Typography>
+              <Typography color={'primary'}>/</Typography>
+              <Typography color={i18n.language === 'en' ? 'secondary' : 'primary'}>en</Typography>
+            </Button>
+
             <Button
               color="primary"
               size={'large'}
