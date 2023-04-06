@@ -47,20 +47,6 @@ const Stats = () => {
             <ChartAllPoints cumFreq={cumFreqArray} />
           </Box>
         </Box>
-        {/* <Box mt={2}>
-          <BatBox button={true} width={'100%'}>
-            <AbButton
-              size="large"
-              fullWidth={true}
-              label="more"
-              onClick={() => {
-                navigate('/chat');
-              }}
-              selected={true}
-              color="secondary"
-            />
-          </BatBox>
-        </Box> */}
       </FullSizeBox>
     </BatBox>
   );

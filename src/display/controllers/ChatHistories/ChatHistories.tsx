@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 
 import { AbButton } from 'abair-components';
 
+import { basePath } from '@/config';
 import BatBox from '@/display/components/BatBox';
 import ChatHistory from '@/display/components/ChatHistory';
 import { useChats } from '@/store/chats';
@@ -49,7 +50,7 @@ const ChatHistories = ({ showHowMany = 3 }: ChatHistoriesProps) => {
             fullWidth={true}
             label={t('buttons.seeAll')}
             onClick={() => {
-              navigate('/history');
+              navigate(`${basePath}history`);
             }}
             selected={true}
             color="secondary"

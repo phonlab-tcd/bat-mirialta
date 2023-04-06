@@ -18,7 +18,7 @@ import { useProfile } from '@/store/auth';
 
 function Header() {
   const navigate = useNavigate();
-  const { profile } = useProfile();
+  const { profile, setProfile } = useProfile();
   const [items, setItems] = useState<string[]>(['log in/sign up']);
   const { i18n } = useTranslation();
 
@@ -26,11 +26,12 @@ function Header() {
     if (item === 'logout') {
       supabase.auth.signOut().then(() => {
         setItems(['log in/sign up']);
+        setProfile(null);
       });
     } else if (item === 'profile') {
-      window.location.href = `${domain}profile?origin=applications/bat-mirialta`;
+      window.location.href = `${domain}/profile?origin=applications/bat-mirialta`;
     } else if (item === 'log in/sign up') {
-      window.location.href = `${domain}login?origin=applications/bat-mirialta`;
+      window.location.href = `${domain}/login?origin=applications/bat-mirialta`;
     }
   };
 

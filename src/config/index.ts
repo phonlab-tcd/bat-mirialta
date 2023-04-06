@@ -6,14 +6,14 @@ const repository = 'https://github.com/JohnSloan8/bat-mirialta';
 
 const production = false;
 
-const basePath = '/';
+const basePath = production ? '/applications/bat-mirialta/' : '/';
 
-const domain = production ? 'https://detail-design-develop.com/' : 'http://localhost/';
+const domain = production ? 'https://detail-design-develop.com' : 'http://localhost:8000';
 
 const batDelayMultiplier = production ? 1 : 0.75;
 
 const errorCheckURL = production
-  ? 'https://error-check.detail-design-develop.com/run-full-check'
+  ? 'https://detail-design-develop.com/error-check/run-full-check'
   : 'http://localhost:8002/run-full-check';
 
 const messages = {
