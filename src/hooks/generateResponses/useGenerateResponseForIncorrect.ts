@@ -12,6 +12,7 @@ const useGenerateResponseForIncorrect = () => {
     let wrongPerson = false;
     let minorTypo = false;
     let broadSlenderMistake = false;
+    // let precedingWord = false;
 
     if (errorData.stringConjugationOutput === 'incorrectForm') {
       wrongForm = true;
@@ -30,11 +31,27 @@ const useGenerateResponseForIncorrect = () => {
     } else if (errorData.broadSlenderOutput === 'againstRule') {
       broadSlenderMistake = true;
     }
+    // else if (errorData.precedingWord) {
+    //   precedingWord = true
+    // }
 
     // initial feedback
     let responseObject = pushRandomResponse([], 'feedback', 'incorrect', 'general', 'notice', {});
 
+    // precedingWord
+    // if (precedingWord) {
+    //   responseObject = pushRandomResponse(
+    //     responseObject,
+    //     'feedback',
+    //     'incorrect',
+    //     'conjugation',
+    //     'form',
+    //     {},
+    //   );
+    // } else
+
     // return conjugation related message
+
     if (wrongForm) {
       responseObject = pushRandomResponse(
         responseObject,

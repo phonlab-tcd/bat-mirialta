@@ -92,7 +92,16 @@
           "text_02": "GA - mícheart"
         }
       },
-
+      "precedingWord": {
+        "niNotNior": {
+          "text_01": "hey, should be ní",
+          "text_02": "not níor, something else"
+        },
+        "niorNotNi": {
+          "text_01": "hey, should be níor",
+          "text_02": "not ní, something else"
+        }
+      },
       "fada": {
         "omitted": {
           "text_01": "GA - hey, you left out a fada",
