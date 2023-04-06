@@ -4,7 +4,7 @@ const email = 'sloanjo@tcd.ie';
 
 const repository = 'https://github.com/JohnSloan8/bat-mirialta';
 
-const production = false;
+const production = true;
 
 const basePath = production ? '/applications/bat-mirialta/' : '/';
 
@@ -12,9 +12,7 @@ const domain = production ? 'https://detail-design-develop.com' : 'http://localh
 
 const batDelayMultiplier = production ? 1 : 0.75;
 
-const errorCheckURL = production
-  ? 'https://detail-design-develop.com/apis/error-check/run-full-check'
-  : 'http://localhost:8002/run-full-check';
+const errorCheckURL = 'http://localhost:8002/run-full-check';
 
 const messages = {
   app: {
