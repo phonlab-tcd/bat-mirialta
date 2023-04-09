@@ -94,12 +94,28 @@
       },
       "precedingWord": {
         "niNotNior": {
-          "text_01": "hey, should be ní",
-          "text_02": "not níor, something else"
+          "text_01": "GA - hey, should be ní",
+          "text_02": "GA - not níor, something else"
         },
         "niorNotNi": {
-          "text_01": "hey, should be níor",
-          "text_02": "not ní, something else"
+          "text_01": "GA - hey, should be níor",
+          "text_02": "GA - not ní, something else"
+        },
+        "anNotAr": {
+          "text_01": "GA - hey, should be an",
+          "text_02": "GA - not ar, something else"
+        },
+        "arNotAn": {
+          "text_01": "GA - hey, should be ar",
+          "text_02": "GA - not an, something else"
+        },
+        "nachError": {
+          "text_01": "GA - in this case, 'nach' must be put before the verb",
+          "text_02": "GA - make sure nach isn't left out"
+        },
+        "goError": {
+          "text_01": "GA - in this case, 'go' must be put before the verb",
+          "text_02": "GA - make sure go isn't left out"
         }
       },
       "fada": {

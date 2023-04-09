@@ -101,6 +101,22 @@
         "niorNotNi": {
           "text_01": "hey, should be níor",
           "text_02": "not ní, something else"
+        },
+        "anNotAr": {
+          "text_01": "hey, should be an",
+          "text_02": "not ar, something else"
+        },
+        "arNotAn": {
+          "text_01": "hey, should be ar",
+          "text_02": "not an, something else"
+        },
+        "nachError": {
+          "text_01": "in this case, 'nach' must be put before the verb",
+          "text_02": "make sure nach isn't left out"
+        },
+        "goError": {
+          "text_01": "in this case, 'go' must be put before the verb",
+          "text_02": "make sure go isn't left out"
         }
       },
 
