@@ -8,6 +8,7 @@ import useAnimateResponses from '@/hooks/animate/useAnimateResponses';
 import { ResponseModel } from '@/models';
 import { postError } from '@/services/error-check';
 import { patchAdjacencyPairFeedback } from '@/services/supabase';
+import { getHint } from '@/services/supabase';
 import { currentAdjacencyPairState } from '@/store/adjacencyPairs';
 import { useAvailablePoints } from '@/store/points';
 import { currentQuestionState } from '@/store/questions';
@@ -40,31 +41,35 @@ const useGenerateFeedback = () => {
           },
         );
       } else {
-        postError(currentAdjacencyPair.text, currentQuestion.answer).then((errorData: any) => {
-          // GENERATE RESPONSE OBJECT FROM ERROR DATA
+        getHint('hard', currentQuestion.verb_id).then((hints) => {
+          postError(currentAdjacencyPair.text, currentQuestion.answer, hints).then(
+            (errorData: any) => {
+              // GENERATE RESPONSE OBJECT FROM ERROR DATA
 
-          if (currentAdjacencyPair.text !== null) {
-            responseObject = generateResponseForIncorrect(
-              currentAdjacencyPair.text,
-              currentQuestion.answer,
-              errorData,
-            );
-            console.log('availablePoints:', availablePoints);
-            if (availablePoints <= 2) {
-              responseObject = [
-                { text: 'níl sé ceart', form: 'statement' },
-                { text: `the correct answer is ${currentQuestion.answer}`, form: 'statement' },
-              ];
-            }
-          }
-          patchAdjacencyPairFeedback(
-            currentAdjacencyPair.id,
-            correct,
-            errorData,
-            responseObject,
-          ).then((a_p) => {
-            animateResponses(a_p);
-          });
+              if (currentAdjacencyPair.text !== null) {
+                responseObject = generateResponseForIncorrect(
+                  currentAdjacencyPair.text,
+                  currentQuestion.answer,
+                  errorData,
+                );
+                console.log('availablePoints:', availablePoints);
+                if (availablePoints <= 2) {
+                  responseObject = [
+                    { text: 'níl sé ceart', form: 'statement' },
+                    { text: `the correct answer is ${currentQuestion.answer}`, form: 'statement' },
+                  ];
+                }
+              }
+              patchAdjacencyPairFeedback(
+                currentAdjacencyPair.id,
+                correct,
+                errorData,
+                responseObject,
+              ).then((a_p) => {
+                animateResponses(a_p);
+              });
+            },
+          );
         });
       }
     } else {

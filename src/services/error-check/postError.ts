@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { errorCheckURL } from '@/config';
 
-const postError = async (word: string, target: string) => {
+const postError = async (word: string | null, target: string, hints: string[] | undefined) => {
   try {
     const { data } = await axios({
       method: 'post',
@@ -13,6 +13,7 @@ const postError = async (word: string, target: string) => {
       data: {
         word: word,
         target: target,
+        hints: hints,
       },
       timeout: 10000,
     });
