@@ -1,17 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 import { useRecoilValue } from 'recoil';
 
 import SendIcon from '@mui/icons-material/Send';
 import { Typography } from '@mui/material';
+import { TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
 import { AbIconButton } from 'abair-components';
+import isMobile from 'is-mobile';
 
 import BatBox from '@/display/components/BatBox';
 import { CenteredFlexBox, FullSizeBox, FullSizeCenteredFlexBox } from '@/display/components/styled';
@@ -32,6 +34,7 @@ import './styles.css';
 const IrishKeyboard = () => {
   const [layoutName, setLayoutName] = useState('default');
   const keyboard = useRef<any>();
+  const textBoxRef = useRef<HTMLInputElement>();
   const { chatText, setChatText } = useChatText();
   const currentAdjacencyPair = useRecoilValue(currentAdjacencyPairState);
   const currentQuestion = useRecoilValue(currentQuestionState);
@@ -40,10 +43,24 @@ const IrishKeyboard = () => {
   const { messageInputDisabled, setMessageInputDisabled } = useMessageInputDisabled();
   const { awaitingHint } = useAwaitingHint();
 
+  useEffect(() => {
+    if (!isMobile()) {
+      if (!messageInputDisabled && !awaitingHint) {
+        if (textBoxRef.current !== undefined) {
+          console.log('focussing message');
+          textBoxRef.current.focus();
+        }
+      }
+    }
+  }, [messageInputDisabled, awaitingHint]);
+
   const handleChange = (input: string) => {
     if (!messageInputDisabled) {
+      console.log('input:', input);
       setChatText(input);
-      keyboard.current.setInput(input);
+      if (isMobile()) {
+        keyboard.current.setInput(input);
+      }
     }
   };
 
@@ -70,9 +87,16 @@ const IrishKeyboard = () => {
 
   const handleSend = () => {
     if (currentQuestion !== undefined && currentAdjacencyPair !== undefined) {
+      console.log('settingChatto nothin');
       setChatText('');
-
-      keyboard.current.setInput('');
+      if (isMobile()) {
+        keyboard.current.setInput('');
+      } else {
+        if (textBoxRef.current !== undefined) {
+          textBoxRef.current.value = '';
+          textBoxRef.current.blur();
+        }
+      }
       setMessageInputDisabled(true);
       patchAdjacencyPairText(currentAdjacencyPair.id, chatText).then((a_p) => {
         setAdjacencyPairs(replaceFinalObject(adjacencyPairs, a_p));
@@ -88,7 +112,7 @@ const IrishKeyboard = () => {
     <Box>
       <CenteredFlexBox p={1} sx={{ position: 'relative' }}>
         <BatBox width={'100%'} padding={0.5}>
-          <Grid container py={1} height={56}>
+          <Grid container py={1} height={isMobile() ? 56 : 70}>
             <Grid item xs={1.5}>
               <HintButton />
             </Grid>
@@ -96,16 +120,36 @@ const IrishKeyboard = () => {
             <Grid item xs={9}>
               <FullSizeCenteredFlexBox
                 height={36}
-                border={2}
+                border={isMobile() ? 2 : 0}
                 borderColor={'primary.dark'}
                 sx={{
                   backgroundColor: '#fff',
                   opacity: messageInputDisabled || awaitingHint ? 0.2 : 1,
                 }}
               >
-                <Typography fontFamily={'Helvetica'} alignItems="center">
-                  {chatText}
-                </Typography>
+                {isMobile() ? (
+                  <Typography fontFamily={'Helvetica'} alignItems="center">
+                    {chatText}
+                  </Typography>
+                ) : (
+                  <TextField
+                    inputRef={textBoxRef}
+                    variant="outlined"
+                    onChange={(e) => {
+                      handleChange(e.target.value);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        handleSend();
+                      }
+                    }}
+                    fullWidth
+                    disabled={messageInputDisabled || awaitingHint ? true : false}
+                    inputProps={{ style: { fontFamily: 'Helvetica', textAlign: 'center' } }}
+                  >
+                    {chatText}
+                  </TextField>
+                )}
               </FullSizeCenteredFlexBox>
             </Grid>
             <Grid item xs={1.5}>
@@ -121,28 +165,29 @@ const IrishKeyboard = () => {
               </FullSizeCenteredFlexBox>
             </Grid>
           </Grid>
-
-          <Box
-            sx={{ opacity: messageInputDisabled || awaitingHint ? 0.2 : 1, position: 'relative' }}
-          >
-            {messageInputDisabled || awaitingHint ? (
-              <FullSizeBox sx={{ position: 'absolute', zIndex: 10 }}></FullSizeBox>
-            ) : null}
-            <Keyboard
-              keyboardRef={(r) => (keyboard.current = r)}
-              layoutName={layoutName}
-              layout={keyboardOptions.layout}
-              onChange={(e) => {
-                handleChange(e);
-              }}
-              onKeyPress={(e) => {
-                handleKeyPress(e);
-              }}
-              display={keyboardOptions.display}
-              buttonTheme={keyboardOptions.button}
-              theme="hg-theme-default base"
-            />
-          </Box>
+          {isMobile() && (
+            <Box
+              sx={{ opacity: messageInputDisabled || awaitingHint ? 0.2 : 1, position: 'relative' }}
+            >
+              {messageInputDisabled || awaitingHint ? (
+                <FullSizeBox sx={{ position: 'absolute', zIndex: 10 }}></FullSizeBox>
+              ) : null}
+              <Keyboard
+                keyboardRef={(r) => (keyboard.current = r)}
+                layoutName={layoutName}
+                layout={keyboardOptions.layout}
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                onKeyPress={(e) => {
+                  handleKeyPress(e);
+                }}
+                display={keyboardOptions.display}
+                buttonTheme={keyboardOptions.button}
+                theme="hg-theme-default base"
+              />
+            </Box>
+          )}
         </BatBox>
       </CenteredFlexBox>
     </Box>

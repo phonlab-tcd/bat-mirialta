@@ -15,6 +15,7 @@ import { basePath, domain } from '@/config';
 import { title } from '@/config';
 import { FlexBox } from '@/display/components/styled';
 import supabase from '@/services/supabase';
+import { useSession } from '@/store/auth';
 import { useProfile } from '@/store/auth';
 
 import abairFullLogo from '/assets/images/abair-logo-old.png';
@@ -24,12 +25,14 @@ function Header() {
   const { profile, setProfile } = useProfile();
   const [items, setItems] = useState<string[]>(['log in/sign up']);
   const { i18n } = useTranslation();
+  const { setSession } = useSession();
 
   const handleMenuChoice = async (item: string) => {
     if (item === 'logout') {
       supabase.auth.signOut().then(() => {
         setItems(['log in/sign up']);
         setProfile(null);
+        setSession(null);
       });
     } else if (item === 'profile') {
       window.location.href = `${domain}/profile?origin=applications/bat-mirialta`;
