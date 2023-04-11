@@ -9,12 +9,15 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 import { AbMenu } from 'abair-components';
+import Image from 'mui-image';
 
 import { basePath, domain } from '@/config';
 import { title } from '@/config';
 import { FlexBox } from '@/display/components/styled';
 import supabase from '@/services/supabase';
 import { useProfile } from '@/store/auth';
+
+import abairFullLogo from '/assets/images/abair-logo-old.png';
 
 function Header() {
   const navigate = useNavigate();
@@ -56,11 +59,24 @@ function Header() {
       <AppBar sx={{ backgroundColor: 'primary.dark' }} elevation={0} position="static">
         <Toolbar>
           <FlexBox width={'100%'} sx={{ justifyContent: 'space-between' }}>
-            <Button size={'large'} onClick={changeLang}>
-              <Typography color={i18n.language === 'ga' ? 'secondary' : 'primary'}>ga</Typography>
-              <Typography color={'primary'}>/</Typography>
-              <Typography color={i18n.language === 'en' ? 'secondary' : 'primary'}>en</Typography>
+            <Button
+              size={'large'}
+              onClick={() => {
+                window.location.href = `${domain}`;
+              }}
+            >
+              <Image
+                duration={1000}
+                height={40}
+                width={50}
+                easing="ease-out"
+                alt="abair.ie"
+                src={abairFullLogo}
+                showLoading
+              />
             </Button>
+
+            <Button size={'large'} sx={{ visibility: 'hidden' }}></Button>
 
             <Button
               color="primary"
@@ -71,7 +87,11 @@ function Header() {
             >
               {title}
             </Button>
-
+            <Button size={'large'} onClick={changeLang}>
+              <Typography color={i18n.language === 'ga' ? 'secondary' : 'primary'}>ga</Typography>
+              <Typography color={'primary'}>/</Typography>
+              <Typography color={i18n.language === 'en' ? 'secondary' : 'primary'}>en</Typography>
+            </Button>
             <AbMenu
               avatar={profile !== null ? profile.avatar : ''}
               items={items}

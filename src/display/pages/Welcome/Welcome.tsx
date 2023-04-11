@@ -8,6 +8,7 @@ import RobotImage from '@/display/components/RobotImage';
 import { CenteredFlexBox } from '@/display/components/styled';
 import ChatHistories from '@/display/controllers/ChatHistories';
 import ContinueChatOrNew from '@/display/controllers/ContinueChatOrNew';
+import LoginSignup from '@/display/controllers/LoginSignup';
 import Stats from '@/display/controllers/Stats';
 import { usePopulateChats, useSetSelectedTaskFromActiveChat } from '@/hooks';
 import { useAvailables, useGetAvailables } from '@/hooks/selectTask';
@@ -44,17 +45,25 @@ const Welcome = () => {
         <RobotImage />
       </CenteredFlexBox>
 
-      <CenteredFlexBox mt={1}>
-        <ContinueChatOrNew />
-      </CenteredFlexBox>
+      {session ? (
+        <Box>
+          <CenteredFlexBox mt={1}>
+            <ContinueChatOrNew />
+          </CenteredFlexBox>
 
-      <CenteredFlexBox mt={2}>
-        <Stats />
-      </CenteredFlexBox>
+          <CenteredFlexBox mt={2}>
+            <Stats />
+          </CenteredFlexBox>
 
-      <CenteredFlexBox mt={2}>
-        <ChatHistories />
-      </CenteredFlexBox>
+          <CenteredFlexBox mt={2}>
+            <ChatHistories />
+          </CenteredFlexBox>
+        </Box>
+      ) : (
+        <CenteredFlexBox mt={1}>
+          <LoginSignup />
+        </CenteredFlexBox>
+      )}
     </Box>
   );
 };
