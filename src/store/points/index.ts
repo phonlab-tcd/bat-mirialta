@@ -105,7 +105,7 @@ const useCumFreqArray = () => {
 
 const pointsModalOpenState = atom<boolean>({
   key: 'points-modal-open-state',
-  default: true,
+  default: false,
 });
 
 const usePointsModalOpen = () => {
