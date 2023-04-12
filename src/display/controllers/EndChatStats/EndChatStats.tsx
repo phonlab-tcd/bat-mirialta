@@ -45,36 +45,39 @@ const EndChatStats = () => {
       }}
       sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
     >
-      <Box width={400}>
-        <BatBox width={'100%'} height={386}>
-          <Typography align="center" variant="h6">
-            Stats
-          </Typography>
-          <Box width={'100%'}>
-            <PlayedChatStats />
-          </Box>
-
-          <Box width={'100%'} height={200} sx={{ position: 'relative' }}>
-            <Box width={'93%'} height={'100%'} sx={{ position: 'absolute', left: -10 }}>
-              <ChartAllPoints cumFreq={cumFreqArray} />
+      <div style={{ outline: 'none' }}>
+        <Box width={374}>
+          <BatBox width={'100%'} height={386}>
+            <Typography align="center" variant="h6">
+              Stats
+            </Typography>
+            <Box width={'100%'}>
+              <PlayedChatStats />
             </Box>
-          </Box>
-          <Box mt={2}>
-            <BatBox button={true} width={'100%'}>
-              <AbButton
-                size="large"
-                fullWidth={true}
-                label="abhaile"
-                onClick={() => {
-                  navigate(`${basePath}`);
-                }}
-                selected={true}
-                color="secondary"
-              />
-            </BatBox>
-          </Box>
-        </BatBox>
-      </Box>
+
+            <Box width={'100%'} height={200} sx={{ position: 'relative' }}>
+              <Box width={'93%'} height={'100%'} sx={{ position: 'absolute', left: -10 }}>
+                <ChartAllPoints cumFreq={cumFreqArray} />
+              </Box>
+            </Box>
+            <Box mt={2}>
+              <BatBox button={true} width={'100%'}>
+                <AbButton
+                  size="large"
+                  fullWidth={true}
+                  label="abhaile"
+                  onClick={() => {
+                    setPointsModalOpen(false);
+                    navigate(`${basePath}`);
+                  }}
+                  selected={true}
+                  color="secondary"
+                />
+              </BatBox>
+            </Box>
+          </BatBox>
+        </Box>
+      </div>
     </Modal>
   );
 };

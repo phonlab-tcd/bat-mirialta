@@ -121,17 +121,18 @@ function Chat() {
   return (
     <Box sx={{ backgroundColor: 'background' }}>
       <Meta title="Chat" />
-      <EndChatStats />
+
       <MessageInputButtons vis={taNilInputChoice ? 'visible' : 'hidden'} />
 
       <CenteredFlexBox p={1}>
+        <EndChatStats />
         <BatBox width={'100%'} padding={0.5}>
           <PointsDisplay />
         </BatBox>
       </CenteredFlexBox>
       <CenteredFlexBox px={1}>
         <BatBox width={'100%'} backgroundColor={'background.default'} padding={0}>
-          <Box px={0.6} py={0.5} sx={{ overflowY: 'scroll', height: getChatHeight() }}>
+          <Box px={0.6} py={0.5} sx={{ height: getChatHeight() }}>
             <ChatContainer>
               <MessageList
                 typingIndicator={
