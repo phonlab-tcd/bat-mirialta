@@ -33,7 +33,7 @@ function Header() {
         setItems(['log in/sign up']);
         setProfile(null);
         setSession(null);
-        navigate('/');
+        navigate(`${basePath}`);
       });
     } else if (item === 'profile') {
       window.location.href = `${domain}/profile?origin=applications/bat-mirialta`;
