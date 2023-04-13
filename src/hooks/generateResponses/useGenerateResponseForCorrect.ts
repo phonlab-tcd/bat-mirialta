@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { usePushRandomResponse } from '@/hooks';
+import { useProfile } from '@/store/auth';
 
 const useGenerateResponseForCorrect = () => {
   const pushRandomResponse = usePushRandomResponse();
+  const { profile } = useProfile();
 
   const generateResponseForCorrect = (word: string, target: string) => {
     console.log('word + target correct:', word, target);
@@ -14,7 +16,7 @@ const useGenerateResponseForCorrect = () => {
       'general',
       'followUp',
       {
-        name: 'John',
+        name: profile !== null && profile.username !== null ? profile.username : '',
       },
     );
     return responseObject;
