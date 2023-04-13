@@ -3,6 +3,7 @@ import axios from 'axios';
 import { errorCheckURL } from '@/config';
 
 const postError = async (word: string | null, target: string, hints: string[] | undefined) => {
+  console.log('errorCheckURL', errorCheckURL);
   try {
     const { data } = await axios({
       method: 'post',
@@ -18,6 +19,7 @@ const postError = async (word: string | null, target: string, hints: string[] | 
       timeout: 10000,
     });
     if (data) {
+      console.log('data:', data);
       return data;
     }
 
