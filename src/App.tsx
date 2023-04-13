@@ -20,7 +20,7 @@ import { useProfile, useSession } from '@/store/auth';
 function App() {
   const { session, setSession } = useSession();
   const { setProfile } = useProfile();
-  const [email] = useState('test@test.com');
+  const [email] = useState('johnsloan88@hotmail.com');
   const [password] = useState('xxxxxx');
 
   useEffect(() => {
