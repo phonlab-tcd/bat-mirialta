@@ -10,6 +10,26 @@
     "tense": "Aimsir",
     "form": "Foirm"
   },
+  "instructions": {
+    "welcome": {
+      "text_01": "Welcome to ",
+      "text_02": "Welcome to Bat Mírialta,",
+      "text_03": "Welcome to Bat Mírialta, your irregular verb helper."
+    },
+    "chooseTask": {
+      "text_01": "Choose a verb, ",
+      "text_02": "Choose a verb, tense,",
+      "text_03": "Choose a verb, tense, and form to practice.",
+      "text_04": "Choose a verb, tense, and form to practice.\nI will ask you 10",
+      "text_05": "Choose a verb, tense, and form to practice.\nI will ask you 10 'fill in the blank'",
+      "text_06": "Choose a verb, tense, and form to practice.\nI will ask you 10 'fill in the blank' questions.",
+      "text_07": "Choose a verb, tense, and form to practice.\nI will ask you 10 'fill in the blank' questions.\nI can help by giving hints and suggestions.",
+      "text_08": "Choose a verb, tense, and form to practice.\nI will ask you 10 'fill in the blank' questions.\nI can help by giving hints and suggestions.\nThere are 10 points per question.",
+      "text_09": "Choose a verb, tense, and form to practice.\nI will ask you 10 'fill in the blank' questions.\nI can help by giving hints and suggestions.\nThere are 10 points per question..",
+      "text_10": "Choose a verb, tense, and form to practice.\nI will ask you 10 'fill in the blank' questions.\nI can help by giving hints and suggestions.\nThere are 10 points per question...",
+      "text_11": "Choose a verb, tense, and form to practice.\nI will ask you 10 'fill in the blank' questions.\nI can help by giving hints and suggestions.\nThere are 10 points per question...\nCan you score 100? "
+    }
+  },
   "subHeaders": {
     "played": "A Imrítear",
     "average": "Meánscór",

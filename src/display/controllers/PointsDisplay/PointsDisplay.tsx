@@ -19,9 +19,9 @@ const PointsDisplay = () => {
   const { showAvailablePoints } = useShowAvailablePoints();
 
   return (
-    <FullSizeBox minHeight={36}>
+    <FullSizeBox minHeight={46}>
       {showPoints && (
-        <Grid container>
+        <Grid container height={46}>
           <Grid item xs={2}>
             <FullSizeCenteredFlexBox>
               <QuestionNumber />
@@ -36,7 +36,7 @@ const PointsDisplay = () => {
           </Grid>
           <Grid item xs={3}>
             <FullSizeFlexBox justifyContent="flex-end">
-              <Box width="80%">
+              <Box width="80%" height="100%">
                 <BatBox button={true} backgroundColor="gold">
                   <TotalPoints points={totalPoints} />
                 </BatBox>

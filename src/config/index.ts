@@ -12,9 +12,11 @@ const domain = production ? 'https://detail-design-develop.com' : 'http://localh
 
 const batDelayMultiplier = production ? 1 : 0.75;
 
-const errorCheckURL = production
-  ? 'https://error-check.detail-design-develop.com/run-full-check'
-  : 'http://localhost:8002/run-full-check';
+// const errorCheckURL = production
+//   ? 'https://error-check.detail-design-develop.com/run-full-check'
+//   : 'http://localhost:8002/run-full-check';
+
+const errorCheckURL = 'https://error-check.detail-design-develop.com/run-full-check';
 
 const messages = {
   app: {

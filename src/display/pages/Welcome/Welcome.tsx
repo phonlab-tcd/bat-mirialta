@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { TypeAnimation } from 'react-type-animation';
 
 import Box from '@mui/material/Box';
 
@@ -18,9 +20,11 @@ import { useChats } from '@/store/chats';
 import { useVerbs } from '@/store/scripts';
 
 const Welcome = () => {
+  const { t } = useTranslation();
   useAvailables();
   useGetAvailables();
   useSetSelectedTaskFromActiveChat();
+  const [showHistory, setShowHistory] = useState(false);
   const { verbs } = useVerbs();
   const { chats } = useChats();
   const { session } = useSession();
@@ -36,6 +40,11 @@ const Welcome = () => {
     if (chats.length === 0 && session !== null) {
       populateChats(session.user.id);
     }
+
+    if (chats.filter((ch) => ch.complete && ch.points !== null).length > 0) {
+      console.log('chats:', chats);
+      setShowHistory(true);
+    }
   }, [session]);
 
   return (
@@ -44,6 +53,21 @@ const Welcome = () => {
       <CenteredFlexBox>
         <RobotImage />
       </CenteredFlexBox>
+      <CenteredFlexBox py={1} px={3}>
+        <TypeAnimation
+          sequence={[
+            1000,
+            String(t('instructions.welcome.text_01')),
+            200,
+            String(t('instructions.welcome.text_02')),
+            500,
+            String(t('instructions.welcome.text_03')),
+          ]}
+          wrapper="span"
+          cursor={true}
+          repeat={0}
+        />
+      </CenteredFlexBox>
 
       {session ? (
         <Box>
@@ -51,13 +75,17 @@ const Welcome = () => {
             <ContinueChatOrNew />
           </CenteredFlexBox>
 
-          <CenteredFlexBox mt={2}>
-            <Stats />
-          </CenteredFlexBox>
+          {showHistory ? (
+            <Box>
+              <CenteredFlexBox mt={2}>
+                <Stats />
+              </CenteredFlexBox>
 
-          <CenteredFlexBox mt={2}>
-            <ChatHistories />
-          </CenteredFlexBox>
+              <CenteredFlexBox mt={2}>
+                <ChatHistories />
+              </CenteredFlexBox>
+            </Box>
+          ) : null}
         </Box>
       ) : (
         <CenteredFlexBox mt={1}>

@@ -21,7 +21,7 @@ function App() {
   const { session, setSession } = useSession();
   const { setProfile } = useProfile();
   const [email] = useState('johnsloan88@hotmail.com');
-  const [password] = useState('xxxxxx');
+  const [password] = useState('A1!aaaaa');
 
   useEffect(() => {
     if (!production && session === null) {

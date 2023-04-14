@@ -18,7 +18,7 @@ const PointsAvailable = () => {
       setShowMostRecentPenalty(true);
       setTimeout(() => {
         setShowMostRecentPenalty(false);
-      }, 1000);
+      }, 2000);
     }
   }, [mostRecentPenalty]);
 
@@ -27,26 +27,30 @@ const PointsAvailable = () => {
       <Typography
         pt={-0.5}
         px={0.5}
-        variant="body1"
+        variant="h6"
         sx={{
           position: 'absolute',
+
           visibility:
             mostRecentPenalty === 0 ? 'hidden' : showMostRecentPenalty ? 'visible' : 'hidden',
           top: -5,
-          left: 80,
+          left: 50,
           color: 'red',
         }}
       >{`-${mostRecentPenalty}`}</Typography>
       <Typography
-        variant="body1"
-        // fontWeight="bold"
+        variant={showMostRecentPenalty ? 'h5' : 'h6'}
+        fontWeight={showMostRecentPenalty ? 'bold' : 'normal'}
         px={1}
         borderRadius={100}
         sx={{
           visibility: availablePoints !== 0 ? 'visible' : 'hidden',
         }}
       >
-        {`${availablePoints}pts`}
+        {availablePoints}
+      </Typography>
+      <Typography ml={-0.5} variant="body1">
+        pts
       </Typography>
     </FullSizeCenteredFlexBox>
   );
