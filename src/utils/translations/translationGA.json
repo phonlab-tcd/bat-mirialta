@@ -39,7 +39,8 @@
   "buttons": {
     "start": "Tús a Chur le Comhrá Nua",
     "seeAll": "Gach Rud a Fheicáil",
-    "continue": "Leanúint ar Aghaidh ag Comhrá"
+    "continue": "Leanúint ar Aghaidh ag Comhrá",
+    "loginSignup": "Logáil Isteach/Cruthaigh Cuntas Nua"
   },
   "months": {
     "jan": "Ean",

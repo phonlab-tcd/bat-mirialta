@@ -53,7 +53,7 @@ const Welcome = () => {
       <CenteredFlexBox>
         <RobotImage />
       </CenteredFlexBox>
-      <CenteredFlexBox py={1} px={3}>
+      <CenteredFlexBox py={1} px={3} minHeight={70}>
         <TypeAnimation
           sequence={[
             1000,

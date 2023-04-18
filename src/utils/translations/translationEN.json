@@ -39,7 +39,8 @@
   "buttons": {
     "start": "Start",
     "seeAll": "See All",
-    "continue": "Continue"
+    "continue": "Continue",
+    "loginSignup": "Login/Signup"
   },
   "months": {
     "jan": "Jan",
