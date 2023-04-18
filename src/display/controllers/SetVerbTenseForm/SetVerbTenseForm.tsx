@@ -18,6 +18,7 @@ import { useGenerateIntro } from '@/hooks';
 import usePopulateQuestionSet from '@/hooks/questions/usePopulateQuestionSet';
 import { postChat } from '@/services/supabase';
 import { useAdjacencyPairs } from '@/store/adjacencyPairs';
+import { useAnimatingOutro } from '@/store/animate';
 import { useSession } from '@/store/auth';
 import { useChats, useIntro, useOutro } from '@/store/chats';
 import { useShowAvailablePoints, useShowHome, useShowPoints } from '@/store/points';
@@ -52,6 +53,7 @@ const SetVerbTenseForm = () => {
   const populateQuestionSet = usePopulateQuestionSet();
   const generateIntro = useGenerateIntro();
   const { setAdjacencyPairs } = useAdjacencyPairs();
+  const { setAnimatingOutro } = useAnimatingOutro();
   const startChat = () => {
     if (session !== null) {
       setClickedStart(true);
@@ -76,9 +78,24 @@ const SetVerbTenseForm = () => {
       setOutro([]);
       setAdjacencyPairs([]);
       setMessageInputDisabled(true);
+      setAnimatingOutro(false);
       const intro = generateIntro();
 
       const randomQuestionSet = getRandomArrayFromArray(questionSet, noQuestions);
+
+      // in case of less than 10 questions, we repeat some
+      if (randomQuestionSet.length < 10) {
+        if (randomQuestionSet.length < 5) {
+          alert('There are not enough questions in this question set. Please try another.');
+        } else {
+          const length = randomQuestionSet.length;
+          const extraQsNeeded = 10 - length;
+          for (let i = 0; i < extraQsNeeded; i++) {
+            randomQuestionSet.push(randomQuestionSet[i]);
+          }
+        }
+      }
+
       postChat(
         session.user.id,
         selectedVerb !== undefined ? selectedVerb.name : null,

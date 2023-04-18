@@ -18,8 +18,7 @@ import { basePath, domain } from '@/config';
 import { title } from '@/config';
 import { FlexBox, FullSizeCenteredFlexBox } from '@/display/components/styled';
 import supabase from '@/services/supabase';
-import { useSession } from '@/store/auth';
-import { useProfile } from '@/store/auth';
+import { useProfile, useSession } from '@/store/auth';
 
 import abairFullLogo from '/assets/images/abair-logo-old.png';
 
@@ -116,7 +115,7 @@ function Header() {
               </FlexBox>
             </Grid>
             <Grid item xs={1.5}>
-              <FlexBox justifyContent="flex-end" alignItems="center" height={'100%'}>
+              <FlexBox justifyContent="center" alignItems="center" height={'100%'}>
                 {session ? (
                   <AbMenu
                     avatar={profile !== null ? profile.avatar : ''}

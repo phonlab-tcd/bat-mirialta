@@ -25,7 +25,6 @@ function usePopulateQuestionSet() {
     const formIDs = selectedForm !== undefined ? [selectedForm.id] : forms.map((verb) => verb.id);
 
     getQuestionSet(verbIDs, tenseIDs, formIDs).then((q_s) => {
-      console.log('q_s:', q_s);
       if (q_s !== undefined) {
         setQuestionSet(q_s.map((q) => q.id));
       } else {
