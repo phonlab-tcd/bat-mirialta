@@ -116,40 +116,46 @@ const SetVerbTenseForm = () => {
         <Typography align="center" variant={'h6'}>
           {t('headers.verb')}
         </Typography>
-        <AbSelect
-          handleChange={(e) => {
-            setSelectedVerb(availableVerbs.find((v) => v.name === e.target.value));
-          }}
-          value={selectedVerb !== undefined ? selectedVerb.name : 'all'}
-          label={'Verbs'}
-          items={availableVerbs.map((aV) => aV.name)}
-        />
+        <Box border={1} borderColor={'primary.dark'} borderRadius={1.5}>
+          <AbSelect
+            handleChange={(e) => {
+              setSelectedVerb(availableVerbs.find((v) => v.name === e.target.value));
+            }}
+            value={selectedVerb !== undefined ? selectedVerb.name : 'all'}
+            label={'Verbs'}
+            items={availableVerbs.map((aV) => aV.name)}
+          />
+        </Box>
       </Box>
       <Box mt={1}>
         <Typography align="center" variant={'h6'}>
           {t('headers.tense')}
         </Typography>
-        <AbSelect
-          handleChange={(e) => {
-            setSelectedTense(availableTenses.find((t) => t.name === e.target.value));
-          }}
-          value={selectedTense !== undefined ? selectedTense.name : 'all'}
-          label={'Tenses'}
-          items={availableTenses.map((aT) => aT.name)}
-        />
+        <Box border={1} borderColor={'primary.dark'} borderRadius={1.5}>
+          <AbSelect
+            handleChange={(e) => {
+              setSelectedTense(availableTenses.find((t) => t.name === e.target.value));
+            }}
+            value={selectedTense !== undefined ? selectedTense.name : 'all'}
+            label={'Tenses'}
+            items={availableTenses.map((aT) => aT.name)}
+          />
+        </Box>
       </Box>
       <Box mt={1}>
         <Typography align="center" variant={'h6'}>
           {t('headers.form')}
         </Typography>
-        <AbSelect
-          handleChange={(e) => {
-            setSelectedForm(availableForms.find((t) => t.name === e.target.value));
-          }}
-          value={selectedForm !== undefined ? selectedForm.name : 'all'}
-          label={'Forms'}
-          items={availableForms.map((aF) => aF.name)}
-        />
+        <Box border={1} borderColor={'primary.dark'} borderRadius={1.5}>
+          <AbSelect
+            handleChange={(e) => {
+              setSelectedForm(availableForms.find((t) => t.name === e.target.value));
+            }}
+            value={selectedForm !== undefined ? selectedForm.name : 'all'}
+            label={'Forms'}
+            items={availableForms.map((aF) => aF.name)}
+          />
+        </Box>
       </Box>
       <Box mt={3}>
         <BatBox button={true} width={'100%'}>
