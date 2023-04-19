@@ -4,7 +4,7 @@ const email = 'sloanjo@tcd.ie';
 
 const repository = 'https://github.com/JohnSloan8/bat-mirialta';
 
-const production = true;
+const production = false;
 
 const basePath = production ? '/applications/bat-mirialta/' : '/';
 
