@@ -21,26 +21,20 @@ const useGenerateResponseForIncorrect = () => {
     let nachError = false;
     let goError = false;
 
-
     // first, check if there was an error made with the preceding word
-    if (errorData.precedingWordOutput != "none") {
+    if (errorData.precedingWordOutput !== 'none') {
       precedingWordError = true;
-      if (errorData.precedingWordOutput === "niNotNior") {
+      if (errorData.precedingWordOutput === 'niNotNior') {
         niNotNior = true;
-      }
-      else if (errorData.precedingWordOutput === "niorNotNi") {
+      } else if (errorData.precedingWordOutput === 'niorNotNi') {
         niorNotNi = true;
-      }
-      else if (errorData.precedingWordOutput === "arNotAn") {
+      } else if (errorData.precedingWordOutput === 'arNotAn') {
         arNotAn = true;
-      }
-      else if (errorData.precedingWordOutput === "anNotAr") {
+      } else if (errorData.precedingWordOutput === 'anNotAr') {
         anNotAr = true;
-      }
-      else if (errorData.precedingWordOutput === "nachError") {
+      } else if (errorData.precedingWordOutput === 'nachError') {
         nachError = true;
-      }
-      else if (errorData.precedingWordOutput === "goError") {
+      } else if (errorData.precedingWordOutput === 'goError') {
         goError = true;
       }
     }
@@ -72,6 +66,7 @@ const useGenerateResponseForIncorrect = () => {
 
     // return preceding word message
     if (precedingWordError) {
+      console.log('precedingWordError:', precedingWordError);
       if (niNotNior) {
         responseObject = pushRandomResponse(
           responseObject,
@@ -81,8 +76,7 @@ const useGenerateResponseForIncorrect = () => {
           'niNotNior',
           {},
         );
-      }
-      else if (niorNotNi) {
+      } else if (niorNotNi) {
         responseObject = pushRandomResponse(
           responseObject,
           'feedback',
@@ -91,8 +85,7 @@ const useGenerateResponseForIncorrect = () => {
           'niorNotNi',
           {},
         );
-      }
-      else if (anNotAr) {
+      } else if (anNotAr) {
         responseObject = pushRandomResponse(
           responseObject,
           'feedback',
@@ -101,8 +94,7 @@ const useGenerateResponseForIncorrect = () => {
           'anNotAr',
           {},
         );
-      }
-      else if (arNotAn) {
+      } else if (arNotAn) {
         responseObject = pushRandomResponse(
           responseObject,
           'feedback',
@@ -111,8 +103,7 @@ const useGenerateResponseForIncorrect = () => {
           'arNotAn',
           {},
         );
-      }
-      else if (nachError) {
+      } else if (nachError) {
         responseObject = pushRandomResponse(
           responseObject,
           'feedback',
@@ -121,8 +112,7 @@ const useGenerateResponseForIncorrect = () => {
           'nachError',
           {},
         );
-      }
-      else if (goError) {
+      } else if (goError) {
         responseObject = pushRandomResponse(
           responseObject,
           'feedback',
@@ -132,11 +122,9 @@ const useGenerateResponseForIncorrect = () => {
           {},
         );
       }
-
     }
 
     // return conjugation related message
-
     else if (wrongForm) {
       responseObject = pushRandomResponse(
         responseObject,
