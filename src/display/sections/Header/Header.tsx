@@ -47,12 +47,13 @@ function Header() {
   useEffect(() => {
     if (profile) {
       // console.log('profile:', profile);
-      if (profile.username !== null) {
-        setItems([profile.username, 'profile', 'logout']);
-      } else {
-        setItems(['log in/sign up']);
-      }
+      // if (profile.username !== null) {
+      setItems([profile.username === null ? 'anon' : profile.username, 'profile', 'logout']);
+      // } else {
+      //   setItems(['log in/sign up']);
+      // }
     } else {
+      setItems(['log in/sign up']);
       // console.log('profile:', profile);
     }
   }, [profile]);

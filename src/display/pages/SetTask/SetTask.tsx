@@ -44,37 +44,39 @@ const SetTask = () => {
       <CenteredFlexBox p={2}>
         <RobotImage />
       </CenteredFlexBox>
-      <CenteredFlexBox py={1} px={3}>
-        <TypeAnimation
-          style={{ whiteSpace: 'pre-line', minHeight: 130 }}
-          sequence={[
-            1000,
-            String(t('instructions.chooseTask.text_01')),
-            200,
-            String(t('instructions.chooseTask.text_02')),
-            200,
-            String(t('instructions.chooseTask.text_03')),
-            500,
-            String(t('instructions.chooseTask.text_04')),
-            200,
-            String(t('instructions.chooseTask.text_05')),
-            200,
-            String(t('instructions.chooseTask.text_06')),
-            500,
-            String(t('instructions.chooseTask.text_07')),
-            500,
-            String(t('instructions.chooseTask.text_08')),
-            400,
-            String(t('instructions.chooseTask.text_09')),
-            400,
-            String(t('instructions.chooseTask.text_10')),
-            500,
-            String(t('instructions.chooseTask.text_11')),
-          ]}
-          wrapper="span"
-          cursor={true}
-          repeat={0}
-        />
+      <CenteredFlexBox py={1}>
+        <Box width={400} height={130} px={2}>
+          <TypeAnimation
+            style={{ whiteSpace: 'pre', minHeight: 130, width: '100%' }}
+            sequence={[
+              1000,
+              String(t('instructions.chooseTask.text_01')),
+              200,
+              String(t('instructions.chooseTask.text_02')),
+              200,
+              String(t('instructions.chooseTask.text_03')),
+              500,
+              String(t('instructions.chooseTask.text_04')),
+              200,
+              String(t('instructions.chooseTask.text_05')),
+              200,
+              String(t('instructions.chooseTask.text_06')),
+              500,
+              String(t('instructions.chooseTask.text_07')),
+              500,
+              String(t('instructions.chooseTask.text_08')),
+              400,
+              String(t('instructions.chooseTask.text_09')),
+              400,
+              String(t('instructions.chooseTask.text_10')),
+              500,
+              String(t('instructions.chooseTask.text_11')),
+            ]}
+            wrapper="span"
+            cursor={true}
+            repeat={0}
+          />
+        </Box>
       </CenteredFlexBox>
       <CenteredFlexBox>
         <SetVerbTenseForm />

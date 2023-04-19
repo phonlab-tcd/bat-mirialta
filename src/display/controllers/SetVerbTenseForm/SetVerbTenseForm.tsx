@@ -116,7 +116,7 @@ const SetVerbTenseForm = () => {
         <Typography align="center" variant={'h6'}>
           {t('headers.verb')}
         </Typography>
-        <Box border={1} borderColor={'primary.dark'} borderRadius={1.5}>
+        <Box border={2} borderColor={'primary.dark'} borderRadius={1.5}>
           <AbSelect
             handleChange={(e) => {
               setSelectedVerb(availableVerbs.find((v) => v.name === e.target.value));
@@ -131,7 +131,7 @@ const SetVerbTenseForm = () => {
         <Typography align="center" variant={'h6'}>
           {t('headers.tense')}
         </Typography>
-        <Box border={1} borderColor={'primary.dark'} borderRadius={1.5}>
+        <Box border={2} borderColor={'primary.dark'} borderRadius={1.5}>
           <AbSelect
             handleChange={(e) => {
               setSelectedTense(availableTenses.find((t) => t.name === e.target.value));
@@ -146,7 +146,7 @@ const SetVerbTenseForm = () => {
         <Typography align="center" variant={'h6'}>
           {t('headers.form')}
         </Typography>
-        <Box border={1} borderColor={'primary.dark'} borderRadius={1.5}>
+        <Box border={2} borderColor={'primary.dark'} borderRadius={1.5}>
           <AbSelect
             handleChange={(e) => {
               setSelectedForm(availableForms.find((t) => t.name === e.target.value));
