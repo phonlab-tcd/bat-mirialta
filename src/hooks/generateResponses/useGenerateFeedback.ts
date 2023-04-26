@@ -28,8 +28,10 @@ const useGenerateFeedback = () => {
       currentQuestion !== undefined
     ) {
       let responseObject: ResponseModel[] = [];
-      const correct = currentAdjacencyPair.text === currentQuestion.answer ? true : false;
-
+      const correct =
+        currentAdjacencyPair.text.toLowerCase() === currentQuestion.answer.toLowerCase()
+          ? true
+          : false;
       if (correct) {
         responseObject = generateResponseForCorrect(
           currentAdjacencyPair.text,

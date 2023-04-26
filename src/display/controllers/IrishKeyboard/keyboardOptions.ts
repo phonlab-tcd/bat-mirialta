@@ -1,16 +1,28 @@
 const keyboardOptions = {
   layout: {
-    default: ['{fada} a e i o u {bksp}', '{urú} b c d f g p t', '{séimhiú} n m s r l h {space}'],
-    fada: ['{fada} á é í ó ú {bksp}', '{urú} b c d f g p t', '{séimhiú} n m s r l h {space}'],
+    default: [
+      "- a e i o u '",
+      'b c d f g p t',
+      'n m s r l h',
+      '{fada} {urú} {séimhiú} {space} {bksp}',
+    ],
+    fada: [
+      "- á é í ó ú '",
+      'b c d f g p t',
+      'n m s r l h',
+      '{fada} {urú} {séimhiú} {space} {bksp}',
+    ],
     urú: [
-      '{fada} a e i o u {bksp}',
-      '{urú} mb gc nd bhf ng bp dt',
-      '{séimhiú} n m s r l h {space}',
+      "- a e i o u '",
+      'mb gc nd bhf ng bp dt',
+      'n m s r l h',
+      '{fada} {urú} {séimhiú} {space} {bksp}',
     ],
     séimhiú: [
-      '{fada} a e i o u {bksp}',
-      '{urú} bh ch dh fh gh bh th',
-      '{séimhiú} n mh sh r l h {space}',
+      "- a e i o u '",
+      'bh ch dh fh gh bh th',
+      'n mh sh r l h',
+      '{fada} {urú} {séimhiú} {space} {bksp}',
     ],
   },
   display: {
@@ -26,7 +38,7 @@ const keyboardOptions = {
     {
       class: 'defaults',
       buttons:
-        '{fada} a e i o u á é í ó ú {urú} b c d f g p t mb gc nd bhf ng bp dt {séimhiú} n m s r l h bh ch dh fh gh bh th mh sh {space} {bksp}',
+        "{fada} a e i o u á é í ó ú ' - {urú} b c d f g p t mb gc nd bhf ng bp dt {séimhiú} n m s r l h bh ch dh fh gh bh th mh sh {space} {bksp}",
     },
     {
       class: 'fadas',

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TypeAnimation } from 'react-type-animation';
 
@@ -24,7 +24,7 @@ const Welcome = () => {
   useAvailables();
   useGetAvailables();
   useSetSelectedTaskFromActiveChat();
-  const [showHistory, setShowHistory] = useState(false);
+  // const [showHistory, setShowHistory] = useState(false);
   const { verbs } = useVerbs();
   const { chats } = useChats();
   const { session } = useSession();
@@ -41,10 +41,10 @@ const Welcome = () => {
       populateChats(session.user.id);
     }
 
-    if (chats.filter((ch) => ch.complete && ch.points !== null).length > 0) {
-      console.log('chats:', chats);
-      setShowHistory(true);
-    }
+    // if (chats.filter((ch) => ch.complete && ch.points !== null).length > 0) {
+    //   console.log('chats:', chats);
+    //   // setShowHistory(true);
+    // }
   }, [session]);
 
   return (
@@ -53,7 +53,7 @@ const Welcome = () => {
       <CenteredFlexBox>
         <RobotImage />
       </CenteredFlexBox>
-      <CenteredFlexBox py={1} px={3}>
+      <CenteredFlexBox py={1} px={3} minHeight={70}>
         <TypeAnimation
           sequence={[
             1000,
@@ -75,17 +75,15 @@ const Welcome = () => {
             <ContinueChatOrNew />
           </CenteredFlexBox>
 
-          {showHistory ? (
-            <Box>
-              <CenteredFlexBox mt={2}>
-                <Stats />
-              </CenteredFlexBox>
+          <Box>
+            <CenteredFlexBox mt={2}>
+              <Stats />
+            </CenteredFlexBox>
 
-              <CenteredFlexBox mt={2}>
-                <ChatHistories />
-              </CenteredFlexBox>
-            </Box>
-          ) : null}
+            <CenteredFlexBox mt={2}>
+              <ChatHistories />
+            </CenteredFlexBox>
+          </Box>
         </Box>
       ) : (
         <CenteredFlexBox mt={1}>

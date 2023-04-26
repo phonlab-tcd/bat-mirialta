@@ -18,6 +18,7 @@ import { useGenerateIntro } from '@/hooks';
 import usePopulateQuestionSet from '@/hooks/questions/usePopulateQuestionSet';
 import { postChat } from '@/services/supabase';
 import { useAdjacencyPairs } from '@/store/adjacencyPairs';
+import { useAnimatingOutro } from '@/store/animate';
 import { useSession } from '@/store/auth';
 import { useChats, useIntro, useOutro } from '@/store/chats';
 import { useShowAvailablePoints, useShowHome, useShowPoints } from '@/store/points';
@@ -52,6 +53,7 @@ const SetVerbTenseForm = () => {
   const populateQuestionSet = usePopulateQuestionSet();
   const generateIntro = useGenerateIntro();
   const { setAdjacencyPairs } = useAdjacencyPairs();
+  const { setAnimatingOutro } = useAnimatingOutro();
   const startChat = () => {
     if (session !== null) {
       setClickedStart(true);
@@ -76,9 +78,24 @@ const SetVerbTenseForm = () => {
       setOutro([]);
       setAdjacencyPairs([]);
       setMessageInputDisabled(true);
+      setAnimatingOutro(false);
       const intro = generateIntro();
 
       const randomQuestionSet = getRandomArrayFromArray(questionSet, noQuestions);
+
+      // in case of less than 10 questions, we repeat some
+      if (randomQuestionSet.length < 10) {
+        if (randomQuestionSet.length < 5) {
+          alert('There are not enough questions in this question set. Please try another.');
+        } else {
+          const length = randomQuestionSet.length;
+          const extraQsNeeded = 10 - length;
+          for (let i = 0; i < extraQsNeeded; i++) {
+            randomQuestionSet.push(randomQuestionSet[i]);
+          }
+        }
+      }
+
       postChat(
         session.user.id,
         selectedVerb !== undefined ? selectedVerb.name : null,
@@ -99,40 +116,46 @@ const SetVerbTenseForm = () => {
         <Typography align="center" variant={'h6'}>
           {t('headers.verb')}
         </Typography>
-        <AbSelect
-          handleChange={(e) => {
-            setSelectedVerb(availableVerbs.find((v) => v.name === e.target.value));
-          }}
-          value={selectedVerb !== undefined ? selectedVerb.name : 'all'}
-          label={'Verbs'}
-          items={availableVerbs.map((aV) => aV.name)}
-        />
+        <Box border={2} borderColor={'primary.dark'} borderRadius={1.5}>
+          <AbSelect
+            handleChange={(e) => {
+              setSelectedVerb(availableVerbs.find((v) => v.name === e.target.value));
+            }}
+            value={selectedVerb !== undefined ? selectedVerb.name : 'all'}
+            label={'Verbs'}
+            items={availableVerbs.map((aV) => aV.name)}
+          />
+        </Box>
       </Box>
       <Box mt={1}>
         <Typography align="center" variant={'h6'}>
           {t('headers.tense')}
         </Typography>
-        <AbSelect
-          handleChange={(e) => {
-            setSelectedTense(availableTenses.find((t) => t.name === e.target.value));
-          }}
-          value={selectedTense !== undefined ? selectedTense.name : 'all'}
-          label={'Tenses'}
-          items={availableTenses.map((aT) => aT.name)}
-        />
+        <Box border={2} borderColor={'primary.dark'} borderRadius={1.5}>
+          <AbSelect
+            handleChange={(e) => {
+              setSelectedTense(availableTenses.find((t) => t.name === e.target.value));
+            }}
+            value={selectedTense !== undefined ? selectedTense.name : 'all'}
+            label={'Tenses'}
+            items={availableTenses.map((aT) => aT.name)}
+          />
+        </Box>
       </Box>
       <Box mt={1}>
         <Typography align="center" variant={'h6'}>
           {t('headers.form')}
         </Typography>
-        <AbSelect
-          handleChange={(e) => {
-            setSelectedForm(availableForms.find((t) => t.name === e.target.value));
-          }}
-          value={selectedForm !== undefined ? selectedForm.name : 'all'}
-          label={'Forms'}
-          items={availableForms.map((aF) => aF.name)}
-        />
+        <Box border={2} borderColor={'primary.dark'} borderRadius={1.5}>
+          <AbSelect
+            handleChange={(e) => {
+              setSelectedForm(availableForms.find((t) => t.name === e.target.value));
+            }}
+            value={selectedForm !== undefined ? selectedForm.name : 'all'}
+            label={'Forms'}
+            items={availableForms.map((aF) => aF.name)}
+          />
+        </Box>
       </Box>
       <Box mt={3}>
         <BatBox button={true} width={'100%'}>
