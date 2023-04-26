@@ -2,10 +2,10 @@
   "pageTitles": {
     "home": "Baile",
     "chat": "Comhrá",
-    "history": "Mo Stair"
+    "history": "M'obair go dtí see"
   },
   "headers": {
-    "stats": "Mo Staitisticí",
+    "stats": "Mo Chuid Staitisticí",
     "verb": "Briathar",
     "tense": "Aimsir",
     "form": "Foirm"
@@ -14,7 +14,7 @@
     "welcome": {
       "text_01": "Welcome to ",
       "text_02": "Welcome to Bat Mírialta,",
-      "text_03": "Welcome to Bat Mírialta, your irregular verb helper."
+      "text_03": "Fáilte isteach sa Bhat Mírialta, do chuiditheoir le briathra mírialta."
     },
     "chooseTask": {
       "text_01": "Choose a verb, ",
@@ -27,19 +27,19 @@
       "text_08": "Choose a verb, tense, and form to practice.\nI will ask you 10 'fill in the blank' questions.\nI can help by giving hints and suggestions.\nThere are 10 points per question.",
       "text_09": "Choose a verb, tense, and form to practice.\nI will ask you 10 'fill in the blank' questions.\nI can help by giving hints and suggestions.\nThere are 10 points per question..",
       "text_10": "Choose a verb, tense, and form to practice.\nI will ask you 10 'fill in the blank' questions.\nI can help by giving hints and suggestions.\nThere are 10 points per question...",
-      "text_11": "Choose a verb, tense, and form to practice.\nI will ask you 10 'fill in the blank' questions.\nI can help by giving hints and suggestions.\nThere are 10 points per question...\nCan you score 100? "
+      "text_11": "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 10 gceist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.\nTá 10 bpointe ag dul ar gach ceist...\nAn bhfuil tú in ann 100 a shroichint? "
     }
   },
   "subHeaders": {
-    "played": "A Imrítear",
+    "played": "Déanta",
     "average": "Meánscór",
     "score": "Scór",
-    "all": "go léir"
+    "all": "Iomlán"
   },
   "buttons": {
-    "start": "Tús a Chur le Comhrá Nua",
-    "seeAll": "Gach Rud a Fheicáil",
-    "continue": "Leanúint ar Aghaidh ag Comhrá"
+    "start": "Cuir Tús le Comhrá Nua",
+    "seeAll": "Féach gach rud",
+    "continue": "Lean ar Aghaidh"
   },
   "months": {
     "jan": "Ean",
@@ -60,45 +60,45 @@
     "intro": {
       "greeting": {
         "naive": {
-          "text_01": "Hi {{name}}!",
-          "text_02": "Welcome {{name}}!"
+          "text_01": "Haigh {{name}}!",
+          "text_02": "Fáilte isteach {{name}}!"
         }
       },
       "taskDescription": {
         "basic": {
-          "text_01": "We will practise {{verb}}, {{tense}}, and {{form}}",
-          "text_02": "In this chat we will use {{verb}}, {{tense}}, and {{form}}"
+          "text_01": "Déanaimis cleachtadh ar {{verb}}, {{tense}}, agus {{form}}",
+          "text_02": "Sa chluiche seo úsáidfimid {{verb}}, {{tense}}, agus {{form}}"
         }
       },
       "questionDescription": {
         "basic": {
-          "text_01": "10 questions in total, with 10 points for each"
+          "text_01": "10 gceist san iomlán, le 10 bpointe an ceann"
         }
       },
       "getReady": {
         "basic": {
-          "text_01": "Ok, here comes your first question",
-          "text_02": "get ready for your first question"
+          "text_01": "Seo chugat do chéad cheist",
+          "text_02": "réidh don chéad cheist? Ar aghaidh linn"
         }
       }
     },
     "outro": {
       "beginning": {
         "basic": {
-          "text_01": "Well done, that's the last question {{name}}!",
-          "text_02": "Congratulations, you are now finished {{name}}!"
+          "text_01": "Maith thú, b'shin í an cheist dheiridh {{name}}!",
+          "text_02": "An-mhaith, táimid ag an deireadh anois {{name}}!"
         }
       },
       "points": {
         "basic": {
-          "text_01": "You scored {{points}} points"
+          "text_01": "Fuair tú {{points}} (b)p(h)ointe"
         }
       },
 
       "ending": {
         "basic": {
-          "text_01": "I look forward to seeing you again soon",
-          "text_02": "Keep up the good work!"
+          "text_01": "Táim ag tnúth le bualadh leat arís go luath",
+          "text_02": "Coinnigh suas é!"
         }
       }
     }
@@ -108,95 +108,112 @@
     "incorrect": {
       "general": {
         "notice": {
-          "text_01": "GA - níl sé ceart",
-          "text_02": "GA - mícheart"
+          "text_01": "ní hé sin é",
+          "text_02": "ní hea"
         }
       },
       "precedingWord": {
         "niNotNior": {
-          "text_01": "GA - hey, should be ní",
-          "text_02": "GA - not níor, something else"
+          "text_01": "bain triail as 'ní'",
+          "text_02": "an bhfuil tú cinnte faoi 'níor'?"
         },
         "niorNotNi": {
-          "text_01": "GA - hey, should be níor",
-          "text_02": "GA - not ní, something else"
+          "text_01": "bain triail as 'níor'",
+          "text_02": "an bhfuil tú cinnte faoi 'ní'?"
         },
         "anNotAr": {
-          "text_01": "GA - hey, should be an",
-          "text_02": "GA - not ar, something else"
+          "text_01": "bain triail as 'an' ",
+          "text_02": "an bhfuil tú cinnte faoi 'ar'?"
         },
         "arNotAn": {
-          "text_01": "GA - hey, should be ar",
-          "text_02": "GA - not an, something else"
+          "text_01": "bain triail as 'ar'",
+          "text_02": "an bhfuil tú cinnte faoi 'an'?"
         },
         "nachError": {
-          "text_01": "GA - in this case, 'nach' must be put before the verb",
-          "text_02": "GA - make sure nach isn't left out"
+          "text_01": "sa chás seo úsáid 'nach' roimh an mbriathar",
+          "text_02": "déan cinnte nach bhfuil an focal 'nach' ar lár"
         },
         "goError": {
-          "text_01": "GA - in this case, 'go' must be put before the verb",
-          "text_02": "GA - make sure go isn't left out"
+          "text_01": "sa chás seo úsáid 'go' roimh an mbriathar",
+          "text_02": "déan cinnte nach bhfuil an focal 'go' ar lár"
+        }
+      },
+      "uruSeimhiu": {
+        "seimhiuLeftOut": {
+          "text_01": "looks like you left out a seimhiu"
+        },
+        "uruLeftOut": {
+          "text_01": "looks like you left out an uru"
+        },
+        "extraSeimhiu": {
+          "text_01": "looks like you addded in an unneeded seimhiu"
+        },
+        "extraUru": {
+          "text_01": "looks like you addded in an unneeded uru"
+        },
+        "wrongUru": {
+          "text_01": "looks like you addded in an unneeded uru"
         }
       },
       "fada": {
         "omitted": {
-          "text_01": "GA - hey, you left out a fada",
-          "text_02": "GA - looks like no fada",
-          "text_03": "GA - add in a fada somewhere"
+          "text_01": "d'fhág tú an síneadh fada ar lár",
+          "text_02": "an chuma air nár úsáid tú an síneadh fada",
+          "text_03": "caithfidh tú síneadh fada a chur in áit éigin"
         },
         "extra": {
-          "text_01": "GA - wow, no need for that fada",
-          "text_02": "GA - you don't always need a fada"
+          "text_01": "féachann sé go bhfuil síneadh fada sa bhreis agat",
+          "text_02": "tá síneadh fada agat nach bhfuil gá leis"
         }
       },
       "conjugation": {
         "form": {
-          "text_01": "GA - tense is right, but check the form again",
-          "text_02": "GA - the form is incorrect"
+          "text_01": "tá an aimsir ceart, ach féach ar an bhfoirm arís",
+          "text_02": "níl an fhoirm cheart anseo"
         },
         "verb": {
-          "text_01": "GA - make sure to use the correct verb",
-          "text_02": "GA - wrong verb"
+          "text_01": "bí cinnte go bhfuil an briathar ceart in úsáid agat",
+          "text_02": "briathar mícheart"
         },
         "tense": {
-          "text_01": "GA - remember to use the right tense",
-          "text_02": "GA - wrong tense"
+          "text_01": "bí cinnte go bhfuil an aimsir cheart in úsáid agat",
+          "text_02": "aimsir mhícheart"
         },
         "person": {
-          "text_01": "GA - check who is doing the action"
+          "text_01": "cén phearsa atá i gceist?"
         }
       },
       "typo": {
         "one": {
-          "text_01": "GA - watch out for any minor typos!",
-          "text_02": "GA - careful about typos now",
-          "text_03": "GA - hmmm, is there a typo in there?"
+          "text_01": "bí ag faire amach do bhotúin chló!",
+          "text_02": "seachain botúin chló",
+          "text_03": "hmmm, an bhfuil botún sa chló agat?"
         }
       },
       "broadSlender": {
         "againstRule": {
-          "text_01": "GA - remember the caol le caol, leathan le leathan rule",
-          "text_02": "GA - watch out for the broad/slender vowels"
+          "text_01": "cuimhnigh ar an riail caol-le-caol agus leathan-le-leathan",
+          "text_02": "coimeád súil ar leathan agus caol"
         }
       },
       "other": {
         "error": {
-          "text_01": "GA - you might want to rethink that one",
-          "text_02": "GA - have another go"
+          "text_01": "féach ar an gceann seo arís",
+          "text_02": "bain triail eile as seo"
         }
       }
     },
     "correct": {
       "general": {
         "notice": {
-          "text_01": "tá sé ceart",
+          "text_01": "tá an ceart agat",
           "text_02": "foirfe"
         },
         "followUp": {
           "text_01": "maith thú",
           "text_02": "maith thú {{name}}",
-          "text_03": "go hiontach",
-          "text_04": "go hiontach {{name}}"
+          "text_03": "ar fheabhas",
+          "text_04": "ar fheabhas {{name}}"
         }
       }
     }

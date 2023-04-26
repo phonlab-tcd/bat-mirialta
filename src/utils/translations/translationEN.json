@@ -139,7 +139,23 @@
           "text_02": "make sure go isn't left out"
         }
       },
-
+      "uruSeimhiu": {
+        "seimhiuLeftOut": {
+          "text_01": "looks like you left out a seimhiu"
+        },
+        "uruLeftOut": {
+          "text_01": "looks like you left out an uru"
+        },
+        "extraSeimhiu": {
+          "text_01": "looks like you addded in an unneeded seimhiu"
+        },
+        "extraUru": {
+          "text_01": "looks like you addded in an unneeded uru"
+        },
+        "wrongUru": {
+          "text_01": "looks like you addded in an unneeded uru"
+        }
+      },
       "fada": {
         "omitted": {
           "text_01": "hey, you left out a fada",
