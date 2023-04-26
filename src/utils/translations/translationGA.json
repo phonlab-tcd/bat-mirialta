@@ -12,21 +12,21 @@
   },
   "instructions": {
     "welcome": {
-      "text_01": "Welcome to ",
-      "text_02": "Welcome to Bat Mírialta,",
+      "text_01": "Fáilte isteach sa Bhat Mírialta ",
+      "text_02": "Fáilte isteach sa Bhat Mírialta, do chuiditheoir ",
       "text_03": "Fáilte isteach sa Bhat Mírialta, do chuiditheoir le briathra mírialta."
     },
     "chooseTask": {
-      "text_01": "Choose a verb, ",
-      "text_02": "Choose a verb, tense,",
-      "text_03": "Choose a verb, tense, and form to practice.\n",
-      "text_04": "Choose a verb, tense, and form to practice.\nI will ask you 10",
-      "text_05": "Choose a verb, tense, and form to practice.\nI will ask you 10 'fill in the blank'",
-      "text_06": "Choose a verb, tense, and form to practice.\nI will ask you 10 'fill in the blank' questions.",
-      "text_07": "Choose a verb, tense, and form to practice.\nI will ask you 10 'fill in the blank' questions.\nI can help by giving hints and suggestions.",
-      "text_08": "Choose a verb, tense, and form to practice.\nI will ask you 10 'fill in the blank' questions.\nI can help by giving hints and suggestions.\nThere are 10 points per question.",
-      "text_09": "Choose a verb, tense, and form to practice.\nI will ask you 10 'fill in the blank' questions.\nI can help by giving hints and suggestions.\nThere are 10 points per question..",
-      "text_10": "Choose a verb, tense, and form to practice.\nI will ask you 10 'fill in the blank' questions.\nI can help by giving hints and suggestions.\nThere are 10 points per question...",
+      "text_01": "Pioc briathar, ",
+      "text_02": "Pioc briathar, aimsir,",
+      "text_03": "Pioc briathar, aimsir, agus foirm.\n",
+      "text_04": "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 10 gceist ort le",
+      "text_05": "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 10 gceist ort le 'líon na bearnaí'",
+      "text_06": "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 10 gceist ort le 'líon na bearnaí' iontu.",
+      "text_07": "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 10 gceist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.",
+      "text_08": "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 10 gceist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.\nTá 10 bpointe ag dul ar gach ceist.",
+      "text_09": "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 10 gceist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.\nTá 10 bpointe ag dul ar gach ceist..",
+      "text_10": "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 10 gceist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.\nTá 10 bpointe ag dul ar gach ceist...",
       "text_11": "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 10 gceist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.\nTá 10 bpointe ag dul ar gach ceist...\nAn bhfuil tú in ann 100 a shroichint? "
     }
   },
