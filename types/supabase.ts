@@ -338,6 +338,7 @@ export interface Database {
           updated_at: string | null;
           username: string | null;
           year: number | null;
+          language_preference: string;
         };
         Insert: {
           avatar?: string;
@@ -350,6 +351,7 @@ export interface Database {
           updated_at?: string | null;
           username?: string | null;
           year?: number | null;
+          language_preference?: string;
         };
         Update: {
           avatar?: string;
@@ -362,6 +364,7 @@ export interface Database {
           updated_at?: string | null;
           username?: string | null;
           year?: number | null;
+          language_preference?: string;
         };
       };
       synthesis_requests: {

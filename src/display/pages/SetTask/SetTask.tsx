@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TypeAnimation } from 'react-type-animation';
 
@@ -25,7 +25,8 @@ const SetTask = () => {
   const { session } = useSession();
   const populateVerbsTensesForms = usePopulateVerbsTensesForms();
   const populateChats = usePopulateChats();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [curLang] = useState(i18n.language);
 
   useEffect(() => {
     // reset the question set, so no redirect to chat
@@ -38,16 +39,22 @@ const SetTask = () => {
     }
   }, [session]);
 
+  useEffect(() => {
+    if (i18n.language !== curLang) {
+      window.location.reload();
+    }
+  }, [i18n.language]);
+
   return (
     <Box>
       <Meta title="SetTask" />
-      <CenteredFlexBox p={2}>
+      <CenteredFlexBox pt={2}>
         <RobotImage />
       </CenteredFlexBox>
-      <CenteredFlexBox py={1}>
-        <Box width={400} height={130} px={2}>
+      <CenteredFlexBox py={1} px={2}>
+        <Box width={400} height={170} px={1}>
           <TypeAnimation
-            style={{ whiteSpace: 'pre', minHeight: 130, width: '100%' }}
+            style={{ whiteSpace: 'pre-wrap', minHeight: 170, width: '100%' }}
             sequence={[
               1000,
               String(t('instructions.chooseTask.text_01')),

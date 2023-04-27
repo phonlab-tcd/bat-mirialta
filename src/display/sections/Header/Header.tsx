@@ -18,6 +18,7 @@ import { basePath, domain } from '@/config';
 import { title } from '@/config';
 import { FlexBox, FullSizeCenteredFlexBox } from '@/display/components/styled';
 import supabase from '@/services/supabase';
+import { updateProfileLanguage } from '@/services/supabase';
 import { useProfile, useSession } from '@/store/auth';
 
 import abairFullLogo from '/assets/images/abair-logo-old.png';
@@ -59,7 +60,13 @@ function Header() {
   }, [profile]);
 
   const changeLang = () => {
-    i18n.language === 'en' ? i18n.changeLanguage('ga') : i18n.changeLanguage('en');
+    if (i18n.language === 'en') {
+      i18n.changeLanguage('ga');
+      updateProfileLanguage('ga');
+    } else {
+      i18n.changeLanguage('en');
+      updateProfileLanguage('en');
+    }
   };
   return (
     <Box sx={{ flexGrow: 1 }}>

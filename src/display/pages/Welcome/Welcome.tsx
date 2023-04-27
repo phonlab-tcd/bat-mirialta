@@ -54,19 +54,21 @@ const Welcome = () => {
         <RobotImage />
       </CenteredFlexBox>
       <CenteredFlexBox py={1} px={3} minHeight={70}>
-        <TypeAnimation
-          sequence={[
-            1000,
-            String(t('instructions.welcome.text_01')),
-            200,
-            String(t('instructions.welcome.text_02')),
-            500,
-            String(t('instructions.welcome.text_03')),
-          ]}
-          wrapper="span"
-          cursor={true}
-          repeat={0}
-        />
+        <Box px={1} width={400}>
+          <TypeAnimation
+            sequence={[
+              1000,
+              String(t('instructions.welcome.text_01')),
+              200,
+              String(t('instructions.welcome.text_02')),
+              500,
+              String(t('instructions.welcome.text_03')),
+            ]}
+            wrapper="span"
+            cursor={true}
+            repeat={0}
+          />
+        </Box>
       </CenteredFlexBox>
 
       {session ? (

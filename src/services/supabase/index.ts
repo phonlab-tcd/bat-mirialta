@@ -14,10 +14,11 @@ import getAvailableTenses from './getAvailableTenses';
 import getAvailableVerbs from './getAvailableVerbs';
 import getForms from './getForms';
 import getHint from './getHint';
-import getProfile from './getProfile';
 import getTenses from './getTenses';
 import getVerbs from './getVerbs';
 import getAllPoints from './points/getAllPoints';
+import getProfile from './profiles/getProfile';
+import updateProfileLanguage from './profiles/updateProfileLanguage';
 import getAllQuestions from './questions/getAllQuestions';
 import getQuestion from './questions/getQuestion';
 import getQuestionSet from './questions/getQuestionSet';
@@ -37,6 +38,7 @@ export {
   getTenses,
   getForms,
   getProfile,
+  updateProfileLanguage,
   postAdjacencyPair,
   patchAdjacencyPairText,
   patchAdjacencyPairFeedback,

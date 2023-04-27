@@ -33,7 +33,6 @@ const ChatHistories = ({ showHowMany = 3 }: ChatHistoriesProps) => {
       <Box mb={2}>
         <Typography variant={'h6'} align="center">
           {t('pageTitles.history')}
-          {/* {t('errorFeedback.conjugation.form', { context: '01' })} */}
         </Typography>
 
         {chats
