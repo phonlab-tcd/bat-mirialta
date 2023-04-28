@@ -7,9 +7,17 @@ interface AbSelectProps {
   handleChange: (e: SelectChangeEvent<string | number>) => void;
   items: string[] | number[];
   all?: boolean;
+  allDisplay?: string | null;
 }
 
-const AbSelect = ({ label, value, handleChange, items, all = true }: AbSelectProps) => {
+const AbSelect = ({
+  label,
+  value,
+  handleChange,
+  items,
+  all = true,
+  allDisplay = '',
+}: AbSelectProps) => {
   return (
     <Select
       label={label}
@@ -19,7 +27,7 @@ const AbSelect = ({ label, value, handleChange, items, all = true }: AbSelectPro
     >
       {all && (
         <MenuItem key={'all'} value={'all'}>
-          all
+          {allDisplay}
         </MenuItem>
       )}
       {items.map((item, i) => (

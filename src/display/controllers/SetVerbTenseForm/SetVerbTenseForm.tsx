@@ -108,6 +108,7 @@ const SetVerbTenseForm = () => {
         navigate(`${basePath}chat`);
       });
     }
+    console.log('availableVerbs:', availableVerbs);
   }, [questionSet]);
 
   return (
@@ -124,6 +125,7 @@ const SetVerbTenseForm = () => {
             value={selectedVerb !== undefined ? selectedVerb.name : 'all'}
             label={'Verbs'}
             items={availableVerbs.map((aV) => aV.name)}
+            allDisplay={t('task.allVerbs')}
           />
         </Box>
       </Box>
@@ -139,6 +141,7 @@ const SetVerbTenseForm = () => {
             value={selectedTense !== undefined ? selectedTense.name : 'all'}
             label={'Tenses'}
             items={availableTenses.map((aT) => aT.name)}
+            allDisplay={t('task.allTenses')}
           />
         </Box>
       </Box>
@@ -154,6 +157,7 @@ const SetVerbTenseForm = () => {
             value={selectedForm !== undefined ? selectedForm.name : 'all'}
             label={'Forms'}
             items={availableForms.map((aF) => aF.name)}
+            allDisplay={t('task.allForms')}
           />
         </Box>
       </Box>

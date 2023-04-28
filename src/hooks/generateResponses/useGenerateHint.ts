@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useTranslation } from 'react-i18next';
 import { useRecoilValue } from 'recoil';
 
 import useAnimateHints from '@/hooks/animate/useAnimateHints';
@@ -15,13 +16,13 @@ const useGenerateHint = () => {
   const hintsGiven = useRecoilValue(hintsGivenState);
   const { setAwaitingHint } = useAwaitingHint();
   const currentQuestion = useRecoilValue(currentQuestionState);
+  const { t } = useTranslation();
 
   const animateHints = useAnimateHints();
 
   const generateHint = () => {
     if (currentAdjacencyPair !== undefined && currentQuestion !== undefined) {
       setAwaitingHint(true);
-      console.log('hints given', hintsGiven);
       if (hintsGiven === 0) {
         getHint('hard', currentQuestion.verb_id).then((hints) => {
           let correctLengthHints: string[] = [];
@@ -47,7 +48,7 @@ const useGenerateHint = () => {
             const hintToBeStored: ResponseModel[] = [
               {
                 form: 'statement',
-                text: hintsToBeGiven.join(', '),
+                text: `${t('hints.whatAbout')} ${hintsToBeGiven.join('? ')}`,
               },
             ];
             patchAdjacencyPairHint(currentAdjacencyPair.id, hintToBeStored).then((a_p) => {

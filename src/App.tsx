@@ -2,6 +2,7 @@
 
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Fragment, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { BrowserRouter } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
@@ -12,6 +13,7 @@ import { CenteredFlexBox } from '@/display/components/styled';
 import Header from '@/display/sections/Header';
 import { withErrorHandler } from '@/error-handling';
 import AppErrorBoundaryFallback from '@/error-handling/fallbacks/App';
+import { useChangeLanguage } from '@/hooks';
 import Pages from '@/routes/Pages';
 import supabase from '@/services/supabase';
 import { getProfile } from '@/services/supabase';
@@ -22,6 +24,8 @@ function App() {
   const { setProfile } = useProfile();
   const [email] = useState('johnsloan88@hotmail.com');
   const [password] = useState('A1!aaaab');
+  const { i18n } = useTranslation();
+  const changeLanguage = useChangeLanguage();
 
   useEffect(() => {
     if (!production && session === null) {
@@ -46,6 +50,9 @@ function App() {
       console.log('session:', session);
       getProfile(session).then((p) => {
         setProfile(p);
+        if (i18n.language !== p.language_preference) {
+          changeLanguage();
+        }
         // console.log('profile:', p);
       });
     } else {

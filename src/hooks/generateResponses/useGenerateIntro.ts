@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useTranslation } from 'react-i18next';
+
 import { usePushRandomResponse } from '@/hooks';
 import { useProfile } from '@/store/auth';
 import { useSelectedForm, useSelectedTense, useSelectedVerb } from '@/store/scripts';
@@ -8,6 +10,7 @@ import { useSelectedForm, useSelectedTense, useSelectedVerb } from '@/store/scri
 const useGenerateIntro = () => {
   const { profile } = useProfile();
   const { selectedVerb } = useSelectedVerb();
+  const { t } = useTranslation();
 
   const { selectedTense } = useSelectedTense();
   const { selectedForm } = useSelectedForm();
@@ -24,9 +27,9 @@ const useGenerateIntro = () => {
       'taskDescription',
       'basic',
       {
-        verb: selectedVerb !== undefined ? selectedVerb.name : 'all verbs',
-        tense: selectedTense !== undefined ? selectedTense.name : 'all tenses',
-        form: selectedForm !== undefined ? selectedForm.name : 'all forms',
+        verb: selectedVerb !== undefined ? selectedVerb.name : (t('task.allVerbs') as string),
+        tense: selectedTense !== undefined ? selectedTense.name : (t('task.allTenses') as string),
+        form: selectedForm !== undefined ? selectedForm.name : (t('task.allForms') as string),
       },
     );
     responseObject = pushRandomResponse(

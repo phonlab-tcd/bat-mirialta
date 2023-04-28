@@ -42,12 +42,12 @@ const chatBubblesState = selector({
         if (Array.isArray(m.hints)) {
           m.hints.map((r: ResponseModel) => {
             chatBubbles.push({
-              text: 'hint',
+              text: 'nod',
               sender: 'you',
             });
             if (r.text !== 'temp') {
               chatBubbles.push({
-                text: r.text,
+                text: r.text.charAt(0).toUpperCase() + r.text.slice(1),
                 sender: 'robot',
               });
             }
@@ -62,7 +62,7 @@ const chatBubblesState = selector({
         if (Array.isArray(m.response)) {
           m.response.map((r: ResponseModel) => {
             chatBubbles.push({
-              text: r.text,
+              text: r.text.charAt(0).toUpperCase() + r.text.slice(1),
               sender: 'robot',
             });
           });
@@ -72,7 +72,7 @@ const chatBubblesState = selector({
     outro.map((o) => {
       if (o.text) {
         chatBubbles.push({
-          text: o.text,
+          text: o.text.charAt(0).toUpperCase() + o.text.slice(1),
           sender: 'robot',
         });
       }

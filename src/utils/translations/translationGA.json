@@ -2,7 +2,7 @@
   "pageTitles": {
     "home": "Baile",
     "chat": "Comhrá",
-    "history": "M'obair go dtí see"
+    "history": "M'obair go dtí seo"
   },
   "headers": {
     "stats": "Mo Chuid Staitisticí",
@@ -30,6 +30,14 @@
       "text_11": "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 10 gceist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.\nTá 10 bpointe ag dul ar gach ceist...\nAn bhfuil tú in ann 100 a shroichint? "
     }
   },
+  "task": {
+    "allVerbs": "gach briathar",
+    "allTenses": "gach aimsir",
+    "allForms": "gach foirm"
+  },
+  "hints": {
+    "whatAbout": "Cad faoi"
+  },
   "subHeaders": {
     "played": "Déanta",
     "average": "Meánscór",
@@ -40,7 +48,9 @@
     "start": "Cuir Tús le Comhrá Nua",
     "seeAll": "Féach gach rud",
     "continue": "Lean ar Aghaidh",
-    "loginSignup": "Logáil Isteach/Cruthaigh Cuntas Nua"
+    "loginSignup": "Logáil Isteach/Cruthaigh Cuntas Nua",
+    "home": "baile",
+    "question": "Ceist"
   },
   "months": {
     "jan": "Ean",

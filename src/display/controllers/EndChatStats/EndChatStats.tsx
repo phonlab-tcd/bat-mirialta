@@ -2,6 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
@@ -25,6 +26,7 @@ const EndChatStats = () => {
   const { cumFreqArray, setCumFreqArray } = useCumFreqArray();
   const { pointsModalOpen, setPointsModalOpen } = usePointsModalOpen();
   const { session } = useSession();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (session !== null) {
@@ -65,7 +67,7 @@ const EndChatStats = () => {
                 <AbButton
                   size="large"
                   fullWidth={true}
-                  label="abhaile"
+                  label={t('buttons.home')}
                   onClick={() => {
                     setPointsModalOpen(false);
                     navigate(`${basePath}`);

@@ -17,8 +17,8 @@ import Image from 'mui-image';
 import { basePath, domain } from '@/config';
 import { title } from '@/config';
 import { FlexBox, FullSizeCenteredFlexBox } from '@/display/components/styled';
+import { useChangeLanguage } from '@/hooks';
 import supabase from '@/services/supabase';
-import { updateProfileLanguage } from '@/services/supabase';
 import { useProfile, useSession } from '@/store/auth';
 
 import abairFullLogo from '/assets/images/abair-logo-old.png';
@@ -29,6 +29,7 @@ function Header() {
   const [items, setItems] = useState<string[]>(['log in/sign up']);
   const { i18n } = useTranslation();
   const { session, setSession } = useSession();
+  const changeLanguage = useChangeLanguage();
 
   const handleMenuChoice = async (item: string) => {
     if (item === 'logout') {
@@ -59,15 +60,6 @@ function Header() {
     }
   }, [profile]);
 
-  const changeLang = () => {
-    if (i18n.language === 'en') {
-      i18n.changeLanguage('ga');
-      updateProfileLanguage('ga');
-    } else {
-      i18n.changeLanguage('en');
-      updateProfileLanguage('en');
-    }
-  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar sx={{ backgroundColor: 'primary.dark' }} elevation={0} position="static">
@@ -111,7 +103,7 @@ function Header() {
 
             <Grid item xs={2.5}>
               <FlexBox justifyContent="flex-end" alignItems="center" height={'100%'}>
-                <Button size={'large'} onClick={changeLang}>
+                <Button size={'large'} onClick={changeLanguage}>
                   <Typography color={i18n.language === 'ga' ? 'secondary' : 'primary'}>
                     ga
                   </Typography>

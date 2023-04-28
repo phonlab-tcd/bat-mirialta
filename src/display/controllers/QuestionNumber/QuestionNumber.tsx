@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useTranslation } from 'react-i18next';
+
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
@@ -11,11 +13,14 @@ const QuestionNumber = () => {
   const { completedQuestions } = useCompletedQuestions();
   const { questions } = useQuestions();
   const { showPoints } = useShowPoints();
+  const { t } = useTranslation();
 
   return (
     <Box>
       {showPoints && completedQuestions < questions.length && (
-        <Typography variant="h6">{`Q.${completedQuestions + 1}`}</Typography>
+        <Typography variant="h6">{`${t('buttons.question')}. ${
+          completedQuestions + 1
+        }`}</Typography>
       )}
     </Box>
   );

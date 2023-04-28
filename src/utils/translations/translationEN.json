@@ -30,6 +30,14 @@
       "text_11": "Choose a verb, tense, and form to practice.\nI will ask you 10 'fill in the blank' questions.\nI can help by giving hints and suggestions.\nThere are 10 points per question...\nCan you score 100? "
     }
   },
+  "task": {
+    "allVerbs": "all verbs",
+    "allTenses": "all tenses",
+    "allForms": "all forms"
+  },
+  "hints": {
+    "whatAbout": "What about"
+  },
   "subHeaders": {
     "played": "Played",
     "average": "Average",
@@ -40,7 +48,9 @@
     "start": "Start",
     "seeAll": "See All",
     "continue": "Continue",
-    "loginSignup": "Login/Signup"
+    "loginSignup": "Login/Signup",
+    "home": "home",
+    "question": "Q."
   },
   "months": {
     "jan": "Jan",
@@ -109,8 +119,8 @@
     "incorrect": {
       "general": {
         "notice": {
-          "text_01": "níl sé ceart",
-          "text_02": "mícheart"
+          "text_01": "Not correct",
+          "text_02": "incorrect"
         }
       },
 
@@ -208,14 +218,14 @@
     "correct": {
       "general": {
         "notice": {
-          "text_01": "tá sé ceart",
-          "text_02": "foirfe"
+          "text_01": "that's rign",
+          "text_02": "perfect"
         },
         "followUp": {
-          "text_01": "maith thú",
-          "text_02": "maith thú {{name}}",
-          "text_03": "go hiontach",
-          "text_04": "go hiontach {{name}}"
+          "text_01": "well done",
+          "text_02": "well done {{name}}",
+          "text_03": "fantastic",
+          "text_04": "fantastic {{name}}"
         }
       }
     }

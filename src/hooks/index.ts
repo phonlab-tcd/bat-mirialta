@@ -11,6 +11,7 @@ import useGenerateOutro from './generateResponses/useGenerateOutro';
 import useGenerateResponseForCorrect from './generateResponses/useGenerateResponseForCorrect';
 import useGenerateResponseForIncorrect from './generateResponses/useGenerateResponseForIncorrect';
 import usePushRandomResponse from './generateResponses/usePushRandomResponse';
+import useChangeLanguage from './language/useChangeLanguage';
 import useUpdatePoints from './points/useUpdatePoints';
 
 export {
@@ -28,4 +29,5 @@ export {
   useGenerateResponseForCorrect,
   useGenerateResponseForIncorrect,
   usePushRandomResponse,
+  useChangeLanguage,
 };

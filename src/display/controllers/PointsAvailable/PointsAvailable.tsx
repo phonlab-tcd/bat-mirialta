@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Typography from '@mui/material/Typography';
 
@@ -12,6 +13,8 @@ const PointsAvailable = () => {
   const { availablePoints } = useAvailablePoints();
   const { showMostRecentPenalty, setShowMostRecentPenalty } = useShowMostRecentPenalty();
   const { mostRecentPenalty } = useMostRecentPenalty();
+  const { i18n } = useTranslation();
+  const [pointsString, setPointsString] = useState('');
 
   useEffect(() => {
     if (mostRecentPenalty !== 0) {
@@ -21,6 +24,24 @@ const PointsAvailable = () => {
       }, 2000);
     }
   }, [mostRecentPenalty]);
+
+  useEffect(() => {
+    if (i18n.language === 'en') {
+      if (availablePoints === 1) {
+        setPointsString('point');
+      } else {
+        setPointsString('points');
+      }
+    } else {
+      if (availablePoints >= 3 && availablePoints <= 6) {
+        setPointsString('phointe');
+      } else if (availablePoints >= 7 && availablePoints <= 10) {
+        setPointsString('bpointe');
+      } else {
+        setPointsString('pointe');
+      }
+    }
+  }, [availablePoints]);
 
   return (
     <FullSizeCenteredFlexBox alignItems="center" sx={{ position: 'relative' }}>
@@ -50,7 +71,7 @@ const PointsAvailable = () => {
         {availablePoints}
       </Typography>
       <Typography ml={-0.5} variant="body1">
-        pts
+        {pointsString}
       </Typography>
     </FullSizeCenteredFlexBox>
   );
