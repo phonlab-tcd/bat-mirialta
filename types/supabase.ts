@@ -99,6 +99,7 @@ export interface Database {
           text: string | null;
           user_id: string | null;
           hints: ResponseModel[] | null;
+          verb_tense_form_info: string | null;
         };
         Insert: {
           chat_id: number;
@@ -112,6 +113,7 @@ export interface Database {
           text?: string | null;
           user_id?: string | null;
           hints?: ResponseModel[] | null;
+          verb_tense_form_info?: string | null;
         };
         Update: {
           chat_id?: number;
@@ -125,6 +127,7 @@ export interface Database {
           text?: string | null;
           user_id?: string | null;
           hints?: ResponseModel[] | null;
+          verb_tense_form_info?: string | null;
         };
       };
       bat_chats: {

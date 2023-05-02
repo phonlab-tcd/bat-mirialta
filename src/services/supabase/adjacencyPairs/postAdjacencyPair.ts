@@ -5,11 +5,18 @@ const postAdjacencyPair = async (
   chatID: number,
   questionID: number,
   repeat: number,
+  verb_tense_form_info: string,
 ) => {
   try {
     const { data, error } = await supabase
       .from('bat_adjacency_pairs')
-      .insert({ user_id: userID, chat_id: chatID, question_id: questionID, retry_attempt: repeat })
+      .insert({
+        user_id: userID,
+        chat_id: chatID,
+        question_id: questionID,
+        retry_attempt: repeat,
+        verb_tense_form_info: verb_tense_form_info,
+      })
       .select(`*`)
       .single();
 

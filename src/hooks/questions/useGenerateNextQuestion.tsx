@@ -8,15 +8,49 @@ import { currentAdjacencyPairState, useAdjacencyPairs } from '@/store/adjacencyP
 import { useSession } from '@/store/auth';
 import { activeChatState } from '@/store/chats';
 import { useAvailablePoints } from '@/store/points';
-import { currentQuestionIndexState } from '@/store/questions';
+import { currentQuestionIndexState, currentQuestionState } from '@/store/questions';
+import { useQuestions } from '@/store/questions';
+
+const verbs: { [key: number]: string } = {
+  1: 'abair',
+  2: 'beir',
+  3: 'bí',
+  4: 'clois',
+  5: 'déan',
+  6: 'faigh',
+  7: 'feic',
+  8: 'ith',
+  9: 'tabhair',
+  10: 'tar',
+  11: 'téigh',
+};
+
+const tenses: { [key: number]: string } = {
+  1: 'aimsir chaite',
+  2: 'aimsir láithreach',
+  3: 'aimsir fháisineach',
+  4: 'modh coinníolach',
+};
+
+const forms: { [key: number]: string } = {
+  1: 'ceisteanna',
+  2: 'diúltach',
+  3: 'briathar saor',
+  4: 'ceisteach',
+  5: 'spleach',
+  6: 'coibhneasta',
+  7: 'ceisteanna breise',
+};
 
 const useGenerateNextQuestion = () => {
   const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
   const currentAdjacencyPair = useRecoilValue(currentAdjacencyPairState);
   const currentQuestionIndex = useRecoilValue(currentQuestionIndexState);
+  const currentQuestion = useRecoilValue(currentQuestionState);
   const { session } = useSession();
   const activeChat = useRecoilValue(activeChatState);
   const { availablePoints } = useAvailablePoints();
+  const { questions } = useQuestions();
 
   const determineRepeatForNewAdjacencyPair = () => {
     if (currentAdjacencyPair === undefined) {
@@ -57,7 +91,37 @@ const useGenerateNextQuestion = () => {
 
       if (questionID !== undefined && repeat !== undefined) {
         console.log('in generateNextQuestion');
-        postAdjacencyPair(session.user.id, activeChat.id, questionID, repeat).then((a_p) => {
+        console.log('questionID:', questionID);
+        console.log('questions:', questions);
+        console.log('currentQuestion:', currentQuestion);
+        console.log('verbs:', verbs);
+        let verbTenseFormInfo = '';
+        if (currentQuestion !== undefined) {
+          if (activeChat.verb === null) {
+            verbTenseFormInfo += verbs[currentQuestion.verb_id];
+          }
+          if (activeChat.tense === null) {
+            if (verbTenseFormInfo === '') {
+              verbTenseFormInfo += tenses[currentQuestion.tense_id];
+            } else {
+              verbTenseFormInfo += `, ${tenses[currentQuestion.tense_id]}`;
+            }
+          }
+          if (activeChat.form === null) {
+            if (verbTenseFormInfo === '') {
+              verbTenseFormInfo += forms[currentQuestion.form_id];
+            } else {
+              verbTenseFormInfo += `, ${forms[currentQuestion.form_id]}`;
+            }
+          }
+        }
+        postAdjacencyPair(
+          session.user.id,
+          activeChat.id,
+          questionID,
+          repeat,
+          verbTenseFormInfo,
+        ).then((a_p) => {
           setAdjacencyPairs([...adjacencyPairs, a_p]);
         });
       } else {

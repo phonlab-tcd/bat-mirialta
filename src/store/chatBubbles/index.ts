@@ -35,8 +35,11 @@ const chatBubblesState = selector({
     adjacencyPairs.map((m) => {
       if (m !== null) {
         const question = questions.find((q) => m.question_id === q.id);
+        const text = question !== undefined ? question.text.replace(/ *\([^)]*\) */g, '') : '-';
+        const verb_tense_form_info =
+          m.verb_tense_form_info !== null ? ` (${m.verb_tense_form_info})` : '';
         chatBubbles.push({
-          text: question !== undefined ? question.text : 'error: no question',
+          text: text + verb_tense_form_info,
           sender: 'robot',
         });
         if (Array.isArray(m.hints)) {
