@@ -33,7 +33,6 @@ const useGenerateNextQuestion = () => {
   const generateNextQuestion = () => {
     if (session !== null && activeChat !== undefined) {
       // if wrong, ask again with retry_attempt iterated
-      console.log('currentQuestionIndex:', currentQuestionIndex);
 
       let questionID;
       let repeat;
@@ -56,8 +55,6 @@ const useGenerateNextQuestion = () => {
         }
       }
 
-      console.log('questionID:', questionID);
-      console.log('repeat:', repeat);
       if (questionID !== undefined && repeat !== undefined) {
         console.log('in generateNextQuestion');
         postAdjacencyPair(session.user.id, activeChat.id, questionID, repeat).then((a_p) => {

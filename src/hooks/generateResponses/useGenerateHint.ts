@@ -48,7 +48,7 @@ const useGenerateHint = () => {
             const hintToBeStored: ResponseModel[] = [
               {
                 form: 'statement',
-                text: `${t('hints.whatAbout')} ${hintsToBeGiven.join('? ')}`,
+                text: `${t('hints.whatAbout')} ${hintsToBeGiven.join('? ')}?`,
               },
             ];
             patchAdjacencyPairHint(currentAdjacencyPair.id, hintToBeStored).then((a_p) => {
@@ -87,7 +87,7 @@ const useGenerateHint = () => {
             let hintToBeStored: ResponseModel[] = [
               {
                 form: 'statement',
-                text: hintsToBeGiven.join(', '),
+                text: `${t('hints.whatAbout')} ${hintsToBeGiven.join('? ')}?`,
               },
             ];
             if (currentAdjacencyPair.hints !== null) {

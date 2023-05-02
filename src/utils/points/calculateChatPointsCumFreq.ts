@@ -1,27 +1,24 @@
 const calculateChatPointsCumFreq = (chatPoints: number[]) => {
   const cumFreq = {
-    '90': 0,
-    '80': 0,
-    '70': 0,
-    '60': 0,
     '50': 0,
-    '49': 0,
+    '40': 0,
+    '30': 0,
+    '20': 0,
+    '19': 0,
   };
 
   chatPoints.map((chatPoint) => {
     if (chatPoint !== null) {
-      if (chatPoint < 50) {
-        cumFreq['49'] = cumFreq['49'] + 1;
-      } else if (chatPoint < 60) {
-        cumFreq['50'] = cumFreq['50'] + 1;
-      } else if (chatPoint < 70) {
-        cumFreq['60'] = cumFreq['60'] + 1;
-      } else if (chatPoint < 80) {
-        cumFreq['70'] = cumFreq['70'] + 1;
-      } else if (chatPoint < 90) {
-        cumFreq['80'] = cumFreq['80'] + 1;
+      if (chatPoint < 20) {
+        cumFreq['19'] = cumFreq['19'] + 1;
+      } else if (chatPoint < 30) {
+        cumFreq['20'] = cumFreq['20'] + 1;
+      } else if (chatPoint < 40) {
+        cumFreq['30'] = cumFreq['30'] + 1;
+      } else if (chatPoint < 50) {
+        cumFreq['40'] = cumFreq['40'] + 1;
       } else {
-        cumFreq['90'] = cumFreq['90'] + 1;
+        cumFreq['50'] = cumFreq['50'] + 1;
       }
     }
   });

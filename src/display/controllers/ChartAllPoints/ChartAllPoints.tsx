@@ -19,7 +19,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 interface ChartAllPointsProps {
   cumFreq: number[];
 }
-const ChartAllPoints = ({ cumFreq = [2, 3, 5, 4, 6, 8, 1] }: ChartAllPointsProps) => {
+const ChartAllPoints = ({ cumFreq = [2, 3, 5, 4, 1] }: ChartAllPointsProps) => {
   const { t } = useTranslation();
 
   const options = {
@@ -84,7 +84,7 @@ const ChartAllPoints = ({ cumFreq = [2, 3, 5, 4, 6, 8, 1] }: ChartAllPointsProps
       },
     },
   };
-  const labels = ['-50', '50+', '60+', '70+', '80+', '90+'];
+  const labels = ['-20', '20+', '30+', '40+', '50'];
   const data = {
     labels,
     datasets: [

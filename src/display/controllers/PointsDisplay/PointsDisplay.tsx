@@ -22,13 +22,12 @@ const PointsDisplay = () => {
     <FullSizeBox minHeight={46}>
       {showPoints && (
         <Grid container height={46}>
-          <Grid item xs={2}>
+          <Grid item xs={3}>
             <FullSizeCenteredFlexBox>
               <QuestionNumber />
             </FullSizeCenteredFlexBox>
           </Grid>
 
-          <Grid item xs={1}></Grid>
           <Grid item xs={6}>
             <FullSizeCenteredFlexBox>
               {showAvailablePoints && <PointsAvailable />}

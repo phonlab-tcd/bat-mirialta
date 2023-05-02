@@ -54,7 +54,7 @@ const PointsAvailable = () => {
 
           visibility:
             mostRecentPenalty === 0 ? 'hidden' : showMostRecentPenalty ? 'visible' : 'hidden',
-          top: -5,
+          top: -10,
           left: 50,
           color: 'red',
         }}
