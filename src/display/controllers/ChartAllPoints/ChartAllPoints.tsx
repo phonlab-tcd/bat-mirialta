@@ -75,7 +75,7 @@ const ChartAllPoints = ({ cumFreq = [2, 3, 5, 4, 1] }: ChartAllPointsProps) => {
           font: {
             size: 14,
           },
-          callback: function (value: number) {
+          callback: function (value: any) {
             if (value % 1 === 0) {
               return value;
             }
