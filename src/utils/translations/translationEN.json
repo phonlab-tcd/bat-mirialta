@@ -102,7 +102,7 @@
       },
       "points": {
         "basic": {
-          "text_01": "You scored {{points}} points"
+          "text_01": "You scored {{points}}"
         }
       },
 

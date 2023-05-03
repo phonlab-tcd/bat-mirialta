@@ -41,7 +41,7 @@ const PointsAvailable = () => {
         setPointsString('pointe');
       }
     }
-  }, [availablePoints]);
+  }, [availablePoints, i18n.language]);
 
   return (
     <FullSizeCenteredFlexBox alignItems="center" sx={{ position: 'relative' }}>
