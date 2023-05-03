@@ -12,7 +12,7 @@
   },
   "instructions": {
     "welcome": {
-      "text_01": "Fáilte isteach sa Bhat Mírialta ",
+      "text_01": "Fáilte isteach sa Bhat Mírialta, ",
       "text_02": "Fáilte isteach sa Bhat Mírialta, do chuiditheoir ",
       "text_03": "Fáilte isteach sa Bhat Mírialta, do chuiditheoir le briathra mírialta."
     },

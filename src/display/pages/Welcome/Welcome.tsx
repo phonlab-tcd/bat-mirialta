@@ -20,7 +20,8 @@ import { useChats } from '@/store/chats';
 import { useVerbs } from '@/store/scripts';
 
 const Welcome = () => {
-  const { t } = useTranslation();
+  const { i18n } = useTranslation();
+
   useAvailables();
   useGetAvailables();
   useSetSelectedTaskFromActiveChat();
@@ -53,21 +54,50 @@ const Welcome = () => {
       <CenteredFlexBox>
         <RobotImage />
       </CenteredFlexBox>
-      <CenteredFlexBox py={1} px={3} minHeight={70}>
+      <CenteredFlexBox py={1} px={2} flexDirection="column" border={1}>
+        <Box px={1} width={400} height={50} border={1}>
+          <Box
+            width={'100%'}
+            height={'100%'}
+            sx={{ display: i18n.language === 'ga' ? 'block' : 'none' }}
+          >
+            <TypeAnimation
+              style={{ whiteSpace: 'pre-wrap', minHeight: 170, width: '100%' }}
+              sequence={[
+                1000,
+                'Fáilte isteach sa Bhat Mírialta, ',
+                200,
+                'Fáilte isteach sa Bhat Mírialta, do chuiditheoir ',
+                500,
+                'Fáilte isteach sa Bhat Mírialta, do chuiditheoir le briathra mírialta.',
+              ]}
+              wrapper="span"
+              cursor={true}
+              repeat={0}
+            />
+          </Box>
+        </Box>
         <Box px={1} width={400}>
-          <TypeAnimation
-            sequence={[
-              1000,
-              String(t('instructions.welcome.text_01')),
-              200,
-              String(t('instructions.welcome.text_02')),
-              500,
-              String(t('instructions.welcome.text_03')),
-            ]}
-            wrapper="span"
-            cursor={true}
-            repeat={0}
-          />
+          <Box
+            width={'100%'}
+            height={'100%'}
+            sx={{ display: i18n.language === 'en' ? 'block' : 'none' }}
+          >
+            <TypeAnimation
+              style={{ whiteSpace: 'pre-wrap', minHeight: 170, width: '100%' }}
+              sequence={[
+                1000,
+                'Welcome to ',
+                200,
+                'Welcome to Bat Mírialta,',
+                500,
+                'Welcome to Bat Mírialta, your irregular verb helper.',
+              ]}
+              wrapper="span"
+              cursor={true}
+              repeat={0}
+            />
+          </Box>
         </Box>
       </CenteredFlexBox>
 

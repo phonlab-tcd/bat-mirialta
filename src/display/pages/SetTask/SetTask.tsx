@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TypeAnimation } from 'react-type-animation';
 
@@ -25,8 +25,7 @@ const SetTask = () => {
   const { session } = useSession();
   const populateVerbsTensesForms = usePopulateVerbsTensesForms();
   const populateChats = usePopulateChats();
-  const { t, i18n } = useTranslation();
-  const [curLang] = useState(i18n.language);
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     // reset the question set, so no redirect to chat
@@ -39,50 +38,86 @@ const SetTask = () => {
     }
   }, [session]);
 
-  useEffect(() => {
-    if (i18n.language !== curLang) {
-      window.location.reload();
-    }
-  }, [i18n.language]);
-
   return (
     <Box>
       <Meta title="SetTask" />
       <CenteredFlexBox pt={2}>
         <RobotImage />
       </CenteredFlexBox>
-      <CenteredFlexBox py={1} px={2}>
+      <CenteredFlexBox py={1} px={2} flexDirection="column">
         <Box width={400} height={170} px={1}>
-          <TypeAnimation
-            style={{ whiteSpace: 'pre-wrap', minHeight: 170, width: '100%' }}
-            sequence={[
-              1000,
-              String(t('instructions.chooseTask.text_01')),
-              200,
-              String(t('instructions.chooseTask.text_02')),
-              200,
-              String(t('instructions.chooseTask.text_03')),
-              500,
-              String(t('instructions.chooseTask.text_04')),
-              200,
-              String(t('instructions.chooseTask.text_05')),
-              200,
-              String(t('instructions.chooseTask.text_06')),
-              500,
-              String(t('instructions.chooseTask.text_07')),
-              500,
-              String(t('instructions.chooseTask.text_08')),
-              400,
-              String(t('instructions.chooseTask.text_09')),
-              400,
-              String(t('instructions.chooseTask.text_10')),
-              500,
-              String(t('instructions.chooseTask.text_11')),
-            ]}
-            wrapper="span"
-            cursor={true}
-            repeat={0}
-          />
+          <Box
+            width={'100%'}
+            height={'100%'}
+            sx={{ display: i18n.language === 'ga' ? 'block' : 'none' }}
+          >
+            <TypeAnimation
+              style={{ whiteSpace: 'pre-wrap', minHeight: 170, width: '100%' }}
+              sequence={[
+                1000,
+                'Pioc briathar, ',
+                200,
+                'Pioc briathar, aimsir,',
+                200,
+                'Pioc briathar, aimsir, agus foirm.\n',
+                500,
+                'Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 gceist ort le',
+                200,
+                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 gceist ort le 'líon na bearnaí'",
+                200,
+                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 gceist ort le 'líon na bearnaí' iontu.",
+                500,
+                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 gceist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.",
+                500,
+                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 gceist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.\nTá 10 bpointe ag dul ar gach ceist.",
+                400,
+                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 gceist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.\nTá 10 bpointe ag dul ar gach ceist..",
+                400,
+                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 gceist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.\nTá 10 bpointe ag dul ar gach ceist...",
+                500,
+                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 gceist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.\nTá 10 bpointe ag dul ar gach ceist...\nAn bhfuil tú in ann 50 a shroichint? ",
+              ]}
+              wrapper="span"
+              cursor={true}
+              repeat={0}
+            />
+          </Box>
+          <Box
+            width={'100%'}
+            height={'100%'}
+            sx={{ display: i18n.language === 'en' ? 'block' : 'none' }}
+          >
+            <TypeAnimation
+              style={{ whiteSpace: 'pre-wrap', minHeight: 170, width: '100%' }}
+              sequence={[
+                1000,
+                'Choose a verb, ',
+                200,
+                'Choose a verb, tense,',
+                200,
+                'Choose a verb, tense, and form to practice.\n',
+                500,
+                'Choose a verb, tense, and form to practice.\nI will ask you 5',
+                200,
+                "Choose a verb, tense, and form to practice.\nI will ask you 5 'fill in the blank'",
+                200,
+                "Choose a verb, tense, and form to practice.\nI will ask you 5 'fill in the blank' questions.",
+                500,
+                "Choose a verb, tense, and form to practice.\nI will ask you 5 'fill in the blank' questions.\nI can help by giving hints and suggestions.",
+                500,
+                "Choose a verb, tense, and form to practice.\nI will ask you 5 'fill in the blank' questions.\nI can help by giving hints and suggestions.\nThere are 10 points per question.",
+                400,
+                "Choose a verb, tense, and form to practice.\nI will ask you 5 'fill in the blank' questions.\nI can help by giving hints and suggestions.\nThere are 10 points per question..",
+                400,
+                "Choose a verb, tense, and form to practice.\nI will ask you 5 'fill in the blank' questions.\nI can help by giving hints and suggestions.\nThere are 10 points per question...",
+                500,
+                "Choose a verb, tense, and form to practice.\nI will ask you 5 'fill in the blank' questions.\nI can help by giving hints and suggestions.\nThere are 10 points per question...\nCan you score 50?",
+              ]}
+              wrapper="span"
+              cursor={true}
+              repeat={0}
+            />
+          </Box>
         </Box>
       </CenteredFlexBox>
       <CenteredFlexBox>
