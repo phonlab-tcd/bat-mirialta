@@ -45,7 +45,7 @@ const ChatHistory = ({ chat }: ChatHistoryProps) => {
         <Grid item xs={3}>
           <FullSizeCenteredFlexBox flexDirection={'column'}>
             <Box height={35} width={50} sx={{ backgroundColor: 'gold' }} borderRadius={1}>
-              <TotalPoints points={chat.points !== null ? chat.points : 0} />
+              <TotalPoints points={chat.points !== null ? chat.points : 0} inChat={false} />
             </Box>
           </FullSizeCenteredFlexBox>
         </Grid>

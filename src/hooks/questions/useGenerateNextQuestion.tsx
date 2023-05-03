@@ -8,7 +8,7 @@ import { currentAdjacencyPairState, useAdjacencyPairs } from '@/store/adjacencyP
 import { useSession } from '@/store/auth';
 import { activeChatState } from '@/store/chats';
 import { useAvailablePoints } from '@/store/points';
-import { currentQuestionIndexState, currentQuestionState } from '@/store/questions';
+import { currentQuestionIndexState } from '@/store/questions';
 import { useQuestions } from '@/store/questions';
 
 const verbs: { [key: number]: string } = {
@@ -46,7 +46,6 @@ const useGenerateNextQuestion = () => {
   const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
   const currentAdjacencyPair = useRecoilValue(currentAdjacencyPairState);
   const currentQuestionIndex = useRecoilValue(currentQuestionIndexState);
-  const currentQuestion = useRecoilValue(currentQuestionState);
   const { session } = useSession();
   const activeChat = useRecoilValue(activeChatState);
   const { availablePoints } = useAvailablePoints();
@@ -68,7 +67,7 @@ const useGenerateNextQuestion = () => {
     if (session !== null && activeChat !== undefined) {
       // if wrong, ask again with retry_attempt iterated
 
-      let questionID;
+      let questionID: number | undefined;
       let repeat;
       if (currentAdjacencyPair === undefined) {
         questionID = activeChat.questions[0];
@@ -90,28 +89,24 @@ const useGenerateNextQuestion = () => {
       }
 
       if (questionID !== undefined && repeat !== undefined) {
-        console.log('in generateNextQuestion');
-        console.log('questionID:', questionID);
-        console.log('questions:', questions);
-        console.log('currentQuestion:', currentQuestion);
-        console.log('verbs:', verbs);
         let verbTenseFormInfo = '';
-        if (currentQuestion !== undefined) {
+        const curQuestion = questions.find((q) => q.id === questionID);
+        if (curQuestion !== undefined) {
           if (activeChat.verb === null) {
-            verbTenseFormInfo += verbs[currentQuestion.verb_id];
+            verbTenseFormInfo += verbs[curQuestion.verb_id];
           }
           if (activeChat.tense === null) {
             if (verbTenseFormInfo === '') {
-              verbTenseFormInfo += tenses[currentQuestion.tense_id];
+              verbTenseFormInfo += tenses[curQuestion.tense_id];
             } else {
-              verbTenseFormInfo += `, ${tenses[currentQuestion.tense_id]}`;
+              verbTenseFormInfo += `, ${tenses[curQuestion.tense_id]}`;
             }
           }
           if (activeChat.form === null) {
             if (verbTenseFormInfo === '') {
-              verbTenseFormInfo += forms[currentQuestion.form_id];
+              verbTenseFormInfo += forms[curQuestion.form_id];
             } else {
-              verbTenseFormInfo += `, ${forms[currentQuestion.form_id]}`;
+              verbTenseFormInfo += `, ${forms[curQuestion.form_id]}`;
             }
           }
         }

@@ -65,7 +65,7 @@ const PointsAvailable = () => {
         px={1}
         borderRadius={100}
         sx={{
-          visibility: availablePoints !== 0 ? 'visible' : 'hidden',
+          visibility: availablePoints > 0 ? 'visible' : 'hidden',
         }}
       >
         {availablePoints}

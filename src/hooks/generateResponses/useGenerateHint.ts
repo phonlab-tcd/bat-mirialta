@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRecoilValue } from 'recoil';
 
@@ -17,6 +18,7 @@ const useGenerateHint = () => {
   const { setAwaitingHint } = useAwaitingHint();
   const currentQuestion = useRecoilValue(currentQuestionState);
   const { t } = useTranslation();
+  const [hardHints, setHardHints] = useState<string[]>();
 
   const animateHints = useAnimateHints();
 
@@ -51,6 +53,7 @@ const useGenerateHint = () => {
                 text: `${t('hints.whatAbout')} ${hintsToBeGiven.join('? ')}?`,
               },
             ];
+            setHardHints(hintsToBeGiven.filter((h) => h !== currentQuestion.answer));
             patchAdjacencyPairHint(currentAdjacencyPair.id, hintToBeStored).then((a_p) => {
               animateHints(a_p);
             });
@@ -77,12 +80,18 @@ const useGenerateHint = () => {
             }
 
             let hintsToBeGiven = [];
-            if (correctLengthHints.length > 1) {
+            if (correctLengthHints.length > 2) {
               correctLengthHints.sort(() => (Math.random() > 0.5 ? 1 : -1));
               hintsToBeGiven = [currentQuestion.answer].concat(correctLengthHints.slice(0, 1));
             } else {
               hintsToBeGiven = [currentQuestion.answer].concat(correctLengthHints);
             }
+
+            if (hintsToBeGiven.length === 1 && Array.isArray(hardHints) && hardHints.length > 0) {
+              //need to add another as none suitable in easy hint set
+              hintsToBeGiven.push(hardHints[0]);
+            }
+
             hintsToBeGiven.sort(() => (Math.random() > 0.5 ? 1 : -1));
             let hintToBeStored: ResponseModel[] = [
               {

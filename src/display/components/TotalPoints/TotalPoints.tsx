@@ -9,17 +9,20 @@ import { CenteredFlexBox, FullSizeCenteredFlexBox } from '@/display/components/s
 
 interface TotalPointsProps {
   points: number;
+  inChat?: boolean;
 }
 
-const TotalPoints = ({ points }: TotalPointsProps) => {
+const TotalPoints = ({ points, inChat = false }: TotalPointsProps) => {
   const [pointsChanged, setPointsChanged] = useState(false);
 
   useEffect(() => {
-    if (points !== 0) {
-      setPointsChanged(true);
-      setTimeout(() => {
-        setPointsChanged(false);
-      }, 2000);
+    if (inChat) {
+      if (points !== 0) {
+        setPointsChanged(true);
+        setTimeout(() => {
+          setPointsChanged(false);
+        }, 2000);
+      }
     }
   }, [points]);
 

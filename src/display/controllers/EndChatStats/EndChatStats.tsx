@@ -45,7 +45,11 @@ const EndChatStats = () => {
       onClose={() => {
         setPointsModalOpen(false);
       }}
-      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
     >
       <div style={{ outline: 'none' }}>
         <Box width={374}>

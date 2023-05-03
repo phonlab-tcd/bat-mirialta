@@ -37,7 +37,7 @@ const PointsDisplay = () => {
             <FullSizeFlexBox justifyContent="flex-end">
               <Box width="80%" height="100%">
                 <BatBox button={true} backgroundColor="gold">
-                  <TotalPoints points={totalPoints} />
+                  <TotalPoints points={totalPoints} inChat={true} />
                 </BatBox>
               </Box>
             </FullSizeFlexBox>

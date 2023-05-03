@@ -39,7 +39,7 @@ const PlayedChatStats = () => {
         </Grid>
         <Grid item xs={6}>
           <Typography align="center" variant="h5">
-            {!Number.isNaN(avScore) ? `${avScore}%` : '-'}
+            {!Number.isNaN(avScore) ? `${avScore}` : '-'}
           </Typography>
         </Grid>
         <Grid item xs={6}>
