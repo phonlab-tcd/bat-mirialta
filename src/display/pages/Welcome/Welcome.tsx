@@ -55,7 +55,7 @@ const Welcome = () => {
         <RobotImage />
       </CenteredFlexBox>
       <CenteredFlexBox py={1} px={2} flexDirection="column">
-        <Box px={1} width={400} height={50}>
+        <Box px={1} width={400}>
           <Box
             width={'100%'}
             height={'100%'}
