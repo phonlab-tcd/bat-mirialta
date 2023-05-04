@@ -40,7 +40,7 @@ const SetTask = () => {
   }, [session]);
 
   return (
-    <Box>
+    <Box pb={2}>
       <Meta title="SetTask" />
       <CenteredFlexBox pt={2}>
         <RobotImage />

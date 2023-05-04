@@ -119,7 +119,7 @@ function Chat() {
   }, [firstLoad, receivedAdjacencyPairHistory]);
 
   return (
-    <Box sx={{ backgroundColor: 'background' }}>
+    <Box sx={{ backgroundColor: 'background', height: '50px' }}>
       <Meta title="Chat" />
 
       <MessageInputButtons vis={taNilInputChoice ? 'visible' : 'hidden'} />
