@@ -39,7 +39,7 @@ const keyboardOptions = {
     {
       class: 'defaults',
       buttons:
-        "{fada} a e i o u á é í ó ú ' - {urú} b c d f g p t mb gc nd bhf ng bp dt {séimhiú} n m s r l h bh ch dh fh gh bh th mh sh {space} {bksp}",
+        "{fada} a e i o u á é í ó ú ' - {urú} b c d f g p t mb gc nd bhf ng bp dt {séimhiú} n m s r l h bh ch dh fh gh ph th mh sh {space} {bksp}",
     },
     {
       class: 'fadas',
@@ -51,7 +51,7 @@ const keyboardOptions = {
     },
     {
       class: 'séimhiús',
-      buttons: '{séimhiú} bh ch dh fh gh bh th mh sh',
+      buttons: '{séimhiú} bh ch dh fh gh ph th mh sh',
     },
     {
       class: 'delete',

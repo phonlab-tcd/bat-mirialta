@@ -40,6 +40,14 @@ const useGenerateIntro = () => {
       'basic',
       {},
     );
+    responseObject = pushRandomResponse(
+      responseObject,
+      'filler',
+      'intro',
+      'hintDescription',
+      'basic',
+      {},
+    );
     responseObject = pushRandomResponse(responseObject, 'filler', 'intro', 'getReady', 'basic', {});
 
     return responseObject;

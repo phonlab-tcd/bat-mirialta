@@ -60,7 +60,7 @@ const PointsAvailable = () => {
         }}
       >{`-${mostRecentPenalty}`}</Typography>
       <Typography
-        variant={showMostRecentPenalty ? 'h5' : 'h6'}
+        variant={showMostRecentPenalty ? 'h6' : 'body1'}
         fontWeight={showMostRecentPenalty ? 'bold' : 'normal'}
         px={1}
         borderRadius={100}
@@ -68,10 +68,10 @@ const PointsAvailable = () => {
           visibility: availablePoints > 0 ? 'visible' : 'hidden',
         }}
       >
-        {availablePoints}
+        ({availablePoints}
       </Typography>
       <Typography ml={-0.5} variant="body1">
-        {pointsString}
+        {pointsString})
       </Typography>
     </FullSizeCenteredFlexBox>
   );

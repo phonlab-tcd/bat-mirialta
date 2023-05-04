@@ -42,7 +42,8 @@
     "played": "Played",
     "average": "Average",
     "score": "Score",
-    "all": "all"
+    "all": "all",
+    "total": "Total"
   },
   "buttons": {
     "start": "Start",
@@ -50,7 +51,7 @@
     "continue": "Continue",
     "loginSignup": "Login/Signup",
     "home": "home",
-    "question": "Q."
+    "question": "Question"
   },
   "months": {
     "jan": "Jan",
@@ -86,6 +87,11 @@
           "text_01": "5 questions in total, with 10 points for each"
         }
       },
+      "hintDescription": {
+        "basic": {
+          "text_01": "If you don't know the answer, tap '?' for a hint"
+        }
+      },
       "getReady": {
         "basic": {
           "text_01": "Ok, here comes your first question",
@@ -96,7 +102,7 @@
     "outro": {
       "beginning": {
         "basic": {
-          "text_01": "Well done, that's the last question {{name}}!",
+          "text_01": "Well done! That's the last question {{name}}!",
           "text_02": "Congratulations, you are now finished {{name}}!"
         }
       },
@@ -218,12 +224,12 @@
     "correct": {
       "general": {
         "notice": {
-          "text_01": "that's rign",
+          "text_01": "that's right!",
           "text_02": "perfect"
         },
         "followUp": {
-          "text_01": "well done",
-          "text_02": "well done {{name}}",
+          "text_01": "well done!",
+          "text_02": "well done {{name}}!",
           "text_03": "fantastic",
           "text_04": "fantastic {{name}}"
         }

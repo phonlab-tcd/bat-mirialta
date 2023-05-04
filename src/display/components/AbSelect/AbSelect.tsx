@@ -8,7 +8,33 @@ interface AbSelectProps {
   items: string[] | number[];
   all?: boolean;
   allDisplay?: string | null;
+  lang?: string;
 }
+
+const englishTranslations: { [key: string]: string } = {
+  abair: 'speak',
+  beir: 'bring',
+  clois: 'hear',
+  faigh: 'get',
+  feic: 'see',
+  ith: 'eat',
+  tabhair: 'give',
+  tar: 'come',
+  bí: 'be',
+  téigh: 'go',
+  déan: 'do/make',
+  'aimsir chaite': 'past tense',
+  'aimsir láithreach': 'present tense',
+  'aimsir fháistineach': 'future tense',
+  'modh coinníollach': 'conditional tense',
+  'briathar saor': 'free verb',
+  ceisteach: 'question',
+  coibhneasta: 'relative clause',
+  ceisteanna: 'questions',
+  'ceisteanna breise': 'additional questions',
+  spleách: 'dependent clause',
+  diúltach: 'negative',
+};
 
 const AbSelect = ({
   label,
@@ -17,6 +43,7 @@ const AbSelect = ({
   items,
   all = true,
   allDisplay = '',
+  lang = 'ga',
 }: AbSelectProps) => {
   return (
     <Select
@@ -32,7 +59,7 @@ const AbSelect = ({
       )}
       {items.map((item, i) => (
         <MenuItem key={i} value={item}>
-          {item}
+          {lang === 'ga' ? item : item + ` (${englishTranslations[item]})`}
         </MenuItem>
       ))}
     </Select>

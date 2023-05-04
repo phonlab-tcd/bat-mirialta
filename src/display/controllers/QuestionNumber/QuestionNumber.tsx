@@ -18,7 +18,7 @@ const QuestionNumber = () => {
   return (
     <Box>
       {showPoints && completedQuestions < questions.length && (
-        <Typography variant="h6">{`${t('buttons.question')}. ${
+        <Typography variant="body1">{`${t('buttons.question')} ${
           completedQuestions + 1
         }`}</Typography>
       )}

@@ -61,7 +61,7 @@ const SetVerbTenseForm = () => {
     }
   };
   const { setMessageInputDisabled } = useMessageInputDisabled();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { setShowAvailablePoints } = useShowAvailablePoints();
   const { setShowPoints } = useShowPoints();
@@ -82,19 +82,6 @@ const SetVerbTenseForm = () => {
       const intro = generateIntro();
 
       const randomQuestionSet = getRandomArrayFromArray(questionSet, noQuestions);
-
-      // in case of less than 10 questions, we repeat some
-      // if (randomQuestionSet.length < 10) {
-      //   if (randomQuestionSet.length < 5) {
-      //     alert('There are not enough questions in this question set. Please try another.');
-      //   } else {
-      //     const length = randomQuestionSet.length;
-      //     const extraQsNeeded = 10 - length;
-      //     for (let i = 0; i < extraQsNeeded; i++) {
-      //       randomQuestionSet.push(randomQuestionSet[i]);
-      //     }
-      //   }
-      // }
 
       postChat(
         session.user.id,
@@ -126,6 +113,7 @@ const SetVerbTenseForm = () => {
             label={'Verbs'}
             items={availableVerbs.map((aV) => aV.name)}
             allDisplay={t('task.allVerbs')}
+            lang={i18n.language}
           />
         </Box>
       </Box>
@@ -142,6 +130,7 @@ const SetVerbTenseForm = () => {
             label={'Tenses'}
             items={availableTenses.map((aT) => aT.name)}
             allDisplay={t('task.allTenses')}
+            lang={i18n.language}
           />
         </Box>
       </Box>
@@ -158,6 +147,7 @@ const SetVerbTenseForm = () => {
             label={'Forms'}
             items={availableForms.map((aF) => aF.name)}
             allDisplay={t('task.allForms')}
+            lang={i18n.language}
           />
         </Box>
       </Box>

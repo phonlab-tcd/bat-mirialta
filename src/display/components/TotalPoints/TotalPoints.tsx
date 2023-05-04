@@ -29,7 +29,9 @@ const TotalPoints = ({ points, inChat = false }: TotalPointsProps) => {
   return (
     <FullSizeCenteredFlexBox>
       <CenteredFlexBox sx={{ position: 'relative' }}>
-        <Typography variant={pointsChanged ? 'h4' : 'h5'}>{points}</Typography>
+        <Typography color="#fff" variant={pointsChanged ? 'h4' : 'h5'}>
+          {points}
+        </Typography>
       </CenteredFlexBox>
     </FullSizeCenteredFlexBox>
   );

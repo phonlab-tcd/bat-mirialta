@@ -42,7 +42,8 @@
     "played": "Déanta",
     "average": "Meánscór",
     "score": "Scór",
-    "all": "Iomlán"
+    "all": "Iomlán",
+    "total": "Iomlán"
   },
   "buttons": {
     "start": "Cuir Tús le Comhrá Nua",
@@ -84,6 +85,11 @@
       "questionDescription": {
         "basic": {
           "text_01": "5 gceist san iomlán, le 10 bpointe an ceann"
+        }
+      },
+      "hintDescription": {
+        "basic": {
+          "text_01": "Muna bhfuil an freagra agat, brúigh '?' le nod a fhail"
         }
       },
       "getReady": {

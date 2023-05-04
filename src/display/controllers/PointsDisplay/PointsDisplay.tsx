@@ -1,11 +1,13 @@
+import { useTranslation } from 'react-i18next';
+
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 import BatBox from '@/display/components/BatBox';
 import TotalPoints from '@/display/components/TotalPoints';
-import { FullSizeCenteredFlexBox } from '@/display/components/styled';
+import { FullSizeCenteredFlexBox, FullSizeFlexBox } from '@/display/components/styled';
 import { FullSizeBox } from '@/display/components/styled';
-import { FullSizeFlexBox } from '@/display/components/styled';
 import PointsAvailable from '@/display/controllers/PointsAvailable';
 import QuestionNumber from '@/display/controllers/QuestionNumber';
 import { useShowPoints } from '@/store/points';
@@ -15,7 +17,7 @@ import { useTotalPoints } from '@/store/points';
 const PointsDisplay = () => {
   const { showPoints } = useShowPoints();
   const { totalPoints } = useTotalPoints();
-
+  const { t } = useTranslation();
   const { showAvailablePoints } = useShowAvailablePoints();
 
   return (
@@ -28,16 +30,29 @@ const PointsDisplay = () => {
             </FullSizeCenteredFlexBox>
           </Grid>
 
-          <Grid item xs={6}>
-            <FullSizeCenteredFlexBox>
-              {showAvailablePoints && <PointsAvailable />}
-            </FullSizeCenteredFlexBox>
-          </Grid>
           <Grid item xs={3}>
+            <FullSizeFlexBox>{showAvailablePoints && <PointsAvailable />}</FullSizeFlexBox>
+          </Grid>
+
+          <Grid item xs={6}>
             <FullSizeFlexBox justifyContent="flex-end">
-              <Box width="80%" height="100%">
-                <BatBox button={true} backgroundColor="gold">
-                  <TotalPoints points={totalPoints} inChat={true} />
+              <Box width="70%" height="100%" sx={{ position: 'relative' }}>
+                <BatBox button={true} backgroundColor="secondary.dark">
+                  <FullSizeFlexBox>
+                    <Grid container>
+                      <Grid item xs={7}>
+                        <FullSizeCenteredFlexBox>
+                          <Typography variant={'body2'} align="right" color="#fff">
+                            {t('subHeaders.total')}:
+                          </Typography>
+                        </FullSizeCenteredFlexBox>
+                      </Grid>
+
+                      <Grid item xs={5}>
+                        <TotalPoints points={totalPoints} inChat={true} />
+                      </Grid>
+                    </Grid>
+                  </FullSizeFlexBox>
                 </BatBox>
               </Box>
             </FullSizeFlexBox>

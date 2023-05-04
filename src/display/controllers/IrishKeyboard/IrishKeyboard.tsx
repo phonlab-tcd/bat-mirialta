@@ -42,6 +42,7 @@ const IrishKeyboard = () => {
   const { adjacencyPairs, setAdjacencyPairs } = useAdjacencyPairs();
   const { messageInputDisabled, setMessageInputDisabled } = useMessageInputDisabled();
   const { awaitingHint } = useAwaitingHint();
+  const [blink, setBlink] = useState(false);
 
   useEffect(() => {
     if (!isMobile()) {
@@ -53,6 +54,12 @@ const IrishKeyboard = () => {
       }
     }
   }, [messageInputDisabled, awaitingHint]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setBlink(!blink);
+    }, 800);
+  }, [blink]);
 
   const handleChange = (input: string) => {
     if (!messageInputDisabled) {
@@ -128,9 +135,20 @@ const IrishKeyboard = () => {
                 }}
               >
                 {isMobile() ? (
-                  <Typography fontFamily={'Helvetica'} alignItems="center">
-                    {chatText}
-                  </Typography>
+                  <Box>
+                    <Typography display="inline" fontFamily={'Helvetica'} alignItems="center">
+                      {chatText}
+                    </Typography>
+                    <Typography
+                      display={'inline'}
+                      sx={{
+                        visibility: messageInputDisabled ? 'hidden' : blink ? 'visible' : 'hidden',
+                      }}
+                      color="gray"
+                    >
+                      |
+                    </Typography>
+                  </Box>
                 ) : (
                   <TextField
                     inputRef={textBoxRef}
