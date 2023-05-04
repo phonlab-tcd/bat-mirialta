@@ -20,14 +20,15 @@ const keyboardOptions = {
     ],
     séimhiú: [
       "- a e i o u '",
-      'bh ch dh fh gh bh th',
+      'bh ch dh fh gh ph th',
       'n mh sh r l h',
       '{fada} {urú} {séimhiú} {space} {bksp}',
     ],
   },
   display: {
-    '{bksp}': 'scrios',
-    '{space}': 'spás',
+    '{bksp}': '&larr;',
+    '{space}':
+      '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
     '{urú}': 'urú',
     '{séimhiú}': 'séimhiú',
     '{shift}': 'caipitliú',
