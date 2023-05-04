@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TypeAnimation } from 'react-type-animation';
 
+// import { TypeAnimation } from 'react-type-animation';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 import Meta from '@/display/components/Meta';
 import RobotImage from '@/display/components/RobotImage';
@@ -45,14 +46,14 @@ const SetTask = () => {
         <RobotImage />
       </CenteredFlexBox>
       <CenteredFlexBox py={1} px={2} flexDirection="column">
-        <Box width={400} height={170} px={1}>
+        <Box width={'95%'} height={150}>
           <Box
             width={'100%'}
             height={'100%'}
             sx={{ display: i18n.language === 'ga' ? 'block' : 'none' }}
           >
-            <TypeAnimation
-              style={{ whiteSpace: 'pre-wrap', minHeight: 170, width: '100%' }}
+            {/* <TypeAnimation
+              style={{ height: 150, width: '100%' }}
               sequence={[
                 1000,
                 'Pioc briathar, ',
@@ -80,15 +81,20 @@ const SetTask = () => {
               wrapper="span"
               cursor={true}
               repeat={0}
-            />
+            /> */}
+            <Typography>
+              Pioc briathar, aimsir, agus foirm. Cuirfidh mé 5 gceist ort le &apos;líon na
+              bearnaí&apos; iontu. Is féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt
+              duit. Tá 10 bpointe ag dul ar gach ceist... An bhfuil tú in ann 50 a shroichint?
+            </Typography>
           </Box>
           <Box
             width={'100%'}
             height={'100%'}
             sx={{ display: i18n.language === 'en' ? 'block' : 'none' }}
           >
-            <TypeAnimation
-              style={{ whiteSpace: 'pre-wrap', minHeight: 170, width: '100%' }}
+            {/* <TypeAnimation
+              style={{ height: 170, width: '100%' }}
               sequence={[
                 1000,
                 'Choose a verb, ',
@@ -116,7 +122,12 @@ const SetTask = () => {
               wrapper="span"
               cursor={true}
               repeat={0}
-            />
+            /> */}
+            <Typography>
+              Choose a verb, tense, and form to practice. I will ask you 5 &apos;fill in the
+              blank&apos; questions. I can help by giving hints and suggestions. There are 10 points
+              per question... Can you score 50?
+            </Typography>
           </Box>
         </Box>
       </CenteredFlexBox>
