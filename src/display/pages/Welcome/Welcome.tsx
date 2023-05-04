@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+// import { Typography } from '@mui/material';
+import { TypeAnimation } from 'react-type-animation';
 
-import { Typography } from '@mui/material';
-// import { TypeAnimation } from 'react-type-animation';
 import Box from '@mui/material/Box';
 
 import Meta from '@/display/components/Meta';
@@ -62,7 +62,7 @@ const Welcome = () => {
             height={'100%'}
             sx={{ display: i18n.language === 'ga' ? 'block' : 'none' }}
           >
-            {/* <TypeAnimation
+            <TypeAnimation
               style={{ height: 170, width: '100%' }}
               sequence={[
                 1000,
@@ -75,17 +75,17 @@ const Welcome = () => {
               wrapper="span"
               cursor={true}
               repeat={0}
-            /> */}
-            <Typography>
+            />
+            {/* <Typography>
               Fáilte isteach sa Bhat Mírialta, do chuiditheoir le briathra mírialta.
-            </Typography>
+            </Typography> */}
           </Box>
           <Box
             width={'100%'}
             height={'100%'}
             sx={{ display: i18n.language === 'en' ? 'block' : 'none' }}
           >
-            {/* <TypeAnimation
+            <TypeAnimation
               style={{ height: 170, width: '100%' }}
               sequence={[
                 1000,
@@ -98,8 +98,8 @@ const Welcome = () => {
               wrapper="span"
               cursor={true}
               repeat={0}
-            /> */}
-            <Typography>Welcome to Bat Mírialta, your irregular verb helper.</Typography>
+            />
+            {/* <Typography>Welcome to Bat Mírialta, your irregular verb helper.</Typography> */}
           </Box>
         </Box>
       </CenteredFlexBox>

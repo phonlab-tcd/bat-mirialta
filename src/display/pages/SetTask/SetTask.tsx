@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { TypeAnimation } from 'react-type-animation';
 
-// import { TypeAnimation } from 'react-type-animation';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 
+// import Typography from '@mui/material/Typography';
 import Meta from '@/display/components/Meta';
 import RobotImage from '@/display/components/RobotImage';
 import { CenteredFlexBox } from '@/display/components/styled';
@@ -52,7 +52,7 @@ const SetTask = () => {
             height={'100%'}
             sx={{ display: i18n.language === 'ga' ? 'block' : 'none' }}
           >
-            {/* <TypeAnimation
+            <TypeAnimation
               style={{ height: 150, width: '100%' }}
               sequence={[
                 1000,
@@ -81,19 +81,19 @@ const SetTask = () => {
               wrapper="span"
               cursor={true}
               repeat={0}
-            /> */}
-            <Typography>
+            />
+            {/* <Typography>
               Pioc briathar, aimsir, agus foirm. Cuirfidh mé 5 gceist ort le &apos;líon na
               bearnaí&apos; iontu. Is féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt
               duit. Tá 10 bpointe ag dul ar gach ceist... An bhfuil tú in ann 50 a shroichint?
-            </Typography>
+            </Typography> */}
           </Box>
           <Box
             width={'100%'}
             height={'100%'}
             sx={{ display: i18n.language === 'en' ? 'block' : 'none' }}
           >
-            {/* <TypeAnimation
+            <TypeAnimation
               style={{ height: 170, width: '100%' }}
               sequence={[
                 1000,
@@ -122,12 +122,12 @@ const SetTask = () => {
               wrapper="span"
               cursor={true}
               repeat={0}
-            /> */}
-            <Typography>
+            />
+            {/* <Typography>
               Choose a verb, tense, and form to practice. I will ask you 5 &apos;fill in the
               blank&apos; questions. I can help by giving hints and suggestions. There are 10 points
               per question... Can you score 50?
-            </Typography>
+            </Typography> */}
           </Box>
         </Box>
       </CenteredFlexBox>
