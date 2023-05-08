@@ -48,7 +48,6 @@ const IrishKeyboard = () => {
     if (!isMobile()) {
       if (!messageInputDisabled && !awaitingHint) {
         if (textBoxRef.current !== undefined) {
-          console.log('focussing message');
           textBoxRef.current.focus();
         }
       }
@@ -63,7 +62,6 @@ const IrishKeyboard = () => {
 
   const handleChange = (input: string) => {
     if (!messageInputDisabled) {
-      console.log('input:', input);
       setChatText(input);
       if (isMobile()) {
         keyboard.current.setInput(input);
@@ -75,7 +73,6 @@ const IrishKeyboard = () => {
     if (button === '{fada}' || button === '{urú}' || button === '{séimhiú}') {
       setLayoutName(button.slice(1, button.length - 1));
       handleShift(button);
-      console.log('here');
     } else {
       setLayoutName('default');
     }
@@ -92,21 +89,30 @@ const IrishKeyboard = () => {
     }
   };
 
+  const resetChatText = () => {
+    if (isMobile()) {
+      keyboard.current.setInput('');
+    } else {
+      if (textBoxRef.current !== undefined) {
+        textBoxRef.current.value = '';
+        textBoxRef.current.blur();
+      }
+    }
+    setChatText('');
+  };
+
+  const cleanWhiteSpace = (t: string) => {
+    return t.replace(/\s+/g, ' ').trim();
+  };
+
   const handleSend = () => {
     if (currentQuestion !== undefined && currentAdjacencyPair !== undefined) {
-      console.log('settingChatto nothin');
-      setChatText('');
-      if (isMobile()) {
-        keyboard.current.setInput('');
-      } else {
-        if (textBoxRef.current !== undefined) {
-          textBoxRef.current.value = '';
-          textBoxRef.current.blur();
-        }
-      }
+      const cleanedChatText = cleanWhiteSpace(chatText);
+
       setMessageInputDisabled(true);
-      patchAdjacencyPairText(currentAdjacencyPair.id, chatText).then((a_p) => {
+      patchAdjacencyPairText(currentAdjacencyPair.id, cleanedChatText).then((a_p) => {
         setAdjacencyPairs(replaceFinalObject(adjacencyPairs, a_p));
+        resetChatText();
       });
     } else {
       console.log('useHandleSend: currentQuestion or currentAdjacencyPair is undefined');

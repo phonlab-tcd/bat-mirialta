@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-import BatBox from '@/display/components/BatBox';
 import TotalPoints from '@/display/components/TotalPoints';
 import { FullSizeCenteredFlexBox, FullSizeFlexBox } from '@/display/components/styled';
 import { FullSizeBox } from '@/display/components/styled';
@@ -36,24 +35,27 @@ const PointsDisplay = () => {
 
           <Grid item xs={6}>
             <FullSizeFlexBox justifyContent="flex-end">
-              <Box width="70%" height="100%" sx={{ position: 'relative' }}>
-                <BatBox button={true} backgroundColor="secondary.dark">
-                  <FullSizeFlexBox>
-                    <Grid container>
-                      <Grid item xs={7}>
-                        <FullSizeCenteredFlexBox>
-                          <Typography variant={'body2'} align="right" color="#fff">
-                            {t('subHeaders.total')}:
-                          </Typography>
-                        </FullSizeCenteredFlexBox>
-                      </Grid>
-
-                      <Grid item xs={5}>
-                        <TotalPoints points={totalPoints} inChat={true} />
-                      </Grid>
+              <Box
+                width="60%"
+                height="100%"
+                sx={{ position: 'relative', backgroundColor: 'primary.data' }}
+                borderRadius={2}
+              >
+                <FullSizeFlexBox>
+                  <Grid container>
+                    <Grid item xs={7}>
+                      <FullSizeCenteredFlexBox>
+                        <Typography variant={'body2'} align="right" color="#fff">
+                          {t('subHeaders.total')}:
+                        </Typography>
+                      </FullSizeCenteredFlexBox>
                     </Grid>
-                  </FullSizeFlexBox>
-                </BatBox>
+
+                    <Grid item xs={5}>
+                      <TotalPoints points={totalPoints} inChat={true} />
+                    </Grid>
+                  </Grid>
+                </FullSizeFlexBox>
               </Box>
             </FullSizeFlexBox>
           </Grid>

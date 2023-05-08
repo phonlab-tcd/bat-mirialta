@@ -46,7 +46,7 @@ const SetTask = () => {
         <RobotImage />
       </CenteredFlexBox>
       <CenteredFlexBox py={1} px={2} flexDirection="column">
-        <Box width={'95%'} height={150}>
+        <Box width={'95%'} height={150} maxWidth={400}>
           <Box
             width={'100%'}
             height={'100%'}

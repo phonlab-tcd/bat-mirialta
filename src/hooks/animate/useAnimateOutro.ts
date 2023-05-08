@@ -58,7 +58,9 @@ const useAnimateOutro = () => {
                 const cumFreq = calculateChatPointsCumFreq(points);
                 console.log('cumFreq: ', cumFreq);
                 setCumFreqArray(Object.values(cumFreq));
-                setPointsModalOpen(true);
+                setTimeout(() => {
+                  setPointsModalOpen(true);
+                }, 2000);
               }
             });
           }

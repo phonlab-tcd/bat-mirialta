@@ -15,6 +15,7 @@ const sharedTheme = {
     primary: {
       wafer: '#ebf4fa',
       main: '#67add6',
+      data: '#5692d2',
       dark: '#3e435a',
     },
     secondary: {
