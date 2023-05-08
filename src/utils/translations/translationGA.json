@@ -10,6 +10,12 @@
     "tense": "Aimsir",
     "form": "Foirm"
   },
+  "menu": {
+    "profile": "próifil",
+    "logOut": "logáil amach",
+    "logIn": "logáil isteach",
+    "signUp": "cláraigh"
+  },
   "instructions": {
     "welcome": {
       "text_01": "Fáilte isteach sa Bhat Mírialta, ",

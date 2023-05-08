@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -26,37 +27,36 @@ import abairFullLogo from '/assets/images/abair-logo-old.png';
 function Header() {
   const navigate = useNavigate();
   const { profile, setProfile } = useProfile();
-  const [items, setItems] = useState<string[]>(['log in/sign up']);
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
+  const [items, setItems] = useState<string[]>([`${t('menu.logIn')}/${t('menu.signUp')}`]);
+
   const { session, setSession } = useSession();
   const changeLanguage = useChangeLanguage();
 
   const handleMenuChoice = async (item: string) => {
-    if (item === 'logout') {
+    if (item === t('menu.logOut')) {
       supabase.auth.signOut().then(() => {
-        setItems(['log in/sign up']);
+        setItems([`${t('menu.logIn')}/${t('menu.signUp')}`]);
         setProfile(null);
         setSession(null);
         navigate(`${basePath}`);
       });
-    } else if (item === 'profile') {
+    } else if (item === t('menu.profile')) {
       window.location.href = `${domain}/profile?origin=applications/bat-mirialta`;
-    } else if (item === 'log in/sign up') {
+    } else if (item === `${t('menu.logIn')}/${t('menu.signUp')}`) {
       window.location.href = `${domain}/login?origin=applications/bat-mirialta`;
     }
   };
 
   useEffect(() => {
     if (profile) {
-      // console.log('profile:', profile);
-      // if (profile.username !== null) {
-      setItems([profile.username === null ? 'anon' : profile.username, 'profile', 'logout']);
-      // } else {
-      //   setItems(['log in/sign up']);
-      // }
+      setItems([
+        profile.username === null ? 'anon' : profile.username,
+        t('menu.profile'),
+        t('menu.logOut'),
+      ]);
     } else {
-      setItems(['log in/sign up']);
-      // console.log('profile:', profile);
+      setItems([`${t('menu.logIn')}/${t('menu.signUp')}`]);
     }
   }, [profile]);
 

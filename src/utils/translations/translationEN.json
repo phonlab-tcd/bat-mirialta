@@ -10,6 +10,12 @@
     "tense": "Tense",
     "form": "Form"
   },
+  "menu": {
+    "profile": "profile",
+    "logOut": "log out",
+    "logIn": "log in",
+    "signUp": "sign up"
+  },
   "instructions": {
     "welcome": {
       "text_01": "Welcome to ",
