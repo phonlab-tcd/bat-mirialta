@@ -27,6 +27,7 @@ const useGenerateHint = () => {
       setAwaitingHint(true);
       if (hintsGiven === 0) {
         getHint('hard', currentQuestion.verb_id).then((hints) => {
+          hints = hints?.map((h) => h.toLowerCase());
           let correctLengthHints: string[] = [];
           if (hints !== undefined) {
             if (currentQuestion.text.includes('_ _')) {
@@ -66,6 +67,7 @@ const useGenerateHint = () => {
           currentQuestion.tense_id,
           currentQuestion.form_id,
         ).then((hints) => {
+          hints = hints?.map((h) => h.toLowerCase());
           if (hints !== undefined) {
             let correctLengthHints: string[] = [];
 

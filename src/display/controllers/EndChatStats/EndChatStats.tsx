@@ -55,7 +55,7 @@ const EndChatStats = () => {
         <Box width={374}>
           <BatBox width={'100%'} height={386}>
             <Typography align="center" variant="h6">
-              Stats
+              {t('headers.stats')}
             </Typography>
             <Box width={'100%'}>
               <PlayedChatStats />

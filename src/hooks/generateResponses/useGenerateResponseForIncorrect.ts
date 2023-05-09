@@ -7,6 +7,7 @@ const useGenerateResponseForIncorrect = () => {
     let addedFada = false;
     let missingFada = false;
     let wrongForm = false;
+    let wrongNegativeForm = false;
     let wrongTense = false;
     let wrongVerb = false;
     let wrongPerson = false;
@@ -42,6 +43,8 @@ const useGenerateResponseForIncorrect = () => {
     // if no error is found, run through the rest of the error checkers
     else if (errorData.stringConjugationOutput === 'incorrectForm') {
       wrongForm = true;
+    } else if (errorData.stringConjugationOutput === 'incorrectNegativeForm') {
+      wrongNegativeForm = true;
     } else if (errorData.stringConjugationOutput === 'incorrectPerson') {
       wrongPerson = true;
     } else if (errorData.stringConjugationOutput === 'incorrectTense') {
@@ -132,6 +135,15 @@ const useGenerateResponseForIncorrect = () => {
         'incorrect',
         'conjugation',
         'form',
+        {},
+      );
+    } else if (wrongNegativeForm) {
+      responseObject = pushRandomResponse(
+        responseObject,
+        'feedback',
+        'incorrect',
+        'conjugation',
+        'negativeForm',
         {},
       );
     } else if (wrongTense) {

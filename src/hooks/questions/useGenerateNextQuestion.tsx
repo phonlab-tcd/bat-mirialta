@@ -33,7 +33,7 @@ const tenses: { [key: number]: string } = {
 };
 
 const forms: { [key: number]: string } = {
-  1: 'ceisteanna',
+  1: 'ráitis',
   2: 'diúltach',
   3: 'briathar saor',
   4: 'ceisteach',

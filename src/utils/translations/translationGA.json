@@ -42,7 +42,7 @@
     "allForms": "gach foirm"
   },
   "hints": {
-    "whatAbout": "Cad faoi"
+    "whatAbout": "Cad faoi:"
   },
   "subHeaders": {
     "played": "Déanta",
@@ -90,18 +90,18 @@
       },
       "questionDescription": {
         "basic": {
-          "text_01": "5 gceist san iomlán, le 10 bpointe an ceann"
+          "text_01": "5 cheist san iomlán, le 10 bpointe an ceann"
         }
       },
       "hintDescription": {
         "basic": {
-          "text_01": "Muna bhfuil an freagra agat, brúigh '?' le nod a fhail"
+          "text_01": "Muna bhfuil an freagra agat, brúigh '?' le nod a fháil"
         }
       },
       "getReady": {
         "basic": {
           "text_01": "Seo chugat do chéad cheist",
-          "text_02": "réidh don chéad cheist? Ar aghaidh linn"
+          "text_02": "Réidh don chéad cheist? Ar aghaidh linn"
         }
       }
     },
@@ -190,9 +190,11 @@
         }
       },
       "conjugation": {
+        "negativeForm": {
+          "text_01": "seiceáil dearfach/diúltach arís"
+        },
         "form": {
-          "text_01": "tá an aimsir ceart, ach féach ar an bhfoirm arís",
-          "text_02": "níl an fhoirm cheart anseo"
+          "text_01": "tá an aimsir ceart, ach féach ar an bhfoirm arís"
         },
         "verb": {
           "text_01": "bí cinnte go bhfuil an briathar ceart in úsáid agat",

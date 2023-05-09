@@ -42,7 +42,7 @@
     "allForms": "all forms"
   },
   "hints": {
-    "whatAbout": "What about"
+    "whatAbout": "What about:"
   },
   "subHeaders": {
     "played": "Played",
@@ -191,6 +191,9 @@
         }
       },
       "conjugation": {
+        "negativeForm": {
+          "text_01": "check positive/negative again"
+        },
         "form": {
           "text_01": "tense is right, but check the form again",
           "text_02": "the form is incorrect"

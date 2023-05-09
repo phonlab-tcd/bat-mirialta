@@ -30,7 +30,7 @@ const englishTranslations: { [key: string]: string } = {
   'briathar saor': 'free verb',
   ceisteach: 'question',
   coibhneasta: 'relative clause',
-  ceisteanna: 'questions',
+  ráitis: 'statements',
   'ceisteanna breise': 'additional questions',
   spleách: 'dependent clause',
   diúltach: 'negative',
