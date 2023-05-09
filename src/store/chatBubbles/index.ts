@@ -35,16 +35,16 @@ const chatBubblesState = selector({
     adjacencyPairs.map((m) => {
       if (m !== null) {
         const question = questions.find((q) => m.question_id === q.id);
-        const regexAllParenthesis = / *\([^)]*\) */g;
-        const regexSinn = / *\(sinn\) */g;
+        // const regexAllParenthesis = / *\([^)]*\) */g;
+        // const regexSinn = / *\(sinn\) */g;
         if (question !== undefined) {
-          const sinnInText = question.text.match(regexSinn) !== null;
-          const text = question.text.replace(regexAllParenthesis, '');
-          const sinnText = sinnInText ? ' [sinn] ' : '';
+          // const sinnInText = question.text.match(regexSinn) !== null;
+          // const text = question.text.replace(regexAllParenthesis, '');
+          // const sinnText = sinnInText ? ' [sinn] ' : '';
           const verbTenseFormInfo =
-            m.verb_tense_form_info !== '' ? ` (${m.verb_tense_form_info})` : '';
+            m.verb_tense_form_info !== '' ? ` -- ${m.verb_tense_form_info} --` : '';
           chatBubbles.push({
-            text: text + sinnText + verbTenseFormInfo,
+            text: question.text + verbTenseFormInfo,
             sender: 'robot',
           });
           if (Array.isArray(m.hints)) {

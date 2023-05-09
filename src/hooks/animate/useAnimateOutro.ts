@@ -53,10 +53,9 @@ const useAnimateOutro = () => {
           setAnimatingOutro(false);
           if (session !== null) {
             getAllPoints(session.user.id).then((points: number[] | undefined) => {
-              console.log('points: ', points);
               if (points) {
                 const cumFreq = calculateChatPointsCumFreq(points);
-                console.log('cumFreq: ', cumFreq);
+
                 setCumFreqArray(Object.values(cumFreq));
                 setTimeout(() => {
                   setPointsModalOpen(true);
@@ -71,7 +70,6 @@ const useAnimateOutro = () => {
 
   const animateOutro = () => {
     if (activeChat !== undefined) {
-      console.log('animating outro');
       const generatedOutro = generateOutro();
       patchChatComplete(activeChat.id, generatedOutro, false, null).then((c) => {
         setChats([...chats.slice(0, chats.length - 1), c]);

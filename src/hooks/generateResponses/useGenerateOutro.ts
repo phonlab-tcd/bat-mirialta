@@ -15,10 +15,9 @@ const useGenerateOutro = () => {
 
   useEffect(() => {
     if (i18n.language === 'ga') {
-      const pointsModulo = totalPoints % 10;
-      if (pointsModulo >= 3 && pointsModulo <= 6) {
+      if (totalPoints >= 3 && totalPoints <= 6) {
         setPointsString('phointe');
-      } else if (pointsModulo >= 7 && pointsModulo <= 10) {
+      } else if (totalPoints >= 7 && totalPoints <= 10) {
         setPointsString('bpointe');
       } else {
         setPointsString('pointe');
