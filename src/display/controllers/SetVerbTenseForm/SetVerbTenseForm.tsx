@@ -111,7 +111,7 @@ const SetVerbTenseForm = () => {
             }}
             value={selectedVerb !== undefined ? selectedVerb.name : 'all'}
             label={'Verbs'}
-            items={availableVerbs.map((aV) => aV.name)}
+            items={availableVerbs.map((aV) => aV.name).sort()}
             allDisplay={t('task.allVerbs')}
             lang={i18n.language}
           />
@@ -128,7 +128,7 @@ const SetVerbTenseForm = () => {
             }}
             value={selectedTense !== undefined ? selectedTense.name : 'all'}
             label={'Tenses'}
-            items={availableTenses.map((aT) => aT.name)}
+            items={availableTenses.map((aT) => aT.name).sort()}
             allDisplay={t('task.allTenses')}
             lang={i18n.language}
           />
@@ -145,7 +145,7 @@ const SetVerbTenseForm = () => {
             }}
             value={selectedForm !== undefined ? selectedForm.name : 'all'}
             label={'Forms'}
-            items={availableForms.map((aF) => aF.name)}
+            items={availableForms.map((aF) => aF.name).sort()}
             allDisplay={t('task.allForms')}
             lang={i18n.language}
           />
