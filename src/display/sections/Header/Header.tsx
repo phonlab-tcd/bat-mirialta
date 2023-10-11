@@ -12,11 +12,10 @@ import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-import { AbMenu } from 'abair-components';
 import Image from 'mui-image';
 
-import { basePath, domain } from '@/config';
 import { title } from '@/config';
+import { AbMenu } from '@/display/components/AbMenu';
 import { FlexBox, FullSizeCenteredFlexBox } from '@/display/components/styled';
 import { useChangeLanguage } from '@/hooks';
 import supabase from '@/services/supabase';
@@ -33,20 +32,31 @@ function Header() {
   const { session, setSession } = useSession();
   const changeLanguage = useChangeLanguage();
 
+  const callbackUrl = encodeURIComponent(
+    `${window.location.protocol}//${window.location.host}/auth/callback`,
+  );
+  const authCallback = `${import.meta.env.VITE_PUBLIC_AUTH_URL}?ref=${callbackUrl}`;
+  const signOutCallback = `${import.meta.env.VITE_PUBLIC_AUTH_URL}sign-out?ref=${callbackUrl}`;
+  const profileCallback = `${import.meta.env.VITE_PUBLIC_AUTH_URL}profile?ref=${callbackUrl}`;
+
   const handleMenuChoice = async (item: string) => {
     if (item === t('menu.logOut')) {
       supabase.auth.signOut().then(() => {
         setItems([`${t('menu.logIn')}/${t('menu.signUp')}`]);
         setProfile(null);
         setSession(null);
-        navigate(`${basePath}`);
+        window.location.href = signOutCallback;
       });
     } else if (item === t('menu.profile')) {
-      window.location.href = `${domain}/profile?origin=applications/bat-mirialta`;
+      window.location.href = profileCallback;
     } else if (item === `${t('menu.logIn')}/${t('menu.signUp')}`) {
-      window.location.href = `${domain}/login?origin=applications/bat-mirialta`;
+      window.location.href = authCallback;
     }
   };
+
+  useEffect(() => {
+    console.log('session in HEader:', session);
+  }, [session]);
 
   useEffect(() => {
     if (profile) {
@@ -70,7 +80,7 @@ function Header() {
               <Button
                 size={'large'}
                 onClick={() => {
-                  window.location.href = `${domain}`;
+                  window.location.href = import.meta.env.VITE_ABAIR_URL;
                 }}
               >
                 <Image
@@ -93,7 +103,7 @@ function Header() {
                   color="primary"
                   size={'large'}
                   onClick={() => {
-                    navigate(`${basePath}`);
+                    navigate(`/`);
                   }}
                 >
                   {title}
@@ -125,7 +135,7 @@ function Header() {
                 ) : (
                   <IconButton
                     onClick={() => {
-                      window.location.href = `${domain}/login`;
+                      window.location.href = authCallback;
                     }}
                     size="medium"
                     edge="end"

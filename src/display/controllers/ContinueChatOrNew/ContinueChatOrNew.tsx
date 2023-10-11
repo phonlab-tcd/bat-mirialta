@@ -9,7 +9,6 @@ import Box from '@mui/material/Box';
 
 import { AbButton } from 'abair-components';
 
-import { basePath } from '@/config';
 import BatBox from '@/display/components/BatBox';
 // import ChatInProgress from '@/display/controllers/ChatInProgress';
 import { patchChatComplete } from '@/services/supabase';
@@ -27,7 +26,7 @@ const ContinueChatOrNew = () => {
 
   const continueChat = (cont: boolean) => {
     if (cont) {
-      navigate(`${basePath}chat`);
+      navigate(`/chat`);
     } else {
       if (session !== null && activeChat !== undefined) {
         console.log('finishing previously unfinished chat');
@@ -36,7 +35,7 @@ const ContinueChatOrNew = () => {
           setChats([...chats.slice(0, chats.length - 1), c]);
         });
       }
-      navigate(`${basePath}set-task`);
+      navigate(`/set-task`);
     }
   };
 

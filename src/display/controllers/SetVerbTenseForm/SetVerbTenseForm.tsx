@@ -11,7 +11,6 @@ import Typography from '@mui/material/Typography';
 
 import { AbButton } from 'abair-components';
 
-import { basePath } from '@/config';
 import AbSelect from '@/display/components/AbSelect';
 import BatBox from '@/display/components/BatBox';
 import { useGenerateIntro } from '@/hooks';
@@ -92,7 +91,7 @@ const SetVerbTenseForm = () => {
         intro,
       ).then((c) => {
         setChats([...chats, c]);
-        navigate(`${basePath}chat`);
+        navigate(`/chat`);
       });
     }
     console.log('availableVerbs:', availableVerbs);

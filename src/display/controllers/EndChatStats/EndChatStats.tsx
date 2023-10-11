@@ -11,7 +11,6 @@ import Typography from '@mui/material/Typography';
 
 import { AbButton } from 'abair-components';
 
-import { basePath } from '@/config';
 import BatBox from '@/display/components/BatBox';
 // import { CenteredFlexBox, FullSizeCenteredFlexBox } from '@/display/components/styled';
 import ChartAllPoints from '@/display/controllers/ChartAllPoints';
@@ -74,7 +73,7 @@ const EndChatStats = () => {
                   label={t('buttons.home')}
                   onClick={() => {
                     setPointsModalOpen(false);
-                    navigate(`${basePath}`);
+                    navigate(`/`);
                   }}
                   selected={true}
                   color="secondary"

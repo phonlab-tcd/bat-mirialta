@@ -11,7 +11,6 @@ import { Avatar, Message, MessageList, TypingIndicator } from '@chatscope/chat-u
 import { ChatContainer } from '@chatscope/chat-ui-kit-react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 
-import { basePath } from '@/config';
 import BatBox from '@/display/components/BatBox';
 import Meta from '@/display/components/Meta';
 import { CenteredFlexBox } from '@/display/components/styled';
@@ -86,7 +85,7 @@ function Chat() {
           });
         } else {
           if (adjacencyPairs.length === 0) {
-            navigate(`${basePath}`);
+            navigate(`/`);
           }
         }
       } else {

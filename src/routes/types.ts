@@ -7,6 +7,7 @@ enum Pages {
   SetTask,
   NotFound,
   History,
+  AuthCallback,
 }
 
 type PathRouteCustomProps = {

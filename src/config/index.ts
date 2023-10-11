@@ -2,13 +2,11 @@ const title = 'Bat Mírialta';
 
 const email = 'sloanjo@tcd.ie';
 
-const repository = 'https://github.com/JohnSloan8/bat-mirialta';
+const repository = 'https://github.com/phonlab-tcd/bat-mirialta';
 
-const production = false;
+const production = true;
 
-const basePath = production ? '/applications/bat-mirialta/' : '/';
-
-const domain = production ? 'https://detail-design-develop.com' : 'http://localhost:8000';
+const domain = production ? 'https://bat-mirialta.abair.ie' : 'http://localhost:8000';
 
 const batDelayMultiplier = production ? 1 : 0.75;
 
@@ -52,7 +50,6 @@ const defaultMetaTags = {
 const giphy404 = 'https://giphy.com/embed/xTiN0L7EW5trfOvEk0';
 
 export {
-  basePath,
   loader,
   dateFormat,
   messages,

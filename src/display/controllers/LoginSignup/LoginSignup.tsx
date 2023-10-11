@@ -7,12 +7,14 @@ import Box from '@mui/material/Box';
 
 import { AbButton } from 'abair-components';
 
-import { domain } from '@/config';
 import BatBox from '@/display/components/BatBox';
 
 const LoginSignup = () => {
   const { t } = useTranslation();
-
+  const callbackUrl = encodeURIComponent(
+    `${window.location.protocol}//${window.location.host}/auth/callback`,
+  );
+  const authCallback = `${import.meta.env.VITE_PUBLIC_AUTH_URL}?ref=${callbackUrl}`;
   return (
     <BatBox>
       <Box>
@@ -22,7 +24,7 @@ const LoginSignup = () => {
             fullWidth={true}
             label={t('buttons.loginSignup')}
             onClick={() => {
-              window.location.href = `${domain}/login?origin=applications/bat-mirialta`;
+              window.location.href = authCallback;
             }}
             selected={true}
             color="secondary"

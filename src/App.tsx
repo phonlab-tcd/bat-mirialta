@@ -28,26 +28,16 @@ function App() {
   const changeLanguage = useChangeLanguage();
 
   useEffect(() => {
-    if (!production && session === null) {
-      supabase.auth.signInWithPassword({ email, password }).then(() => {
-        console.log('signed in');
-      });
-      supabase.auth.onAuthStateChange((_event, session) => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log('session after get:', session);
+      if (session) {
         setSession(session);
-      });
-    } else {
-      const supabaseLocalStorage = localStorage['sb-pdntukcptgktuzpynlsv-auth-token'];
-      console.log('supabaseLocalStorage:', supabaseLocalStorage);
-      if (supabaseLocalStorage !== undefined) {
-        setSession(JSON.parse(supabaseLocalStorage));
       }
-    }
+    });
   }, []);
 
   useEffect(() => {
-    console.log('session changed');
     if (session !== null) {
-      console.log('session:', session);
       getProfile(session).then((p) => {
         setProfile(p);
         if (i18n.language !== p.language_preference) {
