@@ -17,6 +17,7 @@ WORKDIR /usr/src/app
 COPY --from=BUILD_IMAGE /usr/src/app/dist/ /usr/src/app/dist/
 COPY package.json .
 COPY vite.config.ts .
+COPY .env .
 RUN npm install typescript
 EXPOSE 8001
 
