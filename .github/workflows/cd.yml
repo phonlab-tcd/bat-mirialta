@@ -1,0 +1,48 @@
+name: Publish Docker image
+
+on:
+	push:
+		branches:
+			- main
+
+jobs:
+	push_to_registry:
+		name: Push Docker image to Docker Registry
+		runs-on: ubuntu-latest
+		steps:
+			- name: Check out the repo
+			uses: actions/checkout@v2
+
+			- name: Log in to Docker Hub
+			uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+			with:
+				registry: ${{ secrets.DOCKER_REGISTRY }}
+				username: ${{ secrets.DOCKER_USERNAME }}
+				password: ${{ secrets.DOCKER_PASSWORD }}
+
+			- name: Extract metadata (tags, labels) for Docker
+			id: meta
+			uses: docker/metadata-action@v4
+			with:
+				images: registry.abair.ie:5000/${{ secrets.PROJECT_NAME }}
+			
+			- name: Build and push Docker image
+			uses: docker/build-push-action@v3
+			with:
+				context: .
+				push: true
+				tags: ${{ steps.meta.outputs.tags }}
+				labels: ${{ steps.meta.outputs.labels }}
+	update_ssh:
+		name: Update running software
+		needs: "push_to_registry"
+		runs-on: ubuntu-latest
+		steps:
+			- name: executing remote ssh commands using password
+				uses: appleboy/ssh-action@master
+				with:
+					host: ${{ secrets.HOST }}
+					username: ${{ secrets.USERNAME }}
+					key: ${{ secrets.KEY }}
+					port: ${{ secrets.PORT }}
+					script: bash ${{ secrets.DEPLOY_SCRIPT_PATH }}

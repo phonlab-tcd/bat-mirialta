@@ -8,7 +8,7 @@ const production = true;
 
 const domain = production ? 'https://bat-mirialta.abair.ie' : 'http://localhost:8000';
 
-const batDelayMultiplier = production ? 1 : 0.75;
+const batDelayMultiplier = production ? 1 : 0.7;
 
 // const errorCheckURL = production
 //   ? 'https://error-check.detail-design-develop.com/run-full-check'
