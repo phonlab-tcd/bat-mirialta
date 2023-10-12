@@ -1,18 +1,18 @@
 name: Node.js CI
 
 on:
-    pull_request:
-        branches: [main]
-        
+  pull_request:
+    branches: [main]
+
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        
-        steps:
-        - uses: actions/checkout@v3
-        - name: Use Node.js LTS
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js LTS
         uses: actions/setup-node@v3
         with:
-            node-version: 18.16.0
-        - run: |
-            npm i
+          node-version: 18.16.0
+      - run: |
+          npm i
