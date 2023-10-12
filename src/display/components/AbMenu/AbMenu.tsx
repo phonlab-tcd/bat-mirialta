@@ -71,4 +71,6 @@ const AbMenu = ({
   );
 };
 
-export { AbMenu, AbMenuProps };
+export { AbMenu };
+
+export type { AbMenuProps };

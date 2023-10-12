@@ -14,7 +14,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --base=/applications/bat-mirialta/",
+    "build": "tsc && vite build",
     "preview": "vite preview",
     "https-preview": "serve dist",
     "prepare": "husky install",
@@ -38,6 +38,7 @@
     "express": "^4.18.2",
     "i18next": "^22.4.14",
     "is-mobile": "^3.1.1",
+    "path": "^0.12.7",
     "react": "^18.1.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.1.0",
