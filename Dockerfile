@@ -10,8 +10,6 @@ COPY . .
 
 RUN npm run build
 
-CMD ["node", "run-server.js"]
-
 FROM node:18-alpine as PRODUCTION_IMAGE
 
 WORKDIR /usr/src/app
