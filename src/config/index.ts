@@ -19,7 +19,7 @@ const errorCheckURL = 'https://error-check.detail-design-develop.com/run-full-ch
 const messages = {
   app: {
     crash: {
-      title: 'Something went wrong here. You can:',
+      title: 'Something went wrong here now. You can:',
       options: {
         email: `contact with author by this email - ${email}`,
         reset: 'Press here to reset the application',
