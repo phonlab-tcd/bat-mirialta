@@ -16,6 +16,7 @@ const getChats = async (userID: string) => {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
+    console.log('error in getChats');
     alert(e.message);
   }
 };

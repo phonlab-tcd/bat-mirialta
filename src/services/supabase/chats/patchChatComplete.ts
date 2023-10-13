@@ -11,7 +11,8 @@ const patchChatComplete = async (
   try {
     const { data, error } = await supabase
       .from('bat_chats')
-      .update({ id: chatID, outro: outro, complete: complete, points: totalPoints })
+      .update({ outro: outro, complete: complete, points: totalPoints })
+      .eq('id', chatID)
       .select()
       .single();
 

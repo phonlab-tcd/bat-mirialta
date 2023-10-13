@@ -55,10 +55,6 @@ function Header() {
   };
 
   useEffect(() => {
-    console.log('session in HEader:', session);
-  }, [session]);
-
-  useEffect(() => {
     if (profile) {
       setItems([
         profile.username === null ? 'anon' : profile.username,

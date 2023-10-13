@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import supabase from '@/services/supabase';
@@ -12,21 +13,26 @@ const AuthCallback = () => {
   const navigate = useNavigate();
   console.log(access_token, refresh_token);
 
-  if (access_token && refresh_token) {
-    supabase.auth
-      .setSession({
-        refresh_token: refresh_token,
-        access_token: access_token,
-      })
-      .then(({ data: { session } }) => {
-        setSession(session);
+  useEffect(() => {
+    if (access_token && refresh_token) {
+      alert('signing in');
+      supabase.auth
+        .setSession({
+          refresh_token: refresh_token,
+          access_token: access_token,
+        })
+        .then(({ data: { session } }) => {
+          setSession(session);
+          navigate('/');
+        });
+    } else {
+      supabase.auth.signOut().then(() => {
+        alert('signed out');
         navigate('/');
       });
-  } else {
-    supabase.auth.signOut().then(() => {
-      navigate('/');
-    });
-  }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return <h1>in callback</h1>;
 };

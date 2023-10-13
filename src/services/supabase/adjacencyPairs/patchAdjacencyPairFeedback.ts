@@ -12,11 +12,11 @@ const patchAdjacencyPairFeedback = async (
     const { data, error } = await supabase
       .from('bat_adjacency_pairs')
       .update({
-        id: AdjacencyPairID,
         correct: correct,
         error_data: errorData,
         response: response,
       })
+      .eq('id', AdjacencyPairID)
       .select()
       .single();
 

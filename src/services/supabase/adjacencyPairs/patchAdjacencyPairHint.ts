@@ -7,9 +7,9 @@ const patchAdjacencyPairHint = async (AdjacencyPairID: number, hint: ResponseMod
     const { data, error } = await supabase
       .from('bat_adjacency_pairs')
       .update({
-        id: AdjacencyPairID,
         hints: hint,
       })
+      .eq('id', AdjacencyPairID)
       .select()
       .single();
 

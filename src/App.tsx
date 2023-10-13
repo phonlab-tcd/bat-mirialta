@@ -34,6 +34,9 @@ function App() {
         setSession(session);
       }
     });
+    supabase.auth.onAuthStateChange((event, session) => {
+      console.log(event, session);
+    });
   }, []);
 
   useEffect(() => {
@@ -54,8 +57,15 @@ function App() {
     <Fragment>
       <CssBaseline />
       <BrowserRouter>
-        <CenteredFlexBox sx={{ backgroundColor: 'background.dark' }}>
-          <Box sx={{ maxWidth: 'sm', width: '100%', minHeight: '100vh' }}>
+        <CenteredFlexBox sx={{ backgroundColor: '#fff' }}>
+          <Box
+            sx={{
+              maxWidth: 'xs',
+              width: '100%',
+              minHeight: '100vh',
+              backgroundColor: 'background.dark',
+            }}
+          >
             <Header />
             <Pages />
           </Box>

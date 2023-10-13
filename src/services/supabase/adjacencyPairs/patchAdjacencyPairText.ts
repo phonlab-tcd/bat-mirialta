@@ -4,7 +4,8 @@ const patchAdjacencyPairText = async (AdjacencyPairID: number, text: string) => 
   try {
     const { data, error } = await supabase
       .from('bat_adjacency_pairs')
-      .update({ id: AdjacencyPairID, text: text })
+      .update({ text: text })
+      .eq('id', AdjacencyPairID)
       .select()
       .single();
 
