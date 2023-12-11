@@ -15,7 +15,6 @@ const AuthCallback = () => {
 
   useEffect(() => {
     if (access_token && refresh_token) {
-      alert('signing in');
       supabase.auth
         .setSession({
           refresh_token: refresh_token,

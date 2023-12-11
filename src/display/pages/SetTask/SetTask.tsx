@@ -62,28 +62,28 @@ const SetTask = () => {
                 200,
                 'Pioc briathar, aimsir, agus foirm.\n',
                 500,
-                'Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 gceist ort le',
+                'Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 cheist ort le',
                 200,
-                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 gceist ort le 'líon na bearnaí'",
+                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 cheist ort le 'líon na bearnaí'",
                 200,
-                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 gceist ort le 'líon na bearnaí' iontu.",
+                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 cheist ort le 'líon na bearnaí' iontu.",
                 500,
-                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 gceist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.",
+                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 cheist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.",
                 500,
-                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 gceist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.\nTá 10 bpointe ag dul ar gach ceist.",
+                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 cheist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.\nTá 10 bpointe ag dul ar gach ceist.",
                 400,
-                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 gceist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.\nTá 10 bpointe ag dul ar gach ceist..",
+                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 cheist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.\nTá 10 bpointe ag dul ar gach ceist..",
                 400,
-                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 gceist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.\nTá 10 bpointe ag dul ar gach ceist...",
+                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 cheist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.\nTá 10 bpointe ag dul ar gach ceist...",
                 500,
-                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 gceist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.\nTá 10 bpointe ag dul ar gach ceist...\nAn bhfuil tú in ann 50 a shroichint? ",
+                "Pioc briathar, aimsir, agus foirm.\nCuirfidh mé 5 cheist ort le 'líon na bearnaí' iontu.\nIs féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt duit.\nTá 10 bpointe ag dul ar gach ceist...\nAn bhfuil tú in ann 50 a shroichint? ",
               ]}
               wrapper="span"
               cursor={true}
               repeat={0}
             />
             {/* <Typography>
-              Pioc briathar, aimsir, agus foirm. Cuirfidh mé 5 gceist ort le &apos;líon na
+              Pioc briathar, aimsir, agus foirm. Cuirfidh mé 5 cheist ort le &apos;líon na
               bearnaí&apos; iontu. Is féidir liom cabhrú leat trí nodanna agus moltaí a thabhairt
               duit. Tá 10 bpointe ag dul ar gach ceist... An bhfuil tú in ann 50 a shroichint?
             </Typography> */}
