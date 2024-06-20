@@ -5,8 +5,4 @@ function getPageHeight(theme: Theme) {
   return `calc(100vh - ${topSpacing}px)`;
 }
 
-function getChatHeight() {
-  return `calc(100vh - 530px)`;
-}
-
-export { getPageHeight, getChatHeight };
+export { getPageHeight };
