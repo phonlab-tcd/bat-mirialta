@@ -122,7 +122,7 @@ const IrishKeyboard = () => {
   };
 
   return (
-    <Box>
+    <Box className="flex-fill-below">
       <CenteredFlexBox p={1} sx={{ position: 'relative' }}>
         <BatBox width={'100%'} padding={0.5}>
           <Grid container py={1} height={isMobile() ? 56 : 70}>

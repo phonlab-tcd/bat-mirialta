@@ -44,7 +44,7 @@ function flexFillHeight() {
   const rectAbove = elAbove.getBoundingClientRect();
   const top = rectAbove.bottom + window.scrollY;
   const elBelow = document.querySelector('.flex-fill-below');
-  let roomBelow = 102; // guess height of
+  let roomBelow = 102; // guess height of IrishKeyboard in case it's not yet mounted
   if (elBelow) {
     const rectBelow = elBelow.getBoundingClientRect();
     roomBelow = rectBelow.height;
@@ -52,19 +52,24 @@ function flexFillHeight() {
 
   const pxHeight = window.innerHeight - top - roomBelow; // rectBelow.height;
   if (pxHeight < 100) return '100px';
+  if (pxHeight > 1000) return '1000px';
   return pxHeight + 'px';
 }
 
 function chatWindowFillSpaceEffect() {
   window.addEventListener('resize', handleResize);
   handleResize();
+  window.addEventListener('orientationchange', handleResize);
   return handleResizeDestructor;
 
   function handleResize() {
     const chatMain = document.querySelector('.flex-fill-main');
-    if (chatMain) {
+    if (chatMain instanceof HTMLElement) {
       chatMain.style.height = flexFillHeight();
-      console.log(chatMain);
+    } else {
+      console.error(
+        'failed to update height of chat window, selected element is not a HTMLElement',
+      );
     }
   }
 
@@ -203,7 +208,7 @@ function Chat() {
           </Box>
         </BatBox>
       </CenteredFlexBox>
-      {activeChat !== undefined && <IrishKeyboard className="flex-fill-below" />}
+      {activeChat !== undefined && <IrishKeyboard />}
     </Box>
   );
 }
