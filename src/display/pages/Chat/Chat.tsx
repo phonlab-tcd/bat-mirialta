@@ -22,7 +22,6 @@ import { useUpdatePoints } from '@/hooks';
 import { usePopulateChats } from '@/hooks';
 import useGenerateNextQuestion from '@/hooks/questions/useGenerateNextQuestion';
 import useAdjacencyPairLogic from '@/hooks/useAdjacencyPairLogic';
-import { getChatHeight } from '@/routes/Pages/utils';
 import { getAdjacencyPairs, getQuestions } from '@/services/supabase';
 import { useAdjacencyPairs, useReceivedAdjacencyPairHistory } from '@/store/adjacencyPairs';
 import { currentAdjacencyPairState } from '@/store/adjacencyPairs';
@@ -37,6 +36,47 @@ import { useBatTyping, useTaNilInputChoice } from '@/store/textInput';
 
 import anonImg from '/assets/images/anon-avatar.png';
 import robotImg from '/assets/images/robot.png';
+
+// calculate the height of the chat area to fill the entire screen
+function flexFillHeight() {
+  const elAbove = document.querySelector('.flex-fill-above');
+  if (!elAbove) return '60vh';
+  const rectAbove = elAbove.getBoundingClientRect();
+  const top = rectAbove.bottom + window.scrollY;
+  const elBelow = document.querySelector('.flex-fill-below');
+  let roomBelow = 102; // guess height of IrishKeyboard in case it's not yet mounted
+  if (elBelow) {
+    const rectBelow = elBelow.getBoundingClientRect();
+    roomBelow = rectBelow.height;
+  }
+
+  const pxHeight = window.innerHeight - top - roomBelow; // rectBelow.height;
+  if (pxHeight < 100) return '100px';
+  if (pxHeight > 1000) return '1000px';
+  return pxHeight + 'px';
+}
+
+function chatWindowFillSpaceEffect() {
+  window.addEventListener('resize', handleResize);
+  handleResize();
+  window.addEventListener('orientationchange', handleResize);
+  return handleResizeDestructor;
+
+  function handleResize() {
+    const chatMain = document.querySelector('.flex-fill-main');
+    if (chatMain instanceof HTMLElement) {
+      chatMain.style.height = flexFillHeight();
+    } else {
+      console.error(
+        'failed to update height of chat window, selected element is not a HTMLElement',
+      );
+    }
+  }
+
+  function handleResizeDestructor() {
+    window.removeEventListener('resize', handleResize);
+  }
+}
 
 function Chat() {
   const { profile } = useProfile();
@@ -96,6 +136,8 @@ function Chat() {
     }
   }, [session, activeChat, chats]);
 
+  useEffect(chatWindowFillSpaceEffect);
+
   useEffect(() => {
     if (session !== null && activeChat !== undefined && receivedAdjacencyPairHistory) {
       adjacencyPairLogic();
@@ -118,20 +160,20 @@ function Chat() {
   }, [firstLoad, receivedAdjacencyPairHistory]);
 
   return (
-    <Box sx={{ backgroundColor: 'background', height: '50px' }}>
+    <Box sx={{ backgroundColor: 'background' }}>
       <Meta title="Chat" />
 
       <MessageInputButtons vis={taNilInputChoice ? 'visible' : 'hidden'} />
 
-      <CenteredFlexBox p={1}>
+      <CenteredFlexBox className="flex-fill-above" p={1}>
         <EndChatStats />
         <BatBox width={'100%'} padding={0.5}>
           <PointsDisplay />
         </BatBox>
       </CenteredFlexBox>
-      <CenteredFlexBox px={1}>
+      <CenteredFlexBox className="flex-fill-main" px={1} sx={{ height: flexFillHeight() }}>
         <BatBox width={'100%'} backgroundColor={'background.default'} padding={0}>
-          <Box px={0.6} py={0.5} sx={{ height: getChatHeight() }}>
+          <Box px={0.6} py={0.5} sx={{ height: '100%' }}>
             <ChatContainer>
               <MessageList
                 typingIndicator={
