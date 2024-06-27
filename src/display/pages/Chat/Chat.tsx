@@ -2,7 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 import Box from '@mui/material/Box';
@@ -103,9 +103,12 @@ function Chat() {
     useReceivedAdjacencyPairHistory();
   const { chats } = useChats();
 
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const error_info = searchParams.get('error_info');
+
   useEffect(() => {
     if (session !== null) {
-      console.log('activeChat:', activeChat);
       if (chats.length !== 0) {
         if (activeChat !== undefined) {
           getQuestions(activeChat.questions as number[]).then((q) => {
@@ -118,6 +121,9 @@ function Chat() {
                   if (a_p.length !== 0) {
                     setShowPoints(true);
                     setIntro(activeChat.intro);
+                    if (error_info !== null) {
+                      console.log('error_info:', JSON.parse(error_info));
+                    }
                   }
                 }
               });
@@ -154,7 +160,6 @@ function Chat() {
         generateNextQuestion();
       }
       updatePoints();
-
       setFirstLoad(false);
     }
   }, [firstLoad, receivedAdjacencyPairHistory]);
