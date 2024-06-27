@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import LoginIcon from '@mui/icons-material/Login';
 import AppBar from '@mui/material/AppBar';
@@ -28,9 +28,27 @@ function Header() {
   const { profile, setProfile } = useProfile();
   const { i18n, t } = useTranslation();
   const [items, setItems] = useState<string[]>([`${t('menu.logIn')}/${t('menu.signUp')}`]);
-
   const { session, setSession } = useSession();
   const changeLanguage = useChangeLanguage();
+
+  useEffect(() => {
+    if (profile) {
+      setItems([
+        profile.username === null ? 'anon' : profile.username,
+        t('menu.profile'),
+        t('menu.logOut'),
+      ]);
+    } else {
+      setItems([`${t('menu.logIn')}/${t('menu.signUp')}`]);
+    }
+  }, [profile]);
+
+  // check if the user has come from Scéalaí, then return no header
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  if (searchParams.get('ref') === 'scealai') {
+    return null;
+  }
 
   const callbackUrl = encodeURIComponent(
     `${window.location.protocol}//${window.location.host}/auth/callback`,
@@ -53,18 +71,6 @@ function Header() {
       window.location.href = authCallback;
     }
   };
-
-  useEffect(() => {
-    if (profile) {
-      setItems([
-        profile.username === null ? 'anon' : profile.username,
-        t('menu.profile'),
-        t('menu.logOut'),
-      ]);
-    } else {
-      setItems([`${t('menu.logIn')}/${t('menu.signUp')}`]);
-    }
-  }, [profile]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
